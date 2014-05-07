@@ -107,6 +107,7 @@ public class MazeGenerator {
 	 * @param coordinate the x or y coordinate of the tile checked.
 	 * @param boundary the x or y maximum of a tile.
 	 * @return true if the tile in maze, false otherwise.
+	 * @return
 	 */
 	private boolean isTileInMaze(int coordinate, int boundary) {
 	    boolean isInMaze = true;
@@ -133,6 +134,7 @@ public class MazeGenerator {
         }
         return inMaze;
 	}
+	
 	/**
 	 * Find the path from a coordinate to the other.
 	 * @precondition has to be invoked after the method generateMazeArray().
@@ -230,9 +232,9 @@ public class MazeGenerator {
     private final int x;
     private final int y;
     private final Tile[][] tiles;
+
     private int[][] maze = null;
     private boolean[][] visited = null;
     private ArrayList<Coordinate> path = null;
     private ArrayList<Direction> directions = new ArrayList<Direction>();
-    
 }

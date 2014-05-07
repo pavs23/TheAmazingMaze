@@ -118,6 +118,7 @@ public class Maze {
         }
         return path;
     }
+    
     /**
      * Check whether a point is in the maze array.
      * @param x the x coordinate of the point.
@@ -139,7 +140,6 @@ public class Maze {
     private int startY;
     private int finishX;
     private int finishY;
-    private MazeGenerator maze;
-    
+    private MazeGenerator maze;  
     private final int ROAD = 1;
 }

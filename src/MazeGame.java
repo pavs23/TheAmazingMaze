@@ -192,10 +192,8 @@ public class MazeGame {
                Direction dir = null;
                if (keyCode == KeyEvent.VK_LEFT) {
                    dir = LEFT;
-                   System.out.println("hello");
                } else if (keyCode == KeyEvent.VK_RIGHT) {
                    dir = RIGHT;
-                   System.out.println("hello");
                } else if (keyCode == KeyEvent.VK_UP) {
                    dir = ABOVE;
                } else if (keyCode == KeyEvent.VK_DOWN) {
