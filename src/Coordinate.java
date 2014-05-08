@@ -4,6 +4,9 @@
  *
  */
 public class Coordinate {
+    private int x;
+    private int y;
+    
     /**
      * Constructor of the class.
      * @param x the x - integer coordinate.
@@ -40,6 +43,4 @@ public class Coordinate {
         }
         return equal;
     }
-    private int x;
-    private int y;
 }

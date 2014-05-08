@@ -6,6 +6,12 @@ import java.util.ArrayList;
  *
  */
 public class Maze {
+    private int[][] mazeArray;
+    private Coordinate start;
+    private Coordinate finish;
+    private MazeGenerator maze;  
+    private final int ROAD = 1;
+    
     /**
      * Constructor of the class
      * @param x the number of tiles in x-direction.
@@ -22,45 +28,30 @@ public class Maze {
         int randomYFinish = (int)Math.floor((Math.random()*Math.floor(yDimension/2)) - 0.01);
         int yStart = randomYStart*2 + 1;
         int yFinish = randomYFinish*2 + 1;
-        startX = 0;
-        finishX = xDimension-1;
-        startY = yStart;
-        finishY = yFinish;
-        mazeArray[startX][startY] = ROAD;
-        mazeArray[finishX][finishY] = ROAD;
+        Coordinate startCoor = new Coordinate(0, yStart);
+        Coordinate finishCoor = new Coordinate(xDimension-1, yFinish);
+        start = startCoor;
+        finish = finishCoor;
+        mazeArray[0][yStart] = ROAD;
+        mazeArray[xDimension-1][yFinish] = ROAD;
     }
     
     /**
-     * Get the x position of starting point.
-     * @return the x coordinate of starting point.
+     * Get the position of starting point.
+     * @return the coordinate of starting point.
      */
-    public int getStartX() {
-        return startX;
+    public Coordinate getStartCoordinate() {
+        return start;
     }
     
     /**
-     * Get the y position of starting point.
-     * @return the y coordinate of starting point.
+     * Get the position of finish point.
+     * @return the coordinate of finish point.
      */
-    public int getStartY() {
-        return startY;
+    public Coordinate getFinishCoordinate() {
+        return finish;
     }
     
-    /**
-     * Get the x position of finish point.
-     * @return the x coordinate of finish point.
-     */
-    public int getFinishX() {
-        return finishX;
-    }
-    
-    /**
-     * Get the y position of finish point.
-     * @return the y coordinate of finish point.
-     */
-    public int getFinishY() {
-        return finishY;
-    }
     
     /**
      * Get the array of maze.
@@ -73,15 +64,14 @@ public class Maze {
     
     /**
      * Get whether the tile in the direction from current position is a path (not a wall).
-     * @param currX x coordinate of current position.
-     * @param currY y coordinate of current position.
+     * @param currCoordinate coordinate of current position.
      * @param direction the direction of tile from current position that would like to be examined.
      * @return true if it is a path(not a wall), false otherwise).
      */
-    public boolean isPath(int currX, int currY, Direction direction) {
+    public boolean isPath(Coordinate currCoordinate, Direction direction) {
         boolean isNotWall = false;
-        int nextX = currX;
-        int nextY = currY;
+        int nextX = currCoordinate.getX();
+        int nextY = currCoordinate.getY();
         nextX += direction.getXDirection();
         nextY += direction.getYDirection();
         if (isPointInMaze(nextX, nextY)) {
@@ -94,13 +84,16 @@ public class Maze {
     
     /**
      * Find the path from current position to the goal in an open ended maze.
-     * @param currX the current x-position.
-     * @param currY the current y-position.
+     * @param curr the current position.
      * @return an ArrayList of Coordinate path, not including the current point, until the goal.
      */
-    public ArrayList<Coordinate> findPathToGoal(int currX, int currY) {
+    public ArrayList<Coordinate> findPathToGoal(Coordinate curr) {
         
         Coordinate currPoint;
+        int currX = curr.getX();
+        int currY = curr.getY();
+        int finishX = finish.getX();
+        int finishY = finish.getY();
         Coordinate nearFinishPoint = new Coordinate(finishX-1, finishY);
         Coordinate finishPoint = new Coordinate(finishX, finishY);
         // Check if the current point is starting point (currX = 0).
@@ -134,12 +127,4 @@ public class Maze {
         }
         return isInMaze;
     }
-    
-    private int[][] mazeArray;
-    private int startX;
-    private int startY;
-    private int finishX;
-    private int finishY;
-    private MazeGenerator maze;  
-    private final int ROAD = 1;
 }

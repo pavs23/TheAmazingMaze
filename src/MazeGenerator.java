@@ -8,6 +8,18 @@ import java.util.ArrayList;
  *
  */
 public class MazeGenerator {
+    private final int ROAD = 1;
+    private final int WALL = 0;
+    
+    private final int x;
+    private final int y;
+    private final Tile[][] tiles;
+
+    private int[][] maze = null;
+    private boolean[][] visited = null;
+    private ArrayList<Coordinate> path = null;
+    private ArrayList<Direction> directions = new ArrayList<Direction>();
+    
     /**
      * Constructor of the class.
      * @param x the number of road in x direction.
@@ -74,6 +86,41 @@ public class MazeGenerator {
 	}
 	
 	/**
+     * Find the path from a coordinate to the other.
+     * @precondition has to be invoked after the method generateMazeArray().
+     * @param from the Coordinate from.
+     * @param to the Coordinate to.
+     * @return an ArrayList of Coordinate of the path, in order, including both the to but not from.
+     * @return a null object if not valid (coordinate invalid or the method generateMazeArray has not been invoked.
+     * @return empty array list if the path is not found or from = to.
+     */
+    public ArrayList<Coordinate> findPath(Coordinate from, Coordinate to) {
+        int startX = from.getX();
+        int startY = from.getY();
+        int finishX = to.getX();
+        int finishY = to.getY();
+        if (maze != null && isCoordinateInMaze(startX, startY) && isCoordinateInMaze(finishX, finishY)) {  
+            int width = maze.length;
+            int height = maze[0].length;
+            visited = new boolean[maze.length][maze[0].length];
+            // Initialize visited to false.
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < height; j++) {
+                    visited[i][j] = false;
+                }
+            }
+            path = new ArrayList<Coordinate>();
+            boolean pathFound = recursivePath(startX, startY, finishX, finishY);
+            if (pathFound) {
+                // Remove the from.
+                path.remove(0);
+            }
+            return path;
+        } else {
+            return null;
+        }
+    }
+	/**
 	 * Create a maze (collection of Tile objects).
 	 * Tile has south, north, east, and west boundary. true in the boundary means there is no wall between 2 tiles.
 	 * @param currX number of tiles in x dimension.
@@ -101,7 +148,7 @@ public class MazeGenerator {
 			}
 		}
 	}
- 
+	
 	/**
 	 * A helper method to verify whether the tile is in the maze or not.
 	 * @param coordinate the x or y coordinate of the tile checked.
@@ -133,42 +180,6 @@ public class MazeGenerator {
             inMaze = false;
         }
         return inMaze;
-	}
-	
-	/**
-	 * Find the path from a coordinate to the other.
-	 * @precondition has to be invoked after the method generateMazeArray().
-	 * @param from the Coordinate from.
-	 * @param to the Coordinate to.
-	 * @return an ArrayList of Coordinate of the path, in order, including both the to but not from.
-	 * @return a null object if not valid (coordinate invalid or the method generateMazeArray has not been invoked.
-	 * @return empty array list if the path is not found or from = to.
-	 */
-	public ArrayList<Coordinate> findPath(Coordinate from, Coordinate to) {
-	    int startX = from.getX();
-        int startY = from.getY();
-        int finishX = to.getX();
-        int finishY = to.getY();
-	    if (maze != null && isCoordinateInMaze(startX, startY) && isCoordinateInMaze(finishX, finishY)) {  
-    	    int width = maze.length;
-    	    int height = maze[0].length;
-	        visited = new boolean[maze.length][maze[0].length];
-	        // Initialize visited to false.
-	        for (int i = 0; i < width; i++) {
-	            for (int j = 0; j < height; j++) {
-	                visited[i][j] = false;
-	            }
-	        }
-	        path = new ArrayList<Coordinate>();
-	        boolean pathFound = recursivePath(startX, startY, finishX, finishY);
-	        if (pathFound) {
-	            // Remove the from.
-	            path.remove(0);
-	        }
-	        return path;
-	    } else {
-	        return null;
-	    }
 	}
 	
 	/**
@@ -225,16 +236,4 @@ public class MazeGenerator {
         }
         return false;
 	}
-	
-	private final int ROAD = 1;
-    private final int WALL = 0;
-    
-    private final int x;
-    private final int y;
-    private final Tile[][] tiles;
-
-    private int[][] maze = null;
-    private boolean[][] visited = null;
-    private ArrayList<Coordinate> path = null;
-    private ArrayList<Direction> directions = new ArrayList<Direction>();
 }

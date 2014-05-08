@@ -4,6 +4,16 @@
  *
  */
 public class Tile {
+    // Represents the boundaries of the tile.
+    // Initially it is false, but can be set to true if the wall between the boundaries is "destroyed".
+    private boolean north = false;
+    private boolean south = false;
+    private boolean west = false;
+    private boolean east = false;
+    
+    // Represents whether the tile is visited or not.
+    private boolean isVisited = false;
+    
     /**
      * Get the value of the North boundary.
      * @return true if the North boundary is open, false otherwise.
@@ -66,14 +76,4 @@ public class Tile {
     public void visited() {
         isVisited = true;
     }
-    
-    // Represents the boundaries of the tile.
-    // Initially it is false, but can be set to true if the wall between the boundaries is "destroyed".
-    private boolean north = false;
-    private boolean south = false;
-    private boolean west = false;
-    private boolean east = false;
-    
-    // Represents whether the tile is visited or not.
-    private boolean isVisited = false;
 }

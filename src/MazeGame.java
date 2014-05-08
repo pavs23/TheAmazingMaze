@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.event.*;
@@ -8,6 +7,33 @@ import java.util.ArrayList;
 import java.io.*;
 
 public class MazeGame {
+    private Player player;
+    private Maze maze;
+    private JFrame frame;
+    private JPanel gamePanel;
+    private JPanel mazePanel;
+    private JPanel sideMenu;
+    private JLabel[][] labels;
+    private ImageIcon roadIcon;
+    private ImageIcon wallIcon;
+    private ImageIcon playerIconFront;
+    private ImageIcon playerIconBack;
+    private ImageIcon playerIconLeft;
+    private ImageIcon playerIconRight;
+    private ImageIcon hintIcon;
+    
+    private static final Direction ABOVE = new Direction("above", 0, -1);
+    private static final Direction BOTTOM = new Direction("bottom", 0, 1);
+    private static final Direction LEFT = new Direction("left", -1, 0);
+    private static final Direction RIGHT = new Direction("right", 1, 0);
+    
+    private static final int ROAD = 1;
+    private static final int FRAME_WIDTH = 600;
+    
+    /**
+     * The main function. Launch the game.
+     * @param args array of string.
+     */
     public static void main(String[] args) {
         new MazeGame();
     }
@@ -20,7 +46,7 @@ public class MazeGame {
         frame = new JFrame();
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
-        newNormalGame(5,5);
+        newNormalGame(10,10);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -53,9 +79,8 @@ public class MazeGame {
         int[][] mazeArray = maze.getMaze();
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
-        int startingX = maze.getStartX();
-        int startingY = maze.getStartY();
-        player = new Player(startingX, startingY);
+        Coordinate startCoordinate = maze.getStartCoordinate();
+        player = new Player(startCoordinate);
         
         // Create panel for the maze.
         mazePanel = new JPanel();
@@ -134,7 +159,7 @@ public class MazeGame {
             }
             
         // Paint player initially.
-        paintPlayer(startingX, startingY, RIGHT);
+        paintPlayer(startCoordinate, RIGHT);
         setEventListenerToMaze();
         } catch (IOException e) {}
     }
@@ -154,9 +179,8 @@ public class MazeGame {
             public void actionPerformed(ActionEvent e) {
                 getHint.setEnabled(false);
                 gamePanel.setEnabled(false); 
-                int currX = player.getXPosition();
-                int currY = player.getYPosition();
-                final ArrayList<Coordinate> path = maze.findPathToGoal(currX, currY);
+                Coordinate currPos = player.getCoordinate();
+                final ArrayList<Coordinate> path = maze.findPathToGoal(currPos);
                 // n = the dimension of the array/3.
                 for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
                     Coordinate curr = path.get(i);
@@ -244,11 +268,12 @@ public class MazeGame {
     
     /**
      * Paint the player in the maze.
-     * @param xPos the x coordinate of player.
-     * @param yPos the y coordinate of player.
+     * @param coordinate the Coordinate of player..
      * @param direction the direction that the player is facing.
      */
-    public void paintPlayer(int xPos, int yPos, Direction direction) {
+    public void paintPlayer(Coordinate coordinate, Direction direction) {
+        int xPos = coordinate.getX();
+        int yPos = coordinate.getY();
         if (direction == ABOVE) {
             labels[xPos][yPos].setIcon(playerIconBack);
         } else if (direction == BOTTOM) {
@@ -262,32 +287,31 @@ public class MazeGame {
     
     /**
      * Paint road in the maze.
-     * @param xPos the x coordinate of road.
-     * @param yPos the y coordinate of road.
+     * @param pos the Coordinate of road.
      */
-    public void paintRoad(int xPos, int yPos) {
-        labels[xPos][yPos].setIcon(roadIcon);
+    public void paintRoad(Coordinate pos) {
+        labels[pos.getX()][pos.getY()].setIcon(roadIcon);
     }
 
     /**
      * Move the player in the system. Update the player coordinates and repaint.
-     * If the player has finished, send a congratulatory message.
+     * If the player has finished, send a congratulation message.
      * @param direction the direction of movement of the player.
      */
     public void movePlayer(Direction direction) {
-        int currX = player.getXPosition();
-        int currY = player.getYPosition();
-        if (maze.isPath(currX, currY, direction)) {
-            paintRoad(currX, currY);
+        Coordinate curr = player.getCoordinate();
+        if (maze.isPath(curr, direction)) {
+            paintRoad(curr);
             // Find the new position of the player.
+            int currX = curr.getX();
+            int currY = curr.getY();
             currX += direction.getXDirection();
             currY += direction.getYDirection();
-            player.setXPosition(currX);
-            player.setYPosition(currY);
-            paintPlayer(currX, currY, direction);
-            int mazeFinishX = maze.getFinishX();
-            int mazeFinishY = maze.getFinishY();
-            if (currX == mazeFinishX && currY == mazeFinishY) {
+            Coordinate newPos = new Coordinate(currX, currY);
+            player.setCoordinate(newPos);
+            paintPlayer(newPos, direction);
+            Coordinate finishCoor = maze.getFinishCoordinate();
+            if (finishCoor.equals(newPos)) {
                 final JDialog dialog = new JDialog(frame, "Congratulation!", true);
                 dialog.setLocationRelativeTo(frame);
                 dialog.setUndecorated(true);
@@ -300,10 +324,9 @@ public class MazeGame {
                 restart.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent actionEvent) {
                         dialog.setVisible(false);
-                        player.setXPosition(maze.getStartX());
-                        player.setYPosition(maze.getStartY());
-                        paintPlayer(player.getXPosition(), player.getYPosition(), RIGHT);
-                        paintRoad(maze.getFinishX(), maze.getFinishY());
+                        player.setCoordinate(maze.getStartCoordinate());
+                        paintPlayer(player.getCoordinate(), RIGHT);
+                        paintRoad(maze.getFinishCoordinate());
                     }
                 });
                 newGame.addActionListener(new ActionListener() {
@@ -331,27 +354,4 @@ public class MazeGame {
             }
         }
     }
-    
-    private Player player;
-    private Maze maze;
-    private JFrame frame;
-    private JPanel gamePanel;
-    private JPanel mazePanel;
-    private JPanel sideMenu;
-    private JLabel[][] labels;
-    private ImageIcon roadIcon;
-    private ImageIcon wallIcon;
-    private ImageIcon playerIconFront;
-    private ImageIcon playerIconBack;
-    private ImageIcon playerIconLeft;
-    private ImageIcon playerIconRight;
-    private ImageIcon hintIcon;
-    
-    private static final Direction ABOVE = new Direction("above", 0, -1);
-    private static final Direction BOTTOM = new Direction("bottom", 0, 1);
-    private static final Direction LEFT = new Direction("left", -1, 0);
-    private static final Direction RIGHT = new Direction("right", 1, 0);
-    
-    private static final int ROAD = 1;
-    private static final int FRAME_WIDTH = 600;
 }

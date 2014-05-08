@@ -4,6 +4,14 @@
  *
  */
 public class Direction {
+    // Represents the name of the direction.
+    private String directionName;
+    // Represents in which x-y direction the direction is.
+    private int dx;
+    private int dy;
+    // Represents the opposite direction of the current direction.
+    private Direction opposite = null;
+    
     /**
      * Constructor of the class.
      * @param directionName the name of direction.
@@ -55,12 +63,4 @@ public class Direction {
     public void setOppositeDirection (Direction opposite) {
         this.opposite = opposite;
     }
-    
-    // Represents the name of the direction.
-    private String directionName;
-    // Represents in which x-y direction the direction is.
-    private int dx;
-    private int dy;
-    // Represents the opposite direction of the current direction.
-    private Direction opposite = null;
 }
