@@ -45,7 +45,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				mainMenu.dispose();
-				new MazeGame();
+				new MazeGame(10,10);
 				
 			}
 		});
@@ -55,7 +55,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
 				mainMenu.dispose();
-				new MazeGame();
+				new MazeGame(15,15);
 			}
 		});
 		
@@ -64,7 +64,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
 				mainMenu.dispose();
-				new MazeGame();
+				new MazeGame(25,25);
 			}
 		});
 		
