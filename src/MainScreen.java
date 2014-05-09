@@ -49,7 +49,7 @@ public class MainScreen {
             {
                 //Execute when button is pressed
                 System.out.println("You clicked the New Game Button");
-                Difficulty_Selection dsFrame = new Difficulty_Selection();
+                Difficulty_Selection dsFrame = new Difficulty_Selection(mainFrame);
                 mainFrame.setVisible(false);
                 dsFrame.run();
             }

@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,20 +10,22 @@ import javax.swing.JFrame;
 
 public class Difficulty_Selection extends JFrame {
 
-	private JButton easyButton;
-	private JButton mediumButton;
-	private JButton hardButton;
-	private JButton backButton;
+	private Difficulty_Button easyButton;
+	private Difficulty_Button mediumButton;
+	private Difficulty_Button hardButton;
+	private BackButton backButton;
 	public JFrame difficultySelection;
 	
 	
-	public Difficulty_Selection(){
+	public Difficulty_Selection(JFrame mainMenu){
 		difficultySelection = new JFrame("Select Difficulty");
 		
-		easyButton = new JButton("Easy");
-		mediumButton = new JButton("Medium");
-		hardButton = new JButton("Hard");
-		backButton = new JButton("Back");
+		Insets insets = difficultySelection.getInsets();
+		
+		easyButton = new Difficulty_Button("Easy", new Point(175, 80), insets, new Dimension(150, 70));
+		mediumButton = new Difficulty_Button("Medium", new Point(175, 180), insets, new Dimension(150, 70));
+		hardButton = new Difficulty_Button("Hard", new Point(175, 280), insets, new Dimension(150, 70));
+		backButton = new BackButton(new Point(20, 380));
 		
 		difficultySelection.add(easyButton);
 		difficultySelection.add(mediumButton);
@@ -35,21 +38,19 @@ public class Difficulty_Selection extends JFrame {
 		difficultySelection.setLocationRelativeTo(null);
 		difficultySelection.setLayout(null);
 		
-		Insets insets = difficultySelection.getInsets();
-		easyButton.setBounds(insets.left + 175, insets.top + 80, 150, 70);
-		easyButton.setVisible(true);
-		mediumButton.setBounds(insets.left + 175, insets.top + 180, 150, 70);
-		mediumButton.setVisible(true);
-		hardButton.setBounds(insets.left + 175, insets.top + 280, 150, 70);
-		hardButton.setVisible(true);
-		backButton.setBounds(insets.left + 20, insets.top + 380, 100, 40);
-		backButton.setVisible(true);
+		//Setting the positions of the buttons
+		//Insets insets = difficultySelection.getInsets();
+		//easyButton.setBounds(insets.left + 175, insets.top + 80, 150, 70);
+		//mediumButton.setBounds(insets.left + 175, insets.top + 180, 150, 70);
+		//hardButton.setBounds(insets.left + 175, insets.top + 280, 150, 70);
+
 		
 		easyButton.addActionListener(new ActionListener() {
 			
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
+				new MazeGame();
 				
 			}
 		});
@@ -59,6 +60,7 @@ public class Difficulty_Selection extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
+				new MazeGame();
 				
 			}
 		});
@@ -68,7 +70,7 @@ public class Difficulty_Selection extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
-				
+				new MazeGame();
 			}
 		});
 		
@@ -77,7 +79,10 @@ public class Difficulty_Selection extends JFrame {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Go back to the main menu");
-				//difficultySelection.dispose();
+				MainScreen main = new MainScreen();
+				main.run();
+				difficultySelection.dispose();
+				
 				//Figure out how to get back to the main menu from here...
 			}
 		});
