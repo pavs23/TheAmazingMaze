@@ -11,7 +11,7 @@ public class PathTester {
             System.out.println("");
         }
         
-        ArrayList<Coordinate> path = newMaze.findPathToGoal(0, 1);
+        ArrayList<Coordinate> path = newMaze.findPathToGoal(new Coordinate(0,1));
         for (Coordinate each : path) {
             System.out.println (each.getX() + ", " + each.getY());
         }

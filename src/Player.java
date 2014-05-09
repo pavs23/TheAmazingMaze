@@ -4,48 +4,30 @@
  *
  */
 public class Player {
+    private Coordinate coordinate;
+    
     /**
      * Constructor of the class.
-     * @param initialX initial x coordinate of player.
-     * @param initialY initial y coordinate of player.
+     * @param initialCoordinate the initial coordinate of player.
      */
-    public Player(int initialX, int initialY) {
-        x = initialX;
-        y = initialY;
+    public Player(Coordinate initialCoordinate) {
+        coordinate = initialCoordinate;
     }
     
     /**
-     * Get the X position of the player.
-     * @return the x position.
+     * Get the coordinate of the player.
+     * @return the coordinate position.
      */
-    public int getXPosition() {
-        return x;
+    public Coordinate getCoordinate() {
+        return coordinate;
     }
+    
     
     /**
-     * Get the Y position of the player.
-     * @return the y position.
+     * Set the current position of the player.
+     * @param currCoordinate the current position of player.
      */
-    public int getYPosition() {
-        return y;
+    public void setCoordinate(Coordinate currCoordinate) {
+        coordinate = currCoordinate;
     }
-    
-    /**
-     * Set the current X position of the player.
-     * @param currX the current X position of player.
-     */
-    public void setXPosition(int currX) {
-        x = currX;
-    }
-    
-    /**
-     * Set the current Y position of the player.
-     * @param currY the current Y position of player.
-     */
-    public void setYPosition(int currY) {
-        y = currY;
-    }
-    
-    private int x;
-    private int y;
 }
