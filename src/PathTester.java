@@ -3,7 +3,7 @@ public class PathTester {
     public static void main (String[] args) {
         Maze newMaze = new Maze(5,5);
 
-        int mazeArray[][] = newMaze.getMaze();
+        int mazeArray[][] = newMaze.getMazeArray();
         for (int i = 0; i < mazeArray[0].length; i++) {
             for (int j = 0; j < mazeArray.length; j++) {
                 System.out.print(mazeArray[j][i] + " ");
@@ -11,7 +11,7 @@ public class PathTester {
             System.out.println("");
         }
         
-        ArrayList<Coordinate> path = newMaze.findPathToGoal(new Coordinate(0,1));
+        ArrayList<Coordinate> path = newMaze.getHint(new Coordinate(0,1));
         for (Coordinate each : path) {
             System.out.println (each.getX() + ", " + each.getY());
         }

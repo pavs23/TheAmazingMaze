@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * @author floren
  *
  */
-public class Maze {
+public class Maze implements GameMode {
     private int[][] mazeArray;
     private Coordinate start;
     private Coordinate finish;
@@ -58,7 +58,7 @@ public class Maze {
      * 0 representing path and 1 representing walls.
      * @return the 2 dimensional array of the maze.
      */
-    public int[][] getMaze() {
+    public int[][] getMazeArray() {
         return mazeArray;
     }
     
@@ -87,8 +87,7 @@ public class Maze {
      * @param curr the current position.
      * @return an ArrayList of Coordinate path, not including the current point, until the goal.
      */
-    public ArrayList<Coordinate> findPathToGoal(Coordinate curr) {
-        
+    public ArrayList<Coordinate> getHint(Coordinate curr) {    
         Coordinate currPoint;
         int currX = curr.getX();
         int currY = curr.getY();

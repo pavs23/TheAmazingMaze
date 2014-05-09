@@ -30,4 +30,5 @@ public class Player {
     public void setCoordinate(Coordinate currCoordinate) {
         coordinate = currCoordinate;
     }
+    
 }

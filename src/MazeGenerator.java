@@ -90,7 +90,7 @@ public class MazeGenerator {
      * @precondition has to be invoked after the method generateMazeArray().
      * @param from the Coordinate from.
      * @param to the Coordinate to.
-     * @return an ArrayList of Coordinate of the path, in order, including both the to but not from.
+     * @return an ArrayList of Coordinate of the path, in order, including the to but not from.
      * @return a null object if not valid (coordinate invalid or the method generateMazeArray has not been invoked.
      * @return empty array list if the path is not found or from = to.
      */
