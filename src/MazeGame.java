@@ -35,18 +35,18 @@ public class MazeGame {
      * @param args array of string.
      */
     public static void main(String[] args) {
-        new MazeGame();
+        new MazeGame(5, 5);
     }
     
     /**
      * Constructor of the class to create the maze game.
      */
-    public MazeGame() {
+    public MazeGame(int x, int y) {
         // Create the JFrame.
         frame = new JFrame();
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
-        newNormalGame(10,10);
+        newNormalGame(x,y);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -76,7 +76,7 @@ public class MazeGame {
     public void generateRandomMaze(int x, int y) {
         // Create maze.
         maze = new Maze(x, y);
-        int[][] mazeArray = maze.getMaze();
+        int[][] mazeArray = maze.getMazeArray();
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
         Coordinate startCoordinate = maze.getStartCoordinate();
@@ -180,7 +180,7 @@ public class MazeGame {
                 getHint.setEnabled(false);
                 gamePanel.setEnabled(false); 
                 Coordinate currPos = player.getCoordinate();
-                final ArrayList<Coordinate> path = maze.findPathToGoal(currPos);
+                final ArrayList<Coordinate> path = maze.getHint(currPos);
                 // n = the dimension of the array/3.
                 for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
                     Coordinate curr = path.get(i);
