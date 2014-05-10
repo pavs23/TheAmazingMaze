@@ -6,7 +6,7 @@ import java.util.Random;
  * @author Bronte Kalebic
  *
  */
-public class CoinMaze extends GameModeImp implements Cloneable{
+public class CoinMaze extends GameModeImp {
 
 	private ArrayList<Coordinate> coinLocations;
 	private MazeGenerator maze;
@@ -24,7 +24,6 @@ public class CoinMaze extends GameModeImp implements Cloneable{
 		coinLocations = new ArrayList<Coordinate>();
 		maze = new MazeGenerator(sizeX,sizeY);
 		setMazeArray(maze.generateMazeArray());
-		
 		coinCoordinateGenerator();
 	}
 	
@@ -139,13 +138,31 @@ public class CoinMaze extends GameModeImp implements Cloneable{
 	}
 	
 	/**
-	 * Clone the object
+	 * Set the MazeGenerator of the object.
+	 * @param maze the MazeGenerator.
 	 */
-	public Object clone(){  
-	    try{  
-	        return super.clone();  
-	    } catch (Exception e) { 
-	        return null; 
-	    }
+	private void setMaze(MazeGenerator maze) {
+	    this.maze = maze;
+	}
+	
+	/**
+     * Set the coin locations of the object.
+     * @param locations the ArrayList of the position of the coins.
+     */
+	private void setCoinLocations(ArrayList<Coordinate> locations) {
+	    coinLocations = new ArrayList<Coordinate>(locations);
+	}
+	
+	/**
+	 * Clone the object
+	 * The object will have the deep copy of the coinLocations field.
+	 * @return the clone of the object.
+	 */
+	public CoinMaze generateClone(){  
+	     CoinMaze clone = new CoinMaze(5,5);
+	     clone.setMaze(maze);
+	     clone.setCoinLocations(coinLocations);
+	     clone.setMazeArray(maze.generateMazeArray());
+	     return clone;
 	}
 }

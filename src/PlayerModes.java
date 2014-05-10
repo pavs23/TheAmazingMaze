@@ -161,7 +161,6 @@ public abstract class PlayerModes {
         
     public Player generatePlayer(String name) {
         Coordinate startCoordinate = maze.getStartCoordinate();
-        System.out.println(startCoordinate.getX() + " " + startCoordinate.getY());
         Player player = new Player(startCoordinate, name);
         return player;
     }

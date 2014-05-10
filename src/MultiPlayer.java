@@ -36,7 +36,7 @@ public class MultiPlayer extends PlayerModes {
         maze1 = getMaze();
         if (mode.equals("coin")) {
             CoinMaze coinMaze = (CoinMaze) maze1;
-            maze2 = (GameMode) coinMaze.clone();
+            maze2 = (GameMode) coinMaze.generateClone();
         } else {
             maze2 = getMaze();
         }

@@ -45,7 +45,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				mainMenu.dispose();
-				new MazeGame("multi", "normal", "easy");
+				new MazeGame("multi", "coin", "easy");
 				
 			}
 		});
