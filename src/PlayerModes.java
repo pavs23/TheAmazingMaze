@@ -5,7 +5,13 @@ import javax.imageio.*;
 import java.util.ArrayList;
 import java.io.*;
 
+/**
+ * A class that represents common things between Game Modes.
+ * @author floren
+ *
+ */
 public class PlayerModes {
+    // The icons.
     protected ImageIcon roadIcon;
     protected ImageIcon wallIcon;
     protected ImageIcon playerIconFront;
@@ -14,7 +20,7 @@ public class PlayerModes {
     protected ImageIcon playerIconRight;
     protected ImageIcon hintIcon;
     protected ImageIcon coinIcon;
-        
+    
     protected static final int ROAD = 1;
     protected static final int FRAME_WIDTH = 600;
     
@@ -22,15 +28,28 @@ public class PlayerModes {
     private int mode;
     private int[][] mazeArray;
     
-    
+    /**
+     * Set the mode for the game.
+     * @param mode the mode of the game(ADVENTURE_MODE or COIN_MODE).
+     */
     public void setMode(int mode) {
         this.mode = mode;
     }
     
+    /**
+     * Get the mode of the game.
+     * @return an integer representation of the mode of the game.
+     */
     public int getMode() {
         return mode;
     }
     
+    /**
+     * Create maze based on the mode.
+     * @param x the number of roads in x direction.
+     * @param y the number of roads in y direction.
+     * @postcondition mazeArray is updated to become the array of the new maze.
+     */
     public void createMaze(int x, int y) {
         if (mode == MazeGame.COIN_MODE) {
             maze = new CoinMaze(x, y);
@@ -39,11 +58,18 @@ public class PlayerModes {
         }
         mazeArray = maze.getMazeArray();
     }
-        
+    
+    /**
+     * Get the maze of the object.
+     * @return the GameMode representing the maze of the object.
+     */
     public GameMode getMaze() {
         return maze;
     }
     
+    /**
+     * Create the icons needed for the maze game.
+     */
     public void generateIcon() {
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
@@ -111,6 +137,11 @@ public class PlayerModes {
         } catch (IOException e) {}
     }
     
+    /**
+     * Generate a maze panel that will consist of labels as grids.
+     * @param labels an array of labels that will be in the maze panel.
+     * @return the maze panel created.
+     */
     public JPanel generateMazePanel(JLabel[][] labels) {
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
@@ -141,6 +172,10 @@ public class PlayerModes {
         return mazePanel;
     }
     
+    /**
+     * Generate an array of labels based on the size of the frame and maze.
+     * @return the created array of labels.
+     */
     public JLabel[][] generateLabels() {
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
@@ -153,7 +188,12 @@ public class PlayerModes {
         }
         return labels;
     }
-        
+     
+    /**
+     * Create player for the game.
+     * @param name the name of the player.
+     * @return the Player that is created.
+     */
     public Player generatePlayer(String name) {
         Coordinate startCoordinate = maze.getStartCoordinate();
         Player player = new Player(startCoordinate, name);
@@ -166,6 +206,7 @@ public class PlayerModes {
      * Paint the player in the maze.
      * @param coordinate the Coordinate of player..
      * @param direction the direction that the player is facing.
+     * @param labels the labels associated with the player.
      */
     public void paintPlayer(Player player, Coordinate coordinate, Direction direction, JLabel[][] labels) {
         int xPos = coordinate.getX();
@@ -184,6 +225,7 @@ public class PlayerModes {
     /**
      * Paint road in the maze.
      * @param pos the Coordinate of road.
+     * @param labels the labels associated with the road.
      */
     public void paintRoad(Coordinate pos, JLabel[][] labels) {
         labels[pos.getX()][pos.getY()].setIcon(roadIcon);
@@ -193,7 +235,10 @@ public class PlayerModes {
     /**
      * Move the player in the system. Update the player coordinates and repaint.
      * If the player has finished, send a congratulation message.
+     * @param player the player that needs to be moved.
      * @param direction the direction of movement of the player.
+     * @param labels the labels associated with the player.
+     * @param maze the maze associated with the player.
      */
     public void movePlayer(Player player, Direction direction, JLabel[][] labels, GameMode maze) {
         Coordinate curr = player.getCoordinate();

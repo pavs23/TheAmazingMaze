@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * A class that generates and monitors the state of a coin mode maze
+ * A class that generates and monitors the state of a coin mode maze.
  * @author Bronte Kalebic
  *
  */
@@ -10,7 +10,6 @@ public class CoinMaze extends GameModeImp {
 
 	private ArrayList<Coordinate> coinLocations;
 	private MazeGenerator maze;
-	
 	private final int TOTAL_COIN_NUM = 10;
 	private final Coordinate startCoordinate = new Coordinate(1,1);
 	
@@ -105,7 +104,11 @@ public class CoinMaze extends GameModeImp {
 	public int getNumCoins(){
 		return coinLocations.size();
 	}
-	
+		
+	/**
+	 * gets the starting coordinate for the player.
+	 * @return the Coordinate of starting point of the maze.
+	 */
 	public Coordinate getStartCoordinate() {
 	    return startCoordinate;
 	}

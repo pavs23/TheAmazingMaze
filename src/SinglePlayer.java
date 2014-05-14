@@ -3,6 +3,11 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * A class that represents single player mode.
+ * @author floren
+ *
+ */
 public class SinglePlayer extends PlayerModes {
     private Player player;
     private GameMode maze;
@@ -15,6 +20,8 @@ public class SinglePlayer extends PlayerModes {
     /**
      * Constructor of the class to create the maze game.
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
+     * @param x the number of roads needed in X direction.
+     * @param y the number of roads needed in Y direction.
      */
     public SinglePlayer(int mode, int x, int y) {
         // Set the mode of the game.
@@ -96,7 +103,7 @@ public class SinglePlayer extends PlayerModes {
     }
     
     /**
-     * Set the event listener to the frame (arrow key press).
+     * Set the event listener to the frame (arrows key press).
      * Use key binding for it.
      */
     public void setEventListenerToMaze() {   

@@ -45,7 +45,4 @@ public class MazeGame {
             new MultiPlayer(mode, x, y);
         }
     }
-    
-
-    
 }

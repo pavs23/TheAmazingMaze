@@ -2,7 +2,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
-
+/**
+ * A class that represents Multiplayer game.
+ * @author floren
+ *
+ */
 public class MultiPlayer extends PlayerModes {
     private Player player1;
     private Player player2;
@@ -18,6 +22,8 @@ public class MultiPlayer extends PlayerModes {
     /**
      * Constructor of the class to create the maze game.
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
+     * @param x the number of roads needed in X direction.
+     * @param y the number of roads needed in Y direction.
      */
     public MultiPlayer(int mode, int x, int y) {
         // Set the mode of the game.
@@ -35,8 +41,7 @@ public class MultiPlayer extends PlayerModes {
         } else {
             maze2 = getMaze();
         }
-        
-        
+       
         // Create the JFrame.
         frame = new JFrame();
         frame.setLayout(new FlowLayout());
@@ -70,7 +75,7 @@ public class MultiPlayer extends PlayerModes {
     
     
     /**
-     * Set the event listener to the frame (arrow key press).
+     * Set the event listener to the frame (arrows key press and asdw key press).
      * Use key binding for it.
      */
     public void setEventListenerToMaze() {
