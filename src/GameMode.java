@@ -17,13 +17,13 @@ public interface GameMode {
      * @param currentPosition the current position of the player.
      * @return an ArrayList of Coordinate from currentPosition to a goal, not including current coordinate.
      */
-    public abstract ArrayList<Coordinate> getHint(Coordinate currentPosition);
+    public ArrayList<Coordinate> getHint(Coordinate currentPosition);
     
     /**
      * Get the starting coordinate of the player.
      * @return the Coordinate of the starting point.
      */
-    public abstract Coordinate getStartCoordinate();
+    public Coordinate getStartCoordinate();
     
     /**
      * Get whether the tile in the direction from current position is a path (not a wall).

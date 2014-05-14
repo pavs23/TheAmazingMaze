@@ -104,8 +104,28 @@ public class SinglePlayer extends PlayerModes {
      * Set the event listener to the frame (arrow key press).
      * Use key binding for it.
      */
-    public void setEventListenerToMaze() {
+    public void setEventListenerToMaze() {   
+        frame.addKeyListener(new KeyAdapter() {
+           public void keyPressed(KeyEvent e) {
+               int keyCode = e.getKeyCode();
+               Direction dir = null;
+               if (keyCode == KeyEvent.VK_LEFT) {
+                   dir = LEFT;
+               } else if (keyCode == KeyEvent.VK_RIGHT) {
+                   dir = RIGHT;
+               } else if (keyCode == KeyEvent.VK_UP) {
+                   dir = ABOVE;
+               } else if (keyCode == KeyEvent.VK_DOWN) {
+                   dir = BOTTOM;
+               }
+               if (dir != null) {
+                   movePlayer(player, dir, labels, maze);
+               }
+           }
+        });
+        
         // Key bindings (so that it works with panel).
+        /*
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 movePlayer(player, LEFT, labels, maze);
@@ -139,5 +159,6 @@ public class SinglePlayer extends PlayerModes {
         gamePanel.getActionMap().put("up", upKeyPressed);
         gamePanel.getInputMap().put(downKey, "down");
         gamePanel.getActionMap().put("down", downKeyPressed);
+        */
     }
 }

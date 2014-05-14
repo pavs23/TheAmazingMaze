@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 public class MultiPlayer extends PlayerModes {
@@ -79,8 +80,30 @@ public class MultiPlayer extends PlayerModes {
      * Use key binding for it.
      */
     public void setEventListenerToMaze() {
+        frame.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                int keyCode = e.getKeyCode();
+                if (keyCode == KeyEvent.VK_LEFT) {
+                    movePlayer(player1, LEFT, labels1, maze1);
+                } else if (keyCode == KeyEvent.VK_RIGHT) {
+                    movePlayer(player1, RIGHT, labels1, maze1);
+                } else if (keyCode == KeyEvent.VK_UP) {
+                    movePlayer(player1, ABOVE, labels1, maze1);
+                } else if (keyCode == KeyEvent.VK_DOWN) {
+                    movePlayer(player1, BOTTOM, labels1, maze1);
+                } else if (keyCode == KeyEvent.VK_A) {
+                    movePlayer(player2, LEFT, labels2, maze2);
+                } else if (keyCode == KeyEvent.VK_D) {
+                    movePlayer(player2, RIGHT, labels2, maze2);
+                } else if (keyCode == KeyEvent.VK_W) {
+                    movePlayer(player2, ABOVE, labels2, maze2);
+                } else if (keyCode == KeyEvent.VK_S) {
+                    movePlayer(player2, BOTTOM, labels2, maze2);
+                }
+            }
+         });
         // Key bindings (so that it works with panel).
-        
+        /*
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
                 movePlayer(player1, LEFT, labels1, maze1);
@@ -152,5 +175,6 @@ public class MultiPlayer extends PlayerModes {
         gamePanel.getActionMap().put("w", wKeyPressed);
         gamePanel.getInputMap().put(sKey, "s");
         gamePanel.getActionMap().put("s", sKeyPressed);
+        */
     }
 }

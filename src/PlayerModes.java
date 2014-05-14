@@ -5,7 +5,7 @@ import javax.imageio.*;
 import java.util.ArrayList;
 import java.io.*;
 
-public abstract class PlayerModes {
+public class PlayerModes {
     protected ImageIcon roadIcon;
     protected ImageIcon wallIcon;
     protected ImageIcon playerIconFront;
