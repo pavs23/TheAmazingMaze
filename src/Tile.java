@@ -56,16 +56,16 @@ public class Tile {
     
     /**
      * Set the boolean value of boundary to true.
-     * @param direction the string representing the direction that will be set to true (north/south/west/east).
+     * @param direction the Direction representing the direction that will be set to true.
      */
-    public void setBoundaryTrue (String direction) {
-        if (direction.equalsIgnoreCase("north")) {
+    public void setBoundaryTrue (Direction direction) {
+        if (direction.equals(MazeGame.NORTH)) {
             north = true;
-        } else if (direction.equalsIgnoreCase("south")) {
+        } else if (direction.equals(MazeGame.SOUTH)) {
             south = true;
-        } else if (direction.equalsIgnoreCase("west")) {
+        } else if (direction.equals(MazeGame.WEST)) {
             west = true;
-        } else if (direction.equalsIgnoreCase("east")) {
+        } else if (direction.equals(MazeGame.EAST)) {
             east = true;
         }
     }
