@@ -6,15 +6,14 @@ import java.util.Random;
  * @author Bronte Kalebic
  *
  */
-public class CoinMaze implements GameMode{
+public class CoinMaze extends GameModeImp {
 
 	private ArrayList<Coordinate> coinLocations;
 	private MazeGenerator maze;
-	private int[][] mazeArray;
 	
 	private final int TOTAL_COIN_NUM = 10;
-	//private final int WALL = 0;
-	private final int ROAD = 1;
+	private final Coordinate startCoordinate = new Coordinate(1,1);
+	
 	
 	/**
 	 * A constructor that generates a coin maze
@@ -24,21 +23,29 @@ public class CoinMaze implements GameMode{
 	public CoinMaze(int sizeX, int sizeY){
 		coinLocations = new ArrayList<Coordinate>();
 		maze = new MazeGenerator(sizeX,sizeY);
-		mazeArray = maze.generateMazeArray();
-		
+		setMazeArray(maze.generateMazeArray());
 		coinCoordinateGenerator();
 	}
 	
 	/**
 	 * Checks whether a game has finished (if all coins have been found)
+	 * @param playerCoordinate the coordinate of current player.
 	 * @return whether the game is finished or not
 	 */
-	public boolean gameFinished(){
+	public boolean gameFinished(Coordinate playerCoordinate){
 		if (coinLocations.isEmpty()){
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Remove a coin.
+	 * @param coinCoordinate the coordinate of the coin that wants to be removed.
+	 */
+	public void removeCoin(Coordinate coinCoordinate) {
+	    coinLocations.remove(coinCoordinate);
 	}
 	
 	/**
@@ -67,10 +74,20 @@ public class CoinMaze implements GameMode{
 	/**
 	 * Generates a hint path to a random coin in the maze
 	 * @param playerCoordinate is the current position of the player
-	 * @return an array list of the coordinates of the path to a coin
+	 * @return an array list of the coordinates of the path to a coin closest to the player, excluding the coin position.
 	 */
 	public ArrayList<Coordinate> getHint(Coordinate playerCoordinate){
-		return maze.findPath(playerCoordinate, coinLocations.get(0));
+	    ArrayList<Coordinate> path = null;
+	    for (Coordinate location : coinLocations) {
+	        ArrayList<Coordinate> currPath = maze.findPath(playerCoordinate, location);
+	        if (path == null) {
+	            path = currPath;
+	        } else if (path.size() > currPath.size()) {
+	            path = currPath;
+	        }
+	    }
+	    path.remove(path.size()-1);
+		return path;
 	}
 	
 	/**
@@ -82,19 +99,15 @@ public class CoinMaze implements GameMode{
 	}
 	
 	/**
-	 * gets the mazeArray
-	 * @return 2d array of 1 and 0s denoting walls or roads
-	 */
-	public int[][] getMazeArray(){
-		return mazeArray;
-	}
-	
-	/**
 	 * gets the number of coins left to be found
 	 * @return number of coins
 	 */
 	public int getNumCoins(){
 		return coinLocations.size();
+	}
+	
+	public Coordinate getStartCoordinate() {
+	    return startCoordinate;
 	}
 	
 	/**
@@ -104,10 +117,10 @@ public class CoinMaze implements GameMode{
 		Random randomGenerator = new Random();
 		int x;
 		int y;
+		int[][] mazeArray = getMazeArray();
 		int horizLength = mazeArray.length;
 		int vertLength = mazeArray[0].length;
 		Coordinate testCoordinate;
-		Coordinate startCoordinate = new Coordinate(1,1);
 		
 		int i = 0;
 		while (i< TOTAL_COIN_NUM){
@@ -122,8 +135,34 @@ public class CoinMaze implements GameMode{
 				i++;
 			}
 		}
-		
 	}
 	
+	/**
+	 * Set the MazeGenerator of the object.
+	 * @param maze the MazeGenerator.
+	 */
+	private void setMaze(MazeGenerator maze) {
+	    this.maze = maze;
+	}
 	
+	/**
+     * Set the coin locations of the object.
+     * @param locations the ArrayList of the position of the coins.
+     */
+	private void setCoinLocations(ArrayList<Coordinate> locations) {
+	    coinLocations = new ArrayList<Coordinate>(locations);
+	}
+	
+	/**
+	 * Clone the object
+	 * The object will have the deep copy of the coinLocations field.
+	 * @return the clone of the object.
+	 */
+	public CoinMaze generateClone(){  
+	     CoinMaze clone = new CoinMaze(5,5);
+	     clone.setMaze(maze);
+	     clone.setCoinLocations(coinLocations);
+	     clone.setMazeArray(maze.generateMazeArray());
+	     return clone;
+	}
 }

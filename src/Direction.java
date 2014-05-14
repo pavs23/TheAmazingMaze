@@ -63,4 +63,19 @@ public class Direction {
     public void setOppositeDirection (Direction opposite) {
         this.opposite = opposite;
     }
+    
+    /**
+     * Two Direction objects are equal if the x and y direction of both objects are the same.
+     * @param otherObject the other object to be compared with this Direction.
+     * @return true if equal, false otherwise.
+     */
+    @Override
+    public boolean equals (Object otherObject) {
+        boolean isEqual = false;
+        Direction other = (Direction) otherObject;
+        if (other.getXDirection() == dx && other.getYDirection() == dy) {
+            isEqual = true;
+        }
+        return isEqual;
+    }
 }

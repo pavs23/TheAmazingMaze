@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 public class PathTester {
     public static void main (String[] args) {
-        Maze newMaze = new Maze(5,5);
+        NormalMaze newMaze = new NormalMaze(5,5);
 
         int mazeArray[][] = newMaze.getMazeArray();
         for (int i = 0; i < mazeArray[0].length; i++) {
