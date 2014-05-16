@@ -5,7 +5,13 @@ import javax.imageio.*;
 import java.util.ArrayList;
 import java.io.*;
 
-public abstract class PlayerModes {
+/**
+ * A class that represents common things between Game Modes.
+ * @author floren
+ *
+ */
+public class PlayerModes {
+    // The icons.
     protected ImageIcon roadIcon;
     protected ImageIcon wallIcon;
     protected ImageIcon playerIconFront;
@@ -15,40 +21,55 @@ public abstract class PlayerModes {
     protected ImageIcon hintIcon;
     protected ImageIcon coinIcon;
     
-    protected static final Direction ABOVE = new Direction("above", 0, -1);
-    protected static final Direction BOTTOM = new Direction("bottom", 0, 1);
-    protected static final Direction LEFT = new Direction("left", -1, 0);
-    protected static final Direction RIGHT = new Direction("right", 1, 0);
-        
     protected static final int ROAD = 1;
     protected static final int FRAME_WIDTH = 600;
     
     private GameMode maze;
-    private String mode;
+    private int mode;
     private int[][] mazeArray;
     
-    
-    public void setMode(String mode) {
+    /**
+     * Set the mode for the game.
+     * @param mode the mode of the game(ADVENTURE_MODE or COIN_MODE).
+     */
+    public void setMode(int mode) {
         this.mode = mode;
     }
     
-    public String getMode() {
+    /**
+     * Get the mode of the game.
+     * @return an integer representation of the mode of the game.
+     */
+    public int getMode() {
         return mode;
     }
     
+    /**
+     * Create maze based on the mode.
+     * @param x the number of roads in x direction.
+     * @param y the number of roads in y direction.
+     * @postcondition mazeArray is updated to become the array of the new maze.
+     */
     public void createMaze(int x, int y) {
-        if (mode.equals("coin")) {
+        if (mode == MazeGame.COIN_MODE) {
             maze = new CoinMaze(x, y);
         } else {
-            maze = new NormalMaze(x, y);
+            maze = new AdventureMaze(x, y);
         }
         mazeArray = maze.getMazeArray();
     }
-        
+    
+    /**
+     * Get the maze of the object.
+     * @return the GameMode representing the maze of the object.
+     */
     public GameMode getMaze() {
         return maze;
     }
     
+    /**
+     * Create the icons needed for the maze game.
+     */
     public void generateIcon() {
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
@@ -116,6 +137,11 @@ public abstract class PlayerModes {
         } catch (IOException e) {}
     }
     
+    /**
+     * Generate a maze panel that will consist of labels as grids.
+     * @param labels an array of labels that will be in the maze panel.
+     * @return the maze panel created.
+     */
     public JPanel generateMazePanel(JLabel[][] labels) {
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
@@ -136,7 +162,7 @@ public abstract class PlayerModes {
         }
         
         // Paint the coin if it's coin mode.
-        if (mode.equals("coin")) {
+        if (mode == MazeGame.COIN_MODE) {
             CoinMaze coinMaze = (CoinMaze) maze;
             ArrayList<Coordinate> coins = coinMaze.getCoinCoordinates();
             for (Coordinate position : coins) {
@@ -146,6 +172,10 @@ public abstract class PlayerModes {
         return mazePanel;
     }
     
+    /**
+     * Generate an array of labels based on the size of the frame and maze.
+     * @return the created array of labels.
+     */
     public JLabel[][] generateLabels() {
         int xDimension = mazeArray.length;
         int yDimension = mazeArray[0].length;
@@ -158,7 +188,12 @@ public abstract class PlayerModes {
         }
         return labels;
     }
-        
+     
+    /**
+     * Create player for the game.
+     * @param name the name of the player.
+     * @return the Player that is created.
+     */
     public Player generatePlayer(String name) {
         Coordinate startCoordinate = maze.getStartCoordinate();
         Player player = new Player(startCoordinate, name);
@@ -171,17 +206,18 @@ public abstract class PlayerModes {
      * Paint the player in the maze.
      * @param coordinate the Coordinate of player..
      * @param direction the direction that the player is facing.
+     * @param labels the labels associated with the player.
      */
     public void paintPlayer(Player player, Coordinate coordinate, Direction direction, JLabel[][] labels) {
         int xPos = coordinate.getX();
         int yPos = coordinate.getY();
-        if (direction.equals(ABOVE)) {
+        if (direction.equals(MazeGame.NORTH)) {
             labels[xPos][yPos].setIcon(playerIconBack);
-        } else if (direction.equals(BOTTOM)) {
+        } else if (direction.equals(MazeGame.SOUTH)) {
             labels[xPos][yPos].setIcon(playerIconFront);
-        } else if (direction.equals(LEFT)) {
+        } else if (direction.equals(MazeGame.WEST)) {
             labels[xPos][yPos].setIcon(playerIconLeft);
-        } else if (direction.equals(RIGHT)) {
+        } else if (direction.equals(MazeGame.EAST)) {
             labels[xPos][yPos].setIcon(playerIconRight);
         }
     }
@@ -189,6 +225,7 @@ public abstract class PlayerModes {
     /**
      * Paint road in the maze.
      * @param pos the Coordinate of road.
+     * @param labels the labels associated with the road.
      */
     public void paintRoad(Coordinate pos, JLabel[][] labels) {
         labels[pos.getX()][pos.getY()].setIcon(roadIcon);
@@ -198,7 +235,10 @@ public abstract class PlayerModes {
     /**
      * Move the player in the system. Update the player coordinates and repaint.
      * If the player has finished, send a congratulation message.
+     * @param player the player that needs to be moved.
      * @param direction the direction of movement of the player.
+     * @param labels the labels associated with the player.
+     * @param maze the maze associated with the player.
      */
     public void movePlayer(Player player, Direction direction, JLabel[][] labels, GameMode maze) {
         Coordinate curr = player.getCoordinate();
@@ -214,7 +254,7 @@ public abstract class PlayerModes {
             paintPlayer(player, newPos, direction, labels);
             
             // If coin mode, find out whether a player find the coin or not.
-            if (mode.equals("coin")) {
+            if (mode == MazeGame.COIN_MODE) {
                 CoinMaze coinMaze = (CoinMaze) maze;
                 if (coinMaze.coinFound(newPos)) {
                     coinMaze.removeCoin(newPos);

@@ -25,7 +25,6 @@ public class Player {
         return coordinate;
     }
     
-    
     /**
      * Set the current position of the player.
      * @param currCoordinate the current position of player.

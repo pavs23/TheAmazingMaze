@@ -3,6 +3,11 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * A class that represents single player mode.
+ * @author floren
+ *
+ */
 public class SinglePlayer extends PlayerModes {
     private Player player;
     private GameMode maze;
@@ -11,17 +16,14 @@ public class SinglePlayer extends PlayerModes {
     private JPanel mazePanel;
     private JPanel sideMenu;
     private JLabel[][] labels;
-    
-    private static final Direction ABOVE = new Direction("above", 0, -1);
-    private static final Direction BOTTOM = new Direction("bottom", 0, 1);
-    private static final Direction LEFT = new Direction("left", -1, 0);
-    private static final Direction RIGHT = new Direction("right", 1, 0);
 
     /**
      * Constructor of the class to create the maze game.
-     * @param mode the mode of the single game (normal/coin).
+     * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
+     * @param x the number of roads needed in X direction.
+     * @param y the number of roads needed in Y direction.
      */
-    public SinglePlayer(String mode, int x, int y) {
+    public SinglePlayer(int mode, int x, int y) {
         // Set the mode of the game.
         setMode(mode);
         // Create the maze.
@@ -51,7 +53,7 @@ public class SinglePlayer extends PlayerModes {
         generateSideMenu();
         
         // Paint the player and set the listener.
-        paintPlayer(player, player.getCoordinate(), RIGHT, labels);
+        paintPlayer(player, player.getCoordinate(), MazeGame.EAST, labels);
         setEventListenerToMaze();
         
         frame.add(gamePanel);
@@ -101,29 +103,49 @@ public class SinglePlayer extends PlayerModes {
     }
     
     /**
-     * Set the event listener to the frame (arrow key press).
+     * Set the event listener to the frame (arrows key press).
      * Use key binding for it.
      */
-    public void setEventListenerToMaze() {
+    public void setEventListenerToMaze() {   
+        /*
+        frame.addKeyListener(new KeyAdapter() {
+           public void keyPressed(KeyEvent e) {
+               int keyCode = e.getKeyCode();
+               Direction dir = null;
+               if (keyCode == KeyEvent.VK_LEFT) {
+                   dir = MazeGame.WEST;
+               } else if (keyCode == KeyEvent.VK_RIGHT) {
+                   dir = MazeGame.EAST;
+               } else if (keyCode == KeyEvent.VK_UP) {
+                   dir = MazeGame.NORTH;
+               } else if (keyCode == KeyEvent.VK_DOWN) {
+                   dir = MazeGame.SOUTH;
+               }
+               if (dir != null) {
+                   movePlayer(player, dir, labels, maze);
+               }
+           }
+        });
+        */
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, LEFT, labels, maze);
+                movePlayer(player, MazeGame.WEST, labels, maze);
             }
         };
         Action rightKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, RIGHT, labels, maze);
+                movePlayer(player, MazeGame.EAST, labels, maze);
             }
         };
         Action upKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, ABOVE, labels, maze);
+                movePlayer(player, MazeGame.NORTH, labels, maze);
             }
         };
         Action downKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, BOTTOM, labels, maze);
+                movePlayer(player, MazeGame.SOUTH, labels, maze);
             }
         };
         KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);

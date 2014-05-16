@@ -4,13 +4,9 @@
  *
  */
 public class Direction {
-    // Represents the name of the direction.
-    private String directionName;
     // Represents in which x-y direction the direction is.
     private int dx;
     private int dy;
-    // Represents the opposite direction of the current direction.
-    private Direction opposite = null;
     
     /**
      * Constructor of the class.
@@ -18,18 +14,9 @@ public class Direction {
      * @param dx x component of the direction.
      * @param dy y component of the direction.
      */
-    public Direction(String directionName, int dx, int dy) {
-        this.directionName = directionName;
+    public Direction(int dx, int dy) {
         this.dx = dx;
         this.dy = dy;
-    }
-    
-    /**
-     * Get the name of the direction.
-     * @return the String that represents the name of the direction.
-     */
-    public String getDirectionName() {
-        return directionName;
     }
     
     /**
@@ -50,18 +37,12 @@ public class Direction {
     
     /**
      * Get the opposite direction of the current direction.
+     * The opposite direction is the negative of both x & y component.
      * @return the Direction object that is the opposite of the direction.
      */
     public Direction getOpposite() {
+        Direction opposite = new Direction(-getXDirection(), -getYDirection());
         return opposite;
-    }
-    
-    /**
-     * Set the opposite direction.
-     * @param opposite the Direction object representing opposite direction.
-     */
-    public void setOppositeDirection (Direction opposite) {
-        this.opposite = opposite;
     }
     
     /**

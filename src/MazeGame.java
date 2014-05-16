@@ -4,30 +4,45 @@
  *
  */
 
-public class MazeGame {    
+public class MazeGame {
+    // Some constants for the game.
+    public static final int SINGLE_PLAYER = 0;
+    public static final int MULTI_PLAYER = 1;
+    public static final int ADVENTURE_MODE = 0;
+    public static final int COIN_MODE = 1;
+    public static final int EASY = 0;
+    public static final int MEDIUM = 1;
+    public static final int HARD = 1;
+
+    public static final Direction NORTH = new Direction(0, -1);
+    public static final Direction SOUTH = new Direction(0, 1);
+    public static final Direction WEST = new Direction(-1, 0);
+    public static final Direction EAST = new Direction(1, 0);
+    
     /**
-     * Constructor of the class to create the maze game.
+     * Constructor to create the maze game.
+     * @param player SINGLE_PLAYER or MULTI_PLAYER.
+     * @param mode ADVENTURE_MODE or COIN_MODE.
+     * @param difficulty EASY or MEDIUM or HARD.
      */
-    public MazeGame(String players, String mode, String difficulty) {
+    public MazeGame(int player, int mode, int difficulty) {
         int x = 0;
         int y = 0;
-        if (difficulty.equals("easy")) {
+        if (difficulty == EASY) {
             x = 10;
             y = 10;
-        } else if (difficulty.equals("normal")) {
+        } else if (difficulty == MEDIUM) {
             x = 20;
             y = 20;
-        } else if (difficulty.equals("hard")) {
+        } else if (difficulty == HARD) {
             x = 30;
             y = 30;
         }
-        if (players.equals("single")) {
+        
+        if (player == SINGLE_PLAYER) {
             new SinglePlayer(mode, x, y);
-        } else if (players.equals("multi")) {
+        } else if (player == MULTI_PLAYER) {
             new MultiPlayer(mode, x, y);
         }
     }
-    
-
-    
 }

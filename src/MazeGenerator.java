@@ -34,19 +34,11 @@ public class MazeGenerator {
 		        tiles[i][j] = new Tile();
 		    }
 		}
-		// Create the directions.
-	    Direction north = new Direction("north", 0, -1);
-	    Direction south = new Direction("south", 0, 1);
-	    Direction west = new Direction("west", -1, 0);
-	    Direction east = new Direction("east", 1, 0);
-	    north.setOppositeDirection(south);
-	    south.setOppositeDirection(north);
-	    west.setOppositeDirection(east);
-	    east.setOppositeDirection(west);
-		directions.add(north);
-		directions.add(south);
-		directions.add(west);
-		directions.add(east);
+		// Initialize directions Array.
+		directions.add(MazeGame.NORTH);
+		directions.add(MazeGame.SOUTH);
+		directions.add(MazeGame.WEST);
+		directions.add(MazeGame.EAST);
 		createMaze(0, 0);
 	}
 	
@@ -138,8 +130,8 @@ public class MazeGenerator {
 			if (isTileInMaze(nextX, x) && isTileInMaze(nextY,y)
 			    && !tiles[nextX][nextY].isTileVisited()) {
 			    // Remove the walls between the tiles.
-				tiles[currX][currY].setBoundaryTrue(dir.getDirectionName());
-				tiles[nextX][nextY].setBoundaryTrue(dir.getOpposite().getDirectionName());
+				tiles[currX][currY].setBoundaryTrue(dir);
+				tiles[nextX][nextY].setBoundaryTrue(dir.getOpposite());
 				// Mark the tiles as visited.
 				tiles[currX][currY].visited();
 				tiles[nextX][nextY].visited();

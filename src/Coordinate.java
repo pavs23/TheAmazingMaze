@@ -33,6 +33,12 @@ public class Coordinate {
         return y;
     }
     
+    /**
+     * Check the equality of 2 Coordinate objects.
+     * @param otherObject the other object that will be compared to this Coordinate.
+     * @return true if both objects have the same X and Y, false otherwise.
+     */
+    @Override
     public boolean equals(Object otherObject) {
         boolean equal = true;
         Coordinate other = (Coordinate) otherObject;
