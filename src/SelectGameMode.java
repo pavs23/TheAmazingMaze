@@ -14,7 +14,7 @@ public class SelectGameMode extends JPanel {
 	private GameModeButton adventureMode;
 	private SelectGameMode currentScreen;
 	private BackButton back;
-	
+
 	public SelectGameMode(Dimension d, final JFrame mainFrame, final JPanel prev) {
 		currentScreen = this;
 		this.setSize(d);
@@ -27,7 +27,7 @@ public class SelectGameMode extends JPanel {
 		Insets insets = this.getInsets();
 		adventureMode.setBounds(insets.left + 175, insets.top + 100, 150, 90);
 		coinMode.setBounds(insets.left + 175, insets.top + 250, 150, 90);
-		
+
 		back = new BackButton(new Point(10, 380), prev, mainFrame, this);
 		back.setLocation(new Point(20, 380));
 		this.add(back);
@@ -40,12 +40,14 @@ public class SelectGameMode extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Coin Mode");
-				DifficultySelection dsScreen = new DifficultySelection(mainFrame, MazeGame.COIN_MODE, MazeGame.SINGLE_PLAYER, currentScreen);
-				//See if remove works better rather than keeping these panels running
-				
+				SingleOrMulti players = new SingleOrMulti(
+						MazeGame.COIN_MODE, mainFrame, currentScreen);
+				// See if remove works better rather than keeping these panels
+				// running
+
 				currentScreen.setVisible(false);
 				prev.setVisible(false);
-				mainFrame.add(dsScreen);
+				mainFrame.add(players);
 			}
 		});
 
@@ -54,19 +56,19 @@ public class SelectGameMode extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Adventure Mode");
-				SingleOrMulti players = new SingleOrMulti(MazeGame.ADVENTURE_MODE, mainFrame, currentScreen);
+				SingleOrMulti players = new SingleOrMulti(
+						MazeGame.ADVENTURE_MODE, mainFrame, currentScreen);
 				mainFrame.add(players);
-				//DifficultySelection dsScreen = new DifficultySelection(mainFrame, MazeGame.ADVENTURE_MODE);
-				currentScreen.setVisible(false);					//Passed this variable into actionListener as a private
+				
+				currentScreen.setVisible(false); // Passed this variable into actionListener as a private
+												
 				prev.setVisible(false);
 				players.setVisible(true);
-				//mainFrame.add(dsScreen);
+				// mainFrame.add(dsScreen);
 			}
 		});
-	
+
 		this.add(adventureMode);
 		this.add(coinMode);
-		
-
 	}
 }

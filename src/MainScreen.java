@@ -6,8 +6,10 @@ import java.awt.Event;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,6 +23,7 @@ public class MainScreen {
 	public JFrame mainFrame;
 	private JButton cancelButton;
 	private JPanel mainPanel;
+	private JButton leaderboard;
 	
 	public MainScreen(){
 		
@@ -28,6 +31,7 @@ public class MainScreen {
 		mainFrame = new JFrame("Game Menu");
 		newGameButton = new JButton("New Game");
 		cancelButton = new JButton("Quit");
+		leaderboard = new JButton("Leaderboard");
 		
 		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
 		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
@@ -45,14 +49,24 @@ public class MainScreen {
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		Insets insets = mainPanel.getInsets();
-		newGameButton.setBounds(insets.left + 175, insets.top + 100, 150, 90);
+		newGameButton.setLocation(175,100);
+		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
-		cancelButton.setBounds(insets.left + 175, insets.top + 250, 150, 90);
+		
+		cancelButton.setLocation(175, 320);
+		cancelButton.setSize(150, 90);
 		cancelButton.setVisible(true);
+		
+		leaderboard.setLocation(new Point(175,210));
+		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
+		leaderboard.setSize(new Dimension(150, 90));
+		leaderboard.setVisible(true);
 		
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
+		mainPanel.add(leaderboard);
 		mainPanel.add(cancelButton);
+		
 		
 		mainFrame.add(mainPanel);
 		
@@ -80,7 +94,31 @@ public class MainScreen {
             }
 		});
 		
+		
+		leaderboard.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
+				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
+				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
+				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
+				leaders.add(a);
+				leaders.add(b);
+				leaders.add(t);
+				
+				LeaderBoard leaderBoard = new LeaderBoard(leaders, mainPanel, mainFrame);
+				mainPanel.setVisible(false);
+				
+				leaderboard.setVisible(true);
+				mainFrame.remove(mainPanel);
+				
+			}
+		});
 	}
+	
+		
 	
 	public void run(){
 		
