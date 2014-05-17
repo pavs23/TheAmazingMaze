@@ -8,24 +8,36 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author pavan
+ *
+ */
 
 public class SingleOrMulti extends JPanel{
 
 	private SingleOrMulti currentScreen;
+	private BackButton back;
+	private NumberOfPlayersButton one;
+	private NumberOfPlayersButton two;
+	private JLabel heading;
 	
-	public SingleOrMulti(int mode, final JFrame mainFrame){
+	public SingleOrMulti(int mode, final JFrame mainFrame, final JPanel prev){
 		this.setSize(new Dimension(500, 500));
+		this.setLayout(null);
+		
 		currentScreen = this;
 		
-		JLabel heading = new JLabel("How many players?");
+		heading = new JLabel("How many players?");
 		heading.setSize(new Dimension(500, 150));;
 		heading.setForeground(Color.BLACK);
 		heading.setLocation(new Point(10,10));
 		
-		BackButton back = new BackButton(new Point(10, 480), this, mainFrame);
+		back = new BackButton(new Point(10, 380), prev, mainFrame, this);
+		back.setLocation(new Point(20, 380));
 		
-		NumberOfPlayersButton one = new NumberOfPlayersButton(mode, "One Player");
-		NumberOfPlayersButton two = new NumberOfPlayersButton(mode, "Two Players");
+		one = new NumberOfPlayersButton(mode, "One Player");
+		two = new NumberOfPlayersButton(mode, "Two Players");
 		
 		one.setLocation(new Point(175, 100));
 		two.setLocation(new Point(175, 180));
@@ -38,6 +50,7 @@ public class SingleOrMulti extends JPanel{
 		
 		this.add(one);
 		this.add(two);
+		this.add(back);
 		
 		//Set the colour of the buttons in this class as well as other formatting
 		

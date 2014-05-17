@@ -1,4 +1,5 @@
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Event;
@@ -8,6 +9,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,7 +29,11 @@ public class MainScreen {
 		newGameButton = new JButton("New Game");
 		cancelButton = new JButton("Quit");
 		
+		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
+		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
 		
+		newGameButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
+		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		
 		//Setting the size of the Frame
 		Dimension mainFrameDimension = new Dimension(500, 500);

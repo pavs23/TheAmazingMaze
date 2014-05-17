@@ -8,6 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+ * 
+ * @author pavan
+ *
+ */
 
 public class DifficultySelection extends JPanel {
 
@@ -25,19 +30,15 @@ public class DifficultySelection extends JPanel {
 		easyButton = new Difficulty_Button("Easy", new Point(175, 80), insets, new Dimension(150, 70));
 		mediumButton = new Difficulty_Button("Medium", new Point(175, 180), insets, new Dimension(150, 70));
 		hardButton = new Difficulty_Button("Hard", new Point(175, 280), insets, new Dimension(150, 70));
-		//backButton = new BackButton(new Point(20, 380));
+		backButton = new BackButton(new Point(20, 380), prev, mainMenu, this);
 		
 		this.add(easyButton);
 		this.add(mediumButton);
 		this.add(hardButton);
-		//this.add(backButton);
-		
+		this.add(backButton);
 		this.setSize(new Dimension(500, 500));
-		
-		//this.setLocationRelativeTo(null);
 		this.setLayout(null);
 		
-	
 		easyButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {

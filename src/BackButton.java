@@ -10,7 +10,8 @@ import javax.swing.JPanel;
 
 public class BackButton extends JButton{
 	
-	public BackButton(Point p, final JPanel prev, final JFrame mainFrame){
+
+	public BackButton(Point p, final JPanel prev, final JFrame mainFrame, final JPanel currentPanel){
 		this.setText("Back");
 		this.setLocation(p);
 		this.setSize(new Dimension(100,40));
@@ -21,8 +22,10 @@ public class BackButton extends JButton{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				prev.setVisible(true);
+				currentPanel.setVisible(false);
+				remove(currentPanel);
 				mainFrame.add(prev);
+				prev.setVisible(true);
 			}
 		});
 	}
