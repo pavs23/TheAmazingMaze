@@ -11,11 +11,9 @@ import java.util.ArrayList;
 public class SinglePlayer extends PlayerModes {
     private Player player;
     private GameMode maze;
-    private JFrame frame;
-    private JPanel gamePanel;
     private JPanel mazePanel;
-    private JPanel sideMenu;
     private JLabel[][] labels;
+    private JButton hintButton;
 
     /**
      * Constructor of the class to create the maze game.
@@ -24,59 +22,49 @@ public class SinglePlayer extends PlayerModes {
      * @param y the number of roads needed in Y direction.
      */
     public SinglePlayer(int mode, int x, int y) {
-        // Set the mode of the game.
-        setMode(mode);
-        // Create the maze.
-        createMaze(x, y);
-        // Create the icons.
-        generateIcon();
+        super(mode, x, y);
         
         // Initialize maze;
         maze = getMaze();
-        
-        // Create the JFrame.
-        frame = new JFrame();
-        frame.setLayout(new FlowLayout());
-        frame.setResizable(false);
-        
-        // Create the Game Panel, maze and side menu.
-        gamePanel = new JPanel();
-        gamePanel.setLayout(new FlowLayout());
-        gamePanel.setVisible(true);
         
         // Create the labels, mazePanel, and player.
         labels = generateLabels();
         mazePanel = generateMazePanel(labels);
         
-        gamePanel.add(mazePanel);
+        addToGamePanel(mazePanel);
         player = generatePlayer("player1");
-        generateSideMenu();
+        generateHint();
         
         // Paint the player and set the listener.
         paintPlayer(player, player.getCoordinate(), MazeGame.EAST, labels);
         setEventListenerToMaze();
         
-        frame.add(gamePanel);
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        // All components are added, how the frame.
+        showFrame();
+    }
+    
+    @Override
+    public void freeze() {
+        super.freeze();
+        hintButton.setEnabled(false);
+    }
+    
+    @Override
+    public void resume() {
+        super.resume();
+        hintButton.setEnabled(true);
     }
     
     /**
      * Create the side menu with a hint button.
      */
-    public void generateSideMenu() {
-        sideMenu = new JPanel();
-        sideMenu.setLayout(new FlowLayout());
-        gamePanel.add(sideMenu);
-        final JButton getHint = new JButton("Get Hint");
-        getHint.setFocusable(false);
+    private void generateHint() {
+        hintButton = new JButton("Get Hint");
         // Print the first few steps to goal.
         // The number of steps are depending on the maze size.
-        getHint.addActionListener(new ActionListener() {
+        hintButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                getHint.setEnabled(false);
-                gamePanel.setEnabled(false); 
+                freeze(); 
                 Coordinate currPos = player.getCoordinate();
                 final ArrayList<Coordinate> path = maze.getHint(currPos);
                 // n = the dimension of the array/3.
@@ -90,43 +78,22 @@ public class SinglePlayer extends PlayerModes {
                             Coordinate curr = path.get(i);
                             labels[curr.getX()][curr.getY()].setIcon(roadIcon);
                         }
-                        mazePanel.setEnabled(true);
-                        getHint.setEnabled(true);                     
+                        resume();                   
                     }
                 });
                 timer.setRepeats(false);
                 timer.start();             
             }
         });
-        sideMenu.add(getHint);
-        sideMenu.setVisible(true);
+        addToSidePanel(hintButton);
     }
     
     /**
      * Set the event listener to the frame (arrows key press).
      * Use key binding for it.
      */
-    public void setEventListenerToMaze() {   
-        /*
-        frame.addKeyListener(new KeyAdapter() {
-           public void keyPressed(KeyEvent e) {
-               int keyCode = e.getKeyCode();
-               Direction dir = null;
-               if (keyCode == KeyEvent.VK_LEFT) {
-                   dir = MazeGame.WEST;
-               } else if (keyCode == KeyEvent.VK_RIGHT) {
-                   dir = MazeGame.EAST;
-               } else if (keyCode == KeyEvent.VK_UP) {
-                   dir = MazeGame.NORTH;
-               } else if (keyCode == KeyEvent.VK_DOWN) {
-                   dir = MazeGame.SOUTH;
-               }
-               if (dir != null) {
-                   movePlayer(player, dir, labels, maze);
-               }
-           }
-        });
-        */
+    @SuppressWarnings("serial")
+    private void setEventListenerToMaze() {   
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -153,13 +120,9 @@ public class SinglePlayer extends PlayerModes {
         KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
         KeyStroke downKey = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
         
-        gamePanel.getInputMap().put(leftKey, "left");
-        gamePanel.getActionMap().put("left", leftKeyPressed);
-        gamePanel.getInputMap().put(rightKey, "right");
-        gamePanel.getActionMap().put("right", rightKeyPressed);
-        gamePanel.getInputMap().put(upKey, "up");
-        gamePanel.getActionMap().put("up", upKeyPressed);
-        gamePanel.getInputMap().put(downKey, "down");
-        gamePanel.getActionMap().put("down", downKeyPressed);
+        setKeyBinding(leftKey, leftKeyPressed, "left");
+        setKeyBinding(rightKey, rightKeyPressed, "right");
+        setKeyBinding(upKey, upKeyPressed, "up");
+        setKeyBinding(downKey, downKeyPressed, "down");
     }
 }

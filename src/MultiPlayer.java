@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -12,8 +11,6 @@ public class MultiPlayer extends PlayerModes {
     private Player player2;
     private GameMode maze1;
     private GameMode maze2;
-    private JFrame frame;
-    private JPanel gamePanel;
     private JPanel mazePanel1;
     private JPanel mazePanel2;
     private JLabel[][] labels1;
@@ -26,12 +23,8 @@ public class MultiPlayer extends PlayerModes {
      * @param y the number of roads needed in Y direction.
      */
     public MultiPlayer(int mode, int x, int y) {
-        // Set the mode of the game.
-        setMode(mode);
-        // Create the maze.
-        createMaze(x, y);
-        // Create the icons.
-        generateIcon();
+        // Create the super class.
+        super(mode, x, y);
         
         // Initialize maze;
         maze1 = getMaze();
@@ -41,24 +34,14 @@ public class MultiPlayer extends PlayerModes {
         } else {
             maze2 = getMaze();
         }
-       
-        // Create the JFrame.
-        frame = new JFrame();
-        frame.setLayout(new FlowLayout());
-        frame.setResizable(false);
-        
-        // Create the Game Panel, maze and side menu.
-        gamePanel = new JPanel();
-        gamePanel.setLayout(new FlowLayout());
-        gamePanel.setVisible(true);
         
         // Create the labels, mazePanel, and player.
         labels1 = generateLabels();
         labels2 = generateLabels();
         mazePanel1 = generateMazePanel(labels1);
         mazePanel2 = generateMazePanel(labels2);
-        gamePanel.add(mazePanel1);
-        gamePanel.add(mazePanel2);
+        addToGamePanel(mazePanel1);
+        addToGamePanel(mazePanel2);
         player1 = generatePlayer("player1");
         player2 = generatePlayer("player2");
         
@@ -67,10 +50,8 @@ public class MultiPlayer extends PlayerModes {
         paintPlayer(player2, player2.getCoordinate(), MazeGame.EAST, labels2);
         setEventListenerToMaze();
         
-        frame.add(gamePanel);
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        // All components are added, show the frame.
+        showFrame();
     }
     
     
@@ -78,31 +59,8 @@ public class MultiPlayer extends PlayerModes {
      * Set the event listener to the frame (arrows key press and asdw key press).
      * Use key binding for it.
      */
-    public void setEventListenerToMaze() {
-        /*
-        frame.addKeyListener(new KeyAdapter() {
-            public void keyPressed(KeyEvent e) {
-                int keyCode = e.getKeyCode();
-                if (keyCode == KeyEvent.VK_LEFT) {
-                    movePlayer(player2, MazeGame.WEST, labels2, maze2);
-                } else if (keyCode == KeyEvent.VK_RIGHT) {
-                    movePlayer(player2, MazeGame.EAST, labels2, maze2);
-                } else if (keyCode == KeyEvent.VK_UP) {
-                    movePlayer(player2, MazeGame.NORTH, labels2, maze2);
-                } else if (keyCode == KeyEvent.VK_DOWN) {
-                    movePlayer(player2, MazeGame.SOUTH, labels2, maze2);
-                } else if (keyCode == KeyEvent.VK_A) {
-                    movePlayer(player1, MazeGame.WEST, labels1, maze1);
-                } else if (keyCode == KeyEvent.VK_D) {
-                    movePlayer(player1, MazeGame.EAST, labels1, maze1);
-                } else if (keyCode == KeyEvent.VK_W) {
-                    movePlayer(player1, MazeGame.NORTH, labels1, maze1);
-                } else if (keyCode == KeyEvent.VK_S) {
-                    movePlayer(player1, MazeGame.SOUTH, labels1, maze1);
-                }
-            }
-         });
-         */
+    @SuppressWarnings("serial")
+    private void setEventListenerToMaze() {
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -148,6 +106,7 @@ public class MultiPlayer extends PlayerModes {
                 movePlayer(player1, MazeGame.SOUTH, labels1, maze1);
             }
         };
+        
         KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
         KeyStroke rightKey = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
         KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
@@ -158,22 +117,13 @@ public class MultiPlayer extends PlayerModes {
         KeyStroke wKey = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0);
         KeyStroke sKey = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0);
         
-        gamePanel.getInputMap().put(leftKey, "left");
-        gamePanel.getActionMap().put("left", leftKeyPressed);
-        gamePanel.getInputMap().put(rightKey, "right");
-        gamePanel.getActionMap().put("right", rightKeyPressed);
-        gamePanel.getInputMap().put(upKey, "up");
-        gamePanel.getActionMap().put("up", upKeyPressed);
-        gamePanel.getInputMap().put(downKey, "down");
-        gamePanel.getActionMap().put("down", downKeyPressed);
-        
-        gamePanel.getInputMap().put(aKey, "a");
-        gamePanel.getActionMap().put("a", aKeyPressed);
-        gamePanel.getInputMap().put(dKey, "d");
-        gamePanel.getActionMap().put("d", dKeyPressed);
-        gamePanel.getInputMap().put(wKey, "w");
-        gamePanel.getActionMap().put("w", wKeyPressed);
-        gamePanel.getInputMap().put(sKey, "s");
-        gamePanel.getActionMap().put("s", sKeyPressed);
+        setKeyBinding(leftKey, leftKeyPressed, "left");
+        setKeyBinding(rightKey, rightKeyPressed, "right");
+        setKeyBinding(upKey, upKeyPressed, "up");
+        setKeyBinding(downKey, downKeyPressed, "down");
+        setKeyBinding(aKey, aKeyPressed, "a");
+        setKeyBinding(dKey, dKeyPressed, "d");
+        setKeyBinding(wKey, wKeyPressed, "w");
+        setKeyBinding(sKey, sKeyPressed, "s");
     }
 }
