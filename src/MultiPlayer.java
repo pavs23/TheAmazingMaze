@@ -50,6 +50,8 @@ public class MultiPlayer extends PlayerModes {
         paintPlayer(player2, player2.getCoordinate(), MazeGame.EAST, labels2);
         setEventListenerToMaze();
         
+        // All components are added, show the frame.
+        showFrame();
     }
     
     
@@ -58,7 +60,7 @@ public class MultiPlayer extends PlayerModes {
      * Use key binding for it.
      */
     @SuppressWarnings("serial")
-    public void setEventListenerToMaze() {
+    private void setEventListenerToMaze() {
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {

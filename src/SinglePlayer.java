@@ -12,8 +12,8 @@ public class SinglePlayer extends PlayerModes {
     private Player player;
     private GameMode maze;
     private JPanel mazePanel;
-    private JPanel sideMenu;
     private JLabel[][] labels;
+    private JButton hintButton;
 
     /**
      * Constructor of the class to create the maze game.
@@ -33,26 +33,37 @@ public class SinglePlayer extends PlayerModes {
         
         addToGamePanel(mazePanel);
         player = generatePlayer("player1");
-        generateSideMenu();
+        generateHint();
         
         // Paint the player and set the listener.
         paintPlayer(player, player.getCoordinate(), MazeGame.EAST, labels);
         setEventListenerToMaze();
+        
+        // All components are added, how the frame.
+        showFrame();
+    }
+    
+    @Override
+    public void freeze() {
+        super.freeze();
+        hintButton.setEnabled(false);
+    }
+    
+    @Override
+    public void resume() {
+        super.resume();
+        hintButton.setEnabled(true);
     }
     
     /**
      * Create the side menu with a hint button.
      */
-    public void generateSideMenu() {
-        sideMenu = new JPanel();
-        sideMenu.setLayout(new FlowLayout());
-        final JButton getHint = new JButton("Get Hint");
-        getHint.setFocusable(false);
+    private void generateHint() {
+        hintButton = new JButton("Get Hint");
         // Print the first few steps to goal.
         // The number of steps are depending on the maze size.
-        getHint.addActionListener(new ActionListener() {
+        hintButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                getHint.setEnabled(false);
                 freeze(); 
                 Coordinate currPos = player.getCoordinate();
                 final ArrayList<Coordinate> path = maze.getHint(currPos);
@@ -67,17 +78,14 @@ public class SinglePlayer extends PlayerModes {
                             Coordinate curr = path.get(i);
                             labels[curr.getX()][curr.getY()].setIcon(roadIcon);
                         }
-                        resume();
-                        getHint.setEnabled(true);                     
+                        resume();                   
                     }
                 });
                 timer.setRepeats(false);
                 timer.start();             
             }
         });
-        sideMenu.add(getHint);
-        sideMenu.setVisible(true);
-        addToGamePanel(sideMenu);
+        addToSidePanel(hintButton);
     }
     
     /**
@@ -85,7 +93,7 @@ public class SinglePlayer extends PlayerModes {
      * Use key binding for it.
      */
     @SuppressWarnings("serial")
-    public void setEventListenerToMaze() {   
+    private void setEventListenerToMaze() {   
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {

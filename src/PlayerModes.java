@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.*;
@@ -13,7 +15,7 @@ import java.io.*;
  * @author floren
  *
  */
-public class PlayerModes {
+public abstract class PlayerModes {
     // The icons.
     protected ImageIcon roadIcon;
     protected ImageIcon wallIcon;
@@ -33,6 +35,10 @@ public class PlayerModes {
     
     private JFrame frame;
     private JPanel gamePanel;
+    private JPanel sidePanel;
+    
+    private JButton mainMenuButton;
+    private JButton pauseButton;
     
     /**
      * Constructor of the class.
@@ -57,38 +63,59 @@ public class PlayerModes {
         // Create the icons.
         generateIcon();
         
-        // Create the JFrame.
+        // Create the frame.
         frame = new JFrame();
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
         
-        // Create the Game Panel.
+        // Create the gamePanel.
         gamePanel = new JPanel();
         gamePanel.setLayout(new FlowLayout());
         gamePanel.setVisible(true);
         
+        // Create the sidePanel and menu. 
+        sidePanel = new JPanel();
+        sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
+        sidePanel.setVisible(true);    
+        generateSideMenu();
+        
         addToFrame(gamePanel);
+        addToFrame(sidePanel);
+        gamePanel.requestFocus();
     }
     
     /**
-     * Add a new JPanel to frame.
-     * @param newPanel the JPanel that wants to be added to frame.
+     * Add a new JComponent to frame.
+     * @param newComponent the JComponent that wants to be added to frame.
      */
-    public void addToFrame(JPanel newPanel) {
-        frame.add(newPanel);
-        frame.pack();
-        frame.setVisible(true);
+    public void addToFrame(JComponent newComponent) {
+        frame.add(newComponent);
     }
     
     /**
-     * Add a new JPanel to gamePanel.
-     * @param newPanel the JPanel that wants to be added to gamePanel.
+     * Add a new JComponent to gamePanel.
+     * @param newComponent the JComponent that wants to be added to gamePanel.
      */
-    public void addToGamePanel(JPanel newPanel) {
-        gamePanel.add(newPanel);
+    public void addToGamePanel(JComponent newComponent) {
+        gamePanel.add(newComponent);
+    }
+    
+    /**
+     * Add a new JComponent to sidePanel.
+     * @param newComponent the JComponent that wants to be added to sidePanel.
+     */
+    public void addToSidePanel(JComponent newComponent) {
+        sidePanel.add(newComponent);
+    }
+    
+    /**
+     * Pack and show the frame after all components have been added.
+     * Has to be called in order to show the frame.
+     */
+    public void showFrame() {  
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
     
@@ -104,17 +131,24 @@ public class PlayerModes {
     }
     
     /**
-     * Freeze the game panel and its events.
+     * Freeze the panel, buttons, and its events.
      */
     public void freeze() {
         gamePanel.setEnabled(false);
+        sidePanel.setEnabled(false);
+        mainMenuButton.setEnabled(false);
+        pauseButton.setEnabled(false);
     }
     
     /**
-     * Enable the game panel and its events.
+     * Enable the panel, buttons, and its events.
      */
     public void resume() {
         gamePanel.setEnabled(true);
+        gamePanel.requestFocus();
+        sidePanel.setEnabled(true);
+        mainMenuButton.setEnabled(true);
+        pauseButton.setEnabled(true);
     }
     
     /**
@@ -327,55 +361,52 @@ public class PlayerModes {
                 }
             }
             
-            
+            // The player wins.
             if (maze.gameFinished(newPos)) {
                 System.out.println(player.getName() + " win! Congrats!");
-                /*
-                final JDialog dialog = new JDialog(frame, "Congratulation!", true);
-                dialog.setLocationRelativeTo(frame);
-                dialog.setUndecorated(true);
                 
-                JPanel congratulatoryPanel = new JPanel();
-                congratulatoryPanel.setLayout(new BoxLayout(congratulatoryPanel, BoxLayout.Y_AXIS));
-                JButton restart = new JButton("Restart");
-                JButton newGame = new JButton("New Game");
-                JButton quit = new JButton("Quit");
-                restart.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        dialog.setVisible(false);
-                        paintRoad(player.getCoordinate());
-                        player.setCoordinate(maze.getStartCoordinate());
-                        paintPlayer(player.getCoordinate(), RIGHT);
-                        
-                    }
-                });
-                newGame.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        dialog.setVisible(false);
-                        gamePanel.setVisible(false);
-                        frame.dispose();
-                        new SinglePlayer("normal", 20, 20);
-                    }
-                });
-                quit.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        frame.setVisible(false);
-                        frame.dispose();
-                    }
-                });
-                
-                congratulatoryPanel.add(restart);
-                congratulatoryPanel.add(newGame);
-                congratulatoryPanel.add(quit);
-                congratulatoryPanel.setVisible(true); 
-                
-                dialog.add(congratulatoryPanel);
-                dialog.pack();
-                dialog.setVisible(true);
-            }
-            */
             }
         }
     }
     
+    /**
+     * Generate the common buttons on the side menu and their listeners.
+     */
+    private void generateSideMenu() {
+        mainMenuButton = new JButton("Main Menu");
+        pauseButton = new JButton("Pause");
+        
+        pauseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                freeze();
+                gamePanel.setVisible(false);
+                sidePanel.setVisible(false);
+                final JPanel resumePanel = new JPanel();
+                JButton resumeButton = new JButton("Resume");
+                resumeButton.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        resumePanel.setVisible(false);
+                        gamePanel.setVisible(true);
+                        sidePanel.setVisible(true);
+                        resume();
+                    }
+                });
+                resumePanel.add(resumeButton);
+                frame.add(resumePanel);
+            }
+        });
+        
+        mainMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Dispose the current frame.
+                frame.dispose();
+                // Create a new menu.
+                (new MainScreen()).run();
+            }
+        });
+        
+        addToSidePanel(mainMenuButton);
+        addToSidePanel(pauseButton);
+    }
+   
 }
