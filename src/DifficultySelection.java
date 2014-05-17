@@ -18,23 +18,21 @@ public class DifficultySelection extends JPanel {
 	//public JFrame difficultySelection;
 	
 	
-	public DifficultySelection(final JFrame mainMenu){
-		//difficultySelection = new JFrame("Select Difficulty");
+	public DifficultySelection(final JFrame mainMenu, final int mode, final int players, final JPanel prev){
 		
 		Insets insets = mainMenu.getInsets();
 		
 		easyButton = new Difficulty_Button("Easy", new Point(175, 80), insets, new Dimension(150, 70));
 		mediumButton = new Difficulty_Button("Medium", new Point(175, 180), insets, new Dimension(150, 70));
 		hardButton = new Difficulty_Button("Hard", new Point(175, 280), insets, new Dimension(150, 70));
-		backButton = new BackButton(new Point(20, 380));
+		//backButton = new BackButton(new Point(20, 380));
 		
 		this.add(easyButton);
 		this.add(mediumButton);
 		this.add(hardButton);
-		this.add(backButton);
+		//this.add(backButton);
 		
-		Dimension mainFrameDimension = new Dimension(500, 500);
-		this.setSize(mainFrameDimension);
+		this.setSize(new Dimension(500, 500));
 		
 		//this.setLocationRelativeTo(null);
 		this.setLayout(null);
@@ -45,7 +43,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				mainMenu.dispose();
-				new MazeGame(MazeGame.MULTI_PLAYER, MazeGame.COIN_MODE, MazeGame.EASY);
+				new MazeGame(players, mode, MazeGame.EASY);
 				
 			}
 		});
@@ -55,7 +53,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
 				mainMenu.dispose();
-				new MazeGame(MazeGame.MULTI_PLAYER, MazeGame.COIN_MODE, MazeGame.MEDIUM);
+				new MazeGame(players, mode, MazeGame.MEDIUM);
 			}
 		});
 		
@@ -64,10 +62,10 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
 				mainMenu.dispose();
-				new MazeGame(MazeGame.MULTI_PLAYER, MazeGame.COIN_MODE, MazeGame.HARD);
+				new MazeGame(players, mode, MazeGame.HARD);
 			}
 		});
-		
+		/*
 		backButton.addActionListener(new ActionListener() {
 			
 			
@@ -84,7 +82,7 @@ public class DifficultySelection extends JPanel {
 				//this.dispose();
 			}
 		});
-		
+		*/			
 	}
 	
 	public void run(){

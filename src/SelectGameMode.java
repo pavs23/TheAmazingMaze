@@ -23,8 +23,9 @@ public class SelectGameMode extends JPanel {
 		adventureMode.setSize(200, 120);
 
 		Insets insets = this.getInsets();
-		coinMode.setBounds(insets.left + 175, insets.top + 100, 150, 90);
-		adventureMode.setBounds(insets.left + 175, insets.top + 250, 150, 90);
+		adventureMode.setBounds(insets.left + 175, insets.top + 100, 150, 90);
+		coinMode.setBounds(insets.left + 175, insets.top + 250, 150, 90);
+		
 
 		// Still need to hook up this panel to the frame.
 		// also need to put the frame into the chain of the frames.
@@ -34,7 +35,13 @@ public class SelectGameMode extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Coin Mode");
-
+				DifficultySelection dsScreen = new DifficultySelection(mainFrame, MazeGame.COIN_MODE, MazeGame.SINGLE_PLAYER, currentScreen);
+				
+				//See if remove works better rather than keeping these panels running
+				
+				currentScreen.setVisible(false);
+				mainPanel.setVisible(false);
+				mainFrame.add(dsScreen);
 			}
 		});
 
@@ -43,15 +50,19 @@ public class SelectGameMode extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Adventure Mode");
-				DifficultySelection dsScreen = new DifficultySelection(mainFrame);
+				SingleOrMulti players = new SingleOrMulti(MazeGame.ADVENTURE_MODE, mainFrame);
+				mainFrame.add(players);
+				
+				//DifficultySelection dsScreen = new DifficultySelection(mainFrame, MazeGame.ADVENTURE_MODE);
 				currentScreen.setVisible(false);					//Passed this variable into actionListener as a private
 				mainPanel.setVisible(false);
-				mainFrame.add(dsScreen);
+				//mainFrame.add(dsScreen);
 			}
 		});
 	
-		this.add(coinMode);
 		this.add(adventureMode);
+		this.add(coinMode);
+		
 
 	}
 }
