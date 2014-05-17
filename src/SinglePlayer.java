@@ -90,7 +90,7 @@ public class SinglePlayer extends PlayerModes {
                             Coordinate curr = path.get(i);
                             labels[curr.getX()][curr.getY()].setIcon(roadIcon);
                         }
-                        mazePanel.setEnabled(true);
+                        gamePanel.setEnabled(true);
                         getHint.setEnabled(true);                     
                     }
                 });
