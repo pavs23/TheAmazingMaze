@@ -1,12 +1,15 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+
 import javax.swing.*;
 import javax.imageio.*;
+
 import java.util.ArrayList;
 import java.io.*;
 
 /**
  * A class that represents common things between Game Modes.
+ * Create the frame and game panel for the game.
  * @author floren
  *
  */
@@ -28,12 +31,90 @@ public class PlayerModes {
     private int mode;
     private int[][] mazeArray;
     
+    private JFrame frame;
+    private JPanel gamePanel;
+    
     /**
-     * Set the mode for the game.
-     * @param mode the mode of the game(ADVENTURE_MODE or COIN_MODE).
+     * Constructor of the class.
+     * Create the frame and gamePanel for the game.
+     * Create the maze and set the mode for the game.
+     * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
+     * @param x the number of roads needed in X direction.
+     * @param y the number of roads needed in Y direction.
      */
-    public void setMode(int mode) {
+    public PlayerModes(int mode, int x, int y) {
+        // Set the mode of the game.
         this.mode = mode;
+        
+        // Create the maze.
+        if (mode == MazeGame.COIN_MODE) {
+            maze = new CoinMaze(x, y);
+        } else {
+            maze = new AdventureMaze(x, y);
+        }
+        mazeArray = maze.getMazeArray();
+        
+        // Create the icons.
+        generateIcon();
+        
+        // Create the JFrame.
+        frame = new JFrame();
+        frame.setLayout(new FlowLayout());
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        
+        // Create the Game Panel.
+        gamePanel = new JPanel();
+        gamePanel.setLayout(new FlowLayout());
+        gamePanel.setVisible(true);
+        
+        addToFrame(gamePanel);
+    }
+    
+    /**
+     * Add a new JPanel to frame.
+     * @param newPanel the JPanel that wants to be added to frame.
+     */
+    public void addToFrame(JPanel newPanel) {
+        frame.add(newPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    
+    /**
+     * Add a new JPanel to gamePanel.
+     * @param newPanel the JPanel that wants to be added to gamePanel.
+     */
+    public void addToGamePanel(JPanel newPanel) {
+        gamePanel.add(newPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+    
+    /**
+     * Bind a key event to the gamePanel.
+     * @param key the key that corresponds to the action.
+     * @param action the action that will be done upon a key stroke.
+     * @param name the name of the action.
+     */
+    public void setKeyBinding(KeyStroke key, Action action, String name) {
+        gamePanel.getInputMap().put(key, name);
+        gamePanel.getActionMap().put(name, action);
+    }
+    
+    /**
+     * Freeze the game panel and its events.
+     */
+    public void freeze() {
+        gamePanel.setEnabled(false);
+    }
+    
+    /**
+     * Enable the game panel and its events.
+     */
+    public void resume() {
+        gamePanel.setEnabled(true);
     }
     
     /**
@@ -42,21 +123,6 @@ public class PlayerModes {
      */
     public int getMode() {
         return mode;
-    }
-    
-    /**
-     * Create maze based on the mode.
-     * @param x the number of roads in x direction.
-     * @param y the number of roads in y direction.
-     * @postcondition mazeArray is updated to become the array of the new maze.
-     */
-    public void createMaze(int x, int y) {
-        if (mode == MazeGame.COIN_MODE) {
-            maze = new CoinMaze(x, y);
-        } else {
-            maze = new AdventureMaze(x, y);
-        }
-        mazeArray = maze.getMazeArray();
     }
     
     /**
