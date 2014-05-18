@@ -5,20 +5,25 @@ import java.awt.Dimension;
 import java.awt.Event;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
 public class MainScreen {
-
 	private JButton newGameButton;
 	public JFrame mainFrame;
 	private JButton cancelButton;
@@ -26,7 +31,6 @@ public class MainScreen {
 	private JButton leaderboard;
 	
 	public MainScreen(){
-		
 		//Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
 		newGameButton = new JButton("New Game");
@@ -120,12 +124,10 @@ public class MainScreen {
 	
 		
 	
-	public void run(){
-		
+	public void run(){	
 		//newGameButton.setVisible(true);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
 }

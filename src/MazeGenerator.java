@@ -8,17 +8,14 @@ import java.util.ArrayList;
  *
  */
 public class MazeGenerator {
-    private final int ROAD = 1;
-    private final int WALL = 0;
-    
-    private final int x;
-    private final int y;
-    private final Tile[][] tiles;
+    private int x;
+    private int y;
+    private Tile[][] tiles;
 
     private int[][] maze = null;
-    private boolean[][] visited = null;
-    private ArrayList<Coordinate> path = null;
-    private ArrayList<Direction> directions = new ArrayList<Direction>();
+    private boolean[][] visited;
+    private ArrayList<Coordinate> path;
+    private ArrayList<Direction> directions;
     
     /**
      * Constructor of the class.
@@ -35,6 +32,7 @@ public class MazeGenerator {
 		    }
 		}
 		// Initialize directions Array.
+		directions = new ArrayList<Direction>();
 		directions.add(MazeGame.NORTH);
 		directions.add(MazeGame.SOUTH);
 		directions.add(MazeGame.WEST);
@@ -47,34 +45,36 @@ public class MazeGenerator {
 	 * @return
 	 */
 	public int[][] generateMazeArray() {
-	    int xSize = 2*x + 1;
-	    int ySize = 2*y + 1;
-	    int[][] mazeArray = new int[xSize][ySize];
-	    // Initialize the array to 0 (all walls).
-	    for (int i = 0; i < xSize; i++) {
-	        for (int j = 0; j < ySize; j++) {
-	            mazeArray[i][j] = WALL;
-	        }
+	    if (maze == null) {
+    	    int xSize = 2*x + 1;
+    	    int ySize = 2*y + 1;
+    	    int[][] mazeArray = new int[xSize][ySize];
+    	    // Initialize the array to 0 (all walls).
+    	    for (int i = 0; i < xSize; i++) {
+    	        for (int j = 0; j < ySize; j++) {
+    	            mazeArray[i][j] = MazeGame.WALL;
+    	        }
+    	    }
+    	    for (int i = 0; i < x; i++) {
+    	        for (int j = 0; j < y; j++) {
+    	            int currX = 2*i + 1;
+    	            int currY = 2*j + 1;
+    	            // Set the tiles as a path.
+    	            mazeArray[currX][currY] = MazeGame.ROAD;
+    	            // If the tile South boundary true, then it is connected to the south tile.
+    	            if (tiles[i][j].getSouthValue() == true) {
+    	                mazeArray[currX][currY+1] = MazeGame.ROAD;
+    	            }
+    	            // If the tile East boundary true, then it is connected to the east tile.
+                    if (tiles[i][j].getEastValue() == true) {
+                        mazeArray[currX+1][currY] = MazeGame.ROAD;
+                    }
+    	        }
+    	    }
+    	    // Save the maze into the object.
+    	    maze = mazeArray;
 	    }
-	    for (int i = 0; i < x; i++) {
-	        for (int j = 0; j < y; j++) {
-	            int currX = 2*i + 1;
-	            int currY = 2*j + 1;
-	            // Set the tiles as a path.
-	            mazeArray[currX][currY] = ROAD;
-	            // If the tile South boundary true, then it is connected to the south tile.
-	            if (tiles[i][j].getSouthValue() == true) {
-	                mazeArray[currX][currY+1] = ROAD;
-	            }
-	            // If the tile East boundary true, then it is connected to the east tile.
-                if (tiles[i][j].getEastValue() == true) {
-                    mazeArray[currX+1][currY] = ROAD;
-                }
-	        }
-	    }
-	    // Save the maze into the object.
-	    maze = mazeArray;
-	    return mazeArray;
+	    return maze;
 	}
 	
 	/**
@@ -112,6 +112,7 @@ public class MazeGenerator {
             return null;
         }
     }
+    
 	/**
 	 * Create a maze (collection of Tile objects).
 	 * Tile has south, north, east, and west boundary. true in the boundary means there is no wall between 2 tiles.
@@ -190,7 +191,7 @@ public class MazeGenerator {
 	        return true;
 	    }
 	    // Wall = 0.
-        if (visited[currX][currY] || maze[currX][currY] == WALL) {
+        if (visited[currX][currY] || maze[currX][currY] == MazeGame.WALL) {
             // The coordinate has been visited, or it is a wall.
             return false;
         }

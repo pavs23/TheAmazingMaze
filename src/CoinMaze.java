@@ -10,8 +10,8 @@ public class CoinMaze extends GameModeImp {
 
 	private ArrayList<Coordinate> coinLocations;
 	private MazeGenerator maze;
-	private final int TOTAL_COIN_NUM = 10;
-	private final Coordinate startCoordinate = new Coordinate(1,1);
+	private static final int TOTAL_COIN_NUM = 10;
+	private static final Coordinate START_COORDINATE = new Coordinate(1,1);
 	
 	
 	/**
@@ -52,9 +52,9 @@ public class CoinMaze extends GameModeImp {
 	 * found a coin (if the location of the player is the same as the
 	 * location of a coin)
 	 * @param playerCoordinate is the coordinate of the player
-	 * @return if a coin has been found
+	 * @return true if a coin has been found
 	 */
-	public boolean coinFound(Coordinate playerCoordinate){
+	public boolean isCoinFound(Coordinate playerCoordinate){
 		int i = 0;
 		int numCoins = coinLocations.size();
 		Coordinate currentCoordinate; //iterator
@@ -72,13 +72,13 @@ public class CoinMaze extends GameModeImp {
 	
 	/**
 	 * Generates a hint path to a random coin in the maze
-	 * @param playerCoordinate is the current position of the player
+	 * @param curr is the current position of the player
 	 * @return an array list of the coordinates of the path to a coin closest to the player, excluding the coin position.
 	 */
-	public ArrayList<Coordinate> getHint(Coordinate playerCoordinate){
+	public ArrayList<Coordinate> getHint(Coordinate curr){
 	    ArrayList<Coordinate> path = null;
 	    for (Coordinate location : coinLocations) {
-	        ArrayList<Coordinate> currPath = maze.findPath(playerCoordinate, location);
+	        ArrayList<Coordinate> currPath = maze.findPath(curr, location);
 	        if (path == null) {
 	            path = currPath;
 	        } else if (path.size() > currPath.size()) {
@@ -110,9 +110,22 @@ public class CoinMaze extends GameModeImp {
 	 * @return the Coordinate of starting point of the maze.
 	 */
 	public Coordinate getStartCoordinate() {
-	    return startCoordinate;
+	    return START_COORDINATE;
 	}
-	
+
+    /**
+     * Clone the object
+     * The object will have the deep copy of the coinLocations field.
+     * @return the clone of the object.
+     */
+    public CoinMaze generateClone(){  
+         CoinMaze clone = new CoinMaze(5,5);
+         clone.setMaze(maze);
+         clone.setCoinLocations(coinLocations);
+         clone.setMazeArray(maze.generateMazeArray());
+         return clone;
+    }
+    
 	/**
 	 * Generates random coordinates and stores coins in them
 	 */
@@ -133,7 +146,7 @@ public class CoinMaze extends GameModeImp {
 			//only make a coin if the coordinate is on a path, and if
 			//there is not a coin already at that location, and if the
 			//coin is not at the start position
-			if (mazeArray[x][y] == ROAD && !coinLocations.contains(testCoordinate) && !testCoordinate.equals(startCoordinate)){
+			if (mazeArray[x][y] == MazeGame.ROAD && !coinLocations.contains(testCoordinate) && !testCoordinate.equals(START_COORDINATE)){
 				coinLocations.add(testCoordinate);
 				i++;
 			}
@@ -154,18 +167,5 @@ public class CoinMaze extends GameModeImp {
      */
 	private void setCoinLocations(ArrayList<Coordinate> locations) {
 	    coinLocations = new ArrayList<Coordinate>(locations);
-	}
-	
-	/**
-	 * Clone the object
-	 * The object will have the deep copy of the coinLocations field.
-	 * @return the clone of the object.
-	 */
-	public CoinMaze generateClone(){  
-	     CoinMaze clone = new CoinMaze(5,5);
-	     clone.setMaze(maze);
-	     clone.setCoinLocations(coinLocations);
-	     clone.setMazeArray(maze.generateMazeArray());
-	     return clone;
 	}
 }

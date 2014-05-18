@@ -1,4 +1,3 @@
-import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import java.util.ArrayList;
@@ -20,8 +19,10 @@ public class SinglePlayer extends PlayerModes {
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
      * @param x the number of roads needed in X direction.
      * @param y the number of roads needed in Y direction.
+     * @param playerCode the code representing the player's character.
+     * @param playerName the name of the player.
      */
-    public SinglePlayer(int mode, int x, int y) {
+    public SinglePlayer(int mode, int x, int y, int playerCode, String playerName) {
         super(mode, x, y);
         
         // Initialize maze;
@@ -32,12 +33,11 @@ public class SinglePlayer extends PlayerModes {
         mazePanel = generateMazePanel(labels);
         
         addToGamePanel(mazePanel);
-        player = generatePlayer("player1");
+        player = generatePlayer(playerName, playerCode);
         generateHint();
         
-        // Paint the player and set the listener.
+        // Paint the player.
         paintPlayer(player, player.getCoordinate(), MazeGame.EAST, labels);
-        setEventListenerToMaze();
         
         // All components are added, how the frame.
         showFrame();
@@ -93,7 +93,7 @@ public class SinglePlayer extends PlayerModes {
      * Use key binding for it.
      */
     @SuppressWarnings("serial")
-    private void setEventListenerToMaze() {   
+    public void setEventListenerToMaze() {   
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
