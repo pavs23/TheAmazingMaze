@@ -85,6 +85,8 @@ public abstract class PlayerModes {
         setEventListenerToMaze();
     }
     
+    public abstract void setEventListenerToMaze();
+    
     /**
      * Add a new JComponent to frame.
      * @param newComponent the JComponent that wants to be added to frame.
@@ -167,52 +169,6 @@ public abstract class PlayerModes {
         return maze;
     }
     
-    /**
-     * Create the icons needed for the maze game.
-     */
-    public void generateIcon() {
-        int xDimension = mazeArray.length;
-        int yDimension = mazeArray[0].length;
-        
-        iconWidth = MAZE_PANEL_WIDTH/xDimension;
-        iconHeight = MAZE_PANEL_WIDTH/yDimension;
-                
-        File wallFile = new File("wall.jpg");
-        File roadFile = new File("road.jpg");
-        File hintFile = new File("hintTile.jpg");
-        File coinFile = new File("coinTile.jpg");
-        
-        BufferedImage wallImg;
-        BufferedImage roadImg;
-        BufferedImage hintImg;
-        BufferedImage coinImg;
-        
-        Image scaledWall;
-        Image scaledRoad;
-        Image scaledHint;
-        Image scaledCoin;
-        
-        try { 
-            // Read the image.
-            wallImg = ImageIO.read(wallFile);
-            roadImg = ImageIO.read(roadFile);
-            hintImg = ImageIO.read(hintFile);
-            coinImg = ImageIO.read(coinFile);
-            
-            // Set the image dimension.
-            scaledWall = wallImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-            scaledRoad = roadImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-            scaledHint = hintImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-            scaledCoin = coinImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-                    
-            // Create icon from image.        
-            wallIcon = new ImageIcon(scaledWall);
-            roadIcon = new ImageIcon(scaledRoad);
-            hintIcon = new ImageIcon(scaledHint);
-            coinIcon = new ImageIcon(scaledCoin);
-            
-        } catch (IOException e) {}
-    }
     
     /**
      * Generate a maze panel that will consist of labels as grids.
@@ -422,5 +378,50 @@ public abstract class PlayerModes {
         addToSidePanel(pauseButton);
     }
    
-    public abstract void setEventListenerToMaze();
+    /**
+     * Create the icons needed for the maze game.
+     */
+    private void generateIcon() {
+        int xDimension = mazeArray.length;
+        int yDimension = mazeArray[0].length;
+        
+        iconWidth = MAZE_PANEL_WIDTH/xDimension;
+        iconHeight = MAZE_PANEL_WIDTH/yDimension;
+                
+        File wallFile = new File("wall.jpg");
+        File roadFile = new File("road.jpg");
+        File hintFile = new File("hintTile.jpg");
+        File coinFile = new File("coinTile.jpg");
+        
+        BufferedImage wallImg;
+        BufferedImage roadImg;
+        BufferedImage hintImg;
+        BufferedImage coinImg;
+        
+        Image scaledWall;
+        Image scaledRoad;
+        Image scaledHint;
+        Image scaledCoin;
+        
+        try { 
+            // Read the image.
+            wallImg = ImageIO.read(wallFile);
+            roadImg = ImageIO.read(roadFile);
+            hintImg = ImageIO.read(hintFile);
+            coinImg = ImageIO.read(coinFile);
+            
+            // Set the image dimension.
+            scaledWall = wallImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledRoad = roadImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledHint = hintImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledCoin = coinImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                    
+            // Create icon from image.        
+            wallIcon = new ImageIcon(scaledWall);
+            roadIcon = new ImageIcon(scaledRoad);
+            hintIcon = new ImageIcon(scaledHint);
+            coinIcon = new ImageIcon(scaledCoin);
+            
+        } catch (IOException e) {}
+    } 
 }

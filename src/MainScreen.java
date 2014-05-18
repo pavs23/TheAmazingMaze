@@ -71,7 +71,6 @@ public class MainScreen {
 		mainPanel.add(leaderboard);
 		mainPanel.add(cancelButton);
 		
-		
 		mainFrame.add(mainPanel);
 		
 		newGameButton.addActionListener(new ActionListener() {

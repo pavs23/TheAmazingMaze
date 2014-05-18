@@ -56,39 +56,6 @@ public class SinglePlayer extends PlayerModes {
     }
     
     /**
-     * Create the side menu with a hint button.
-     */
-    private void generateHint() {
-        hintButton = new JButton("Get Hint");
-        // Print the first few steps to goal.
-        // The number of steps are depending on the maze size.
-        hintButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                freeze(); 
-                Coordinate currPos = player.getCoordinate();
-                final ArrayList<Coordinate> path = maze.getHint(currPos);
-                // n = the dimension of the array/3.
-                for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
-                    Coordinate curr = path.get(i);
-                    labels[curr.getX()][curr.getY()].setIcon(hintIcon);
-                }
-                Timer timer = new Timer(500, new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
-                            Coordinate curr = path.get(i);
-                            labels[curr.getX()][curr.getY()].setIcon(roadIcon);
-                        }
-                        resume();                   
-                    }
-                });
-                timer.setRepeats(false);
-                timer.start();             
-            }
-        });
-        addToSidePanel(hintButton);
-    }
-    
-    /**
      * Set the event listener to the frame (arrows key press).
      * Use key binding for it.
      */
@@ -124,5 +91,38 @@ public class SinglePlayer extends PlayerModes {
         setKeyBinding(rightKey, rightKeyPressed, "right");
         setKeyBinding(upKey, upKeyPressed, "up");
         setKeyBinding(downKey, downKeyPressed, "down");
+    }
+    
+    /**
+     * Create the side menu with a hint button.
+     */
+    private void generateHint() {
+        hintButton = new JButton("Get Hint");
+        // Print the first few steps to goal.
+        // The number of steps are depending on the maze size.
+        hintButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                freeze(); 
+                Coordinate currPos = player.getCoordinate();
+                final ArrayList<Coordinate> path = maze.getHint(currPos);
+                // n = the dimension of the array/3.
+                for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
+                    Coordinate curr = path.get(i);
+                    labels[curr.getX()][curr.getY()].setIcon(hintIcon);
+                }
+                Timer timer = new Timer(500, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
+                            Coordinate curr = path.get(i);
+                            labels[curr.getX()][curr.getY()].setIcon(roadIcon);
+                        }
+                        resume();                   
+                    }
+                });
+                timer.setRepeats(false);
+                timer.start();             
+            }
+        });
+        addToSidePanel(hintButton);
     }
 }
