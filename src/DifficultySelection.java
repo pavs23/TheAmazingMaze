@@ -16,9 +16,9 @@ import javax.swing.JPanel;
 
 public class DifficultySelection extends JPanel {
 
-	private Difficulty_Button easyButton;
-	private Difficulty_Button mediumButton;
-	private Difficulty_Button hardButton;
+	private DifficultyButton easyButton;
+	private DifficultyButton mediumButton;
+	private DifficultyButton hardButton;
 	private BackButton backButton;
 	//public JFrame difficultySelection;
 	
@@ -27,9 +27,9 @@ public class DifficultySelection extends JPanel {
 		
 		Insets insets = mainMenu.getInsets();
 		
-		easyButton = new Difficulty_Button("Easy", new Point(175, 80), insets, new Dimension(150, 70));
-		mediumButton = new Difficulty_Button("Medium", new Point(175, 180), insets, new Dimension(150, 70));
-		hardButton = new Difficulty_Button("Hard", new Point(175, 280), insets, new Dimension(150, 70));
+		easyButton = new DifficultyButton("Easy", new Point(175, 80), insets, new Dimension(150, 70));
+		mediumButton = new DifficultyButton("Medium", new Point(175, 180), insets, new Dimension(150, 70));
+		hardButton = new DifficultyButton("Hard", new Point(175, 280), insets, new Dimension(150, 70));
 		backButton = new BackButton(new Point(20, 380), prev, mainMenu, this);
 		
 		this.add(easyButton);

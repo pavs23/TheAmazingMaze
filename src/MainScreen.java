@@ -24,8 +24,8 @@ import javax.swing.JPanel;
 
 
 public class MainScreen {
+	private JFrame mainFrame;
 	private JButton newGameButton;
-	public JFrame mainFrame;
 	private JButton cancelButton;
 	private JPanel mainPanel;
 	private JButton leaderboard;

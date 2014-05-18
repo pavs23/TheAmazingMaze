@@ -13,6 +13,7 @@ public class SinglePlayer extends PlayerModes {
     private JPanel mazePanel;
     private JLabel[][] labels;
     private JButton hintButton;
+    private GameTimer timer;
 
     /**
      * Constructor of the class to create the maze game.
@@ -35,6 +36,7 @@ public class SinglePlayer extends PlayerModes {
         addToGamePanel(mazePanel);
         player = generatePlayer(playerName, playerCode);
         generateHint();
+        generateTimer();
         
         // Paint the player.
         paintPlayer(player, player.getCoordinate(), MazeGame.EAST, labels);
@@ -124,5 +126,12 @@ public class SinglePlayer extends PlayerModes {
             }
         });
         addToSidePanel(hintButton);
+    }
+    
+    /**
+     * Method to create timer for the game.
+     */
+    private void generateTimer() {
+        
     }
 }
