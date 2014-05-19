@@ -59,71 +59,81 @@ public class MultiPlayer extends PlayerModes {
      * Set the event listener to the frame (arrows key press and asdw key press).
      * Use key binding for it.
      */
+    
+
+
+    
+    
     @SuppressWarnings("serial")
     private void setEventListenerToMaze() {
         // Key bindings (so that it works with panel).
-        Action leftKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player2, MazeGame.WEST, labels2, maze2);
-            }
-        };
-        Action rightKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player2, MazeGame.EAST, labels2, maze2);
-            }
-        };
-        Action upKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player2, MazeGame.NORTH, labels2, maze2);
-            }
-        };
-        Action downKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player2, MazeGame.SOUTH, labels2, maze2);
-            }
-        };
         
-        Action aKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player1, MazeGame.WEST, labels1, maze1);
-            }
-        };
-        
-        Action dKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player1, MazeGame.EAST, labels1, maze1);
-            }
-        };
-        
-        Action wKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player1, MazeGame.NORTH, labels1, maze1);
-            }
-        };
-        
-        Action sKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                movePlayer(player1, MazeGame.SOUTH, labels1, maze1);
-            }
-        };
-        
-        KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
-        KeyStroke rightKey = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
-        KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
-        KeyStroke downKey = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
-        
-        KeyStroke aKey = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0);
-        KeyStroke dKey = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0);
-        KeyStroke wKey = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0);
-        KeyStroke sKey = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0);
-        
-        setKeyBinding(leftKey, leftKeyPressed, "left");
-        setKeyBinding(rightKey, rightKeyPressed, "right");
-        setKeyBinding(upKey, upKeyPressed, "up");
-        setKeyBinding(downKey, downKeyPressed, "down");
-        setKeyBinding(aKey, aKeyPressed, "a");
-        setKeyBinding(dKey, dKeyPressed, "d");
-        setKeyBinding(wKey, wKeyPressed, "w");
-        setKeyBinding(sKey, sKeyPressed, "s");
+        		Action leftKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player2, MazeGame.WEST, labels2, maze2);
+                    }
+                };
+                Action rightKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player2, MazeGame.EAST, labels2, maze2);
+                    }
+                };
+                Action upKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player2, MazeGame.NORTH, labels2, maze2);
+                    }
+                };
+                Action downKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player2, MazeGame.SOUTH, labels2, maze2);
+                    }
+                };
+                
+                Action aKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player1, MazeGame.WEST, labels1, maze1);
+                    }
+                };
+                
+                Action dKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player1, MazeGame.EAST, labels1, maze1);
+                    }
+                };
+                
+                Action wKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player1, MazeGame.NORTH, labels1, maze1);
+                    }
+                };
+                
+                Action sKeyPressed = new AbstractAction() {
+                    public void actionPerformed(ActionEvent e) {
+                        movePlayer(player1, MazeGame.SOUTH, labels1, maze1);
+                    }
+                };
+                
+                
+                KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
+                KeyStroke rightKey = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
+                KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
+                KeyStroke downKey = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
+                
+                KeyStroke aKey = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0);
+                KeyStroke dKey = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0);
+                KeyStroke wKey = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0);
+                KeyStroke sKey = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0);
+                
+                
+                setKeyBinding(leftKey, leftKeyPressed, "left");
+                setKeyBinding(rightKey, rightKeyPressed, "right");
+                setKeyBinding(upKey, upKeyPressed, "up");
+                setKeyBinding(downKey, downKeyPressed, "down");
+                
+                setKeyBinding(aKey, aKeyPressed, "a");
+                setKeyBinding(dKey, dKeyPressed, "d");
+                setKeyBinding(wKey, wKeyPressed, "w");
+                setKeyBinding(sKey, sKeyPressed, "s"); 
+
     }
 }
