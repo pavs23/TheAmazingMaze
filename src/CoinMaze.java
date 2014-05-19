@@ -146,7 +146,7 @@ public class CoinMaze extends GameModeImp {
 			//only make a coin if the coordinate is on a path, and if
 			//there is not a coin already at that location, and if the
 			//coin is not at the start position
-			if (mazeArray[x][y] == MazeGame.ROAD && !coinLocations.contains(testCoordinate) && !testCoordinate.equals(START_COORDINATE)){
+			if (mazeArray[x][y] == Game.ROAD && !coinLocations.contains(testCoordinate) && !testCoordinate.equals(START_COORDINATE)){
 				coinLocations.add(testCoordinate);
 				i++;
 			}

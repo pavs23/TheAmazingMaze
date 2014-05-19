@@ -5,29 +5,6 @@
  */
 
 public class MazeGame {
-    // Some constants for the game.
-    public static final int SINGLE_PLAYER = 0;
-    public static final int MULTI_PLAYER = 1;
-    public static final int ADVENTURE_MODE = 0;
-    public static final int COIN_MODE = 1;
-    public static final int EASY = 0;
-    public static final int MEDIUM = 1;
-    public static final int HARD = 1;
-    public static final int ROAD = 1;
-    public static final int WALL = 0;
-    
-    // The player characters.
-    public static final int PLAYER_0 = 0;
-    public static final int PLAYER_1 = 1;
-    public static final int PLAYER_2 = 2;
-    public static final int PLAYER_3 = 3;
-    public static final int PLAYER_4 = 4;
-
-    public static final Direction NORTH = new Direction(0, -1);
-    public static final Direction SOUTH = new Direction(0, 1);
-    public static final Direction WEST = new Direction(-1, 0);
-    public static final Direction EAST = new Direction(1, 0);
-    
     private int x;
     private int y;
     
@@ -35,10 +12,10 @@ public class MazeGame {
     // THIS ONE NEEDS TO BE REPLACED LATER AFTER CHARACTER SELECTION HAS BEEN MADE.
     // THIS IS JUST A TEMPLATE TO MAKE THE 18/5 VERSION WORKED.
     public MazeGame (int players, int mode, int difficulty) {
-        if (players == SINGLE_PLAYER) {
-            new MazeGame(PLAYER_0, "player 1", mode, difficulty);
+        if (players == Game.SINGLE_PLAYER) {
+            new MazeGame(Game.PLAYER_0, "player 1", mode, difficulty);
         } else {
-            new MazeGame(PLAYER_0, "player 1", PLAYER_0, "player 2", mode, difficulty);
+            new MazeGame(Game.PLAYER_0, "player 1", Game.PLAYER_0, "player 2", mode, difficulty);
         }
     }
     
@@ -74,13 +51,13 @@ public class MazeGame {
      * @param difficulty EASY or MEDIUM or HARD.
      */
     private void computeDifficulty(int difficulty) {
-        if (difficulty == EASY) {
+        if (difficulty == Game.EASY) {
             x = 10;
             y = 10;
-        } else if (difficulty == MEDIUM) {
+        } else if (difficulty == Game.MEDIUM) {
             x = 20;
             y = 20;
-        } else if (difficulty == HARD) {
+        } else if (difficulty == Game.HARD) {
             x = 30;
             y = 30;
         }

@@ -61,7 +61,7 @@ public class SingleOrMulti extends JPanel{
 				
 				//Open up difficulty selection mode which takes in number of game mode
 				//		and number of players. That creates the game
-				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, MazeGame.SINGLE_PLAYER, currentScreen);
+				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
 				mainFrame.add(dsScreen);
@@ -76,7 +76,7 @@ public class SingleOrMulti extends JPanel{
 				
 				//Open up difficulty selection mode which takes in number of game mode
 				//		and number of players. That creates the game
-				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, MazeGame.MULTI_PLAYER, currentScreen);
+				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.MULTI_PLAYER, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
 				mainFrame.add(dsScreen);

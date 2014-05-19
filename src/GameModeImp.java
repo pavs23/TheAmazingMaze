@@ -27,7 +27,7 @@ public abstract class GameModeImp implements GameMode {
         nextX += direction.getXDirection();
         nextY += direction.getYDirection();
         if (isPointInMaze(nextX, nextY)) {
-            if (mazeArray[nextX][nextY] == MazeGame.ROAD) {
+            if (mazeArray[nextX][nextY] == Game.ROAD) {
                 isNotWall = true;
             }
         }

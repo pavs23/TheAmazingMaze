@@ -150,22 +150,22 @@ public class ScoreManager {
 	private FileInputStream getFileInputStream(int modeFlag, int difficultyFlag){
 		FileInputStream file = null;
 		try{
-			if (difficultyFlag == MazeGame.EASY){
-				if (modeFlag == MazeGame.ADVENTURE_MODE){
+			if (difficultyFlag == Game.EASY){
+				if (modeFlag == Game.ADVENTURE_MODE){
 					file = new FileInputStream("src/easyNormalScore.txt");
-				} else if (modeFlag == MazeGame.COIN_MODE){
+				} else if (modeFlag == Game.COIN_MODE){
 					file = new FileInputStream("src/easyCoinScore.txt");
 				}
-			} else if (difficultyFlag == MazeGame.MEDIUM){
-				if (modeFlag == MazeGame.ADVENTURE_MODE){
+			} else if (difficultyFlag == Game.MEDIUM){
+				if (modeFlag == Game.ADVENTURE_MODE){
 					file = new FileInputStream("src/mediumNormalScore.txt");
-				} else if (modeFlag == MazeGame.COIN_MODE){
+				} else if (modeFlag == Game.COIN_MODE){
 					file = new FileInputStream("src/mediumCoinScore.txt");
 				}
-			} else if (difficultyFlag == MazeGame.HARD){
-				if (modeFlag == MazeGame.ADVENTURE_MODE){
+			} else if (difficultyFlag == Game.HARD){
+				if (modeFlag == Game.ADVENTURE_MODE){
 					file = new FileInputStream("src/hardNormalScore.txt");
-				} else if (modeFlag == MazeGame.COIN_MODE) {
+				} else if (modeFlag == Game.COIN_MODE) {
 					file = new FileInputStream("src/hardCoinScore.txt");
 				}
 			}
@@ -186,27 +186,27 @@ public class ScoreManager {
 	private File getFile(int modeFlag, int difficultyFlag){
 		File file = null;
 		try{
-			if (difficultyFlag == MazeGame.EASY){
-				if (modeFlag == MazeGame.ADVENTURE_MODE){
+			if (difficultyFlag == Game.EASY){
+				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("easy normal");
 					file = new File("src/easyNormalScore.txt");
-				} else if (modeFlag == MazeGame.COIN_MODE){
+				} else if (modeFlag == Game.COIN_MODE){
 					//System.out.println("easy coin");
 					file = new File("src/easyCoinScore.txt");
 				}
-			} else if (difficultyFlag == MazeGame.MEDIUM){
-				if (modeFlag == MazeGame.ADVENTURE_MODE){
+			} else if (difficultyFlag == Game.MEDIUM){
+				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("medium normal");
 					file = new File("src/mediumNormalScore.txt");
-				} else if (modeFlag == MazeGame.COIN_MODE){
+				} else if (modeFlag == Game.COIN_MODE){
 					//System.out.println("medium coin");
 					file = new File("src/mediumCoinScore.txt");
 				}
-			} else if (difficultyFlag == MazeGame.HARD){
-				if (modeFlag == MazeGame.ADVENTURE_MODE){
+			} else if (difficultyFlag == Game.HARD){
+				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("hard normal");
 					file = new File("src/hardNormalScore.txt");
-				} else if (modeFlag == MazeGame.COIN_MODE) {
+				} else if (modeFlag == Game.COIN_MODE) {
 					//System.out.println("hard coin");
 					file = new File("src/hardCoinScore.txt");
 				}
