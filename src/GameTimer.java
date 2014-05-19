@@ -7,7 +7,7 @@ import javax.swing.*;
 public class GameTimer {
 
 	private static final String PAUSE = "PAUSE";
-	private static final int TOTAL_MINS = 59;
+	private static final int TOTAL_MINS = 2;
 	private static final int TOTAL_SECONDS = 59;
 	private static final int ONE_SECOND = 1000;
 
@@ -36,7 +36,7 @@ public class GameTimer {
 			myTimer.start();
 
 			String text = String
-					.format("CountDown %d : %d", minutesRepo, sec);
+					.format("%d : %d", minutesRepo, sec);
 			timerLabel.setText(text);
 
 		
