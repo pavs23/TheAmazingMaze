@@ -1,13 +1,9 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
 import javax.swing.*;
-import javax.imageio.*;
-
 import java.util.ArrayList;
-import java.io.*;
 
 /**
  * A class that represents common things between Game Modes.
@@ -261,24 +257,34 @@ public abstract class PlayerModes {
      */
     public Player generatePlayer(String name, int playerCode) {
         Coordinate startCoordinate = maze.getStartCoordinate();
-        Image scaledPlayerFront;
-        Image scaledPlayerBack;
-        Image scaledPlayerLeft;
-        Image scaledPlayerRight;
-        ImageIcon playerIconFront = null;
-        ImageIcon playerIconBack = null;
-        ImageIcon playerIconLeft = null;
-        ImageIcon playerIconRight = null;
+        Image scaledPlayerFront =  null;
+        Image scaledPlayerBack = null;
+        Image scaledPlayerLeft = null;
+        Image scaledPlayerRight = null;
+        ImageIcon playerIconFront;
+        ImageIcon playerIconBack;
+        ImageIcon playerIconLeft;
+        ImageIcon playerIconRight;
         if (playerCode == Game.PLAYER_0) {          
             scaledPlayerFront = Game.PLAYER_0_FRONT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
             scaledPlayerBack = Game.PLAYER_0_BACK_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
             scaledPlayerLeft = Game.PLAYER_0_LEFT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-            scaledPlayerRight = Game.PLAYER_0_RIGHT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
-            playerIconFront = new ImageIcon(scaledPlayerFront);
-            playerIconBack = new ImageIcon(scaledPlayerBack);
-            playerIconLeft = new ImageIcon(scaledPlayerLeft);
-            playerIconRight = new ImageIcon(scaledPlayerRight);      
+            scaledPlayerRight = Game.PLAYER_0_RIGHT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);               
+        } else if (playerCode == Game.PLAYER_1) {
+            scaledPlayerFront = Game.PLAYER_1_FRONT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledPlayerBack = Game.PLAYER_1_BACK_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledPlayerLeft = Game.PLAYER_1_LEFT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledPlayerRight = Game.PLAYER_1_RIGHT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+        } else if (playerCode == Game.PLAYER_2) {
+            scaledPlayerFront = Game.PLAYER_2_FRONT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledPlayerBack = Game.PLAYER_2_BACK_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledPlayerLeft = Game.PLAYER_2_LEFT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledPlayerRight = Game.PLAYER_2_RIGHT_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH); 
         }
+        playerIconFront = new ImageIcon(scaledPlayerFront);
+        playerIconBack = new ImageIcon(scaledPlayerBack);
+        playerIconLeft = new ImageIcon(scaledPlayerLeft);
+        playerIconRight = new ImageIcon(scaledPlayerRight); 
         Player player = new Player(startCoordinate, name, playerIconFront, playerIconBack, playerIconLeft, playerIconRight);
         return player;
     }

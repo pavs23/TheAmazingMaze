@@ -1,16 +1,10 @@
-import java.awt.Button;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Event;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +32,14 @@ public class Game {
 	public static final Image PLAYER_0_BACK_IMAGE;
 	public static final Image PLAYER_0_LEFT_IMAGE;
 	public static final Image PLAYER_0_RIGHT_IMAGE;
+	public static final Image PLAYER_1_FRONT_IMAGE;
+    public static final Image PLAYER_1_BACK_IMAGE;
+    public static final Image PLAYER_1_LEFT_IMAGE;
+    public static final Image PLAYER_1_RIGHT_IMAGE;
+    public static final Image PLAYER_2_FRONT_IMAGE;
+    public static final Image PLAYER_2_BACK_IMAGE;
+    public static final Image PLAYER_2_LEFT_IMAGE;
+    public static final Image PLAYER_2_RIGHT_IMAGE;
 	
 	
 	// Constants in the game.
@@ -74,15 +76,31 @@ public class Game {
         File player0BackFile = new File("playerRoadBack.jpg");
         File player0LeftFile = new File("playerRoadLeft.jpg");
         File player0RightFile = new File("playerRoadRight.jpg"); 
+        File player1FrontFile = new File("playerRoadFront.jpg");
+        File player1BackFile = new File("playerRoadBack.jpg");
+        File player1LeftFile = new File("playerRoadLeft.jpg");
+        File player1RightFile = new File("playerRoadRight.jpg"); 
+        File player2FrontFile = new File("playerRoadFront.jpg");
+        File player2BackFile = new File("playerRoadBack.jpg");
+        File player2LeftFile = new File("playerRoadLeft.jpg");
+        File player2RightFile = new File("playerRoadRight.jpg"); 
         
-        BufferedImage wallImg = null;
-        BufferedImage roadImg = null;
-        BufferedImage hintImg = null;
-        BufferedImage coinImg = null;
-        BufferedImage player0FrontImg = null;
-        BufferedImage player0BackImg = null;
-        BufferedImage player0LeftImg = null;
-        BufferedImage player0RightImg = null;
+        Image wallImg = null;
+        Image roadImg = null;
+        Image hintImg = null;
+        Image coinImg = null;
+        Image player0FrontImg = null;
+        Image player0BackImg = null;
+        Image player0LeftImg = null;
+        Image player0RightImg = null;
+        Image player1FrontImg = null;
+        Image player1BackImg = null;
+        Image player1LeftImg = null;
+        Image player1RightImg = null;
+        Image player2FrontImg = null;
+        Image player2BackImg = null;
+        Image player2LeftImg = null;
+        Image player2RightImg = null;
         
         try {
             wallImg = ImageIO.read(wallFile);
@@ -93,6 +111,14 @@ public class Game {
             player0BackImg = ImageIO.read(player0BackFile);
             player0LeftImg = ImageIO.read(player0LeftFile);
             player0RightImg = ImageIO.read(player0RightFile);
+            player1FrontImg = ImageIO.read(player1FrontFile);
+            player1BackImg = ImageIO.read(player1BackFile);
+            player1LeftImg = ImageIO.read(player1LeftFile);
+            player1RightImg = ImageIO.read(player1RightFile);
+            player2FrontImg = ImageIO.read(player2FrontFile);
+            player2BackImg = ImageIO.read(player2BackFile);
+            player2LeftImg = ImageIO.read(player2LeftFile);
+            player2RightImg = ImageIO.read(player2RightFile);
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -103,8 +129,15 @@ public class Game {
             PLAYER_0_BACK_IMAGE = player0BackImg;
             PLAYER_0_LEFT_IMAGE = player0LeftImg;
             PLAYER_0_RIGHT_IMAGE = player0RightImg;
-        }
-        
+            PLAYER_1_FRONT_IMAGE = player1FrontImg;
+            PLAYER_1_BACK_IMAGE = player1BackImg;
+            PLAYER_1_LEFT_IMAGE = player1LeftImg;
+            PLAYER_1_RIGHT_IMAGE = player1RightImg;
+            PLAYER_2_FRONT_IMAGE = player2FrontImg;
+            PLAYER_2_BACK_IMAGE = player2BackImg;
+            PLAYER_2_LEFT_IMAGE = player2LeftImg;
+            PLAYER_2_RIGHT_IMAGE = player2RightImg;
+        }   
     }
     
 	public Game(){
