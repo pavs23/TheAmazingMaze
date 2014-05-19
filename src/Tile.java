@@ -59,13 +59,13 @@ public class Tile {
      * @param direction the Direction representing the direction that will be set to true.
      */
     public void setBoundaryTrue (Direction direction) {
-        if (direction.equals(MazeGame.NORTH)) {
+        if (direction.equals(Game.NORTH)) {
             north = true;
-        } else if (direction.equals(MazeGame.SOUTH)) {
+        } else if (direction.equals(Game.SOUTH)) {
             south = true;
-        } else if (direction.equals(MazeGame.WEST)) {
+        } else if (direction.equals(Game.WEST)) {
             west = true;
-        } else if (direction.equals(MazeGame.EAST)) {
+        } else if (direction.equals(Game.EAST)) {
             east = true;
         }
     }

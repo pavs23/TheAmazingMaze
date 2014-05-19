@@ -33,10 +33,11 @@ public class MazeGenerator {
 		}
 		// Initialize directions Array.
 		directions = new ArrayList<Direction>();
-		directions.add(MazeGame.NORTH);
-		directions.add(MazeGame.SOUTH);
-		directions.add(MazeGame.WEST);
-		directions.add(MazeGame.EAST);
+
+		directions.add(Game.NORTH);
+		directions.add(Game.SOUTH);
+		directions.add(Game.WEST);
+		directions.add(Game.EAST);
 		createMaze(0, 0);
 	}
 	
@@ -52,7 +53,8 @@ public class MazeGenerator {
     	    // Initialize the array to 0 (all walls).
     	    for (int i = 0; i < xSize; i++) {
     	        for (int j = 0; j < ySize; j++) {
-    	            mazeArray[i][j] = MazeGame.WALL;
+
+    	            mazeArray[i][j] = Game.WALL;
     	        }
     	    }
     	    for (int i = 0; i < x; i++) {
@@ -60,14 +62,15 @@ public class MazeGenerator {
     	            int currX = 2*i + 1;
     	            int currY = 2*j + 1;
     	            // Set the tiles as a path.
-    	            mazeArray[currX][currY] = MazeGame.ROAD;
+
+    	            mazeArray[currX][currY] = Game.ROAD;
     	            // If the tile South boundary true, then it is connected to the south tile.
     	            if (tiles[i][j].getSouthValue() == true) {
-    	                mazeArray[currX][currY+1] = MazeGame.ROAD;
+    	                mazeArray[currX][currY+1] = Game.ROAD;
     	            }
     	            // If the tile East boundary true, then it is connected to the east tile.
                     if (tiles[i][j].getEastValue() == true) {
-                        mazeArray[currX+1][currY] = MazeGame.ROAD;
+                        mazeArray[currX+1][currY] = Game.ROAD;
                     }
     	        }
     	    }
@@ -191,7 +194,8 @@ public class MazeGenerator {
 	        return true;
 	    }
 	    // Wall = 0.
-        if (visited[currX][currY] || maze[currX][currY] == MazeGame.WALL) {
+
+        if (visited[currX][currY] || maze[currX][currY] == Game.WALL) {
             // The coordinate has been visited, or it is a wall.
             return false;
         }

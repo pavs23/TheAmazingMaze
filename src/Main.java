@@ -12,7 +12,8 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-    	MainScreen g = new MainScreen();
+
+    	Game g = new Game();
     	g.run();
 	}
 }

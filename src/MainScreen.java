@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -25,24 +26,24 @@ import javax.swing.JPanel;
 
 public class MainScreen {
 	private JFrame mainFrame;
-	private JButton newGameButton;
-	private JButton cancelButton;
-	private JPanel mainPanel;
-	private JButton leaderboard;
+	private StyledButton newGameButton;
+	private StyledButton cancelButton;
+	private MainPanel mainPanel;
+	private StyledButton leaderboard;
 	
 	public MainScreen(){
+		
+		
 		//Making the Objects which go on the screen
-		mainFrame = new JFrame("Game Menu");
-		newGameButton = new JButton("New Game");
-		cancelButton = new JButton("Quit");
-		leaderboard = new JButton("Leaderboard");
+		mainFrame = new JFrame("The Amazing Maze");
+		newGameButton = new StyledButton();
+		cancelButton = new StyledButton();
+		leaderboard = new StyledButton();
 		
-		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		
-		newGameButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		
+		newGameButton.setText("New Game");
+		cancelButton.setText("Quit");
+		leaderboard.setText("Leaderboard");
+
 		//Setting the size of the Frame
 		Dimension mainFrameDimension = new Dimension(500, 500);
 		mainFrame.setSize(mainFrameDimension);
@@ -50,9 +51,10 @@ public class MainScreen {
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
+		mainFrame.getContentPane().setPreferredSize( Toolkit.getDefaultToolkit().getScreenSize());
+		
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
-		Insets insets = mainPanel.getInsets();
 		newGameButton.setLocation(175,100);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);

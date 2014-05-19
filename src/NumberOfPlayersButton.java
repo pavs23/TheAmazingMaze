@@ -10,7 +10,7 @@ import javax.swing.JButton;
  *
  */
 
-public class NumberOfPlayersButton extends JButton{
+public class NumberOfPlayersButton extends StyledButton{
 
 	/**
 	 * 
@@ -20,8 +20,6 @@ public class NumberOfPlayersButton extends JButton{
 	public NumberOfPlayersButton(int mode, String text) {
 		this.setSize(new Dimension(150, 70));
 		this.setText(text);
-		this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		
 		//Setting borders to the button
 	}
 }

@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -12,6 +14,7 @@ import javax.swing.JPanel;
 public class GamePausedPanel extends JPanel{
 
 	private JButton continueButton;
+	private JLabel title;
 	
 	/**
 	 * 
@@ -28,6 +31,9 @@ public class GamePausedPanel extends JPanel{
 		continueButton.setSize(new Dimension(80,50));
 		this.add(continueButton);
 		*/
+		title = new JLabel("You have Paused the game!");
+		this.add(title);
+		
 	}
 	
 	private JButton getContinueButton(){

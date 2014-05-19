@@ -2,7 +2,8 @@ import java.awt.event.*;
 
 import javax.swing.*;
 /**
- * A class that represents Multiplayer MazeGame.
+ *
+ * A class that represents Multiplayer Game.
  * @author floren
  *
  */
@@ -17,7 +18,11 @@ public class MultiPlayer extends PlayerModes {
     private JLabel[][] labels2;
 
     /**
+<<<<<<< HEAD
      * Constructor of the class to create the maze MazeGame.
+=======
+     * Constructor of the class to create the maze Game.
+>>>>>>> 59b76bbcc3a169317ede4a0938bace012973e186
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
      * @param x the number of roads needed in X direction.
      * @param y the number of roads needed in Y direction.
@@ -32,7 +37,7 @@ public class MultiPlayer extends PlayerModes {
         
         // Initialize maze;
         maze1 = getMaze();
-        if (mode == MazeGame.COIN_MODE) {
+        if (mode == Game.COIN_MODE) {
             CoinMaze coinMaze = (CoinMaze) maze1;
             maze2 = (GameMode) coinMaze.generateClone();
         } else {
@@ -50,8 +55,9 @@ public class MultiPlayer extends PlayerModes {
         player2 = generatePlayer(player2Name, player2Code);
         
         // Paint the players.
-        paintPlayer(player1, player1.getCoordinate(), MazeGame.EAST, labels1);
-        paintPlayer(player2, player2.getCoordinate(), MazeGame.EAST, labels2);
+
+        paintPlayer(player1, player1.getCoordinate(), Game.EAST, labels1);
+        paintPlayer(player2, player2.getCoordinate(), Game.EAST, labels2);
         
         // All components are added, show the frame.
         showFrame();
@@ -70,73 +76,69 @@ public class MultiPlayer extends PlayerModes {
     @SuppressWarnings("serial")
     public void setEventListenerToMaze() {
         // Key bindings (so that it works with panel).
-        
-        		Action leftKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player2, MazeGame.WEST, labels2, maze2);
-                    }
-                };
-                Action rightKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player2, MazeGame.EAST, labels2, maze2);
-                    }
-                };
-                Action upKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player2, MazeGame.NORTH, labels2, maze2);
-                    }
-                };
-                Action downKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player2, MazeGame.SOUTH, labels2, maze2);
-                    }
-                };
-                
-                Action aKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player1, MazeGame.WEST, labels1, maze1);
-                    }
-                };
-                
-                Action dKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player1, MazeGame.EAST, labels1, maze1);
-                    }
-                };
-                
-                Action wKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player1, MazeGame.NORTH, labels1, maze1);
-                    }
-                };
-                
-                Action sKeyPressed = new AbstractAction() {
-                    public void actionPerformed(ActionEvent e) {
-                        movePlayer(player1, MazeGame.SOUTH, labels1, maze1);
-                    }
-                };
-                
-                
-                KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
-                KeyStroke rightKey = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
-                KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
-                KeyStroke downKey = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
-                
-                KeyStroke aKey = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0);
-                KeyStroke dKey = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0);
-                KeyStroke wKey = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0);
-                KeyStroke sKey = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0);
-                
-                
-                setKeyBinding(leftKey, leftKeyPressed, "left");
-                setKeyBinding(rightKey, rightKeyPressed, "right");
-                setKeyBinding(upKey, upKeyPressed, "up");
-                setKeyBinding(downKey, downKeyPressed, "down");
-                
-                setKeyBinding(aKey, aKeyPressed, "a");
-                setKeyBinding(dKey, dKeyPressed, "d");
-                setKeyBinding(wKey, wKeyPressed, "w");
-                setKeyBinding(sKey, sKeyPressed, "s"); 
 
+        Action leftKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player2, Game.WEST, labels2, maze2);
+            }
+        };
+        Action rightKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player2, Game.EAST, labels2, maze2);
+            }
+        };
+        Action upKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player2, Game.NORTH, labels2, maze2);
+            }
+        };
+        Action downKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player2, Game.SOUTH, labels2, maze2);
+            }
+        };
+        
+        Action aKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player1, Game.WEST, labels1, maze1);
+            }
+        };
+        
+        Action dKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player1, Game.EAST, labels1, maze1);
+            }
+        };
+        
+        Action wKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player1, Game.NORTH, labels1, maze1);
+            }
+        };
+        
+        Action sKeyPressed = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                movePlayer(player1, Game.SOUTH, labels1, maze1);
+            }
+        };
+        
+        KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
+        KeyStroke rightKey = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
+        KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
+        KeyStroke downKey = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
+        
+        KeyStroke aKey = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0);
+        KeyStroke dKey = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0);
+        KeyStroke wKey = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0);
+        KeyStroke sKey = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0);
+        
+        setKeyBinding(leftKey, leftKeyPressed, "left");
+        setKeyBinding(rightKey, rightKeyPressed, "right");
+        setKeyBinding(upKey, upKeyPressed, "up");
+        setKeyBinding(downKey, downKeyPressed, "down");
+        setKeyBinding(aKey, aKeyPressed, "a");
+        setKeyBinding(dKey, dKeyPressed, "d");
+        setKeyBinding(wKey, wKeyPressed, "w");
+        setKeyBinding(sKey, sKeyPressed, "s");
     }
 }

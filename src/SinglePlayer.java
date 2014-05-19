@@ -39,7 +39,8 @@ public class SinglePlayer extends PlayerModes {
         generateTimer();
         
         // Paint the player.
-        paintPlayer(player, player.getCoordinate(), MazeGame.EAST, labels);
+
+        paintPlayer(player, player.getCoordinate(), Game.EAST, labels);
         
         // All components are added, how the frame.
         showFrame();
@@ -66,22 +67,22 @@ public class SinglePlayer extends PlayerModes {
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, MazeGame.WEST, labels, maze);
+                movePlayer(player, Game.WEST, labels, maze);
             }
         };
         Action rightKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, MazeGame.EAST, labels, maze);
+                movePlayer(player, Game.EAST, labels, maze);
             }
         };
         Action upKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, MazeGame.NORTH, labels, maze);
+                movePlayer(player, Game.NORTH, labels, maze);
             }
         };
         Action downKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, MazeGame.SOUTH, labels, maze);
+                movePlayer(player, Game.SOUTH, labels, maze);
             }
         };
         KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
@@ -110,13 +111,13 @@ public class SinglePlayer extends PlayerModes {
                 // n = the dimension of the array/3.
                 for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
                     Coordinate curr = path.get(i);
-                    labels[curr.getX()][curr.getY()].setIcon(hintIcon);
+                    labels[curr.getX()][curr.getY()].setIcon(getHintIcon());
                 }
                 Timer timer = new Timer(500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
                             Coordinate curr = path.get(i);
-                            labels[curr.getX()][curr.getY()].setIcon(roadIcon);
+                            labels[curr.getX()][curr.getY()].setIcon(getRoadIcon());
                         }
                         resume();                   
                     }

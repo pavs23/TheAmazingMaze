@@ -41,7 +41,7 @@ public class SelectGameMode extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Coin Mode");
 				SingleOrMulti players = new SingleOrMulti(
-						MazeGame.COIN_MODE, mainFrame, currentScreen);
+						Game.COIN_MODE, mainFrame, currentScreen);
 				// See if remove works better rather than keeping these panels
 				// running
 
@@ -57,7 +57,7 @@ public class SelectGameMode extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Adventure Mode");
 				SingleOrMulti players = new SingleOrMulti(
-						MazeGame.ADVENTURE_MODE, mainFrame, currentScreen);
+						Game.ADVENTURE_MODE, mainFrame, currentScreen);
 				mainFrame.add(players);
 				
 				currentScreen.setVisible(false); // Passed this variable into actionListener as a private
