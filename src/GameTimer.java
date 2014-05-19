@@ -75,7 +75,7 @@ public class GameTimer {
 			if (min >= 0 && sec > 0) {
 				
 				sec = secondsRepo -  elapsedSeconds;
-					String text = String.format("CountDown %d : %d", min,
+					String text = String.format("%d : %d", min,
 							sec);
 					timerLabel.setText(text);
 			}
