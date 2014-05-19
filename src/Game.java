@@ -69,22 +69,22 @@ public class Game {
      * Load the images from the files.
      */
     static {
-        File wallFile = new File("wall.jpg");
-        File roadFile = new File("road.jpg");
-        File hintFile = new File("hintTile.jpg");
-        File coinFile = new File("coinTile.jpg"); 
-        File player0FrontFile = new File("playerRoadFront.jpg");
-        File player0BackFile = new File("playerRoadBack.jpg");
-        File player0LeftFile = new File("playerRoadLeft.jpg");
-        File player0RightFile = new File("playerRoadRight.jpg"); 
-        File player1FrontFile = new File("playerRoadFront.jpg");
-        File player1BackFile = new File("playerRoadBack.jpg");
-        File player1LeftFile = new File("playerRoadLeft.jpg");
-        File player1RightFile = new File("playerRoadRight.jpg"); 
-        File player2FrontFile = new File("playerRoadFront.jpg");
-        File player2BackFile = new File("playerRoadBack.jpg");
-        File player2LeftFile = new File("playerRoadLeft.jpg");
-        File player2RightFile = new File("playerRoadRight.jpg"); 
+        File wallFile = new File("wall2.jpg");
+        File roadFile = new File("road2.jpg");
+        File hintFile = new File("hint2.jpg");
+        File coinFile = new File("coin2.jpg"); 
+        File player0FrontFile = new File("boyFront.png");
+        File player0BackFile = new File("boyBack.png");
+        File player0LeftFile = new File("boyLeft.png");
+        File player0RightFile = new File("boyRight.png"); 
+        File player1FrontFile = new File("girlFront.png");
+        File player1BackFile = new File("girlBack.png");
+        File player1LeftFile = new File("girlLeft.png");
+        File player1RightFile = new File("girlRight.png"); 
+        File player2FrontFile = new File("pikachuFront.png");
+        File player2BackFile = new File("pikachuBack.png");
+        File player2LeftFile = new File("pikachuLeft.png");
+        File player2RightFile = new File("pikachuRight.png"); 
         
         Image wallImg = null;
         Image roadImg = null;
