@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -75,14 +76,25 @@ public abstract class PlayerModes {
         
         addToFrame(gamePanel);
         addToFrame(sidePanel);
+        gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         
         // Set event listener to gamePanel.
         setEventListenerToMaze();
     }
     
+    /**
+     * A method to set the listeners to the maze game.
+     */
     public abstract void setEventListenerToMaze();
     
+    
+    /**
+     * A method that is called to indicate that a player has won.
+     * @param playerName the name of the player that won the game.
+     */
+    public abstract void gameEndWin(String playerName);
+  
     /**
      * Add a new JComponent to frame.
      * @param newComponent the JComponent that wants to be added to frame.
@@ -116,6 +128,7 @@ public abstract class PlayerModes {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+    
     
     /**
      * Bind a key event to the gamePanel.
@@ -195,6 +208,13 @@ public abstract class PlayerModes {
      */
     public ImageIcon getCoinIcon() {
         return coinIcon;
+    }
+    
+    /**
+     * A method to throw away the frame.
+     */
+    public void disposeFrame() {
+        frame.dispose();
     }
     
     /**
@@ -351,8 +371,7 @@ public abstract class PlayerModes {
             
             // The player wins.
             if (maze.gameFinished(newPos)) {
-                System.out.println(player.getName() + " win! Congrats!");
-                
+                gameEndWin(player.getName());
             }
         }
     }
@@ -386,6 +405,7 @@ public abstract class PlayerModes {
         
         mainMenuButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                freeze();
                 // Dispose the current frame.
                 frame.dispose();
                 // Create a new menu.
