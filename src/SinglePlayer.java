@@ -47,14 +47,14 @@ public class SinglePlayer extends PlayerModes {
     
     @Override
     public void freeze() {
-        super.freeze();
-        hintButton.setEnabled(false);
+        disabledGame();
+        timer.pause();
     }
     
     @Override
     public void resume() {
-        super.resume();
-        hintButton.setEnabled(true);
+        enabledGame();
+        timer.start();
     }
     
     /**
@@ -62,7 +62,7 @@ public class SinglePlayer extends PlayerModes {
      * Use key binding for it.
      */
     @SuppressWarnings("serial")
-    public void setEventListenerToMaze() {   
+    public void setEventListenerToMaze() {
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
@@ -96,15 +96,39 @@ public class SinglePlayer extends PlayerModes {
     }
     
     /**
+     * Dispose the frame and create new frame for winning player.
+     * Show the score of the winning player.
+     */
+    public void gameEndWin(String playerName) {
+        timer.pause();
+        disposeFrame();
+        int currSec = timer.getCurrentSecond();
+        int score = currSec * Game.SCORE_MULTIPLIER;
+        // CREATE A FRAME FOR WINNING PLAYER HERE.
+        System.out.println(playerName + " wins! The score = " + score);
+    }
+    
+    /**
+     * A method that is called to indicate that a player has lost.
+     * Create a lost frame and dispose the current game frame.
+     */
+    public void gameEndLost() {
+        disposeFrame();
+        // CREATE A FRAME FOR LOSING PLAYER HERE
+        System.out.println("You lose...");
+    }
+    
+    /**
      * Create the side menu with a hint button.
      */
     private void generateHint() {
         hintButton = new JButton("Get Hint");
+        hintButton.setFocusable(false);
         // Print the first few steps to goal.
         // The number of steps are depending on the maze size.
         hintButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                freeze(); 
+                disabledGame(); 
                 Coordinate currPos = player.getCoordinate();
                 final ArrayList<Coordinate> path = maze.getHint(currPos);
                 // n = the dimension of the array/3.
@@ -112,17 +136,17 @@ public class SinglePlayer extends PlayerModes {
                     Coordinate curr = path.get(i);
                     labels[curr.getX()][curr.getY()].setIcon(getHintIcon());
                 }
-                Timer timer = new Timer(500, new ActionListener() {
+                Timer newTimer = new Timer(500, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
                             Coordinate curr = path.get(i);
                             labels[curr.getX()][curr.getY()].setIcon(getRoadIcon());
                         }
-                        resume();                   
+                        enabledGame();                   
                     }
                 });
-                timer.setRepeats(false);
-                timer.start();             
+                newTimer.setRepeats(false);
+                newTimer.start();             
             }
         });
         addToSidePanel(hintButton);
@@ -132,6 +156,26 @@ public class SinglePlayer extends PlayerModes {
      * Method to create timer for the game.
      */
     private void generateTimer() {
-        
+        JLabel timeLabel = new JLabel();
+        timeLabel.setVisible(true);
+        addToSidePanel(timeLabel);
+        timer = new GameTimer(timeLabel, this);
+        timer.start();    
+    }
+    
+    /**
+     * A method that will disable the buttons and action listeners in the game.
+     */
+    private void disabledGame() {
+        super.freeze();
+        hintButton.setEnabled(false);
+    }
+    
+    /**
+     * A method that will enable the buttons and action listeners in the game.
+     */
+    private void enabledGame() {
+        super.resume();
+        hintButton.setEnabled(true);
     }
 }
