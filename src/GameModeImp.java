@@ -5,12 +5,6 @@
  */
 public abstract class GameModeImp implements GameMode {
     private int[][] mazeArray;
-    protected final int WALL = 0;
-    protected final int ROAD = 1;
-    
-    protected void setMazeArray(int[][] array) {
-        mazeArray = array;
-    }
     
     /**
      * Get the array of 0s and 1s in the maze.
@@ -33,11 +27,19 @@ public abstract class GameModeImp implements GameMode {
         nextX += direction.getXDirection();
         nextY += direction.getYDirection();
         if (isPointInMaze(nextX, nextY)) {
-            if (mazeArray[nextX][nextY] == ROAD) {
+            if (mazeArray[nextX][nextY] == MazeGame.ROAD) {
                 isNotWall = true;
             }
         }
         return isNotWall;
+    }
+    
+    /**
+     * Set the mazeArray of the class.
+     * @param array the array representing the maze.
+     */
+    protected void setMazeArray(int[][] array) {
+        mazeArray = array;
     }
     
     /**

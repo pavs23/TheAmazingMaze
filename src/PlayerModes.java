@@ -19,23 +19,21 @@ public abstract class PlayerModes {
     // The icons.
     protected ImageIcon roadIcon;
     protected ImageIcon wallIcon;
-    protected ImageIcon playerIconFront;
-    protected ImageIcon playerIconBack;
-    protected ImageIcon playerIconLeft;
-    protected ImageIcon playerIconRight;
     protected ImageIcon hintIcon;
     protected ImageIcon coinIcon;
-    
-    protected static final int ROAD = 1;
-    protected static final int FRAME_WIDTH = 600;
+
+    public static final int MAZE_PANEL_WIDTH = 600;
     
     private GameMode maze;
     private int mode;
     private int[][] mazeArray;
+    private int iconWidth;
+    private int iconHeight;
     
     private JFrame frame;
     private JPanel gamePanel;
     private JPanel sidePanel;
+    private GamePausedPanel pausePanel;
     
     private JButton mainMenuButton;
     private JButton pauseButton;
@@ -83,7 +81,12 @@ public abstract class PlayerModes {
         addToFrame(gamePanel);
         addToFrame(sidePanel);
         gamePanel.requestFocus();
+        
+        // Set event listener to gamePanel.
+        setEventListenerToMaze();
     }
+    
+    public abstract void setEventListenerToMaze();
     
     /**
      * Add a new JComponent to frame.
@@ -167,75 +170,6 @@ public abstract class PlayerModes {
         return maze;
     }
     
-    /**
-     * Create the icons needed for the maze game.
-     */
-    public void generateIcon() {
-        int xDimension = mazeArray.length;
-        int yDimension = mazeArray[0].length;
-        
-        File wallFile = new File("wall.jpg");
-        File roadFile = new File("road.jpg");
-        File playerFrontFile = new File("playerRoadFront.jpg");
-        File playerBackFile = new File("playerRoadBack.jpg");
-        File playerLeftFile = new File("playerRoadLeft.jpg");
-        File playerRightFile = new File("playerRoadRight.jpg");
-        File hintFile = new File("hintTile.jpg");
-        File coinFile = new File("coinTile.jpg");
-        
-        BufferedImage wallImg;
-        BufferedImage roadImg;
-        BufferedImage playerFrontImg;
-        BufferedImage playerBackImg;
-        BufferedImage playerLeftImg;
-        BufferedImage playerRightImg;
-        BufferedImage hintImg;
-        BufferedImage coinImg;
-        
-        Image scaledWall;
-        Image scaledRoad;
-        Image scaledPlayerFront;
-        Image scaledPlayerBack;
-        Image scaledPlayerLeft;
-        Image scaledPlayerRight;
-        Image scaledHint;
-        Image scaledCoin;
-        
-        try { 
-            // Read the image.
-            wallImg = ImageIO.read(wallFile);
-            roadImg = ImageIO.read(roadFile);
-            playerFrontImg = ImageIO.read(playerFrontFile);
-            playerBackImg = ImageIO.read(playerBackFile);
-            playerLeftImg = ImageIO.read(playerLeftFile);
-            playerRightImg = ImageIO.read(playerRightFile);
-            hintImg = ImageIO.read(hintFile);
-            coinImg = ImageIO.read(coinFile);
-            
-            // Set the image dimension.
-            int height = FRAME_WIDTH/yDimension;
-            int width = FRAME_WIDTH/xDimension;
-            scaledWall = wallImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledRoad = roadImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledPlayerFront = playerFrontImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledPlayerBack = playerBackImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledPlayerLeft = playerLeftImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledPlayerRight = playerRightImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledHint = hintImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-            scaledCoin = coinImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-                    
-            // Create icon from image.        
-            wallIcon = new ImageIcon(scaledWall);
-            roadIcon = new ImageIcon(scaledRoad);
-            playerIconFront = new ImageIcon(scaledPlayerFront);
-            playerIconBack = new ImageIcon(scaledPlayerBack);
-            playerIconLeft = new ImageIcon(scaledPlayerLeft);
-            playerIconRight = new ImageIcon(scaledPlayerRight);
-            hintIcon = new ImageIcon(scaledHint);
-            coinIcon = new ImageIcon(scaledCoin);
-            
-        } catch (IOException e) {}
-    }
     
     /**
      * Generate a maze panel that will consist of labels as grids.
@@ -252,7 +186,7 @@ public abstract class PlayerModes {
         mazePanel.setVisible(true);
         for (int j = 0; j < yDimension; j++) {
             for (int i = 0; i < xDimension; i++) {
-                if (mazeArray[i][j] == ROAD) {
+                if (mazeArray[i][j] == MazeGame.ROAD) {
                     labels[i][j].setIcon(roadIcon);
                 } else {
                     labels[i][j].setIcon(wallIcon);
@@ -283,7 +217,7 @@ public abstract class PlayerModes {
         for (int j = 0; j < yDimension; j++) {
             for (int i = 0; i < xDimension; i++) {
                 labels[i][j] = new JLabel();
-                labels[i][j].setPreferredSize(new Dimension(FRAME_WIDTH/xDimension, FRAME_WIDTH/yDimension));
+                labels[i][j].setPreferredSize(new Dimension(MAZE_PANEL_WIDTH/xDimension, MAZE_PANEL_WIDTH/yDimension));
             }
         }
         return labels;
@@ -292,15 +226,51 @@ public abstract class PlayerModes {
     /**
      * Create player for the game.
      * @param name the name of the player.
+     * @param playerCode the code of the character of the player.
      * @return the Player that is created.
      */
-    public Player generatePlayer(String name) {
+    public Player generatePlayer(String name, int playerCode) {
         Coordinate startCoordinate = maze.getStartCoordinate();
-        Player player = new Player(startCoordinate, name);
+        File playerFrontFile;
+        File playerBackFile;
+        File playerLeftFile;
+        File playerRightFile;
+        BufferedImage playerFrontImg;
+        BufferedImage playerBackImg;
+        BufferedImage playerLeftImg;
+        BufferedImage playerRightImg;
+        Image scaledPlayerFront;
+        Image scaledPlayerBack;
+        Image scaledPlayerLeft;
+        Image scaledPlayerRight;
+        ImageIcon playerIconFront = null;
+        ImageIcon playerIconBack = null;
+        ImageIcon playerIconLeft = null;
+        ImageIcon playerIconRight = null;
+        if (playerCode == MazeGame.PLAYER_0) {          
+            playerFrontFile = new File("playerRoadFront.jpg");
+            playerBackFile = new File("playerRoadBack.jpg");
+            playerLeftFile = new File("playerRoadLeft.jpg");
+            playerRightFile = new File("playerRoadRight.jpg");
+            try {
+                playerFrontImg = ImageIO.read(playerFrontFile);
+                playerBackImg = ImageIO.read(playerBackFile);
+                playerLeftImg = ImageIO.read(playerLeftFile);
+                playerRightImg = ImageIO.read(playerRightFile);
+                scaledPlayerFront = playerFrontImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                scaledPlayerBack = playerBackImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                scaledPlayerLeft = playerLeftImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                scaledPlayerRight = playerRightImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                playerIconFront = new ImageIcon(scaledPlayerFront);
+                playerIconBack = new ImageIcon(scaledPlayerBack);
+                playerIconLeft = new ImageIcon(scaledPlayerLeft);
+                playerIconRight = new ImageIcon(scaledPlayerRight);
+            } catch (IOException e) {}        
+        }
+        Player player = new Player(startCoordinate, name, playerIconFront, playerIconBack, playerIconLeft, playerIconRight);
         return player;
     }
-        
-        
+            
         
     /**
      * Paint the player in the maze.
@@ -312,13 +282,13 @@ public abstract class PlayerModes {
         int xPos = coordinate.getX();
         int yPos = coordinate.getY();
         if (direction.equals(MazeGame.NORTH)) {
-            labels[xPos][yPos].setIcon(playerIconBack);
+            labels[xPos][yPos].setIcon(player.getBackView());
         } else if (direction.equals(MazeGame.SOUTH)) {
-            labels[xPos][yPos].setIcon(playerIconFront);
+            labels[xPos][yPos].setIcon(player.getFrontView());
         } else if (direction.equals(MazeGame.WEST)) {
-            labels[xPos][yPos].setIcon(playerIconLeft);
+            labels[xPos][yPos].setIcon(player.getLeftView());
         } else if (direction.equals(MazeGame.EAST)) {
-            labels[xPos][yPos].setIcon(playerIconRight);
+            labels[xPos][yPos].setIcon(player.getRightView());
         }
     }
        
@@ -356,7 +326,7 @@ public abstract class PlayerModes {
             // If coin mode, find out whether a player find the coin or not.
             if (mode == MazeGame.COIN_MODE) {
                 CoinMaze coinMaze = (CoinMaze) maze;
-                if (coinMaze.coinFound(newPos)) {
+                if (coinMaze.isCoinFound(newPos)) {
                     coinMaze.removeCoin(newPos);
                 }
             }
@@ -381,18 +351,22 @@ public abstract class PlayerModes {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
-                final JPanel resumePanel = new JPanel();
                 JButton resumeButton = new JButton("Resume");
+                
+                pausePanel = new GamePausedPanel();
+                pausePanel.add(resumeButton);
+                
                 resumeButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        resumePanel.setVisible(false);
+                        pausePanel.setVisible(false);
                         gamePanel.setVisible(true);
                         sidePanel.setVisible(true);
                         resume();
                     }
                 });
-                resumePanel.add(resumeButton);
-                frame.add(resumePanel);
+                
+                pausePanel.add(resumeButton);
+                frame.add(pausePanel);
             }
         });
         
@@ -409,4 +383,50 @@ public abstract class PlayerModes {
         addToSidePanel(pauseButton);
     }
    
+    /**
+     * Create the icons needed for the maze game.
+     */
+    private void generateIcon() {
+        int xDimension = mazeArray.length;
+        int yDimension = mazeArray[0].length;
+        
+        iconWidth = MAZE_PANEL_WIDTH/xDimension;
+        iconHeight = MAZE_PANEL_WIDTH/yDimension;
+                
+        File wallFile = new File("wall.jpg");
+        File roadFile = new File("road.jpg");
+        File hintFile = new File("hintTile.jpg");
+        File coinFile = new File("coinTile.jpg");
+        
+        BufferedImage wallImg;
+        BufferedImage roadImg;
+        BufferedImage hintImg;
+        BufferedImage coinImg;
+        
+        Image scaledWall;
+        Image scaledRoad;
+        Image scaledHint;
+        Image scaledCoin;
+        
+        try { 
+            // Read the image.
+            wallImg = ImageIO.read(wallFile);
+            roadImg = ImageIO.read(roadFile);
+            hintImg = ImageIO.read(hintFile);
+            coinImg = ImageIO.read(coinFile);
+            
+            // Set the image dimension.
+            scaledWall = wallImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledRoad = roadImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledHint = hintImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+            scaledCoin = coinImg.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
+                    
+            // Create icon from image.        
+            wallIcon = new ImageIcon(scaledWall);
+            roadIcon = new ImageIcon(scaledRoad);
+            hintIcon = new ImageIcon(scaledHint);
+            coinIcon = new ImageIcon(scaledCoin);
+            
+        } catch (IOException e) {}
+    } 
 }

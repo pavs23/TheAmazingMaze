@@ -14,10 +14,10 @@ public interface GameMode {
     
     /**
      * Get hint for the maze.
-     * @param currentPosition the current position of the player.
+     * @param curr the current position of the player.
      * @return an ArrayList of Coordinate from currentPosition to a goal, not including current coordinate.
      */
-    public ArrayList<Coordinate> getHint(Coordinate currentPosition);
+    public ArrayList<Coordinate> getHint(Coordinate curr);
     
     /**
      * Get the starting coordinate of the player.
