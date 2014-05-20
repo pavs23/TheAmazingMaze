@@ -17,7 +17,7 @@ public class NameEntrySinglePlayer extends JPanel{
 	private JPanel current;
 	private BackButton backButton;
 	
-	public NameEntrySinglePlayer(final JFrame mainFrame, final int mode, final JPanel prev){
+	public NameEntrySinglePlayer(final JFrame mainFrame, final int mode, final JPanel prev, final int difficulty){
 		current = this;
 		this.setSize(new Dimension(500, 500));
 		this.setLayout(null);
@@ -50,10 +50,11 @@ public class NameEntrySinglePlayer extends JPanel{
 				
 				String playerName = nameField.getText();
 				//Add difficulty selection here
-				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, current, playerName);
-				mainFrame.add(dsScreen);
+				//DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, current);
+				new MazeGame(Game.PLAYER_0, playerName, mode, difficulty);
+				//mainFrame.add(dsScreen);
 				mainFrame.remove(prev);
-				dsScreen.setVisible(true);
+				//dsScreen.setVisible(true);
 				current.setVisible(false);
 			}
 			

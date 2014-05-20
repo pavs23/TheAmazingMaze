@@ -19,7 +19,7 @@ public class NameEntryDoublePlayer extends JPanel{
 	private BackButton backButton;
 	private DifficultySelection dsScreen; 
 	
-	public NameEntryDoublePlayer(final JFrame mainFrame, final int mode, final JPanel prev){
+	public NameEntryDoublePlayer(final JFrame mainFrame, final int mode, final JPanel prev, final int difficulty){
 		current = this;
 		
 		this.setSize(new Dimension(500, 500));
@@ -58,11 +58,9 @@ public class NameEntryDoublePlayer extends JPanel{
 				String playerOne = playerOneNameField.getText();
 				String playerTwo = playerTwoNameField.getText();
 				//Add difficulty selection here
-				dsScreen = new DifficultySelection(mainFrame, mode, Game.MULTI_PLAYER, prev, playerOne, playerTwo);
 				
-				mainFrame.add(dsScreen);
-				mainFrame.remove(prev);
-				dsScreen.setVisible(true);
+				new MazeGame(Game.PLAYER_0, playerOne, Game.PLAYER_1, playerTwo, mode, difficulty);
+				
 				current.setVisible(false);
 			}
 		});
