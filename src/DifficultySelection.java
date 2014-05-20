@@ -47,7 +47,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				mainMenu.dispose();
-				new MazeGame(players, playerOne, mode, Game.EASY);
+				new MazeGame(Game.PLAYER_0, playerOne, mode, Game.EASY);
 				
 			}
 		});
@@ -95,8 +95,8 @@ public DifficultySelection(final JFrame mainMenu, final int mode, final int play
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				mainMenu.dispose();
-				new MazeGame(players, playerOne, mode, Game.EASY);
-				//new MazeGame(Game., playerOne, int player2Code, playerTwo, mode, Game.EASY);
+				//new MazeGame(players, playerOne, mode, Game.EASY);
+				new MazeGame(Game.PLAYER_0, playerOne, Game.PLAYER_2, playerTwo, mode, Game.EASY);
 				
 			}
 		});
@@ -106,8 +106,8 @@ public DifficultySelection(final JFrame mainMenu, final int mode, final int play
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
 				mainMenu.dispose();
-				new MazeGame(players, playerOne, mode, Game.MEDIUM);
-				//new MazeGame(Game., playerOne, int player2Code, playerTwo, mode, Game.MEDIUM);
+				//new MazeGame(players, playerOne, mode, Game.MEDIUM);
+				new MazeGame(Game.PLAYER_0, playerOne, Game.PLAYER_2, playerTwo, mode, Game.MEDIUM);
 			}
 		});
 		
@@ -116,8 +116,8 @@ public DifficultySelection(final JFrame mainMenu, final int mode, final int play
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
 				mainMenu.dispose();
-				new MazeGame(players, playerOne, mode, Game.HARD);
-				//new MazeGame(Game., playerOne, int player2Code, playerTwo, mode, Game.HARD);
+				//new MazeGame(players, playerOne, mode, Game.HARD);
+				new MazeGame(Game.PLAYER_0, playerOne, Game.PLAYER_2, playerTwo, mode, Game.HARD);
 			}
 		});
 				

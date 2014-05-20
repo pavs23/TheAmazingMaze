@@ -31,7 +31,7 @@ public abstract class PlayerModes {
     private JFrame frame;
     private JPanel gamePanel;
     private JPanel sidePanel;
-    private GamePausedPanel pausePanel;
+    private GamePausedPanel pausePanel = null;
     
     private StyledButton mainMenuButton;
     private StyledButton pauseButton;
@@ -402,23 +402,27 @@ public abstract class PlayerModes {
                 resumeButton.setText("Resume");
                 resumeButton.setLocation(new Point(200, 400));
                 resumeButton.setSize(new Dimension(100, 40));
+                resumeButton.setVisible(true);
                 
+                if (pausePanel == null) {
+                    pausePanel = new GamePausedPanel();
+                    pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
+                    pausePanel.add(resumeButton);
+                    addToFrame(pausePanel);
+                }
                 
-                pausePanel = new GamePausedPanel();
-                
-                pausePanel.add(resumeButton);
+                pausePanel.setVisible(true);
                 
                 resumeButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         pausePanel.setVisible(false);
                         gamePanel.setVisible(true);
                         sidePanel.setVisible(true);
+                        showFrame();
                         resume();
                     }
                 });
-                
-                pausePanel.add(resumeButton);
-                frame.add(pausePanel);
+                showFrame();
             }
         });
         

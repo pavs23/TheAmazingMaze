@@ -14,6 +14,8 @@ public class SinglePlayer extends PlayerModes {
     private JLabel[][] labels;
     private JButton hintButton;
     private GameTimer timer;
+    private Timer[] timers = new Timer[4];
+    private boolean gameFinished = false;
 
     /**
      * Constructor of the class to create the maze game.
@@ -47,13 +49,15 @@ public class SinglePlayer extends PlayerModes {
     }
     
     @Override
-    public void freeze() {
-        disabledGame();
+    public void freeze() {  
+        stopTimers();
+        disabledGame();  
         timer.pause();
     }
     
     @Override
     public void resume() {
+        setTimersToNull();
         enabledGame();
         timer.start();
     }
@@ -67,41 +71,131 @@ public class SinglePlayer extends PlayerModes {
         // Key bindings (so that it works with panel).
         Action leftKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, Game.WEST, labels, maze);
+                if (timers[0] == null) {      
+                    timers[0] = new Timer(Game.MOVING_TIME, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                             movePlayer(player, Game.WEST, labels, maze);
+                             if (gameFinished) {
+                                 timers[0].stop();
+                             }
+                        }
+                    });
+                    movePlayer(player, Game.WEST, labels, maze);     
+                    timers[0].start();        
+                }   
+            }
+        };
+        Action leftKeyReleased = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (timers[0] != null) {
+                    timers[0].stop();
+                    timers[0] = null;
+                }
             }
         };
         Action rightKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, Game.EAST, labels, maze);
+                if (timers[1] == null) {      
+                    timers[1] = new Timer(Game.MOVING_TIME, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                             movePlayer(player, Game.EAST, labels, maze);
+                             if (gameFinished) {
+                                 timers[1].stop();
+                             }
+                        }
+                    });
+                    movePlayer(player, Game.EAST, labels, maze);  
+                    timers[1].start();
+                }
+            }
+        };
+        Action rightKeyReleased = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+               if (timers[1] != null) {
+                    timers[1].stop();
+                    timers[1] = null;
+               }
             }
         };
         Action upKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, Game.NORTH, labels, maze);
+                if (timers[2] == null) {      
+                    timers[2] = new Timer(Game.MOVING_TIME, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                             movePlayer(player, Game.NORTH, labels, maze); 
+                             if (gameFinished) {
+                                 timers[2].stop();
+                             }
+                        }
+                    });
+                    movePlayer(player, Game.NORTH, labels, maze);
+                    timers[2].start();
+                }
+            }
+        };
+        Action upKeyReleased = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (timers[2] != null) {
+                    timers[2].stop();
+                    timers[2] = null;
+                }
             }
         };
         Action downKeyPressed = new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                movePlayer(player, Game.SOUTH, labels, maze);
+                if (timers[3] == null) {      
+                    timers[3] = new Timer(Game.MOVING_TIME, new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                             movePlayer(player, Game.SOUTH, labels, maze);
+                             if (gameFinished) {
+                                 timers[3].stop();
+                             }
+                        }
+                    });
+                    movePlayer(player, Game.SOUTH, labels, maze); 
+                    timers[3].start();
+                }
             }
         };
-        KeyStroke leftKey = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0);
-        KeyStroke rightKey = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0);
-        KeyStroke upKey = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0);
-        KeyStroke downKey = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0);
+        Action downKeyReleased = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                if (timers[3] != null) {
+                    timers[3].stop();
+                    timers[3] = null;
+                }
+            }
+        };
         
-        setKeyBinding(leftKey, leftKeyPressed, "left");
-        setKeyBinding(rightKey, rightKeyPressed, "right");
-        setKeyBinding(upKey, upKeyPressed, "up");
-        setKeyBinding(downKey, downKeyPressed, "down");
+        KeyStroke leftKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false);
+        KeyStroke rightKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false);
+        KeyStroke upKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false);
+        KeyStroke downKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false);
+        
+        KeyStroke leftKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true);
+        KeyStroke rightKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true);
+        KeyStroke upKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true);
+        KeyStroke downKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true);
+        
+        setKeyBinding(leftKeyDown, leftKeyPressed, "leftD");
+        setKeyBinding(rightKeyDown, rightKeyPressed, "rightD");
+        setKeyBinding(upKeyDown, upKeyPressed, "upD");
+        setKeyBinding(downKeyDown, downKeyPressed, "downD");
+        
+        setKeyBinding(leftKeyUp, leftKeyReleased, "leftU");
+        setKeyBinding(rightKeyUp, rightKeyReleased, "rightU");
+        setKeyBinding(upKeyUp, upKeyReleased, "upU");
+        setKeyBinding(downKeyUp, downKeyReleased, "downU");
     }
     
     /**
      * Dispose the frame and create new frame for winning player.
+     * Stop the timers.
      * Show the score of the winning player.
      */
     public void gameEndWin(String playerName) {
-        timer.pause();
+        gameFinished = true;
+        freeze();
+        timer.pause();    
         disposeFrame();
         int currSec = timer.getCurrentSecond();
         int score = currSec * Game.SCORE_MULTIPLIER;
@@ -114,6 +208,8 @@ public class SinglePlayer extends PlayerModes {
      * Create a lost frame and dispose the current game frame.
      */
     public void gameEndLost() {
+        gameFinished = true;
+        freeze();
         disposeFrame();
         // CREATE A FRAME FOR LOSING PLAYER HERE
         System.out.println("You lose...");
@@ -178,5 +274,25 @@ public class SinglePlayer extends PlayerModes {
     private void enabledGame() {
         super.resume();
         hintButton.setEnabled(true);
+    }
+
+    /**
+     * A helper method to stop all timers.
+     */
+    private void stopTimers() {
+        for (int i = 0; i < timers.length; i++) {
+            if (timers[i] != null) {
+                timers[i].stop();
+            }
+        }
+    }
+    
+    /**
+     * A helper method to set all timers to null.
+     */
+    private void setTimersToNull() {
+        for (int i = 0; i < timers.length; i++) {
+            timers[i] = null;
+        }
     }
 }
