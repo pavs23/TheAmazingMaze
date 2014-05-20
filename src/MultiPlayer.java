@@ -75,6 +75,7 @@ public class MultiPlayer extends PlayerModes {
     
     @SuppressWarnings("serial")
     public void setEventListenerToMaze() {
+        
         // Key bindings (so that it works with panel).
 
         Action leftKeyPressed = new AbstractAction() {
@@ -140,5 +141,14 @@ public class MultiPlayer extends PlayerModes {
         setKeyBinding(dKey, dKeyPressed, "d");
         setKeyBinding(wKey, wKeyPressed, "w");
         setKeyBinding(sKey, sKeyPressed, "s");
+    }
+    
+    /**
+     * Dispose the frame, and show which player wins on game end.
+     */
+    public void gameEndWin(String playerName) {
+        disposeFrame();
+        // CREATE FRAME FOR WINNING PLAYER IN MULTI GAME HERE
+        System.out.println(playerName + " wins!");
     }
 }
