@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public abstract class PlayerModes {
     // The icons.
+
     private ImageIcon roadIcon;
     private ImageIcon wallIcon;
     private ImageIcon hintIcon;
@@ -30,9 +31,10 @@ public abstract class PlayerModes {
     private JFrame frame;
     private JPanel gamePanel;
     private JPanel sidePanel;
+    private GamePausedPanel pausePanel;
     
-    private JButton mainMenuButton;
-    private JButton pauseButton;
+    private StyledButton mainMenuButton;
+    private StyledButton pauseButton;
     
     /**
      * Constructor of the class.
@@ -149,6 +151,7 @@ public abstract class PlayerModes {
         sidePanel.setEnabled(false);
         mainMenuButton.setEnabled(false);
         pauseButton.setEnabled(false);
+        //also freeze timer here
     }
     
     /**
@@ -178,6 +181,7 @@ public abstract class PlayerModes {
         return maze;
     }
     
+
     /**
      * Get the scaled wall icon.
      * @return the ImageIcon of the wall.
@@ -209,6 +213,7 @@ public abstract class PlayerModes {
     public ImageIcon getCoinIcon() {
         return coinIcon;
     }
+
     
     /**
      * A method to throw away the frame.
@@ -277,6 +282,7 @@ public abstract class PlayerModes {
      */
     public Player generatePlayer(String name, int playerCode) {
         Coordinate startCoordinate = maze.getStartCoordinate();
+
         Image scaledPlayerFront =  null;
         Image scaledPlayerBack = null;
         Image scaledPlayerLeft = null;
@@ -319,6 +325,7 @@ public abstract class PlayerModes {
     public void paintPlayer(Player player, Coordinate coordinate, Direction direction, JLabel[][] labels) {
         int xPos = coordinate.getX();
         int yPos = coordinate.getY();
+
         if (direction.equals(Game.NORTH)) {
             labels[xPos][yPos].setIcon(player.getBackView());
         } else if (direction.equals(Game.SOUTH)) {
@@ -380,26 +387,38 @@ public abstract class PlayerModes {
      * Generate the common buttons on the side menu and their listeners.
      */
     private void generateSideMenu() {
-        mainMenuButton = new JButton("Main Menu");
-        pauseButton = new JButton("Pause");
+        mainMenuButton = new StyledButton();
+        mainMenuButton.setText("Main Menu");
+        
+        pauseButton = new StyledButton();
+        pauseButton.setText("Pause");
         
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
-                final JPanel resumePanel = new JPanel();
-                JButton resumeButton = new JButton("Resume");
+                JButton resumeButton = new StyledButton();
+                resumeButton.setText("Resume");
+                resumeButton.setLocation(new Point(200, 400));
+                resumeButton.setSize(new Dimension(100, 40));
+                
+                
+                pausePanel = new GamePausedPanel();
+                
+                pausePanel.add(resumeButton);
+                
                 resumeButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        resumePanel.setVisible(false);
+                        pausePanel.setVisible(false);
                         gamePanel.setVisible(true);
                         sidePanel.setVisible(true);
                         resume();
                     }
                 });
-                resumePanel.add(resumeButton);
-                frame.add(resumePanel);
+                
+                pausePanel.add(resumeButton);
+                frame.add(pausePanel);
             }
         });
         
@@ -426,6 +445,7 @@ public abstract class PlayerModes {
         
         iconWidth = MAZE_PANEL_WIDTH/xDimension;
         iconHeight = MAZE_PANEL_WIDTH/yDimension;
+
             
         // Set the image dimension.
         Image scaledWall = Game.WALL_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);

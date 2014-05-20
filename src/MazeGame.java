@@ -5,6 +5,7 @@
  */
 
 public class MazeGame {
+    
     private int x;
     private int y;
     
@@ -19,7 +20,7 @@ public class MazeGame {
         }
     }
     
-    /**
+     /**
      * Constructor to create a single player game.
      * @param playerCode the code representing player's character.
      * @param playerName the name of the player.
@@ -51,6 +52,7 @@ public class MazeGame {
      * @param difficulty EASY or MEDIUM or HARD.
      */
     private void computeDifficulty(int difficulty) {
+
         if (difficulty == Game.EASY) {
             x = 10;
             y = 10;

@@ -10,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 
 
-public class DifficultyButton extends JButton{
+public class DifficultyButton extends StyledButton{
 	
 	public DifficultyButton(String text, Point p, Insets inset, Dimension d){
 		this.setBounds(inset.left + p.x, inset.top + p.y, d.width, d.height );
@@ -18,6 +18,5 @@ public class DifficultyButton extends JButton{
 		this.setText(text);
 		this.setBackground(Color.gray);
 		this.setForeground(Color.white);
-		this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 	}
 }

@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,11 +21,16 @@ public class ScoreManager {
 	private final int NUM_ELEMENTS = 2;
 	private final int NAME = 0;
 	private final int SCORE_NUM = 1;
+	private ScoreEncrypter encrypter;
+	
+	public ScoreManager(){
+		encrypter = new ScoreEncrypter();
+	}
 	
 	//A temp main for testing purposes
 	/*public static void main(String[] args){
 		//ArrayList<LeaderBoardEntry> scoreArray = getScores(0,0);
-		setNewScore(COIN_MODE, EASY, "Tom", 20);
+		setNewScore(Game.COIN_MODE, Game.EASY, "Tom", 20);
 	}*/
 	
 	/**
@@ -36,36 +42,33 @@ public class ScoreManager {
 	 * @return An array list of scores
 	 */
 	public ArrayList<LeaderBoardEntry> getScores(int modeFlag, int difficultyFlag){
-		
+
 		ArrayList<LeaderBoardEntry> scoreArray = new ArrayList<LeaderBoardEntry>();
 		String score; //stores whole line of input
+		String encryptedScore;
 		//splits input into name and score number
 		String splitString[] = new String[NUM_ELEMENTS]; 
 		String tempName; //temporary name to create lbe with
 		int tempScore; //temporary score number to create lbe with
 		LeaderBoardEntry tempLBE; //temporary lbe to add to array list
+
+		//find relevant text file
+		FileInputStream scoreFile = getFileInputStream(modeFlag, difficultyFlag);
 		
-		try{
-			//find relevant text file
-			FileInputStream scoreFile = getFileInputStream(modeFlag, difficultyFlag);
+		//scan all the high score records and store them in an array list
+		Scanner scanner = new Scanner(scoreFile);
+		while(scanner.hasNextLine()){
+			encryptedScore = scanner.nextLine();
+			score = encrypter.decryptString(encryptedScore);
+			splitString = score.split(" ");
 			
-			//scan all the high score records and store them in an array list
-			Scanner scanner = new Scanner(scoreFile);
-			while(scanner.hasNextLine()){
-				score = scanner.nextLine();
-				splitString = score.split(" ");
-				
-				tempName = splitString[NAME];
-				tempScore = Integer.parseInt(splitString[SCORE_NUM]);
-				tempLBE = new LeaderBoardEntry(tempName, tempScore);
-				scoreArray.add(tempLBE);
-			}
-			scanner.close();
-			
-		} catch (Exception e){
-			System.out.println("Error reading file");
+			tempName = splitString[NAME];
+			tempScore = Integer.parseInt(splitString[SCORE_NUM]);
+			tempLBE = new LeaderBoardEntry(tempName, tempScore);
+			scoreArray.add(tempLBE);
 		}
-		
+		scanner.close();
+
 		return scoreArray;
 
 	}
@@ -125,11 +128,13 @@ public class ScoreManager {
 			
 			//write scores to file
 			int i = 0;
+			String outputString;
 			while (i < scoreArray.size()){
-				writer.write(scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum() + "\n");
+				outputString = scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum();
+				writer.write(encrypter.encryptString(outputString) + "\n");
 				i++;
 			}
-		} catch (Exception e){
+		} catch (IOException e){
 			System.out.println("you fucked up");
 		} finally {
 			try{

@@ -39,6 +39,7 @@ public class SinglePlayer extends PlayerModes {
         generateTimer();
         
         // Paint the player.
+
         paintPlayer(player, player.getCoordinate(), Game.EAST, labels);
         
         // All components are added, how the frame.

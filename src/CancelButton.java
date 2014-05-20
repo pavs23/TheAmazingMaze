@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.border.Border;
 
 
-public class CancelButton extends JFrame{
+public class CancelButton extends StyledButton{
 
 	public CancelButton(){
 

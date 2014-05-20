@@ -30,6 +30,7 @@ public class AdventureMaze extends GameModeImp {
         Coordinate finishCoor = new Coordinate(xDimension-1, yFinish);
         start = startCoor;
         finish = finishCoor;
+
         mazeArray[0][yStart] = Game.ROAD;
         mazeArray[xDimension-1][yFinish] = Game.ROAD;
         setMazeArray(mazeArray);

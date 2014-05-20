@@ -33,6 +33,7 @@ public class MazeGenerator {
 		}
 		// Initialize directions Array.
 		directions = new ArrayList<Direction>();
+
 		directions.add(Game.NORTH);
 		directions.add(Game.SOUTH);
 		directions.add(Game.WEST);
@@ -52,6 +53,7 @@ public class MazeGenerator {
     	    // Initialize the array to 0 (all walls).
     	    for (int i = 0; i < xSize; i++) {
     	        for (int j = 0; j < ySize; j++) {
+
     	            mazeArray[i][j] = Game.WALL;
     	        }
     	    }
@@ -60,6 +62,7 @@ public class MazeGenerator {
     	            int currX = 2*i + 1;
     	            int currY = 2*j + 1;
     	            // Set the tiles as a path.
+
     	            mazeArray[currX][currY] = Game.ROAD;
     	            // If the tile South boundary true, then it is connected to the south tile.
     	            if (tiles[i][j].getSouthValue() == true) {
@@ -191,6 +194,7 @@ public class MazeGenerator {
 	        return true;
 	    }
 	    // Wall = 0.
+
         if (visited[currX][currY] || maze[currX][currY] == Game.WALL) {
             // The coordinate has been visited, or it is a wall.
             return false;
