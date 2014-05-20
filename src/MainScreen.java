@@ -74,6 +74,7 @@ public class MainScreen {
 		mainPanel.add(cancelButton);
 		
 		mainFrame.add(mainPanel);
+		mainFrame.setResizable(false);
 		
 		newGameButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)

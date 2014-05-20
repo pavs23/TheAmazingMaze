@@ -1,5 +1,7 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +15,7 @@ import javax.swing.JPanel;
 
 public class GamePausedPanel extends JPanel{
 
-	private JButton continueButton;
+	private StyledButton continueButton;
 	private JLabel title;
 	
 	/**
@@ -31,12 +33,16 @@ public class GamePausedPanel extends JPanel{
 		continueButton.setSize(new Dimension(80,50));
 		this.add(continueButton);
 		*/
-		title = new JLabel("You have Paused the game!");
+		this.setLayout(null);
+		title = new JLabel("Paused");
+		title.setFont(title.getFont().deriveFont(64.0f));
+		title.setLocation(new Point(100, 30));
+		title.setSize(new Dimension(400, 100));
 		this.add(title);
 		
 	}
 	
-	private JButton getContinueButton(){
+	private StyledButton getContinueButton(){
 		return continueButton;
 	}
 }

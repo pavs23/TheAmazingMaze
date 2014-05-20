@@ -32,8 +32,8 @@ public abstract class PlayerModes {
     private JPanel sidePanel;
     private GamePausedPanel pausePanel;
     
-    private JButton mainMenuButton;
-    private JButton pauseButton;
+    private StyledButton mainMenuButton;
+    private StyledButton pauseButton;
     
     /**
      * Constructor of the class.
@@ -368,17 +368,25 @@ public abstract class PlayerModes {
      * Generate the common buttons on the side menu and their listeners.
      */
     private void generateSideMenu() {
-        mainMenuButton = new JButton("Main Menu");
-        pauseButton = new JButton("Pause");
+        mainMenuButton = new StyledButton();
+        mainMenuButton.setText("Main Menu");
+        
+        pauseButton = new StyledButton();
+        pauseButton.setText("Pause");
         
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
-                JButton resumeButton = new JButton("Resume");
+                JButton resumeButton = new StyledButton();
+                resumeButton.setText("Resume");
+                resumeButton.setLocation(new Point(200, 400));
+                resumeButton.setSize(new Dimension(100, 40));
+                
                 
                 pausePanel = new GamePausedPanel();
+                
                 pausePanel.add(resumeButton);
                 
                 resumeButton.addActionListener(new ActionListener() {
