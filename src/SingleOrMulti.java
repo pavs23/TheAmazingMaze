@@ -61,13 +61,13 @@ public class SingleOrMulti extends JPanel{
 				
 				//Open up difficulty selection mode which takes in number of game mode
 				//		and number of players. That creates the game
-				//DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, currentScreen);
-				NameEntrySinglePlayer enterName = new NameEntrySinglePlayer(mainFrame, mode, currentScreen);
+				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, currentScreen);
+				//NameEntrySinglePlayer enterName = new NameEntrySinglePlayer(mainFrame, mode, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
-				mainFrame.add(enterName);
-				//mainFrame.add(dsScreen);
-				//dsScreen.setVisible(true);
+				//mainFrame.add(enterName);
+				mainFrame.add(dsScreen);
+				dsScreen.setVisible(true);
 				
 			}
 		});
@@ -78,13 +78,13 @@ public class SingleOrMulti extends JPanel{
 				
 				//Open up difficulty selection mode which takes in number of game mode
 				//		and number of players. That creates the game
-				//DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.MULTI_PLAYER, currentScreen);
-				NameEntryDoublePlayer enterName = new NameEntryDoublePlayer(mainFrame, mode, currentScreen);
+				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.MULTI_PLAYER, currentScreen);
+				//NameEntryDoublePlayer enterName = new NameEntryDoublePlayer(mainFrame, mode, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
-				mainFrame.add(enterName);
-				//mainFrame.add(dsScreen);
-				//dsScreen.setVisible(true);
+				//mainFrame.add(enterName);
+				mainFrame.add(dsScreen);
+				dsScreen.setVisible(true);
 				
 				//Add another panel here to take the user to enter the both the usernames
 			}
