@@ -20,10 +20,11 @@ public class DifficultySelection extends JPanel {
 	private DifficultyButton mediumButton;
 	private DifficultyButton hardButton;
 	private BackButton backButton;
+	private String playerName;
 	//public JFrame difficultySelection;
 	
 	
-	public DifficultySelection(final JFrame mainMenu, final int mode, final int players, final JPanel prev, String playerName){
+	public DifficultySelection(final JFrame mainMenu, final int mode, final int players, final JPanel prev, String playerNameIn){
 		
 		Insets insets = mainMenu.getInsets();
 		
@@ -31,6 +32,7 @@ public class DifficultySelection extends JPanel {
 		mediumButton = new DifficultyButton("Medium", new Point(175, 180), insets, new Dimension(150, 70));
 		hardButton = new DifficultyButton("Hard", new Point(175, 280), insets, new Dimension(150, 70));
 		backButton = new BackButton(new Point(20, 380), prev, mainMenu, this);
+		playerName = playerNameIn;
 		
 		this.add(easyButton);
 		this.add(mediumButton);
@@ -44,7 +46,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				mainMenu.dispose();
-				new MazeGame(players, mode, Game.EASY);
+				new MazeGame(players, playerName, mode, Game.EASY);
 				
 			}
 		});
@@ -54,7 +56,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
 				mainMenu.dispose();
-				new MazeGame(players, mode, Game.MEDIUM);
+				new MazeGame(players, playerName, mode, Game.MEDIUM);
 			}
 		});
 		
@@ -63,7 +65,7 @@ public class DifficultySelection extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
 				mainMenu.dispose();
-				new MazeGame(players, mode, Game.HARD);
+				new MazeGame(players, playerName, mode, Game.HARD);
 			}
 		});
 		/*

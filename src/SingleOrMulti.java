@@ -62,7 +62,7 @@ public class SingleOrMulti extends JPanel{
 				//Open up difficulty selection mode which takes in number of game mode
 				//		and number of players. That creates the game
 				//DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, currentScreen);
-				EnterPlayerName enterName = new EnterPlayerName(mainFrame, mode, currentScreen);
+				NameEntrySinglePlayer enterName = new NameEntrySinglePlayer(mainFrame, mode, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
 				mainFrame.add(enterName);

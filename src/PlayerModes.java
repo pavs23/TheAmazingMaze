@@ -138,6 +138,7 @@ public abstract class PlayerModes {
         sidePanel.setEnabled(false);
         mainMenuButton.setEnabled(false);
         pauseButton.setEnabled(false);
+        //also freeze timer here
     }
     
     /**
