@@ -151,25 +151,7 @@ public class Game {
     }
     
 	public Game(){
-	    // Set up score files if not previously there.
-	    ArrayList<File> scoreFiles = new ArrayList<File>();
-	    scoreFiles.add(new File("easyCoinScore.txt"));
-	    scoreFiles.add(new File("easyNormalScore.txt"));
-	    scoreFiles.add(new File("mediumCoinScore.txt"));
-	    scoreFiles.add(new File("mediumNormalScore.txt"));
-	    scoreFiles.add(new File("hardCoinScore.txt"));
-	    scoreFiles.add(new File("hardNormalScore.txt"));
-	    for (File eachFile : scoreFiles) {
-	        if (!eachFile.exists()) {
-	            try {
-	                System.out.println("yes");
-	                eachFile.createNewFile();
-	            } catch (IOException e) {}
-	        }
-	    }
-	    
-	    
-		//Making the Objects which go on the screen
+	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
 		newGameButton = new JButton("New Game");
 		cancelButton = new JButton("Quit");

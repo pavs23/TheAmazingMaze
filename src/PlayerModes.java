@@ -475,5 +475,5 @@ public abstract class PlayerModes {
         roadIcon = new ImageIcon(scaledRoad);
         hintIcon = new ImageIcon(scaledHint);
         coinIcon = new ImageIcon(scaledCoin);
-    } 
+    }
 }

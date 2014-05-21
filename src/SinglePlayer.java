@@ -42,7 +42,6 @@ public class SinglePlayer extends PlayerModes {
         generateTimer();
         
         // Paint the player.
-
         paintPlayer(player, player.getCoordinate(), Game.EAST, labels);
         
         // All components are added, how the frame.
@@ -50,15 +49,13 @@ public class SinglePlayer extends PlayerModes {
     }
     
     @Override
-    public void freeze() {  
-        stopTimers();
+    public void freeze() {
         disabledGame();  
         timer.pause();
     }
     
     @Override
     public void resume() {
-        setTimersToNull();
         enabledGame();
         timer.start();
     }
@@ -243,7 +240,7 @@ public class SinglePlayer extends PlayerModes {
                     Coordinate curr = path.get(i);
                     labels[curr.getX()][curr.getY()].setIcon(getHintIcon());
                 }
-                Timer newTimer = new Timer(500, new ActionListener() {
+                Timer newTimer = new Timer(750, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
                             Coordinate curr = path.get(i);
@@ -275,6 +272,7 @@ public class SinglePlayer extends PlayerModes {
      */
     private void disabledGame() {
         super.freeze();
+        stopTimers();
         hintButton.setEnabled(false);
     }
     
@@ -282,7 +280,8 @@ public class SinglePlayer extends PlayerModes {
      * A method that will enable the buttons and action listeners in the game.
      */
     private void enabledGame() {
-        super.resume();
+        setTimersToNull();
+        super.resume();   
         if (hintRemaining > 0) {
             hintButton.setEnabled(true);
         }
