@@ -16,18 +16,19 @@ public class SinglePlayer extends PlayerModes {
     private GameTimer timer;
     private Timer[] timers = new Timer[4];
     private boolean gameFinished = false;
+    private int difficulty;
+    private int hintRemaining = 3;
 
     /**
      * Constructor of the class to create the maze game.
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
-     * @param x the number of roads needed in X direction.
-     * @param y the number of roads needed in Y direction.
+     * @param difficulty the difficulty of the game.
      * @param playerCode the code representing the player's character.
      * @param playerName the name of the player.
      */
-    public SinglePlayer(int mode, int x, int y, int playerCode, String playerName) {
-        super(mode, x, y);
-        
+    public SinglePlayer(int mode, int difficulty, int playerCode, String playerName) {
+        super(mode, difficulty);
+        this.difficulty = difficulty;
         // Initialize maze;
         maze = getMaze();
         
@@ -200,6 +201,13 @@ public class SinglePlayer extends PlayerModes {
         int currSec = timer.getCurrentSecond();
         int score = currSec * Game.SCORE_MULTIPLIER;
         // CREATE A FRAME FOR WINNING PLAYER HERE.
+        // Store the score in the leader board.
+        ScoreManager manageScore = new ScoreManager();
+        manageScore.setNewScore(getMode(), difficulty, playerName, score);
+        ArrayList<LeaderBoardEntry> lists = manageScore.getScores(getMode(), difficulty);
+        for (LeaderBoardEntry each : lists) {
+            System.out.println(each.getScoreName() + " " + each.getScoreNum());
+        }
         System.out.println(playerName + " wins! The score = " + score);
     }
     
@@ -219,17 +227,19 @@ public class SinglePlayer extends PlayerModes {
      * Create the side menu with a hint button.
      */
     private void generateHint() {
-        hintButton = new JButton("Get Hint");
+        hintButton = new JButton("Get Hint : " + hintRemaining);
         hintButton.setFocusable(false);
         // Print the first few steps to goal.
         // The number of steps are depending on the maze size.
         hintButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                hintRemaining --;
+                hintButton.setText("Get Hint : " + hintRemaining);
                 disabledGame(); 
                 Coordinate currPos = player.getCoordinate();
                 final ArrayList<Coordinate> path = maze.getHint(currPos);
                 // n = the dimension of the array/3.
-                for (int i = 0; i < labels.length/3 && i < path.size(); i++) {
+                for (int i = 0; i < labels.length/4 && i < path.size(); i++) {
                     Coordinate curr = path.get(i);
                     labels[curr.getX()][curr.getY()].setIcon(getHintIcon());
                 }
@@ -239,11 +249,11 @@ public class SinglePlayer extends PlayerModes {
                             Coordinate curr = path.get(i);
                             labels[curr.getX()][curr.getY()].setIcon(getRoadIcon());
                         }
-                        enabledGame();                   
+                        enabledGame();
                     }
                 });
                 newTimer.setRepeats(false);
-                newTimer.start();             
+                newTimer.start();
             }
         });
         addToSidePanel(hintButton);
@@ -273,7 +283,9 @@ public class SinglePlayer extends PlayerModes {
      */
     private void enabledGame() {
         super.resume();
-        hintButton.setEnabled(true);
+        if (hintRemaining > 0) {
+            hintButton.setEnabled(true);
+        }
     }
 
     /**

@@ -54,6 +54,7 @@ public class NameEntrySinglePlayer extends JPanel{
 				new MazeGame(Game.PLAYER_0, playerName, mode, difficulty);
 				//mainFrame.add(dsScreen);
 				mainFrame.remove(prev);
+				mainFrame.dispose();
 				//dsScreen.setVisible(true);
 				current.setVisible(false);
 			}
@@ -61,7 +62,4 @@ public class NameEntrySinglePlayer extends JPanel{
 		});
 		
 	}
-	
-	
-
 }

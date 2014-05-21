@@ -22,16 +22,15 @@ public class MultiPlayer extends PlayerModes {
     /**
      * Constructor of the class to create the maze MazeGame.
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
-     * @param x the number of roads needed in X direction.
-     * @param y the number of roads needed in Y direction.
+     * @param difficulty the difficulty of the maze.
      * @param player1Code the code representing the player 1's character.
      * @param player1Name the name of the player 1.
      * @param player2Code the code representing the player 2's character.
      * @param player2Name the name of the player 2.
      */
-    public MultiPlayer(int mode, int x, int y, int player1Code, String player1Name, int player2Code, String player2Name) {
+    public MultiPlayer(int mode, int difficulty, int player1Code, String player1Name, int player2Code, String player2Name) {
         // Create the super class.
-        super(mode, x, y);
+        super(mode, difficulty);
         
         // Initialize maze;
         maze1 = getMaze();

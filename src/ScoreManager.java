@@ -194,26 +194,26 @@ public class ScoreManager {
 			if (difficultyFlag == Game.EASY){
 				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("easy normal");
-					file = new File("src/easyNormalScore.txt");
+					file = new File("easyNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE){
 					//System.out.println("easy coin");
-					file = new File("src/easyCoinScore.txt");
+					file = new File("easyCoinScore.txt");
 				}
 			} else if (difficultyFlag == Game.MEDIUM){
 				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("medium normal");
-					file = new File("src/mediumNormalScore.txt");
+					file = new File("mediumNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE){
 					//System.out.println("medium coin");
-					file = new File("src/mediumCoinScore.txt");
+					file = new File("mediumCoinScore.txt");
 				}
 			} else if (difficultyFlag == Game.HARD){
 				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("hard normal");
-					file = new File("src/hardNormalScore.txt");
+					file = new File("hardNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE) {
 					//System.out.println("hard coin");
-					file = new File("src/hardCoinScore.txt");
+					file = new File("hardCoinScore.txt");
 				}
 			}
 			return file;

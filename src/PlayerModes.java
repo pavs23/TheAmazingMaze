@@ -36,17 +36,30 @@ public abstract class PlayerModes {
     private StyledButton mainMenuButton;
     private StyledButton pauseButton;
     
+    
     /**
      * Constructor of the class.
      * Create the frame and gamePanel for the game.
      * Create the maze and set the mode for the game.
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
-     * @param x the number of roads needed in X direction.
-     * @param y the number of roads needed in Y direction.
+     * @param difficulty the difficulty level of the maze.
      */
-    public PlayerModes(int mode, int x, int y) {
+    public PlayerModes(int mode, int difficulty) {
         // Set the mode of the game.
         this.mode = mode;
+        
+        int x = 0;
+        int y = 0;
+        if (difficulty == Game.EASY) {
+            x = Game.EASY_X;
+            y = Game.EASY_Y;
+        } else if (difficulty == Game.MEDIUM) {
+            x = Game.MEDIUM_X;
+            y = Game.MEDIUM_Y;
+        } else if (difficulty == Game.HARD) {
+            x = Game.HARD_X;
+            y = Game.HARD_Y;
+        }
         
         // Create the maze.
         if (mode == Game.COIN_MODE) {

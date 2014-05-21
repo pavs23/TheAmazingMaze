@@ -38,7 +38,7 @@ public class MazeGenerator {
 		directions.add(Game.SOUTH);
 		directions.add(Game.WEST);
 		directions.add(Game.EAST);
-		createMaze(0, 0);
+		createMaze(x/2, y/2);
 	}
 	
 	/**

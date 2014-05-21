@@ -66,6 +66,14 @@ public class Game {
     public static final Direction WEST = new Direction(-1, 0);
     public static final Direction EAST = new Direction(1, 0);
 	
+    // Difficulties
+    public static final int EASY_X = 10;
+    public static final int EASY_Y = 10;
+    public static final int MEDIUM_X = 20;
+    public static final int MEDIUM_Y = 20;   
+    public static final int HARD_X = 30;
+    public static final int HARD_Y = 30;
+
     /**
      * Load the images from the files.
      */
@@ -143,6 +151,24 @@ public class Game {
     }
     
 	public Game(){
+	    // Set up score files if not previously there.
+	    ArrayList<File> scoreFiles = new ArrayList<File>();
+	    scoreFiles.add(new File("easyCoinScore.txt"));
+	    scoreFiles.add(new File("easyNormalScore.txt"));
+	    scoreFiles.add(new File("mediumCoinScore.txt"));
+	    scoreFiles.add(new File("mediumNormalScore.txt"));
+	    scoreFiles.add(new File("hardCoinScore.txt"));
+	    scoreFiles.add(new File("hardNormalScore.txt"));
+	    for (File eachFile : scoreFiles) {
+	        if (!eachFile.exists()) {
+	            try {
+	                System.out.println("yes");
+	                eachFile.createNewFile();
+	            } catch (IOException e) {}
+	        }
+	    }
+	    
+	    
 		//Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
 		newGameButton = new JButton("New Game");
@@ -215,6 +241,7 @@ public class Game {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
 				ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
 				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
 				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
