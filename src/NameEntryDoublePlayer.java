@@ -59,7 +59,7 @@ public class NameEntryDoublePlayer extends JPanel{
 				String playerTwo = playerTwoNameField.getText();
 				//Add difficulty selection here
 				
-				new MazeGame(Game.PLAYER_0, playerOne, Game.PLAYER_1, playerTwo, mode, difficulty);
+				new MazeGame(Game.MULTI_PLAYER,Game.PLAYER_0, playerOne, Game.PLAYER_1, playerTwo, mode, difficulty);
 				mainFrame.dispose();
 				current.setVisible(false);
 			}
