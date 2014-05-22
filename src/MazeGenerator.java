@@ -2,7 +2,7 @@ import java.util.Collections;
 import java.util.ArrayList;
  
 /**
- * A class that generate a maze with depth first search recursive backtracking algorithm.
+ * A class that generate a maze with depth first search algorithm.
  * Generate a maze without starting & exit point.
  * @author floren
  *
@@ -28,7 +28,7 @@ public class MazeGenerator {
 		tiles = new Tile[this.x][this.y];
 		for (int i = 0; i < x; i++) {
 		    for (int j = 0; j < y; j++) {
-		        tiles[i][j] = new Tile();
+		        tiles[i][j] = new Tile(i, j);
 		    }
 		}
 		// Initialize directions Array.
@@ -37,7 +37,7 @@ public class MazeGenerator {
 		directions.add(Game.SOUTH);
 		directions.add(Game.WEST);
 		directions.add(Game.EAST);
-		createMaze(0, 0);
+		createMaze(x/2, y/2);
 	}
 	
 	/**
@@ -52,6 +52,7 @@ public class MazeGenerator {
     	    // Initialize the array to 0 (all walls).
     	    for (int i = 0; i < xSize; i++) {
     	        for (int j = 0; j < ySize; j++) {
+
     	            mazeArray[i][j] = Game.WALL;
     	        }
     	    }
@@ -60,6 +61,7 @@ public class MazeGenerator {
     	            int currX = 2*i + 1;
     	            int currY = 2*j + 1;
     	            // Set the tiles as a path.
+
     	            mazeArray[currX][currY] = Game.ROAD;
     	            // If the tile South boundary true, then it is connected to the south tile.
     	            if (tiles[i][j].getSouthValue() == true) {
@@ -120,42 +122,88 @@ public class MazeGenerator {
 	 * @param currY number of tiles in y dimension.
 	 */
 	private void createMaze(int currX, int currY) {
-	    // Randomized the direction that the tile will go.
-		ArrayList<Direction> dirCopy = new ArrayList<Direction>(directions);
-		Collections.shuffle(dirCopy);
-		for (Direction dir : dirCopy) {
-		    // Compute the next tile according to the Direction chosen.
-			int nextX = currX + dir.getXDirection();
-			int nextY = currY + dir.getYDirection();
-			// Only execute if the next point is in the maze and has not been visited.
-			if (isTileInMaze(nextX, x) && isTileInMaze(nextY,y)
-			    && !tiles[nextX][nextY].isTileVisited()) {
-			    // Remove the walls between the tiles.
-				tiles[currX][currY].setBoundaryTrue(dir);
-				tiles[nextX][nextY].setBoundaryTrue(dir.getOpposite());
-				// Mark the tiles as visited.
-				tiles[currX][currY].visited();
-				tiles[nextX][nextY].visited();
-				// Do the recursive call for the chosen neighbor.
-				createMaze(nextX, nextY);
-			}
-		}
+	    /*
+        ArrayList<Direction> dirCopy = new ArrayList<Direction>(directions);
+        Collections.shuffle(dirCopy);
+        for (Direction dir : dirCopy) {
+            // Compute the next tile according to the Direction chosen.
+            int nextX = currX + dir.getXDirection();
+            int nextY = currY + dir.getYDirection();
+            // Only execute if the next point is in the maze and has not been visited.
+            if (isTileInMaze(nextX, nextY)
+                && !tiles[nextX][nextY].isTileVisited()) {
+                // Remove the walls between the tiles.
+                tiles[currX][currY].setBoundaryTrue(dir);
+                tiles[nextX][nextY].setBoundaryTrue(dir.getOpposite());
+                // Mark the tiles as visited.
+                tiles[currX][currY].visited();
+                tiles[nextX][nextY].visited();
+                // Do the recursive call for the chosen neighbor.
+                createMaze(nextX, nextY);
+            }
+        }
+        */
+	    ///*
+	      tiles[currX][currY].visited();
+	      ArrayList<Tile> tilesList = new ArrayList<Tile>();
+	      tilesList.add(tiles[currX][currY]);
+
+	      while (!tilesList.isEmpty()) {
+	          Tile currTile;
+	          int currSize = tilesList.size();
+	          double random = Math.floor(Math.random() * currSize);
+	          int randomIndex = (int)random;
+	          // To help reduce long roads with short branches.
+	          if (Math.random() * 10 < 2.5) {
+	              currTile = tilesList.remove(randomIndex);
+	          } else {
+	              currTile = tilesList.remove(currSize - 1);
+	          }
+	          
+	          int currTileX = currTile.getX();
+	          int currTileY = currTile.getY();
+	          
+	          Tile successor = null;
+	          Direction currDir = null;
+	          
+	          // Randomized the direction that the tile will go.
+	          ArrayList<Direction> dirCopy = new ArrayList<Direction>(directions);
+	          Collections.shuffle(dirCopy);
+	          for (Direction dir : dirCopy) {
+	              int nextTileX = currTileX + dir.getXDirection();
+	              int nextTileY = currTileY + dir.getYDirection();
+	              if (isTileInMaze(nextTileX, nextTileY) && !tiles[nextTileX][nextTileY].isTileVisited()) {
+	                  successor = tiles[nextTileX][nextTileY];
+	                  currDir = dir;
+	                  break;
+	              }
+	          }
+
+	          if (successor != null) {
+	              currTile.setBoundaryTrue(currDir);
+	              successor.visited();
+	              successor.setBoundaryTrue(currDir.getOpposite());
+	              tilesList.add(currTile);
+	              tilesList.add(successor);
+	          }
+	      }
+	      //*/
 	}
 	
 	/**
 	 * A helper method to verify whether the tile is in the maze or not.
-	 * @param coordinate the x or y coordinate of the tile checked.
-	 * @param boundary the x or y maximum of a tile.
+	 * @param x the x position of the tile.
+	 * @param y the y position of the tile.
 	 * @return true if the tile in maze, false otherwise.
-	 * @return
 	 */
-	private boolean isTileInMaze(int coordinate, int boundary) {
-	    boolean isInMaze = true;
-	    if (coordinate < 0 || coordinate >= boundary) {
-	        isInMaze = false;
-	    }
-		return isInMaze;
-	}
+	private boolean isTileInMaze(int x, int y) {
+        boolean isInMaze = true;
+        if (x < 0 || x >= this.x || y < 0 || y >= this.y) {
+            isInMaze = false;
+        }
+        return isInMaze;
+    }
+	
 	
 	/**
 	 * Helper function to know whether a coordinate is in the maze array.
@@ -191,6 +239,7 @@ public class MazeGenerator {
 	        return true;
 	    }
 	    // Wall = 0.
+
         if (visited[currX][currY] || maze[currX][currY] == Game.WALL) {
             // The coordinate has been visited, or it is a wall.
             return false;

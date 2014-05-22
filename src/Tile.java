@@ -14,6 +14,36 @@ public class Tile {
     // Represents whether the tile is visited or not.
     private boolean isVisited = false;
     
+    // Represents the position of the tile.
+    private int x;
+    private int y;
+    
+    /**
+     * Create a Tile.
+     * @param x the x coordinate of the tile.
+     * @param y the y coordinate of the tile.
+     */
+    public Tile(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    
+    /**
+     * Get X value of the tile.
+     * @return the x value.
+     */
+    public int getX() {
+        return x;
+    }
+    
+    /**
+     * Get Y value of the tile.
+     * @return the y value.
+     */
+    public int getY() {
+        return y;
+    }
+    
     /**
      * Get the value of the North boundary.
      * @return true if the North boundary is open, false otherwise.

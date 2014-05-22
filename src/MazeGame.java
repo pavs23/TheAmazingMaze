@@ -4,11 +4,7 @@
  *
  */
 
-public class MazeGame {
-    private int x;
-    private int y;
-    
-    
+public class MazeGame {    
     // THIS ONE NEEDS TO BE REPLACED LATER AFTER CHARACTER SELECTION HAS BEEN MADE.
     // THIS IS JUST A TEMPLATE TO MAKE THE 18/5 VERSION WORKED.
     public MazeGame (int players, int mode, int difficulty) {
@@ -19,7 +15,7 @@ public class MazeGame {
         }
     }
     
-    /**
+     /**
      * Constructor to create a single player game.
      * @param playerCode the code representing player's character.
      * @param playerName the name of the player.
@@ -27,8 +23,7 @@ public class MazeGame {
      * @param difficulty EASY or MEDIUM or HARD.
      */
     public MazeGame(int playerCode, String playerName, int mode, int difficulty) {
-        computeDifficulty(difficulty);
-        new SinglePlayer(mode, x, y, playerCode, playerName);
+        new SinglePlayer(mode, difficulty, playerCode, playerName);
     }
     
     /**
@@ -41,25 +36,6 @@ public class MazeGame {
      * @param difficulty EASY or MEDIUM or HARD.
      */
     public MazeGame(int player1Code, String player1Name, int player2Code, String player2Name, int mode, int difficulty) {
-        computeDifficulty(difficulty);
-        new MultiPlayer(mode, x, y, player1Code, player1Name, player2Code, player2Name);
-    }
-    
-    /**
-     * Set the dimensions of maze based on difficulty.
-     * @postcondition x and y field would change according to the dimension.
-     * @param difficulty EASY or MEDIUM or HARD.
-     */
-    private void computeDifficulty(int difficulty) {
-        if (difficulty == Game.EASY) {
-            x = 10;
-            y = 10;
-        } else if (difficulty == Game.MEDIUM) {
-            x = 20;
-            y = 20;
-        } else if (difficulty == Game.HARD) {
-            x = 30;
-            y = 30;
-        }
+        new MultiPlayer(mode, difficulty, player1Code, player1Name, player2Code, player2Name);
     }
 }

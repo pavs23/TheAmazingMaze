@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public abstract class PlayerModes {
     // The icons.
+
     private ImageIcon roadIcon;
     private ImageIcon wallIcon;
     private ImageIcon hintIcon;
@@ -30,21 +31,35 @@ public abstract class PlayerModes {
     private JFrame frame;
     private JPanel gamePanel;
     private JPanel sidePanel;
+    private GamePausedPanel pausePanel = null;
     
-    private JButton mainMenuButton;
-    private JButton pauseButton;
+    private StyledButton mainMenuButton;
+    private StyledButton pauseButton;
+    
     
     /**
      * Constructor of the class.
      * Create the frame and gamePanel for the game.
      * Create the maze and set the mode for the game.
      * @param mode the mode of the single game (ADVENTURE_MODE/COIN_MODE).
-     * @param x the number of roads needed in X direction.
-     * @param y the number of roads needed in Y direction.
+     * @param difficulty the difficulty level of the maze.
      */
-    public PlayerModes(int mode, int x, int y) {
+    public PlayerModes(int mode, int difficulty) {
         // Set the mode of the game.
         this.mode = mode;
+        
+        int x = 0;
+        int y = 0;
+        if (difficulty == Game.EASY) {
+            x = Game.EASY_X;
+            y = Game.EASY_Y;
+        } else if (difficulty == Game.MEDIUM) {
+            x = Game.MEDIUM_X;
+            y = Game.MEDIUM_Y;
+        } else if (difficulty == Game.HARD) {
+            x = Game.HARD_X;
+            y = Game.HARD_Y;
+        }
         
         // Create the maze.
         if (mode == Game.COIN_MODE) {
@@ -149,6 +164,7 @@ public abstract class PlayerModes {
         sidePanel.setEnabled(false);
         mainMenuButton.setEnabled(false);
         pauseButton.setEnabled(false);
+        //also freeze timer here
     }
     
     /**
@@ -178,6 +194,7 @@ public abstract class PlayerModes {
         return maze;
     }
     
+
     /**
      * Get the scaled wall icon.
      * @return the ImageIcon of the wall.
@@ -209,6 +226,7 @@ public abstract class PlayerModes {
     public ImageIcon getCoinIcon() {
         return coinIcon;
     }
+
     
     /**
      * A method to throw away the frame.
@@ -277,6 +295,7 @@ public abstract class PlayerModes {
      */
     public Player generatePlayer(String name, int playerCode) {
         Coordinate startCoordinate = maze.getStartCoordinate();
+
         Image scaledPlayerFront =  null;
         Image scaledPlayerBack = null;
         Image scaledPlayerLeft = null;
@@ -319,6 +338,7 @@ public abstract class PlayerModes {
     public void paintPlayer(Player player, Coordinate coordinate, Direction direction, JLabel[][] labels) {
         int xPos = coordinate.getX();
         int yPos = coordinate.getY();
+
         if (direction.equals(Game.NORTH)) {
             labels[xPos][yPos].setIcon(player.getBackView());
         } else if (direction.equals(Game.SOUTH)) {
@@ -380,26 +400,42 @@ public abstract class PlayerModes {
      * Generate the common buttons on the side menu and their listeners.
      */
     private void generateSideMenu() {
-        mainMenuButton = new JButton("Main Menu");
-        pauseButton = new JButton("Pause");
+        mainMenuButton = new StyledButton();
+        mainMenuButton.setText("Main Menu");
+        
+        pauseButton = new StyledButton();
+        pauseButton.setText("Pause");
         
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
-                final JPanel resumePanel = new JPanel();
-                JButton resumeButton = new JButton("Resume");
+                JButton resumeButton = new StyledButton();
+                resumeButton.setText("Resume");
+                resumeButton.setLocation(new Point(200, 400));
+                resumeButton.setSize(new Dimension(100, 40));
+                resumeButton.setVisible(true);
+                
+                if (pausePanel == null) {
+                    pausePanel = new GamePausedPanel();
+                    pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
+                    pausePanel.add(resumeButton);
+                    addToFrame(pausePanel);
+                }
+                
+                pausePanel.setVisible(true);
+                
                 resumeButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        resumePanel.setVisible(false);
+                        pausePanel.setVisible(false);
                         gamePanel.setVisible(true);
                         sidePanel.setVisible(true);
+                        showFrame();
                         resume();
                     }
                 });
-                resumePanel.add(resumeButton);
-                frame.add(resumePanel);
+                showFrame();
             }
         });
         
@@ -426,6 +462,7 @@ public abstract class PlayerModes {
         
         iconWidth = MAZE_PANEL_WIDTH/xDimension;
         iconHeight = MAZE_PANEL_WIDTH/yDimension;
+
             
         // Set the image dimension.
         Image scaledWall = Game.WALL_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
@@ -438,5 +475,5 @@ public abstract class PlayerModes {
         roadIcon = new ImageIcon(scaledRoad);
         hintIcon = new ImageIcon(scaledHint);
         coinIcon = new ImageIcon(scaledCoin);
-    } 
+    }
 }

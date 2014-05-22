@@ -45,8 +45,8 @@ public class GameTimer {
 	            elapsedSeconds++;
 
 	            if (sec == 0 && min == 0) {
-	                singlePlayer.gameEndLost();
 	                myTimer.stop();
+	                singlePlayer.gameEndLost();           
 	            } else if (sec == 0 && min != 0) {
 	                minutesRepo--;
 	                min--;
@@ -58,7 +58,7 @@ public class GameTimer {
 	            if (min >= 0 && sec > 0) {
 	                
 	                sec = secondsRepo -  elapsedSeconds;
-	                    String text = String.format("%d : %d", min,
+	                    String text = String.format("%02d : %02d", min,
 	                            sec);
 	                    timerLabel.setText(text);
 	            }
@@ -66,7 +66,7 @@ public class GameTimer {
 		});
 		myTimer.start();
 		
-		String text = String.format("%d : %d", minutesRepo, sec);
+		String text = String.format("%02d : %02d", minutesRepo, sec);
 		timerLabel.setText(text);
 	}
 	

@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
-public class BackButton extends JButton{
+public class BackButton extends StyledButton{
 	
 
 	public BackButton(Point p, final JPanel prev, final JFrame mainFrame, final JPanel currentPanel){
@@ -18,7 +18,6 @@ public class BackButton extends JButton{
 		this.setLocation(p);
 		this.setSize(new Dimension(100,40));
 		this.setVisible(true);
-		this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		
 		this.addActionListener(new ActionListener() {
 			

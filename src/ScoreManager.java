@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,11 +21,16 @@ public class ScoreManager {
 	private final int NUM_ELEMENTS = 2;
 	private final int NAME = 0;
 	private final int SCORE_NUM = 1;
+	private ScoreEncrypter encrypter;
+	
+	public ScoreManager(){
+		encrypter = new ScoreEncrypter();
+	}
 	
 	//A temp main for testing purposes
 	/*public static void main(String[] args){
 		//ArrayList<LeaderBoardEntry> scoreArray = getScores(0,0);
-		setNewScore(COIN_MODE, EASY, "Tom", 20);
+		setNewScore(Game.COIN_MODE, Game.EASY, "Tom", 20);
 	}*/
 	
 	/**
@@ -36,36 +42,33 @@ public class ScoreManager {
 	 * @return An array list of scores
 	 */
 	public ArrayList<LeaderBoardEntry> getScores(int modeFlag, int difficultyFlag){
-		
+
 		ArrayList<LeaderBoardEntry> scoreArray = new ArrayList<LeaderBoardEntry>();
 		String score; //stores whole line of input
+		String encryptedScore;
 		//splits input into name and score number
 		String splitString[] = new String[NUM_ELEMENTS]; 
 		String tempName; //temporary name to create lbe with
 		int tempScore; //temporary score number to create lbe with
 		LeaderBoardEntry tempLBE; //temporary lbe to add to array list
+
+		//find relevant text file
+		FileInputStream scoreFile = getFileInputStream(modeFlag, difficultyFlag);
 		
-		try{
-			//find relevant text file
-			FileInputStream scoreFile = getFileInputStream(modeFlag, difficultyFlag);
+		//scan all the high score records and store them in an array list
+		Scanner scanner = new Scanner(scoreFile);
+		while(scanner.hasNextLine()){
+			encryptedScore = scanner.nextLine();
+			score = encrypter.decryptString(encryptedScore);
+			splitString = score.split(" ");
 			
-			//scan all the high score records and store them in an array list
-			Scanner scanner = new Scanner(scoreFile);
-			while(scanner.hasNextLine()){
-				score = scanner.nextLine();
-				splitString = score.split(" ");
-				
-				tempName = splitString[NAME];
-				tempScore = Integer.parseInt(splitString[SCORE_NUM]);
-				tempLBE = new LeaderBoardEntry(tempName, tempScore);
-				scoreArray.add(tempLBE);
-			}
-			scanner.close();
-			
-		} catch (Exception e){
-			System.out.println("Error reading file");
+			tempName = splitString[NAME];
+			tempScore = Integer.parseInt(splitString[SCORE_NUM]);
+			tempLBE = new LeaderBoardEntry(tempName, tempScore);
+			scoreArray.add(tempLBE);
 		}
-		
+		scanner.close();
+
 		return scoreArray;
 
 	}
@@ -84,7 +87,7 @@ public class ScoreManager {
 		ArrayList<LeaderBoardEntry> scoreArray = getScores(modeFlag, difficultyFlag);
 		boolean savedNewScore;
 		
-		if (scoreArray.isEmpty()){
+		if (scoreArray.isEmpty() || scoreArray.size() < NUM_SCORES){
 			LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 			scoreArray.add(newLBE);
 			savedNewScore = true;
@@ -120,16 +123,24 @@ public class ScoreManager {
 	private void storeLeaderBoard(ArrayList<LeaderBoardEntry> scoreArray, int modeFlag, int difficultyFlag){
 		BufferedWriter writer = null;
 		try{
-			File file = getFile(modeFlag, difficultyFlag);	
+			File file = getFile(modeFlag, difficultyFlag);
+			if (file.exists()) {  
+			    file.delete();
+			}
+			// Create a new file with the same name.
+			file.createNewFile();
 			writer = new BufferedWriter(new FileWriter(file));
 			
 			//write scores to file
 			int i = 0;
+			String outputString;
 			while (i < scoreArray.size()){
-				writer.write(scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum() + "\n");
+				outputString = scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum();
+				writer.write(encrypter.encryptString(outputString) + "\n");
 				i++;
 			}
-		} catch (Exception e){
+			file.setReadOnly();
+		} catch (IOException e){
 			System.out.println("you fucked up");
 		} finally {
 			try{
@@ -148,28 +159,14 @@ public class ScoreManager {
 	 * @return a file input stream to be used to read input
 	 */
 	private FileInputStream getFileInputStream(int modeFlag, int difficultyFlag){
-		FileInputStream file = null;
+		FileInputStream stream = null;
 		try{
-			if (difficultyFlag == Game.EASY){
-				if (modeFlag == Game.ADVENTURE_MODE){
-					file = new FileInputStream("src/easyNormalScore.txt");
-				} else if (modeFlag == Game.COIN_MODE){
-					file = new FileInputStream("src/easyCoinScore.txt");
-				}
-			} else if (difficultyFlag == Game.MEDIUM){
-				if (modeFlag == Game.ADVENTURE_MODE){
-					file = new FileInputStream("src/mediumNormalScore.txt");
-				} else if (modeFlag == Game.COIN_MODE){
-					file = new FileInputStream("src/mediumCoinScore.txt");
-				}
-			} else if (difficultyFlag == Game.HARD){
-				if (modeFlag == Game.ADVENTURE_MODE){
-					file = new FileInputStream("src/hardNormalScore.txt");
-				} else if (modeFlag == Game.COIN_MODE) {
-					file = new FileInputStream("src/hardCoinScore.txt");
-				}
-			}
-			return file;
+		    File file = getFile(modeFlag, difficultyFlag);
+		    if (!file.exists()) {
+		        file.createNewFile();    
+		    } 
+		    stream = new FileInputStream(file);
+		    return stream;
 		} catch (Exception e){
 			System.out.println("File not found");
 			return null;
@@ -189,26 +186,26 @@ public class ScoreManager {
 			if (difficultyFlag == Game.EASY){
 				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("easy normal");
-					file = new File("src/easyNormalScore.txt");
+					file = new File("easyNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE){
 					//System.out.println("easy coin");
-					file = new File("src/easyCoinScore.txt");
+					file = new File("easyCoinScore.txt");
 				}
 			} else if (difficultyFlag == Game.MEDIUM){
 				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("medium normal");
-					file = new File("src/mediumNormalScore.txt");
+					file = new File("mediumNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE){
 					//System.out.println("medium coin");
-					file = new File("src/mediumCoinScore.txt");
+					file = new File("mediumCoinScore.txt");
 				}
 			} else if (difficultyFlag == Game.HARD){
 				if (modeFlag == Game.ADVENTURE_MODE){
 					//System.out.println("hard normal");
-					file = new File("src/hardNormalScore.txt");
+					file = new File("hardNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE) {
 					//System.out.println("hard coin");
-					file = new File("src/hardCoinScore.txt");
+					file = new File("hardCoinScore.txt");
 				}
 			}
 			return file;
@@ -217,5 +214,4 @@ public class ScoreManager {
 			return null;
 		}
 	}
-	
 }
