@@ -6,7 +6,7 @@ import javax.swing.*;
 /**
  * A class that represents a timer for the game.
  * Each game is 2 minutes and 59 s.
- * @author josephine
+ * @author JosephineJs
  *
  */
 public class GameTimer {
@@ -40,7 +40,6 @@ public class GameTimer {
 	 * Start the timer.
 	 */
 	public void start(){
-		//tracker = secondsRepo;
 		myTimer = new Timer(ONE_SECOND, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 	            elapsedSeconds++;
