@@ -45,28 +45,33 @@ public class MainScreen {
 		leaderboard.setText("Leaderboard");
 
 		//Setting the size of the Frame
-		Dimension mainFrameDimension = new Dimension(500, 500);
-		mainFrame.setSize(mainFrameDimension);
-		mainPanel = new MainPanel(mainFrameDimension);		
+		mainFrame.setSize(new Dimension(600, 600));
+		mainPanel = new MainPanel(new Dimension(600, 600));		
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
-		mainFrame.getContentPane().setPreferredSize( Toolkit.getDefaultToolkit().getScreenSize());
-		
+		mainFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);		
+		mainFrame.setVisible(true);
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
-		newGameButton.setLocation(175,100);
+		newGameButton.setLocation(375,100);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(175, 320);
+		cancelButton.setLocation(500, 320);
 		cancelButton.setSize(150, 90);
 		cancelButton.setVisible(true);
 		
-		leaderboard.setLocation(new Point(175,210));
+		leaderboard.setLocation(new Point(375,210));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setSize(new Dimension(150, 90));
 		leaderboard.setVisible(true);
+		
+		Toolkit tk = Toolkit.getDefaultToolkit();  
+		int xSize = ((int) tk.getScreenSize().getWidth());  
+		int ySize = ((int) tk.getScreenSize().getHeight());  
+		mainFrame.setSize(xSize,ySize);  
+		 
 		
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
@@ -82,7 +87,7 @@ public class MainScreen {
                 //Execute when button is pressed
                 System.out.println("You clicked the New Game Button");
                 //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
-                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(500,500), mainFrame, mainPanel);
+                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(600,600), mainFrame, mainPanel);
                 mainFrame.setVisible(true);
                 mainPanel.setVisible(false);
                 mainFrame.add(gameModeScreen);

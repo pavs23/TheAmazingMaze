@@ -23,6 +23,11 @@ public class Game {
 	private JPanel mainPanel;
 	private JButton leaderboard;
 	
+	// Positions of the buttons on the panel
+	private static final int xButtonPosition = 225;
+	private static final int yButtonPosition = 100;
+	private static final int verticalGap = 110;
+	
 	// The Images used in the game.
 	public static final Image ROAD_IMAGE;
 	public static final Image WALL_IMAGE;
@@ -164,7 +169,7 @@ public class Game {
 		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		
 		//Setting the size of the Frame
-		Dimension mainFrameDimension = new Dimension(500, 500);
+		Dimension mainFrameDimension = new Dimension(600, 600);
 		mainFrame.setSize(mainFrameDimension);
 		mainPanel = new MainPanel(mainFrameDimension);		
 		//Setting the layout of the Frame
@@ -173,15 +178,15 @@ public class Game {
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		Insets insets = mainPanel.getInsets();
-		newGameButton.setLocation(175,100);
+		newGameButton.setLocation(xButtonPosition, yButtonPosition);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(175, 320);
+		cancelButton.setLocation(new Point(xButtonPosition, yButtonPosition + (2 * verticalGap)));
 		cancelButton.setSize(150, 90);
 		cancelButton.setVisible(true);
 		
-		leaderboard.setLocation(new Point(175,210));
+		leaderboard.setLocation(new Point(xButtonPosition, yButtonPosition + verticalGap));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setSize(new Dimension(150, 90));
 		leaderboard.setVisible(true);
@@ -199,7 +204,7 @@ public class Game {
                 //Execute when button is pressed
                 System.out.println("You clicked the New Game Button");
                 //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
-                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(500,500), mainFrame, mainPanel);
+                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(600,600), mainFrame, mainPanel);
                 mainFrame.setVisible(true);
                 mainPanel.setVisible(false);
                 mainFrame.add(gameModeScreen);

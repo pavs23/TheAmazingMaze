@@ -18,7 +18,7 @@ public class NumberOfPlayersButton extends StyledButton{
 	 * @param text : the text which the button should display
 	 */
 	public NumberOfPlayersButton(int mode, String text) {
-		this.setSize(new Dimension(150, 70));
+		this.setSize(new Dimension(150, 90));
 		this.setText(text);
 		//Setting borders to the button
 	}

@@ -12,10 +12,11 @@ import javax.swing.border.Border;
 
 public class DifficultyButton extends StyledButton{
 	
-	public DifficultyButton(String text, Point p, Insets inset, Dimension d){
-		this.setBounds(inset.left + p.x, inset.top + p.y, d.width, d.height );
+	public DifficultyButton(String text, Point p){
+		
 		this.setLocation(p);
 		this.setText(text);
+		this.setSize(150, 90);
 		this.setBackground(Color.gray);
 		this.setForeground(Color.white);
 	}

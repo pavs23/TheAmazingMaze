@@ -14,6 +14,8 @@ public class SelectGameMode extends JPanel {
 	private GameModeButton adventureMode;
 	private SelectGameMode currentScreen;
 	private BackButton back;
+	private final int xPosition = 225;
+	private final int yPosition = 100;
 
 	public SelectGameMode(Dimension d, final JFrame mainFrame, final JPanel prev) {
 		currentScreen = this;
@@ -21,15 +23,15 @@ public class SelectGameMode extends JPanel {
 		this.setLayout(null);
 		coinMode = new GameModeButton("Coin Mode", Color.YELLOW);
 		adventureMode = new GameModeButton("Adventure", Color.green);
-		coinMode.setSize(200, 120);
-		adventureMode.setSize(200, 120);
+		coinMode.setSize(150, 90);
+		adventureMode.setSize(150, 90);
 
 		Insets insets = this.getInsets();
-		adventureMode.setBounds(insets.left + 175, insets.top + 100, 150, 90);
-		coinMode.setBounds(insets.left + 175, insets.top + 250, 150, 90);
+		adventureMode.setLocation(xPosition, yPosition);
+		coinMode.setLocation(xPosition, yPosition + 160);
 
 		back = new BackButton(new Point(10, 380), prev, mainFrame, this);
-		back.setLocation(new Point(20, 380));
+		back.setLocation(new Point(20, 480));
 		this.add(back);
 
 		// Still need to hook up this panel to the frame.

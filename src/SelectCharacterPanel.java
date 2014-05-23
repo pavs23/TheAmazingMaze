@@ -37,6 +37,15 @@ public class SelectCharacterPanel extends JPanel {
     private ImageIcon player1;
     private ImageIcon player2;
     
+    private final int xLabelPosition = 240;
+	private final int yLabelPosition = 80;
+	
+	private final int xImageLabelPosition = 240;
+	private final int yImageLabelPosition = 140;
+	
+	private final int xButton= 150;
+	private final int yButton = 80;
+    
     private static final int CHAR_DIMENSION = 75;
     
     public SelectCharacterPanel(final JFrame mainFrame, final int mode, final JPanel prev, final int singleOrMulti, 
@@ -53,42 +62,42 @@ public class SelectCharacterPanel extends JPanel {
         player2 = new ImageIcon(scaledPlayer2);
         
         current = this;
-        this.setSize(new Dimension(500, 500));
+        this.setSize(new Dimension(600, 600));
         this.setLayout(null);
         
         title = new JLabel();
         title.setSize(new Dimension(250, 40));
-        title.setLocation(new Point(190, 20));
+        title.setLocation(new Point(240, 20));
         
         playerOneLabel = new JLabel("Player 1:");
         playerOneLabel.setSize(new Dimension(100,30));
-        playerOneLabel.setLocation(new Point(200, 80));
+        playerOneLabel.setLocation(new Point(xLabelPosition, yLabelPosition));
         
         button1 = new JRadioButton("Boy");
         button1.setSize(new Dimension(90, 30));
-        button1.setLocation(new Point(100, 110));
+        button1.setLocation(new Point(xButton, 110));
         button1.setSelected(true);
         
         button2 = new JRadioButton("Girl");
         button2.setSize(new Dimension(90, 30));
-        button2.setLocation(new Point(200, 110));
+        button2.setLocation(new Point(xButton + 100, 110));
         
         button3 = new JRadioButton("Pikachu");
         button3.setSize(new Dimension(90, 30));
-        button3.setLocation(new Point(300, 110));
+        button3.setLocation(new Point(xButton + 200, 110));
         
         button4 = new JRadioButton("Boy");
         button4.setSize(new Dimension(90, 30));
-        button4.setLocation(new Point(100, 250));
+        button4.setLocation(new Point(xButton, 250));
         button4.setSelected(true);
         
         button5 = new JRadioButton("Girl");
         button5.setSize(new Dimension(90, 30));
-        button5.setLocation(new Point(200, 250));
+        button5.setLocation(new Point(xButton + 100, 250));
         
         button6 = new JRadioButton("Pikachu");
         button6.setSize(new Dimension(90, 30));
-        button6.setLocation(new Point(300, 250));
+        button6.setLocation(new Point(xButton + 200, 250));
         
         ButtonGroup group = new ButtonGroup();
         group.add(button1);
@@ -102,24 +111,24 @@ public class SelectCharacterPanel extends JPanel {
         
         playerTwoLabel = new JLabel("Player 2:");
         playerTwoLabel.setSize(new Dimension(100, 30));
-        playerTwoLabel.setLocation(new Point(200, 220));
+        playerTwoLabel.setLocation(new Point(xLabelPosition, 220));
         
         imageLabel1 = new JLabel();
         imageLabel1.setSize(new Dimension(CHAR_DIMENSION, CHAR_DIMENSION));
-        imageLabel1.setLocation(new Point(200, 140));
+        imageLabel1.setLocation(new Point(xImageLabelPosition, yImageLabelPosition));
         imageLabel1.setIcon(player0);
         
         imageLabel2 = new JLabel();
         imageLabel2.setSize(new Dimension(CHAR_DIMENSION, CHAR_DIMENSION));
-        imageLabel2.setLocation(new Point(200, 290));
+        imageLabel2.setLocation(new Point(xImageLabelPosition, yImageLabelPosition + 150));
         imageLabel2.setIcon(player0);
         
         done = new StyledButton();
-        done.setText("Done");
+        done.setText("Start Game!");
         done.setSize(new Dimension(100, 40));
-        done.setLocation(new Point(200, 390));
+        done.setLocation(new Point(240, 390));
         
-        backButton = new BackButton(new Point(20, 380), prev, mainFrame, this);
+        backButton = new BackButton(new Point(20, 480), prev, mainFrame, this);
         
         this.add(title);
         this.add(playerOneLabel);
