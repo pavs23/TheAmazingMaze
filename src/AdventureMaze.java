@@ -10,12 +10,25 @@ public class AdventureMaze extends GameModeImp {
     private Coordinate finish;
     private MazeGenerator maze;  
     
+    private static final int EASY_BOUNDARY = 70;
+    private static final int MEDIUM_BOUNDARY = 150;
+    private static final int HARD_BOUNDARY = 220;
+    
     /**
      * Constructor of the class
-     * @param x the number of tiles in x-direction.
-     * @param y the number of tiles in y-direction.
+     * @param x the number of tiles in x-direction (it should be greater than 0).
+     * @param y the number of tiles in y-direction (it should be greater than 0).
      */
     public AdventureMaze(int x, int y) {
+        int boundary = -1;
+        if (x == Game.EASY_X && y == Game.EASY_Y) {
+            boundary = EASY_BOUNDARY;
+        } else if (x == Game.MEDIUM_X && y == Game.MEDIUM_Y) {
+            boundary = MEDIUM_BOUNDARY;
+        } else if (x == Game.HARD_X && y == Game.HARD_Y) {
+            boundary = HARD_BOUNDARY;
+        }
+        
         maze = new MazeGenerator(x, y);
         int[][] mazeArray = maze.generateMazeArray();
         int xDimension = mazeArray.length;
@@ -23,17 +36,52 @@ public class AdventureMaze extends GameModeImp {
         // The starting and opening point must be valid at odd indexes.
         // The starting X is at the leftmost of maze, finish X is at rightmost of maze.
         int randomYStart = (int)Math.floor((Math.random()*Math.floor(yDimension/2)) - 0.01);
-        int randomYFinish = (int)Math.floor((Math.random()*Math.floor(yDimension/2)) - 0.01);
         int yStart = randomYStart*2 + 1;
-        int yFinish = randomYFinish*2 + 1;
-        Coordinate startCoor = new Coordinate(0, yStart);
-        Coordinate finishCoor = new Coordinate(xDimension-1, yFinish);
-        start = startCoor;
-        finish = finishCoor;
-
         mazeArray[0][yStart] = Game.ROAD;
-        mazeArray[xDimension-1][yFinish] = Game.ROAD;
-        setMazeArray(mazeArray);
+        Coordinate startCoor = new Coordinate(0, yStart);
+        start = startCoor;    
+        
+        // Find the finishing point that is the furthest from the starting point.
+        boolean coordinateFound = false;
+        int i = 0;
+        
+        // Set the y Finish to be equal at 1 first.
+        // Set the length to be equal 0 at first.
+        int yFinish = 1;
+        int length = 0;
+        Coordinate finishCoor = new Coordinate(xDimension-1, yFinish);
+        int currLength;
+        int currYFinish;
+        Coordinate currFinishCoor;
+           
+        while(!coordinateFound && i < y) {
+            currYFinish = i*2 + 1;
+            
+            // Set current finish position.
+            currFinishCoor = new Coordinate(xDimension-1, currYFinish);
+            finish = currFinishCoor;
+            
+            ArrayList<Coordinate> pathToEnd = getHint(startCoor);
+            currLength = pathToEnd.size();
+            
+            // Update the length and coordinate if the currLength is greater.
+            if (currLength > length) {
+                yFinish = currYFinish;
+                length = currLength;
+                finishCoor = currFinishCoor;
+                setMazeArray(mazeArray);
+                System.out.println("yoohoo");
+            }
+            
+            // If the length is now greater than boundary, exit the loop.
+            if (length > boundary) {
+                coordinateFound = true;
+            }    
+            i++;
+        }
+        
+        finish = finishCoor;
+        mazeArray[xDimension-1][yFinish] = Game.ROAD;  
     }
     
     /**

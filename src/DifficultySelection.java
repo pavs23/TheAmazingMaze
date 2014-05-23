@@ -46,19 +46,10 @@ public class DifficultySelection extends JPanel {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
-				
-				if(players == Game.SINGLE_PLAYER){
-					NameEntrySinglePlayer nameEntry = new NameEntrySinglePlayer(mainFrame, mode, current, Game.EASY);
-					current.setVisible(false);
-					mainFrame.add(nameEntry);
-					nameEntry.setVisible(true);
-				} else if(players == Game.MULTI_PLAYER){
-					NameEntryDoublePlayer nameEntry = new NameEntryDoublePlayer(mainFrame, mode, current, Game.EASY);
-					current.setVisible(false);
-					mainFrame.add(nameEntry);
-					nameEntry.setVisible(true);
-				}
-				
+				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.EASY);
+				current.setVisible(false);
+				mainFrame.add(nameEntry);
+				nameEntry.setVisible(true);		
 			}
 		});
 		
@@ -66,21 +57,10 @@ public class DifficultySelection extends JPanel {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
-
-				//mainFrame.dispose();
-				//new MazeGame(players, playerOne, mode, Game.MEDIUM);
-				
-				if(players == Game.SINGLE_PLAYER){
-					NameEntrySinglePlayer nameEntry = new NameEntrySinglePlayer(mainFrame, mode, current, Game.MEDIUM);
-					current.setVisible(false);
-					mainFrame.add(nameEntry);
-					nameEntry.setVisible(true);
-				} else if(players == Game.MULTI_PLAYER){
-					NameEntryDoublePlayer nameEntry = new NameEntryDoublePlayer(mainFrame, mode, current, Game.MEDIUM);
-					current.setVisible(false);
-					mainFrame.add(nameEntry);
-					nameEntry.setVisible(true);
-				}
+				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.MEDIUM);
+				current.setVisible(false);
+				mainFrame.add(nameEntry);
+				nameEntry.setVisible(true);
 				
 			}
 		});
@@ -89,19 +69,10 @@ public class DifficultySelection extends JPanel {
 			
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
-
-				//mainFrame.dispose();
-				if(players == Game.SINGLE_PLAYER){
-					NameEntrySinglePlayer nameEntry = new NameEntrySinglePlayer(mainFrame, mode, current, Game.HARD);
-					current.setVisible(false);
-					mainFrame.add(nameEntry);
-					nameEntry.setVisible(true);
-				} else if(players == Game.MULTI_PLAYER){
-					NameEntryDoublePlayer nameEntry = new NameEntryDoublePlayer(mainFrame, mode, current, Game.HARD);
-					current.setVisible(false);
-					mainFrame.add(nameEntry);
-					nameEntry.setVisible(true);
-				}
+				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.HARD);
+				current.setVisible(false);
+				mainFrame.add(nameEntry);
+				nameEntry.setVisible(true);
 
 			}
 		});

@@ -21,11 +21,12 @@ public class ScoreManager {
 	private final int NUM_ELEMENTS = 2;
 	private final int NAME = 0;
 	private final int SCORE_NUM = 1;
-	private ScoreEncrypter encrypter;
-	
+	//private ScoreEncrypter encrypter;
+	/*
 	public ScoreManager(){
 		encrypter = new ScoreEncrypter();
 	}
+	*/
 	
 	//A temp main for testing purposes
 	/*public static void main(String[] args){
@@ -45,7 +46,8 @@ public class ScoreManager {
 
 		ArrayList<LeaderBoardEntry> scoreArray = new ArrayList<LeaderBoardEntry>();
 		String score; //stores whole line of input
-		String encryptedScore;
+		// String encryptedScore;
+		
 		//splits input into name and score number
 		String splitString[] = new String[NUM_ELEMENTS]; 
 		String tempName; //temporary name to create lbe with
@@ -58,8 +60,9 @@ public class ScoreManager {
 		//scan all the high score records and store them in an array list
 		Scanner scanner = new Scanner(scoreFile);
 		while(scanner.hasNextLine()){
-			encryptedScore = scanner.nextLine();
-			score = encrypter.decryptString(encryptedScore);
+			score = scanner.nextLine();
+			// encryptedScore = scanner.nextLine();
+			// score = encrypter.decryptString(encryptedScore);
 			splitString = score.split(" ");
 			
 			tempName = splitString[NAME];
@@ -136,7 +139,8 @@ public class ScoreManager {
 			String outputString;
 			while (i < scoreArray.size()){
 				outputString = scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum();
-				writer.write(encrypter.encryptString(outputString) + "\n");
+				// writer.write(encrypter.encryptString(outputString) + "\n");
+				writer.write(outputString + "\n");
 				i++;
 			}
 			file.setReadOnly();
