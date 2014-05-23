@@ -22,6 +22,7 @@ public class Game {
 	private JButton cancelButton;
 	private JPanel mainPanel;
 	private JButton leaderboard;
+	private JButton instructions;
 	
 	// The Images used in the game.
 	public static final Image ROAD_IMAGE;
@@ -156,6 +157,7 @@ public class Game {
 		newGameButton = new JButton("New Game");
 		cancelButton = new JButton("Quit");
 		leaderboard = new JButton("Leaderboard");
+		instructions = new JButton("Instructions");
 		
 		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
 		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
@@ -186,10 +188,15 @@ public class Game {
 		leaderboard.setSize(new Dimension(150, 90));
 		leaderboard.setVisible(true);
 		
+		instructions.setLocation(175, 400);
+		instructions.setSize(150, 90);
+		instructions.setVisible(true);
+		
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
 		mainPanel.add(cancelButton);
+		mainPanel.add(instructions);
 		
 		mainFrame.add(mainPanel);
 		
@@ -240,6 +247,24 @@ public class Game {
 				
 			}
 		});
+		
+		instructions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+                System.out.println("You clicked the Instructions Button");
+                //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
+                InstructionPanel instructionScreen = new InstructionPanel(mainFrame, mainPanel);
+                mainFrame.setVisible(true);
+                mainPanel.setVisible(false);
+                mainFrame.remove(mainPanel);
+                mainFrame.add(instructionScreen);
+                
+               
+                //dsFrame.run();
+            }
+		});
+		
 	}
 	
 		
