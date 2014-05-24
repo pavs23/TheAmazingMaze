@@ -231,17 +231,34 @@ public class Game {
 			public void actionPerformed(ActionEvent arg0) {
 				
 			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
-				ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
+				/*ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
+				ArrayList<ArrayList<LeaderBoardEntry>> test = new ArrayList<ArrayList<LeaderBoardEntry>>();
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
 				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
 				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
 				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
 				leaders.add(a);
 				leaders.add(b);
-				leaders.add(t);
+				leaders.add(t);*/
 				
-				LeaderBoard leaderBoard = new LeaderBoard(leaders, mainPanel, mainFrame);
+				ArrayList<ArrayList<LeaderBoardEntry>> leaderBoards = new ArrayList<ArrayList<LeaderBoardEntry>>();
+				ScoreManager manager = new ScoreManager();
+				leaderBoards.add(manager.getScores(ADVENTURE_MODE, EASY));
+				leaderBoards.add(manager.getScores(COIN_MODE, EASY));
+				leaderBoards.add(manager.getScores(ADVENTURE_MODE, MEDIUM));
+				leaderBoards.add(manager.getScores(COIN_MODE, MEDIUM));
+				leaderBoards.add(manager.getScores(ADVENTURE_MODE, HARD));
+				leaderBoards.add(manager.getScores(COIN_MODE, HARD));
+				
+				LeaderBoard leaderBoard = new LeaderBoard(leaderBoards, mainPanel, mainFrame);
 				mainPanel.setVisible(false);
 				
+				mainFrame.add(leaderBoard);
 				leaderboard.setVisible(true);
 				mainFrame.remove(mainPanel);
 				

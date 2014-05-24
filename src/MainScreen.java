@@ -106,7 +106,10 @@ public class MainScreen {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
 				ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
+				ArrayList<ArrayList<LeaderBoardEntry>> test = new ArrayList<ArrayList<LeaderBoardEntry>>();
+				test.add(leaders);
 				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
 				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
 				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
@@ -114,7 +117,7 @@ public class MainScreen {
 				leaders.add(b);
 				leaders.add(t);
 				
-				LeaderBoard leaderBoard = new LeaderBoard(leaders, mainPanel, mainFrame);
+				LeaderBoard leaderBoard = new LeaderBoard(test, mainPanel, mainFrame);
 				mainPanel.setVisible(false);
 				
 				leaderboard.setVisible(true);

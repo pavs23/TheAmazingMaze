@@ -16,6 +16,12 @@ public class InstructionPanel extends JPanel {
 	private JLabel title;
 	private JLabel instructions;
 	
+	/**
+	 * A constructor to generate the instruction panel
+	 * @param mainFrame is the main frame of the game
+	 * @param prev is the previous frame to go back to if the back 
+	 * button is pressed
+	 */
 	public InstructionPanel(final JFrame mainFrame, final JPanel prev){
 		
 		//set current panel
@@ -45,6 +51,11 @@ public class InstructionPanel extends JPanel {
 		
 	}
 	
+	/**
+	 * Generates the text to be displayed on the instructions screen
+	 * @return a string with all the text in it. The text is formatted 
+	 * using HTML.
+	 */
 	private String getInstructionText(){
 		String adventureTitle = "<html>Adventure Mode:<br>";
 		String adventureText = "In this mode, the player will need to "

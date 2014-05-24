@@ -19,8 +19,8 @@ public class ScoreManager {
 	private final int NUM_SCORES = 5;
 	private final int REDUNDANT_SCORE = NUM_SCORES;
 	private final int NUM_ELEMENTS = 2;
-	private final int NAME = 0;
-	private final int SCORE_NUM = 1;
+	//private final int NAME = 0;
+	//private final int SCORE_NUM = 1;
 	//private ScoreEncrypter encrypter;
 	/*
 	public ScoreManager(){
@@ -54,6 +54,10 @@ public class ScoreManager {
 		int tempScore; //temporary score number to create lbe with
 		LeaderBoardEntry tempLBE; //temporary lbe to add to array list
 
+		//inner loop variables
+		int i;
+		int size;
+		
 		//find relevant text file
 		FileInputStream scoreFile = getFileInputStream(modeFlag, difficultyFlag);
 		
@@ -65,8 +69,18 @@ public class ScoreManager {
 			// score = encrypter.decryptString(encryptedScore);
 			splitString = score.split(" ");
 			
-			tempName = splitString[NAME];
-			tempScore = Integer.parseInt(splitString[SCORE_NUM]);
+			//loop to find end of name if there's spaces
+			i = 0;
+			size = splitString.length;
+			tempName = "";
+			while (i < size-1){
+				tempName += splitString[i] + " ";
+				i++;
+			}
+			tempScore = Integer.parseInt(splitString[size-1]);
+			
+			//tempName = splitString[NAME];
+			//tempScore = Integer.parseInt(splitString[SCORE_NUM]);
 			tempLBE = new LeaderBoardEntry(tempName, tempScore);
 			scoreArray.add(tempLBE);
 		}
@@ -90,15 +104,19 @@ public class ScoreManager {
 		ArrayList<LeaderBoardEntry> scoreArray = getScores(modeFlag, difficultyFlag);
 		boolean savedNewScore;
 		
-		if (scoreArray.isEmpty() || scoreArray.size() < NUM_SCORES){
+		if (scoreArray.isEmpty()){
 			LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 			scoreArray.add(newLBE);
 			savedNewScore = true;
 		} else {
 			savedNewScore = false;
 			int i = 0;
-			while (i < scoreArray.size() && !savedNewScore){
-				if (newScore >= scoreArray.get(i).getScoreNum()){
+			while (i < scoreArray.size()+1 && !savedNewScore){
+				if (i == scoreArray.size()){
+					LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
+					scoreArray.add(i, newLBE);
+					savedNewScore = true;
+				} else if (newScore >= scoreArray.get(i).getScoreNum()){
 					LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 					scoreArray.add(i, newLBE);
 					savedNewScore = true;
@@ -108,6 +126,7 @@ public class ScoreManager {
 				}
 				i++;
 			}
+			
 		}
 			
 		if (savedNewScore){
