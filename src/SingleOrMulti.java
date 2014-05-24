@@ -21,29 +21,31 @@ public class SingleOrMulti extends JPanel{
 	private NumberOfPlayersButton one;
 	private NumberOfPlayersButton two;
 	private JLabel heading;
+	private final int xPosition = 225;
+	private final int yPosition = 100;
 	
 	public SingleOrMulti(final int mode, final JFrame mainFrame, final JPanel prev){
-		this.setSize(new Dimension(500, 500));
+		this.setSize(new Dimension(600, 600));
 		this.setLayout(null);
 		
 		currentScreen = this;
 		
 		heading = new JLabel("How many players?");
-		heading.setSize(new Dimension(500, 150));;
+		heading.setSize(new Dimension(600, 150));;
 		heading.setForeground(Color.BLACK);
 		heading.setLocation(new Point(10,10));
 		
-		back = new BackButton(new Point(10, 380), prev, mainFrame, this);
-		back.setLocation(new Point(20, 380));
+		back = new BackButton(new Point(10, 480), prev, mainFrame, this);
+		back.setLocation(new Point(20, 480));
 		
 		one = new NumberOfPlayersButton(mode, "One Player");
 		two = new NumberOfPlayersButton(mode, "Two Players");
 		
-		one.setLocation(new Point(175, 100));
-		two.setLocation(new Point(175, 180));
+		one.setLocation(new Point(xPosition, yPosition));
+		two.setLocation(new Point(xPosition, yPosition + 160));
 		
-		one.setSize(new Dimension(150, 70));
-		two.setSize(new Dimension(150, 70));
+		one.setSize(new Dimension(150, 90));
+		two.setSize(new Dimension(150, 90));
 		
 		one.setBackground(Color.orange);
 		two.setBackground(Color.MAGENTA);

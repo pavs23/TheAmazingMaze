@@ -22,24 +22,26 @@ public class DifficultySelection extends JPanel {
 	private BackButton backButton;
 	private JPanel current;
 	
+	private static final int xPositionButton = 225;
+	private static final int yPositionButton = 100;
+	private static final int vGap = 30;
+	
 	//public JFrame difficultySelection;
 	
 	
 	public DifficultySelection(final JFrame mainFrame, final int mode, final int players, final JPanel prev){
 		
-		Insets insets = mainFrame.getInsets();
-		
-		easyButton = new DifficultyButton("Easy", new Point(175, 80), insets, new Dimension(150, 70));
-		mediumButton = new DifficultyButton("Medium", new Point(175, 180), insets, new Dimension(150, 70));
-		hardButton = new DifficultyButton("Hard", new Point(175, 280), insets, new Dimension(150, 70));
-		backButton = new BackButton(new Point(20, 380), prev, mainFrame, this);
+		easyButton = new DifficultyButton("Easy", new Point(xPositionButton, yPositionButton));
+		mediumButton = new DifficultyButton("Medium", new Point(xPositionButton, (2 * yPositionButton + vGap)));
+		hardButton = new DifficultyButton("Hard", new Point(xPositionButton,3 * yPositionButton + (2 * vGap)));
+		backButton = new BackButton(new Point(20, 480), prev, mainFrame, this);
 		current = this;
 		
 		this.add(easyButton);
 		this.add(mediumButton);
 		this.add(hardButton);
 		this.add(backButton);
-		this.setSize(new Dimension(500, 500));
+		this.setSize(new Dimension(600, 600));
 		this.setLayout(null);
 		
 		easyButton.addActionListener(new ActionListener() {
