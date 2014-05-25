@@ -14,25 +14,11 @@ import java.util.Scanner;
 public class ScoreManager {
 	
 	/*
-	 * A bunch of constants for things
+	 * A bunch of constants for scoring.
 	 */
-	private final int NUM_SCORES = 5;
-	private final int REDUNDANT_SCORE = NUM_SCORES;
-	private final int NUM_ELEMENTS = 2;
-	//private final int NAME = 0;
-	//private final int SCORE_NUM = 1;
-	//private ScoreEncrypter encrypter;
-	/*
-	public ScoreManager(){
-		encrypter = new ScoreEncrypter();
-	}
-	*/
-	
-	//A temp main for testing purposes
-	/*public static void main(String[] args){
-		//ArrayList<LeaderBoardEntry> scoreArray = getScores(0,0);
-		setNewScore(Game.COIN_MODE, Game.EASY, "Tom", 20);
-	}*/
+	private static final int NUM_SCORES = 5;
+	private static final int REDUNDANT_SCORE = NUM_SCORES;
+	private static final int NUM_ELEMENTS = 2;
 	
 	/**
 	 * A method that generates an array list of scores from a text file
@@ -46,7 +32,6 @@ public class ScoreManager {
 
 		ArrayList<LeaderBoardEntry> scoreArray = new ArrayList<LeaderBoardEntry>();
 		String score; //stores whole line of input
-		// String encryptedScore;
 		
 		//splits input into name and score number
 		String splitString[] = new String[NUM_ELEMENTS]; 
@@ -65,8 +50,6 @@ public class ScoreManager {
 		Scanner scanner = new Scanner(scoreFile);
 		while(scanner.hasNextLine()){
 			score = scanner.nextLine();
-			// encryptedScore = scanner.nextLine();
-			// score = encrypter.decryptString(encryptedScore);
 			splitString = score.split(" ");
 			
 			//loop to find end of name if there's spaces
@@ -79,8 +62,6 @@ public class ScoreManager {
 			}
 			tempScore = Integer.parseInt(splitString[size-1]);
 			
-			//tempName = splitString[NAME];
-			//tempScore = Integer.parseInt(splitString[SCORE_NUM]);
 			tempLBE = new LeaderBoardEntry(tempName, tempScore);
 			scoreArray.add(tempLBE);
 		}
@@ -130,7 +111,6 @@ public class ScoreManager {
 		}
 			
 		if (savedNewScore){
-			//System.out.println("hello");
 			storeLeaderBoard(scoreArray, modeFlag, difficultyFlag);
 		}
 			
@@ -158,13 +138,11 @@ public class ScoreManager {
 			String outputString;
 			while (i < scoreArray.size()){
 				outputString = scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum();
-				// writer.write(encrypter.encryptString(outputString) + "\n");
 				writer.write(outputString + "\n");
 				i++;
 			}
 			file.setReadOnly();
 		} catch (IOException e){
-			System.out.println("you fucked up");
 		} finally {
 			try{
 				writer.close();
