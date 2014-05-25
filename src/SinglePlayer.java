@@ -161,6 +161,7 @@ public class SinglePlayer extends PlayerModes {
      * Dispose the frame and create new frame for winning player.
      * Stop the timers.
      * Show the score of the winning player.
+     * @param playerName the name of the winning player.
      */
     public void gameEndWin(String playerName) {
         gameFinished = true;

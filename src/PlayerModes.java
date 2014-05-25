@@ -330,6 +330,7 @@ public abstract class PlayerModes {
         
     /**
      * Paint the player in the maze.
+     * @param player the player that will be painted.
      * @param coordinate the Coordinate of player..
      * @param direction the direction that the player is facing.
      * @param labels the labels associated with the player.

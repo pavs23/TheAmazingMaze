@@ -244,6 +244,7 @@ public class MultiPlayer extends PlayerModes {
     
     /**
      * Dispose the frame, stop and dispose the timers, and show which player wins on game end.
+     * @param playerName the name of the winning player.
      */
     public void gameEndWin(String playerName) {
         gameFinished = true;
