@@ -70,7 +70,12 @@ public class SelectCharacterPanel extends JPanel {
         current = this;
         this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         this.setLayout(null);
-        this.setBackground(Color.WHITE);
+        
+        JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        
+        panelLabel.setIcon(Game.BACKGROUND);
         
         File selectCharacterFile = new File("Select_Character.jpg");
         Image selectCharacterImage = null;
@@ -78,8 +83,8 @@ public class SelectCharacterPanel extends JPanel {
             selectCharacterImage = ImageIO.read(selectCharacterFile);
         } catch (IOException e) {}
         title = new JLabel();
-        title.setSize(new Dimension(420, 80));
-        title.setLocation(new Point(90, 20));
+        title.setSize(new Dimension(400, 80));
+        title.setLocation(new Point(100, 20));
         Image scaledSelectCharacter = selectCharacterImage.getScaledInstance(title.getWidth(), title.getHeight(), Image.SCALE_SMOOTH);    
         ImageIcon selectCharacterIcon = new ImageIcon(scaledSelectCharacter);
         title.setIcon(selectCharacterIcon);
@@ -145,20 +150,22 @@ public class SelectCharacterPanel extends JPanel {
         
         backButton = new BackButton(prev, mainFrame, this);
         
-        this.add(title);
-        this.add(playerOneLabel);
-        this.add(playerTwoLabel);
-        this.add(button1);
-        this.add(button2);
-        this.add(button3);
-        this.add(button4);
-        this.add(button5);
-        this.add(button6);
-        this.add(imageLabel1);
-        this.add(imageLabel2);
+        panelLabel.add(title);
+        panelLabel.add(playerOneLabel);
+        panelLabel.add(playerTwoLabel);
+        panelLabel.add(button1);
+        panelLabel.add(button2);
+        panelLabel.add(button3);
+        panelLabel.add(button4);
+        panelLabel.add(button5);
+        panelLabel.add(button6);
+        panelLabel.add(imageLabel1);
+        panelLabel.add(imageLabel2);
         
-        this.add(done);
-        this.add(backButton);
+        panelLabel.add(done);
+        panelLabel.add(backButton);
+        
+        this.add(panelLabel);
         
         if (singleOrMulti == Game.SINGLE_PLAYER) {
             playerOneLabel.setVisible(false);
