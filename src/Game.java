@@ -33,10 +33,12 @@ public class Game {
 	private JLabel yoshiLabel;
 	private ImageIcon marioIcon;
 	private JLabel marioLabel;
+	private ImageIcon peachIcon;
+	private JLabel peachLabel;
 	
 	// Positions of the buttons on the panel
 	private static final int X_BUTTON_POSITION = 225;
-	private static final int y_BUTTON_POSITION = 100;
+	private static final int Y_BUTTON_POSITION = 80;
 	private static final int VERTICAL_GAP = 130;
 	
 	// The Images used in the game.
@@ -60,8 +62,9 @@ public class Game {
     public static final Image PLAYER_2_IMAGE;
     public static final Image PLAYER_2_RIGHT_IMAGE;
     public static final Image THE_AMAZING_MAZE_HEADING;
-    private static final Image YOSHI_TONGUE_IMAGE;
-    //private static final Image MARIO2;
+    public static final Image YOSHI_TONGUE_IMAGE;
+    public static final Image MARIO2_IMAGE;
+    public static final Image PEACH2_IMAGE;
 	
 	
 	// Constants in the game.
@@ -129,7 +132,8 @@ public class Game {
         File backgroundFile = new File("Background.jpg");
         File theAmazingMazeHeadingFile = new File("theAmazingMazeLogo.gif");
         File yoshiTongueFile = new File("yoshiTongue.jpg");
-        File mario2 = new File("mario2.png");
+        File mario2File = new File("mario2.png");
+        File peach2File = new File("peach2.jpg");
         
         Image wallImg = null;
         Image roadImg = null;
@@ -153,6 +157,8 @@ public class Game {
         Image backgroundImg = null;
         Image theAmazingMazeHeadingImg = null;
         Image yoshiTongueImg = null;
+        Image mario2Img = null;
+        Image peach2Img = null;
         
         try {
             wallImg = ImageIO.read(wallFile);
@@ -177,6 +183,8 @@ public class Game {
             backgroundImg = ImageIO.read(backgroundFile);
             theAmazingMazeHeadingImg = ImageIO.read(theAmazingMazeHeadingFile);
             yoshiTongueImg = ImageIO.read(yoshiTongueFile);
+            mario2Img = ImageIO.read(mario2File);
+            peach2Img = ImageIO.read(peach2File);
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -201,6 +209,8 @@ public class Game {
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
             THE_AMAZING_MAZE_HEADING = theAmazingMazeHeadingImg;
             YOSHI_TONGUE_IMAGE = yoshiTongueImg;
+            MARIO2_IMAGE = mario2Img;
+            PEACH2_IMAGE = peach2Img;
         }   
     }
     
@@ -217,6 +227,10 @@ public class Game {
 		title = new JLabel();
 		yoshiIcon = new ImageIcon(YOSHI_TONGUE_IMAGE);
 		yoshiLabel = new JLabel();
+		marioIcon = new ImageIcon(MARIO2_IMAGE);
+		marioLabel = new JLabel();
+		peachIcon = new ImageIcon(PEACH2_IMAGE);
+		peachLabel = new JLabel();
 		
 		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
 		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
@@ -234,20 +248,20 @@ public class Game {
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		Insets insets = mainPanel.getInsets();
-		newGameButton.setLocation(X_BUTTON_POSITION, y_BUTTON_POSITION);
+		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(new Point(X_BUTTON_POSITION, y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
+		cancelButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
 		cancelButton.setSize(150, 90);
 		cancelButton.setVisible(true);
 		
-		leaderboard.setLocation(new Point(X_BUTTON_POSITION, y_BUTTON_POSITION + VERTICAL_GAP));
+		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setSize(new Dimension(150, 90));
 		leaderboard.setVisible(true);
 		
-		instructions.setLocation(new Point(X_BUTTON_POSITION, y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
+		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
 		instructions.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		instructions.setSize(150, 90);
 		instructions.setVisible(true);
@@ -259,10 +273,19 @@ public class Game {
 		title.setVisible(true);
 		
 		yoshiLabel.setIcon(yoshiIcon);
-		yoshiLabel.setLocation(new Point(20, 238));
+		yoshiLabel.setLocation(new Point(20, 347));
 		yoshiLabel.setSize(new Dimension(320, 206));
 		yoshiLabel.setVisible(true);
 		
+		marioLabel.setIcon(marioIcon);
+		marioLabel.setLocation(new Point(380, 150));
+		marioLabel.setSize(new Dimension(192, 292));
+		marioLabel.setVisible(true);
+		
+		peachLabel.setIcon(peachIcon);
+		peachLabel.setLocation(new Point(5, 60));
+		peachLabel.setSize(new Dimension(237, 300));
+		peachLabel.setVisible(true);
 		
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
@@ -271,6 +294,8 @@ public class Game {
 		mainPanel.add(instructions);
 		mainPanel.add(title);
 		mainPanel.add(yoshiLabel);
+		mainPanel.add(marioLabel);
+		mainPanel.add(peachLabel);
 		mainPanel.setBackground(Color.WHITE);
 		
 		mainFrame.add(mainPanel);
