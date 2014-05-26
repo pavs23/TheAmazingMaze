@@ -41,6 +41,7 @@ public class DifficultySelection extends JPanel {
 	
 	public DifficultySelection(final JFrame mainFrame, final int mode, final int players, final JPanel prev){
 		
+
 		File easyFile = new File("easy.png");
 		File mediumFile = new File("Medium.png");
 		File hardFile = new File("Hard.png");
@@ -76,14 +77,15 @@ public class DifficultySelection extends JPanel {
 		easyButton = new DifficultyButton(easyLabel, new Point(xPositionButton, yPositionButton));
 		mediumButton = new DifficultyButton(mediumLabel, new Point(xPositionButton, (2 * yPositionButton + vGap)));
 		hardButton = new DifficultyButton(hardLabel, new Point(xPositionButton,3 * yPositionButton + (2 * vGap)));
-		backButton = new BackButton(new Point(20, 480), prev, mainFrame, this);
+		backButton = new BackButton(prev, mainFrame, this);
+
 		current = this;
 		
 		this.add(easyButton);
 		this.add(mediumButton);
 		this.add(hardButton);
 		this.add(backButton);
-		this.setSize(new Dimension(600, 600));
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		this.setLayout(null);
 		
 		easyButton.addActionListener(new ActionListener() {

@@ -30,8 +30,7 @@ public class SelectGameMode extends JPanel {
 		adventureMode.setLocation(xPosition, yPosition);
 		coinMode.setLocation(xPosition, yPosition + 160);
 
-		back = new BackButton(new Point(10, 380), prev, mainFrame, this);
-		back.setLocation(new Point(20, 480));
+		back = new BackButton(prev, mainFrame, this);
 		this.add(back);
 
 		// Still need to hook up this panel to the frame.

@@ -26,7 +26,7 @@ public class InstructionPanel extends JPanel {
 		
 		//set current panel
 		this.setLayout(null);
-		this.setSize(new Dimension(500, 500));
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		
 		//set title
 		title = new JLabel("Instructions");
@@ -41,7 +41,7 @@ public class InstructionPanel extends JPanel {
         instructions.setVisible(true);
         
         //set back button
-        backButton = new BackButton(new Point(20, 380), prev, mainFrame, this);
+        backButton = new BackButton(prev, mainFrame, this);
         backButton.setVisible(true);
         
         //create frame

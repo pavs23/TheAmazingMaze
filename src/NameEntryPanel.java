@@ -54,7 +54,7 @@ public class NameEntryPanel extends JPanel{
         done.setLocation(new Point(X_POSITION - 15, Y_POSITION + 170));
         done.setEnabled(false);
         
-        backButton = new BackButton(new Point(20, 480), prev, mainFrame, this);
+        backButton = new BackButton(prev, mainFrame, this);
         
         this.add(title);
         this.add(playerOneLabel);

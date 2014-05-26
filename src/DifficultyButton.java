@@ -1,6 +1,6 @@
 
 import java.awt.Color;
-
+import java.awt.Font;
 import java.awt.Point;
 
 import javax.swing.JLabel;
@@ -20,12 +20,14 @@ public class DifficultyButton extends StyledButton{
 		//this.setText(text);
 
 		this.setSize(150, 90);	
-		this.add(difficultyLabel);
-		//Font myFont = new Font("AR Destine", Font.PLAIN, 25);
 
-		//this.setFont(myFont);
-		//this.setBackground(Color.black);
+		Font myFont = new Font("AR Destine", Font.PLAIN, 25);
+				
+		this.setFont(myFont);
+		this.setBackground(Color.black);
+		
+		this.setForeground(Color.white);
+		this.setOpaque(true);
 
-		//this.setForeground(Color.white);
 	}
 }

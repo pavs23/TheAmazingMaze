@@ -35,8 +35,7 @@ public class SingleOrMulti extends JPanel{
 		heading.setForeground(Color.BLACK);
 		heading.setLocation(new Point(10,10));
 		
-		back = new BackButton(new Point(10, 480), prev, mainFrame, this);
-		back.setLocation(new Point(20, 480));
+		back = new BackButton(prev, mainFrame, this);
 		
 		one = new NumberOfPlayersButton(mode, "One Player");
 		two = new NumberOfPlayersButton(mode, "Two Players");

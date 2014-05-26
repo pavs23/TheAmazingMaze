@@ -37,7 +37,7 @@ public class GamePausedPanel extends JPanel{
 		title = new JLabel("Paused");
 		title.setFont(title.getFont().deriveFont(64.0f));
 		title.setLocation(new Point(100, 30));
-		title.setSize(new Dimension(400, 100));
+		title.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		this.add(title);
 		
 	}
