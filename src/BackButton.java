@@ -27,7 +27,7 @@ public class BackButton extends StyledButton{
 		
 		this.setText("Back");
 		this.setFont(new Font("AR Destine", Font.PLAIN, 25));
-		this.setLocation(new Point(20, 520));
+		this.setLocation(new Point(20, 480));
 		
 		this.setBackground(Color.RED);
         this.setForeground(Color.WHITE);

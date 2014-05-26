@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -85,6 +86,9 @@ public class Game {
     
     // Frame size
     public static final int FRAME_SIZE = 600;
+    
+    // Background For MazeGame
+    public static final ImageIcon BACKGROUND;
 
     /**
      * Load the images from the files.
@@ -109,6 +113,7 @@ public class Game {
         File player0File = new File("Mario.jpg");
         File player1File = new File("Peach.jpg");
         File player2File = new File("Yoshi.jpg");
+        File backgroundFile = new File("Background.jpg");
         
         Image wallImg = null;
         Image roadImg = null;
@@ -129,6 +134,7 @@ public class Game {
         Image player0Img = null;
         Image player1Img = null;
         Image player2Img = null;
+        Image backgroundImg = null;
         
         
         try {
@@ -151,6 +157,7 @@ public class Game {
             player0Img = ImageIO.read(player0File);
             player1Img = ImageIO.read(player1File);
             player2Img = ImageIO.read(player2File);
+            backgroundImg = ImageIO.read(backgroundFile);
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -172,6 +179,7 @@ public class Game {
             PLAYER_0_IMAGE = player0Img;
             PLAYER_1_IMAGE = player1Img;
             PLAYER_2_IMAGE = player2Img;
+            BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
         }   
     }
     
