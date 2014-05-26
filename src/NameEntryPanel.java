@@ -32,6 +32,11 @@ public class NameEntryPanel extends JPanel{
         title = new JLabel();
         title.setSize(new Dimension(200, 30));
         
+        JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
         playerOneLabel = new JLabel("Player 1:");
         playerOneLabel.setSize(new Dimension(100,30));
         playerOneLabel.setLocation(new Point(X_POSITION, Y_POSITION));
@@ -56,13 +61,15 @@ public class NameEntryPanel extends JPanel{
         
         backButton = new BackButton(prev, mainFrame, this);
         
-        this.add(title);
-        this.add(playerOneLabel);
-        this.add(playerOneNameField);
-        this.add(playerTwoLabel);
-        this.add(playerTwoNameField);
-        this.add(done);
-        this.add(backButton);
+        panelLabel.add(title);
+        panelLabel.add(playerOneLabel);
+        panelLabel.add(playerOneNameField);
+        panelLabel.add(playerTwoLabel);
+        panelLabel.add(playerTwoNameField);
+        panelLabel.add(done);
+        panelLabel.add(backButton);
+        
+        this.add(panelLabel);
         
         if (singleOrMulti == Game.SINGLE_PLAYER) {
         	

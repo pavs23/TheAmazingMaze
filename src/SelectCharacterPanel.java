@@ -74,7 +74,6 @@ public class SelectCharacterPanel extends JPanel {
         JLabel panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
-        
         panelLabel.setIcon(Game.BACKGROUND);
         
         File selectCharacterFile = new File("Select_Character.jpg");

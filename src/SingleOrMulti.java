@@ -28,6 +28,11 @@ public class SingleOrMulti extends JPanel{
 		this.setSize(new Dimension(600, 600));
 		this.setLayout(null);
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
 		currentScreen = this;
 		
 		heading = new JLabel("How many players?");
@@ -49,9 +54,11 @@ public class SingleOrMulti extends JPanel{
 		one.setBackground(Color.orange);
 		two.setBackground(Color.MAGENTA);
 		
-		this.add(one);
-		this.add(two);
-		this.add(back);
+		panelLabel.add(one);
+		panelLabel.add(two);
+		panelLabel.add(back);
+		
+		this.add(panelLabel);
 		
 		//Set the colour of the buttons in this class as well as other formatting
 		

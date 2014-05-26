@@ -81,13 +81,21 @@ public class DifficultySelection extends JPanel {
 
 		current = this;
 		
-		this.add(easyButton);
-		this.add(mediumButton);
-		this.add(hardButton);
-		this.add(backButton);
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
-		this.setLayout(null);
+        this.setLayout(null);
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
+        panelLabel.add(easyButton);
+        panelLabel.add(mediumButton);
+        panelLabel.add(hardButton);
+        panelLabel.add(backButton);
+        
+        this.add(panelLabel);
+        
 		easyButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
