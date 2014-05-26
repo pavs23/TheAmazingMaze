@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,14 +13,12 @@ import javax.swing.JPanel;
  */
 public class InstructionPanel extends JPanel {
 	
-	//normal stuff
 	private BackButton backButton;
 	private JLabel title;
 	private JLabel adventureInstructions;
 	private JLabel coinInstructions;
-	
-	//images
-	
+	private ImageIcon headingIcon;
+	private JPanel headingPanel;
 	
 	/**
 	 * A constructor to generate the instruction panel
