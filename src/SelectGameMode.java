@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SelectGameMode extends JPanel {
@@ -26,12 +27,16 @@ public class SelectGameMode extends JPanel {
 		coinMode.setSize(150, 90);
 		adventureMode.setSize(150, 90);
 
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
 		Insets insets = this.getInsets();
 		adventureMode.setLocation(xPosition, yPosition);
 		coinMode.setLocation(xPosition, yPosition + 160);
 
 		back = new BackButton(prev, mainFrame, this);
-		this.add(back);
 
 		// Still need to hook up this panel to the frame.
 		// also need to put the frame into the chain of the frames.
@@ -68,8 +73,10 @@ public class SelectGameMode extends JPanel {
 				// mainFrame.add(dsScreen);
 			}
 		});
-
-		this.add(adventureMode);
-		this.add(coinMode);
+		
+		panelLabel.add(back);
+		panelLabel.add(adventureMode);
+		panelLabel.add(coinMode);
+		this.add(panelLabel);
 	}
 }

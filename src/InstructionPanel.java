@@ -28,6 +28,11 @@ public class InstructionPanel extends JPanel {
 		this.setLayout(null);
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
 		//set title
 		title = new JLabel("Instructions");
         title.setSize(new Dimension(250, 40));
@@ -45,9 +50,11 @@ public class InstructionPanel extends JPanel {
         backButton.setVisible(true);
         
         //create frame
-        this.add(backButton);
-        this.add(title);
-        this.add(instructions);
+        panelLabel.add(backButton);
+        panelLabel.add(title);
+        panelLabel.add(instructions);
+        
+        this.add(panelLabel);
 		
 	}
 	
