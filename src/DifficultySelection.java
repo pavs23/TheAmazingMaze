@@ -30,9 +30,9 @@ public class DifficultySelection extends JPanel {
 	
 	private static final int xPositionButton = 225;
 	private static final int yPositionButton = 150;
-	private static final int xDifficultyLabel = 150;
-	private static final int yDifficultyLabel = 90;
-	private static final int vGap = 20;
+	private static final int lengthDifficultyLabel = 150;
+	private static final int widthDifficultyLabel = 70;
+	private static final int vGap = 30;
 	
 	//public JFrame difficultySelection;
 	private JLabel easyLabel;
@@ -54,29 +54,29 @@ public class DifficultySelection extends JPanel {
             hardImage = ImageIO.read(hardFile);
         } catch (IOException e) {}
         easyLabel = new JLabel();
-        easyLabel.setSize(new Dimension(xDifficultyLabel, yDifficultyLabel));
+        easyLabel.setSize(new Dimension(lengthDifficultyLabel, widthDifficultyLabel));
         easyLabel.setLocation(new Point(100, 20));
         Image scaledEasyButton = easyImage.getScaledInstance(easyLabel.getWidth(), easyLabel.getHeight(), Image.SCALE_SMOOTH);    
         ImageIcon easyIcon = new ImageIcon(scaledEasyButton);
         easyLabel.setIcon(easyIcon);
         
         mediumLabel = new JLabel();
-        mediumLabel.setSize(new Dimension(xDifficultyLabel, yDifficultyLabel));
+        mediumLabel.setSize(new Dimension(lengthDifficultyLabel, widthDifficultyLabel));
         mediumLabel.setLocation(new Point(100, 20));
         Image scaledMediumButton = mediumImage.getScaledInstance(mediumLabel.getWidth(), mediumLabel.getHeight(), Image.SCALE_SMOOTH);    
         ImageIcon mediumIcon = new ImageIcon(scaledMediumButton);
         mediumLabel.setIcon(mediumIcon);
         
         hardLabel = new JLabel();
-        hardLabel.setSize(new Dimension(xDifficultyLabel, yDifficultyLabel));
+        hardLabel.setSize(new Dimension(lengthDifficultyLabel, widthDifficultyLabel));
         hardLabel.setLocation(new Point(100, 20));
         Image scaledHardButton = hardImage.getScaledInstance(hardLabel.getWidth(), hardLabel.getHeight(), Image.SCALE_SMOOTH);    
         ImageIcon hardIcon = new ImageIcon(scaledHardButton);
         hardLabel.setIcon(hardIcon);
 		
 		easyButton = new DifficultyButton(easyLabel, new Point(xPositionButton, yPositionButton));
-		mediumButton = new DifficultyButton(mediumLabel, new Point(xPositionButton, (yPositionButton + yPositionButton/2)));
-		hardButton = new DifficultyButton(hardLabel, new Point(xPositionButton, 3 * yPositionButton));
+		mediumButton = new DifficultyButton(mediumLabel, new Point(xPositionButton, (yPositionButton + widthDifficultyLabel + vGap)));
+		hardButton = new DifficultyButton(hardLabel, new Point(xPositionButton, (yPositionButton + 2 * widthDifficultyLabel + 2 * vGap)));
 		backButton = new BackButton(prev, mainFrame, this);
 
 		current = this;

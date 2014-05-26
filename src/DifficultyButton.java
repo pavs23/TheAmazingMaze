@@ -18,7 +18,7 @@ public class DifficultyButton extends StyledButton{
 
 		this.setLocation(p);
 
-		this.setSize(150, 90);	
+		this.setSize(150, 70);	
 		this.add(difficultyLabel);
 		this.setOpaque(true);
 
