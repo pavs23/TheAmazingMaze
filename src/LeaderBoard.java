@@ -58,7 +58,7 @@ public class LeaderBoard extends JPanel{
 		this.setLayout(null);
 		
 		//set back button
-		back = new BackButton(new Point(20, 380), prev, mainFrame, this);
+		back = new BackButton(prev, mainFrame, this);
 		back.setVisible(true);
 		
 		//set title

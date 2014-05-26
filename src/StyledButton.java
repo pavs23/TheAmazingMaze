@@ -4,13 +4,27 @@ import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
+import java.awt.event.*;
+
 
 public class StyledButton extends JButton{
 
-	 public StyledButton (){
+	 public StyledButton() {
 		 this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		 //this.setFont(this.getFont().deriveFont(16.0f));
-		
-		 
+		 this.setOpaque(true);
+		 final StyledButton curr = this;
+		 this.addMouseListener(new MouseAdapter(){
+		     public void mouseEntered(MouseEvent e) {
+		         curr.setFont(curr.getFont().deriveFont(Font.BOLD));
+		     }
+             public void mouseExited(MouseEvent e) {
+                 curr.setFont(curr.getFont().deriveFont(Font.PLAIN));        
+             }
+		 });
+	 }
+	 
+	 public StyledButton(String text) {
+	     this();
+	     this.setText(text);   
 	 }
 }

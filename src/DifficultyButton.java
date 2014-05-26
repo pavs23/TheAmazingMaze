@@ -25,5 +25,6 @@ public class DifficultyButton extends StyledButton{
 		this.setBackground(Color.black);
 		
 		this.setForeground(Color.white);
+		this.setOpaque(true);
 	}
 }

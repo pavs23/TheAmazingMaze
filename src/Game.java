@@ -46,6 +46,9 @@ public class Game {
     public static final Image PLAYER_2_BACK_IMAGE;
     public static final Image PLAYER_2_LEFT_IMAGE;
     public static final Image PLAYER_2_RIGHT_IMAGE;
+    public static final Image PLAYER_0_IMAGE;
+    public static final Image PLAYER_1_IMAGE;
+    public static final Image PLAYER_2_IMAGE;
 	
 	
 	// Constants in the game.
@@ -79,27 +82,33 @@ public class Game {
     public static final int MEDIUM_Y = 20;   
     public static final int HARD_X = 30;
     public static final int HARD_Y = 30;
+    
+    // Frame size
+    public static final int FRAME_SIZE = 600;
 
     /**
      * Load the images from the files.
      */
     static {
-        File wallFile = new File("wall2.jpg");
-        File roadFile = new File("road2.jpg");
-        File hintFile = new File("hint2.jpg");
-        File coinFile = new File("coin2.jpg"); 
-        File player0FrontFile = new File("boyFront.png");
-        File player0BackFile = new File("boyBack.png");
-        File player0LeftFile = new File("boyLeft.png");
-        File player0RightFile = new File("boyRight.png"); 
-        File player1FrontFile = new File("girlFront.png");
-        File player1BackFile = new File("girlBack.png");
-        File player1LeftFile = new File("girlLeft.png");
-        File player1RightFile = new File("girlRight.png"); 
-        File player2FrontFile = new File("pikachuFront.png");
-        File player2BackFile = new File("pikachuBack.png");
-        File player2LeftFile = new File("pikachuLeft.png");
-        File player2RightFile = new File("pikachuRight.png"); 
+        File wallFile = new File("wall.jpg");
+        File roadFile = new File("road.jpg");
+        File hintFile = new File("hint.jpg");
+        File coinFile = new File("coin.jpg"); 
+        File player0FrontFile = new File("Mario_Front.jpg");
+        File player0BackFile = new File("Mario_Back.jpg");
+        File player0LeftFile = new File("Mario_Left.jpg");
+        File player0RightFile = new File("Mario_Right.jpg"); 
+        File player1FrontFile = new File("Peach_Front.jpg");
+        File player1BackFile = new File("Peach_Back.jpg");
+        File player1LeftFile = new File("Peach_Left.jpg");
+        File player1RightFile = new File("Peach_Right.jpg"); 
+        File player2FrontFile = new File("Yoshi_Front.jpg");
+        File player2BackFile = new File("Yoshi_Back.jpg");
+        File player2LeftFile = new File("Yoshi_Left.jpg");
+        File player2RightFile = new File("Yoshi_Right.jpg"); 
+        File player0File = new File("Mario.jpg");
+        File player1File = new File("Peach.jpg");
+        File player2File = new File("Yoshi.jpg");
         
         Image wallImg = null;
         Image roadImg = null;
@@ -117,6 +126,10 @@ public class Game {
         Image player2BackImg = null;
         Image player2LeftImg = null;
         Image player2RightImg = null;
+        Image player0Img = null;
+        Image player1Img = null;
+        Image player2Img = null;
+        
         
         try {
             wallImg = ImageIO.read(wallFile);
@@ -135,6 +148,9 @@ public class Game {
             player2BackImg = ImageIO.read(player2BackFile);
             player2LeftImg = ImageIO.read(player2LeftFile);
             player2RightImg = ImageIO.read(player2RightFile);
+            player0Img = ImageIO.read(player0File);
+            player1Img = ImageIO.read(player1File);
+            player2Img = ImageIO.read(player2File);
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -153,16 +169,19 @@ public class Game {
             PLAYER_2_BACK_IMAGE = player2BackImg;
             PLAYER_2_LEFT_IMAGE = player2LeftImg;
             PLAYER_2_RIGHT_IMAGE = player2RightImg;
+            PLAYER_0_IMAGE = player0Img;
+            PLAYER_1_IMAGE = player1Img;
+            PLAYER_2_IMAGE = player2Img;
         }   
     }
     
 	public Game(){
 	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
-		newGameButton = new JButton("New Game");
-		cancelButton = new JButton("Quit");
-		leaderboard = new JButton("Leaderboard");
-		instructions = new JButton("Instructions");
+		newGameButton = new StyledButton("New Game");
+		cancelButton = new StyledButton("Quit");
+		leaderboard = new StyledButton("Leaderboard");
+		instructions = new StyledButton("Instructions");
 		
 		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
 		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
@@ -171,7 +190,7 @@ public class Game {
 		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		
 		//Setting the size of the Frame
-		Dimension mainFrameDimension = new Dimension(600, 600);
+		Dimension mainFrameDimension = new Dimension(FRAME_SIZE, FRAME_SIZE);
 		mainFrame.setSize(mainFrameDimension);
 		mainPanel = new MainPanel(mainFrameDimension);		
 		//Setting the layout of the Frame
@@ -211,7 +230,7 @@ public class Game {
                 //Execute when button is pressed
                 System.out.println("You clicked the New Game Button");
                 //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
-                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(600,600), mainFrame, mainPanel);
+                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(Game.FRAME_SIZE,Game.FRAME_SIZE), mainFrame, mainPanel);
                 mainFrame.setVisible(true);
                 mainPanel.setVisible(false);
                 mainFrame.add(gameModeScreen);
