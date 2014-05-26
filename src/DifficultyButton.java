@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 public class DifficultyButton extends StyledButton{
 	
+<<<<<<< HEAD
 	/**
 	 * 
 	 */
@@ -22,6 +23,16 @@ public class DifficultyButton extends StyledButton{
 		this.setText(text);
 		
 		Font myFont = new Font("Monospaced", Font.PLAIN, 25);
+=======
+	public DifficultyButton(String text, Point p){
+		
+		this.setLocation(p);
+		this.setText(text);
+
+		this.setSize(150, 90);	
+		Font myFont = new Font("AR Destine", Font.PLAIN, 25);
+				
+>>>>>>> 396c916e77fb304b712e936a4bef72369985f13f
 		this.setFont(myFont);
 		this.setForeground(Color.black);
 		this.setBackground(Color.black);

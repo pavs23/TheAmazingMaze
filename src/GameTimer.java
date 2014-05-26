@@ -39,7 +39,7 @@ public class GameTimer {
 	/**
 	 * Start the timer.
 	 */
-	public void start(){
+	public void start() {
 		myTimer = new Timer(ONE_SECOND, new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
 	            elapsedSeconds++;
@@ -73,7 +73,7 @@ public class GameTimer {
 	/**
 	 * Pause the timer.
 	 */
-	public void pause(){
+	public void pause() {
 		myTimer.stop();
 	}
 	
@@ -81,7 +81,7 @@ public class GameTimer {
 	 * Get the current second of the timer.
 	 * @return
 	 */
-	public int getCurrentSecond(){
+	public int getCurrentSecond() {
 		return min*60 + sec;
 	}
 }

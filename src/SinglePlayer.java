@@ -64,105 +64,16 @@ public class SinglePlayer extends PlayerModes {
      * Set the event listener to the frame (arrows key press).
      * Use key binding for it.
      */
-    @SuppressWarnings("serial")
     public void setEventListenerToMaze() {
         // Key bindings (so that it works with panel).
-        Action leftKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[0] == null) {      
-                    timers[0] = new Timer(Game.MOVING_TIME, new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                             movePlayer(player, Game.WEST, labels, maze);
-                             if (gameFinished) {
-                                 timers[0].stop();
-                             }
-                        }
-                    });
-                    movePlayer(player, Game.WEST, labels, maze);     
-                    timers[0].start();        
-                }   
-            }
-        };
-        Action leftKeyReleased = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[0] != null) {
-                    timers[0].stop();
-                    timers[0] = null;
-                }
-            }
-        };
-        Action rightKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[1] == null) {      
-                    timers[1] = new Timer(Game.MOVING_TIME, new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                             movePlayer(player, Game.EAST, labels, maze);
-                             if (gameFinished) {
-                                 timers[1].stop();
-                             }
-                        }
-                    });
-                    movePlayer(player, Game.EAST, labels, maze);  
-                    timers[1].start();
-                }
-            }
-        };
-        Action rightKeyReleased = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-               if (timers[1] != null) {
-                    timers[1].stop();
-                    timers[1] = null;
-               }
-            }
-        };
-        Action upKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[2] == null) {      
-                    timers[2] = new Timer(Game.MOVING_TIME, new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                             movePlayer(player, Game.NORTH, labels, maze); 
-                             if (gameFinished) {
-                                 timers[2].stop();
-                             }
-                        }
-                    });
-                    movePlayer(player, Game.NORTH, labels, maze);
-                    timers[2].start();
-                }
-            }
-        };
-        Action upKeyReleased = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[2] != null) {
-                    timers[2].stop();
-                    timers[2] = null;
-                }
-            }
-        };
-        Action downKeyPressed = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[3] == null) {      
-                    timers[3] = new Timer(Game.MOVING_TIME, new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                             movePlayer(player, Game.SOUTH, labels, maze);
-                             if (gameFinished) {
-                                 timers[3].stop();
-                             }
-                        }
-                    });
-                    movePlayer(player, Game.SOUTH, labels, maze); 
-                    timers[3].start();
-                }
-            }
-        };
-        Action downKeyReleased = new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
-                if (timers[3] != null) {
-                    timers[3].stop();
-                    timers[3] = null;
-                }
-            }
-        };
+        Action leftKeyPressed = new PressedAction(0, Game.WEST);
+        Action leftKeyReleased = new ReleasedAction(0);
+        Action rightKeyPressed = new PressedAction(1, Game.EAST);
+        Action rightKeyReleased = new ReleasedAction(1);
+        Action upKeyPressed = new PressedAction(2, Game.NORTH);
+        Action upKeyReleased = new ReleasedAction(2);
+        Action downKeyPressed = new PressedAction(3, Game.SOUTH);
+        Action downKeyReleased = new ReleasedAction(3);
         
         KeyStroke leftKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false);
         KeyStroke rightKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false);
@@ -186,9 +97,71 @@ public class SinglePlayer extends PlayerModes {
     }
     
     /**
+     * A class that represents pressed action.
+     * @author floren
+     *
+     */
+    @SuppressWarnings("serial")
+    private class PressedAction extends AbstractAction {
+        private int index;
+        private Direction dir;
+        
+        /**
+         * Constructor of the class.
+         * @param index the index of timer related to the event listener.
+         * @param dir the direction of player movement that is tied to this listener.
+         */
+        public PressedAction(int index, Direction dir) {
+            this.index = index;
+            this.dir = dir;
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+            if (timers[index] == null) {      
+                timers[index] = new Timer(Game.MOVING_TIME, new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                         movePlayer(player, dir, labels, maze);
+                         if (gameFinished) {
+                             timers[index].stop();
+                         }
+                    }
+                });
+                movePlayer(player, dir, labels, maze); 
+                timers[index].start();
+            }
+        }
+    }
+    
+    /**
+     * A class that represents released action.
+     * @author floren
+     *
+     */
+    @SuppressWarnings("serial")
+    private class ReleasedAction extends AbstractAction {
+        private int index;
+        
+        /**
+         * Constructor of the class.
+         * @param index the index of timer related to the event listener.
+         */
+        public ReleasedAction(int index) {
+            this.index = index;
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+            if (timers[index] != null) {
+                timers[index].stop();
+                timers[index] = null;
+            }
+        }
+    }
+    
+    /**
      * Dispose the frame and create new frame for winning player.
      * Stop the timers.
      * Show the score of the winning player.
+     * @param playerName the name of the winning player.
      */
     public void gameEndWin(String playerName) {
         gameFinished = true;

@@ -41,8 +41,8 @@ public class MazeGenerator {
 	}
 	
 	/**
-	 * Generate the maze as an array. 0 = wall, 1 = path.
-	 * @return
+	 * Generate the maze as an array.
+	 * @return the array of the maze.
 	 */
 	public int[][] generateMazeArray() {
 	    if (maze == null) {
@@ -122,28 +122,6 @@ public class MazeGenerator {
 	 * @param currY number of tiles in y dimension.
 	 */
 	private void createMaze(int currX, int currY) {
-	    /*
-        ArrayList<Direction> dirCopy = new ArrayList<Direction>(directions);
-        Collections.shuffle(dirCopy);
-        for (Direction dir : dirCopy) {
-            // Compute the next tile according to the Direction chosen.
-            int nextX = currX + dir.getXDirection();
-            int nextY = currY + dir.getYDirection();
-            // Only execute if the next point is in the maze and has not been visited.
-            if (isTileInMaze(nextX, nextY)
-                && !tiles[nextX][nextY].isTileVisited()) {
-                // Remove the walls between the tiles.
-                tiles[currX][currY].setBoundaryTrue(dir);
-                tiles[nextX][nextY].setBoundaryTrue(dir.getOpposite());
-                // Mark the tiles as visited.
-                tiles[currX][currY].visited();
-                tiles[nextX][nextY].visited();
-                // Do the recursive call for the chosen neighbor.
-                createMaze(nextX, nextY);
-            }
-        }
-        */
-	    ///*
 	      tiles[currX][currY].visited();
 	      ArrayList<Tile> tilesList = new ArrayList<Tile>();
 	      tilesList.add(tiles[currX][currY]);
@@ -169,14 +147,19 @@ public class MazeGenerator {
 	          // Randomized the direction that the tile will go.
 	          ArrayList<Direction> dirCopy = new ArrayList<Direction>(directions);
 	          Collections.shuffle(dirCopy);
-	          for (Direction dir : dirCopy) {
+	          int i = 0;
+	          boolean successorFound = false;
+	         
+	          while (!successorFound && i < dirCopy.size()) {
+	              Direction dir = dirCopy.get(i);
 	              int nextTileX = currTileX + dir.getXDirection();
-	              int nextTileY = currTileY + dir.getYDirection();
-	              if (isTileInMaze(nextTileX, nextTileY) && !tiles[nextTileX][nextTileY].isTileVisited()) {
-	                  successor = tiles[nextTileX][nextTileY];
-	                  currDir = dir;
-	                  break;
-	              }
+                  int nextTileY = currTileY + dir.getYDirection();
+                  if (isTileInMaze(nextTileX, nextTileY) && !tiles[nextTileX][nextTileY].isTileVisited()) {
+                      successor = tiles[nextTileX][nextTileY];
+                      currDir = dir;
+                      successorFound = true;
+                  }
+	              i++;
 	          }
 
 	          if (successor != null) {
@@ -187,7 +170,6 @@ public class MazeGenerator {
 	              tilesList.add(successor);
 	          }
 	      }
-	      //*/
 	}
 	
 	/**

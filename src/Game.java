@@ -22,6 +22,12 @@ public class Game {
 	private JButton cancelButton;
 	private JPanel mainPanel;
 	private JButton leaderboard;
+	private JButton instructions;
+	
+	// Positions of the buttons on the panel
+	private static final int xButtonPosition = 225;
+	private static final int yButtonPosition = 100;
+	private static final int verticalGap = 110;
 	
 	// The Images used in the game.
 	public static final Image ROAD_IMAGE;
@@ -156,6 +162,7 @@ public class Game {
 		newGameButton = new JButton("New Game");
 		cancelButton = new JButton("Quit");
 		leaderboard = new JButton("Leaderboard");
+		instructions = new JButton("Instructions");
 		
 		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
 		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
@@ -164,7 +171,7 @@ public class Game {
 		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		
 		//Setting the size of the Frame
-		Dimension mainFrameDimension = new Dimension(500, 500);
+		Dimension mainFrameDimension = new Dimension(600, 600);
 		mainFrame.setSize(mainFrameDimension);
 		mainPanel = new MainPanel(mainFrameDimension);		
 		//Setting the layout of the Frame
@@ -175,23 +182,28 @@ public class Game {
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		Insets insets = mainPanel.getInsets();
-		newGameButton.setLocation(175,100);
+		newGameButton.setLocation(xButtonPosition, yButtonPosition);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(175, 320);
+		cancelButton.setLocation(new Point(xButtonPosition, yButtonPosition + (2 * verticalGap)));
 		cancelButton.setSize(150, 90);
 		cancelButton.setVisible(true);
 		
-		leaderboard.setLocation(new Point(175,210));
+		leaderboard.setLocation(new Point(xButtonPosition, yButtonPosition + verticalGap));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setSize(new Dimension(150, 90));
 		leaderboard.setVisible(true);
+		
+		instructions.setLocation(175, 400);
+		instructions.setSize(150, 90);
+		instructions.setVisible(true);
 		
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
 		mainPanel.add(cancelButton);
+		mainPanel.add(instructions);
 		
 		mainFrame.add(mainPanel);
 		
@@ -201,7 +213,7 @@ public class Game {
                 //Execute when button is pressed
                 System.out.println("You clicked the New Game Button");
                 //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
-                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(500,500), mainFrame, mainPanel);
+                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(600,600), mainFrame, mainPanel);
                 mainFrame.setVisible(true);
                 mainPanel.setVisible(false);
                 mainFrame.add(gameModeScreen);
@@ -226,22 +238,57 @@ public class Game {
 			public void actionPerformed(ActionEvent arg0) {
 				
 			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
-				ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
+				/*ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
+				ArrayList<ArrayList<LeaderBoardEntry>> test = new ArrayList<ArrayList<LeaderBoardEntry>>();
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
+				test.add(leaders);
 				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
 				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
 				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
 				leaders.add(a);
 				leaders.add(b);
-				leaders.add(t);
+				leaders.add(t);*/
 				
-				LeaderBoard leaderBoard = new LeaderBoard(leaders, mainPanel, mainFrame);
+				ArrayList<ArrayList<LeaderBoardEntry>> leaderBoards = new ArrayList<ArrayList<LeaderBoardEntry>>();
+				ScoreManager manager = new ScoreManager();
+				leaderBoards.add(manager.getScores(ADVENTURE_MODE, EASY));
+				leaderBoards.add(manager.getScores(COIN_MODE, EASY));
+				leaderBoards.add(manager.getScores(ADVENTURE_MODE, MEDIUM));
+				leaderBoards.add(manager.getScores(COIN_MODE, MEDIUM));
+				leaderBoards.add(manager.getScores(ADVENTURE_MODE, HARD));
+				leaderBoards.add(manager.getScores(COIN_MODE, HARD));
+				
+				LeaderBoard leaderBoard = new LeaderBoard(leaderBoards, mainPanel, mainFrame);
 				mainPanel.setVisible(false);
 				
+				mainFrame.add(leaderBoard);
 				leaderboard.setVisible(true);
 				mainFrame.remove(mainPanel);
 				
 			}
 		});
+		
+		instructions.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+            {
+                //Execute when button is pressed
+                System.out.println("You clicked the Instructions Button");
+                //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
+                InstructionPanel instructionScreen = new InstructionPanel(mainFrame, mainPanel);
+                mainFrame.setVisible(true);
+                mainPanel.setVisible(false);
+                mainFrame.remove(mainPanel);
+                mainFrame.add(instructionScreen);
+                
+               
+                //dsFrame.run();
+            }
+		});
+		
 	}
 	
 		

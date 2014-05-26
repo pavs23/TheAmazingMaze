@@ -18,6 +18,10 @@ public class Player {
      * Constructor of the class.
      * @param initialCoordinate the initial coordinate of player.
      * @param name the name of the player.
+     * @param front the icon representing the front view of the player.
+     * @param back the icon representing the back view of the player.
+     * @param left the icon representing the left view of the player.
+     * @param right the icon representing the right view of the player.
      */
     public Player(Coordinate initialCoordinate, String name, 
             ImageIcon front, ImageIcon back, ImageIcon left, ImageIcon right) {
