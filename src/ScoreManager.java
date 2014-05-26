@@ -92,7 +92,7 @@ public class ScoreManager {
 		} else {
 			savedNewScore = false;
 			int i = 0;
-			while (i < scoreArray.size()+1 && !savedNewScore){
+			while (i < NUM_SCORES && i < scoreArray.size() + 1 && !savedNewScore){
 				if (i == scoreArray.size()){
 					LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 					scoreArray.add(i, newLBE);
@@ -106,8 +106,7 @@ public class ScoreManager {
 					}
 				}
 				i++;
-			}
-			
+			}		
 		}
 			
 		if (savedNewScore){

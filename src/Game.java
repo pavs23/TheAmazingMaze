@@ -20,7 +20,7 @@ import javax.swing.JPanel;
 public class Game {
 	private JFrame mainFrame;
 	private JButton newGameButton;
-	private JButton cancelButton;
+	private JButton quitButton;
 	private JPanel mainPanel;
 	private JButton leaderboard;
 	private JButton instructions;
@@ -50,6 +50,8 @@ public class Game {
     public static final Image PLAYER_0_IMAGE;
     public static final Image PLAYER_1_IMAGE;
     public static final Image PLAYER_2_IMAGE;
+    public static final Image PLAYER_1_TEXT_IMAGE;
+    public static final Image PLAYER_2_TEXT_IMAGE;
 	
 	
 	// Constants in the game.
@@ -68,7 +70,7 @@ public class Game {
     // The player characters.
     public static final int PLAYER_0 = 0;
     public static final int PLAYER_1 = 1;
-    public static final int PLAYER_2 = 2;
+    public static final int PLAYER_2 = 2;  
 
     // Directions in the game.
     public static final Direction NORTH = new Direction(0, -1);
@@ -89,6 +91,7 @@ public class Game {
     
     // Background For MazeGame
     public static final ImageIcon BACKGROUND;
+    
 
     /**
      * Load the images from the files.
@@ -114,6 +117,8 @@ public class Game {
         File player1File = new File("Peach.jpg");
         File player2File = new File("Yoshi.jpg");
         File backgroundFile = new File("Background.jpg");
+        File player1TextFile = new File("Player_1_Text.jpg");
+        File player2TextFile = new File("Player_2_Text.jpg");
         
         Image wallImg = null;
         Image roadImg = null;
@@ -135,8 +140,9 @@ public class Game {
         Image player1Img = null;
         Image player2Img = null;
         Image backgroundImg = null;
-        
-        
+        Image player1TextImg = null;
+        Image player2TextImg = null;
+         
         try {
             wallImg = ImageIO.read(wallFile);
             roadImg = ImageIO.read(roadFile);
@@ -158,6 +164,8 @@ public class Game {
             player1Img = ImageIO.read(player1File);
             player2Img = ImageIO.read(player2File);
             backgroundImg = ImageIO.read(backgroundFile);
+            player1TextImg = ImageIO.read(player1TextFile);
+            player2TextImg = ImageIO.read(player2TextFile);
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -180,40 +188,38 @@ public class Game {
             PLAYER_1_IMAGE = player1Img;
             PLAYER_2_IMAGE = player2Img;
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
+            PLAYER_1_TEXT_IMAGE = player1TextImg;
+            PLAYER_2_TEXT_IMAGE = player2TextImg;
         }   
     }
     
 	public Game(){
 	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
+		
 		newGameButton = new StyledButton("New Game");
-		cancelButton = new StyledButton("Quit");
+		quitButton = new QuitButton(mainFrame);
 		leaderboard = new StyledButton("Leaderboard");
 		instructions = new StyledButton("Instructions");
-		
-		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		
-		newGameButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		
 		//Setting the size of the Frame
 		Dimension mainFrameDimension = new Dimension(FRAME_SIZE, FRAME_SIZE);
 		mainFrame.setSize(mainFrameDimension);
+		mainFrame.setResizable(false);
+		
 		mainPanel = new MainPanel(mainFrameDimension);		
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
-		Insets insets = mainPanel.getInsets();
 		newGameButton.setLocation(xButtonPosition, yButtonPosition);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(new Point(xButtonPosition, yButtonPosition + (2 * verticalGap)));
-		cancelButton.setSize(150, 90);
-		cancelButton.setVisible(true);
+		quitButton.setLocation(new Point(xButtonPosition, yButtonPosition + (2 * verticalGap)));
+		quitButton.setSize(150, 90);
+		quitButton.setVisible(true);
 		
 		leaderboard.setLocation(new Point(xButtonPosition, yButtonPosition + verticalGap));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
@@ -227,7 +233,7 @@ public class Game {
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
-		mainPanel.add(cancelButton);
+		mainPanel.add(quitButton);
 		mainPanel.add(instructions);
 		
 		mainFrame.add(mainPanel);
@@ -247,36 +253,11 @@ public class Game {
             }
 		});
 		
-		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                System.out.println("You clicked the Exit Button");
-                mainFrame.dispose();
-            }
-		});
-		
 		
 		leaderboard.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
-				/*ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
-				ArrayList<ArrayList<LeaderBoardEntry>> test = new ArrayList<ArrayList<LeaderBoardEntry>>();
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
-				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
-				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
-				leaders.add(a);
-				leaders.add(b);
-				leaders.add(t);*/
 				
 				ArrayList<ArrayList<LeaderBoardEntry>> leaderBoards = new ArrayList<ArrayList<LeaderBoardEntry>>();
 				ScoreManager manager = new ScoreManager();
