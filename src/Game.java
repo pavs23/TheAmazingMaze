@@ -171,6 +171,8 @@ public class Game {
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
 		
+		
+		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		Insets insets = mainPanel.getInsets();
 		newGameButton.setLocation(175,100);
