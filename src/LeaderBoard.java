@@ -55,10 +55,15 @@ public class LeaderBoard extends JPanel{
 		
 		//set current panel
 		this.setSize(new Dimension(600, 600));
-		this.setLayout(null);
+		this.setLayout(null);	
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
 		//set back button
-		back = new BackButton(new Point(20, 380), prev, mainFrame, this);
+		back = new BackButton(prev, mainFrame, this);
 		back.setVisible(true);
 		
 		//set title
@@ -66,7 +71,7 @@ public class LeaderBoard extends JPanel{
 		title.setSize(new Dimension(250, 40));
 		title.setLocation(new Point(160, 20));
 		title.setVisible(true);
-		
+        
 		//set leader board
 		//easy normal
 		easyNormalTitle = new JLabel("Easy Adventure Mode");
@@ -148,26 +153,28 @@ public class LeaderBoard extends JPanel{
 		hardCoinScores.setVisible(true);
 		
 		//generate frame
-		this.add(back);
-		this.add(title);
-		this.add(easyNormalTitle);
-		this.add(easyNormalNames);
-		this.add(easyNormalScores);
-		this.add(easyCoinTitle);
-		this.add(easyCoinNames);
-		this.add(easyCoinScores);
-		this.add(mediumNormalTitle);
-		this.add(mediumNormalNames);
-		this.add(mediumNormalScores);
-		this.add(mediumCoinTitle);
-		this.add(mediumCoinNames);
-		this.add(mediumCoinScores);
-		this.add(hardNormalTitle);
-		this.add(hardNormalNames);
-		this.add(hardNormalScores);
-		this.add(hardCoinTitle);
-		this.add(hardCoinNames);
-		this.add(hardCoinScores);
+		panelLabel.add(back);
+		panelLabel.add(title);
+		panelLabel.add(easyNormalTitle);
+		panelLabel.add(easyNormalNames);
+		panelLabel.add(easyNormalScores);
+		panelLabel.add(easyCoinTitle);
+		panelLabel.add(easyCoinNames);
+		panelLabel.add(easyCoinScores);
+		panelLabel.add(mediumNormalTitle);
+		panelLabel.add(mediumNormalNames);
+		panelLabel.add(mediumNormalScores);
+		panelLabel.add(mediumCoinTitle);
+		panelLabel.add(mediumCoinNames);
+		panelLabel.add(mediumCoinScores);
+		panelLabel.add(hardNormalTitle);
+		panelLabel.add(hardNormalNames);
+		panelLabel.add(hardNormalScores);
+		panelLabel.add(hardCoinTitle);
+		panelLabel.add(hardCoinNames);
+		panelLabel.add(hardCoinScores);
+		
+		this.add(panelLabel);
 		
 	}
 	

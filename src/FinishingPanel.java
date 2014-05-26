@@ -9,7 +9,7 @@ public class FinishingPanel extends JPanel{
 	private JLabel message;
 	
 	public FinishingPanel(String text){
-		this.setSize(new Dimension(500, 500));
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		message.setText(text);
 	}
 }

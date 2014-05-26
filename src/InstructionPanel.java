@@ -31,8 +31,13 @@ public class InstructionPanel extends JPanel {
 		
 		//set current panel
 		this.setLayout(null);
-		this.setSize(new Dimension(600, 600));
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
 		//set title
 		title = new JLabel("Instructions");
         title.setSize(new Dimension(250, 40));
@@ -52,14 +57,15 @@ public class InstructionPanel extends JPanel {
         coinInstructions.setVisible(true);
         
         //set back button
-        backButton = new BackButton(new Point(20, 380), prev, mainFrame, this);
+        backButton = new BackButton(prev, mainFrame, this);
         backButton.setVisible(true);
         
         //create frame
         this.add(backButton);
         this.add(title);
         this.add(adventureInstructions);
-        this.add(coinInstructions);
+        this.add(coinInstructions);        
+        this.add(panelLabel);
 		
 	}
 	

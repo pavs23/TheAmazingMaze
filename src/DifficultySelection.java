@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -34,16 +35,24 @@ public class DifficultySelection extends JPanel {
 		easyButton = new DifficultyButton("Easy", new Point(xPositionButton, yPositionButton));
 		mediumButton = new DifficultyButton("Medium", new Point(xPositionButton, (2 * yPositionButton + vGap)));
 		hardButton = new DifficultyButton("Hard", new Point(xPositionButton,3 * yPositionButton + (2 * vGap)));
-		backButton = new BackButton(new Point(20, 480), prev, mainFrame, this);
+		backButton = new BackButton(prev, mainFrame, this);
 		current = this;
 		
-		this.add(easyButton);
-		this.add(mediumButton);
-		this.add(hardButton);
-		this.add(backButton);
-		this.setSize(new Dimension(600, 600));
-		this.setLayout(null);
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        this.setLayout(null);
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
+        panelLabel.add(easyButton);
+        panelLabel.add(mediumButton);
+        panelLabel.add(hardButton);
+        panelLabel.add(backButton);
+        
+        this.add(panelLabel);
+        
 		easyButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {

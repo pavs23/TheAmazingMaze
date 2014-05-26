@@ -1,9 +1,14 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.awt.Image;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -22,6 +27,10 @@ public class SelectCharacterPanel extends JPanel {
     private JRadioButton button5;
     private JRadioButton button6;
     
+    ImageIcon player0;
+    ImageIcon player1;
+    ImageIcon player2;
+    
     private JLabel title;
     private JLabel playerOneLabel;
     private JLabel playerTwoLabel;
@@ -33,10 +42,6 @@ public class SelectCharacterPanel extends JPanel {
     private JPanel current;
     private BackButton backButton;
     
-    private ImageIcon player0;
-    private ImageIcon player1;
-    private ImageIcon player2;
-    
     private final int xLabelPosition = 240;
 	private final int yLabelPosition = 80;
 	
@@ -46,15 +51,16 @@ public class SelectCharacterPanel extends JPanel {
 	private final int xButton= 150;
 	private final int yButton = 80;
     
-    private static final int CHAR_DIMENSION = 75;
+    private static final int CHAR_X_DIMENSION = 75;
+    private static final int CHAR_Y_DIMENSION = 100;
     
     public SelectCharacterPanel(final JFrame mainFrame, final int mode, final JPanel prev, final int singleOrMulti, 
                                 final int difficulty, final String player1Name, final String player2Name){
         
         // Set the image dimension.
-        Image scaledPlayer0 = Game.PLAYER_0_FRONT_IMAGE.getScaledInstance(CHAR_DIMENSION, CHAR_DIMENSION, Image.SCALE_SMOOTH);
-        Image scaledPlayer1 = Game.PLAYER_1_FRONT_IMAGE.getScaledInstance(CHAR_DIMENSION, CHAR_DIMENSION, Image.SCALE_SMOOTH);
-        Image scaledPlayer2 = Game.PLAYER_2_FRONT_IMAGE.getScaledInstance(CHAR_DIMENSION, CHAR_DIMENSION, Image.SCALE_SMOOTH);
+        Image scaledPlayer0 = Game.PLAYER_0_IMAGE.getScaledInstance(CHAR_X_DIMENSION, CHAR_Y_DIMENSION, Image.SCALE_SMOOTH);
+        Image scaledPlayer1 = Game.PLAYER_1_IMAGE.getScaledInstance(CHAR_X_DIMENSION, CHAR_Y_DIMENSION, Image.SCALE_SMOOTH);
+        Image scaledPlayer2 = Game.PLAYER_2_IMAGE.getScaledInstance(CHAR_X_DIMENSION, CHAR_Y_DIMENSION, Image.SCALE_SMOOTH);
                     
         // Create icon from image.        
         player0 = new ImageIcon(scaledPlayer0);
@@ -62,40 +68,53 @@ public class SelectCharacterPanel extends JPanel {
         player2 = new ImageIcon(scaledPlayer2);
         
         current = this;
-        this.setSize(new Dimension(600, 600));
+        this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         this.setLayout(null);
         
+        JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
+        File selectCharacterFile = new File("Select_Character.jpg");
+        Image selectCharacterImage = null;
+        try {
+            selectCharacterImage = ImageIO.read(selectCharacterFile);
+        } catch (IOException e) {}
         title = new JLabel();
-        title.setSize(new Dimension(250, 40));
-        title.setLocation(new Point(240, 20));
+        title.setSize(new Dimension(400, 80));
+        title.setLocation(new Point(100, 20));
+        Image scaledSelectCharacter = selectCharacterImage.getScaledInstance(title.getWidth(), title.getHeight(), Image.SCALE_SMOOTH);    
+        ImageIcon selectCharacterIcon = new ImageIcon(scaledSelectCharacter);
+        title.setIcon(selectCharacterIcon);
         
         playerOneLabel = new JLabel("Player 1:");
         playerOneLabel.setSize(new Dimension(100,30));
         playerOneLabel.setLocation(new Point(xLabelPosition, yLabelPosition));
         
-        button1 = new JRadioButton("Boy");
+        button1 = new JRadioButton("Mario");
         button1.setSize(new Dimension(90, 30));
         button1.setLocation(new Point(xButton, 110));
         button1.setSelected(true);
         
-        button2 = new JRadioButton("Girl");
+        button2 = new JRadioButton("Peach");
         button2.setSize(new Dimension(90, 30));
         button2.setLocation(new Point(xButton + 100, 110));
         
-        button3 = new JRadioButton("Pikachu");
+        button3 = new JRadioButton("Yoshi");
         button3.setSize(new Dimension(90, 30));
         button3.setLocation(new Point(xButton + 200, 110));
         
-        button4 = new JRadioButton("Boy");
+        button4 = new JRadioButton("Mario");
         button4.setSize(new Dimension(90, 30));
         button4.setLocation(new Point(xButton, 250));
         button4.setSelected(true);
         
-        button5 = new JRadioButton("Girl");
+        button5 = new JRadioButton("Peach");
         button5.setSize(new Dimension(90, 30));
         button5.setLocation(new Point(xButton + 100, 250));
         
-        button6 = new JRadioButton("Pikachu");
+        button6 = new JRadioButton("Yoshi");
         button6.setSize(new Dimension(90, 30));
         button6.setLocation(new Point(xButton + 200, 250));
         
@@ -114,12 +133,12 @@ public class SelectCharacterPanel extends JPanel {
         playerTwoLabel.setLocation(new Point(xLabelPosition, 220));
         
         imageLabel1 = new JLabel();
-        imageLabel1.setSize(new Dimension(CHAR_DIMENSION, CHAR_DIMENSION));
+        imageLabel1.setSize(new Dimension(CHAR_X_DIMENSION, CHAR_Y_DIMENSION));
         imageLabel1.setLocation(new Point(xImageLabelPosition, yImageLabelPosition));
         imageLabel1.setIcon(player0);
         
         imageLabel2 = new JLabel();
-        imageLabel2.setSize(new Dimension(CHAR_DIMENSION, CHAR_DIMENSION));
+        imageLabel2.setSize(new Dimension(CHAR_X_DIMENSION, CHAR_Y_DIMENSION));
         imageLabel2.setLocation(new Point(xImageLabelPosition, yImageLabelPosition + 150));
         imageLabel2.setIcon(player0);
         
@@ -128,25 +147,26 @@ public class SelectCharacterPanel extends JPanel {
         done.setSize(new Dimension(100, 40));
         done.setLocation(new Point(240, 390));
         
-        backButton = new BackButton(new Point(20, 480), prev, mainFrame, this);
+        backButton = new BackButton(prev, mainFrame, this);
         
-        this.add(title);
-        this.add(playerOneLabel);
-        this.add(playerTwoLabel);
-        this.add(button1);
-        this.add(button2);
-        this.add(button3);
-        this.add(button4);
-        this.add(button5);
-        this.add(button6);
-        this.add(imageLabel1);
-        this.add(imageLabel2);
+        panelLabel.add(title);
+        panelLabel.add(playerOneLabel);
+        panelLabel.add(playerTwoLabel);
+        panelLabel.add(button1);
+        panelLabel.add(button2);
+        panelLabel.add(button3);
+        panelLabel.add(button4);
+        panelLabel.add(button5);
+        panelLabel.add(button6);
+        panelLabel.add(imageLabel1);
+        panelLabel.add(imageLabel2);
         
-        this.add(done);
-        this.add(backButton);
+        panelLabel.add(done);
+        panelLabel.add(backButton);
+        
+        this.add(panelLabel);
         
         if (singleOrMulti == Game.SINGLE_PLAYER) {
-            title.setText("Select Character");
             playerOneLabel.setVisible(false);
             playerTwoLabel.setVisible(false);
             button4.setVisible(false);
@@ -154,8 +174,6 @@ public class SelectCharacterPanel extends JPanel {
             button6.setVisible(false);
             imageLabel2.setVisible(false);
             done.setLocation(new Point(200, 250));
-        } else {
-            title.setText("Select Characters");
         }
         
         done.addActionListener(new ActionListener() {
