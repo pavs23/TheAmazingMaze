@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class Game {
 	private JFrame mainFrame;
 	private JButton newGameButton;
-	private JButton cancelButton;
+	private JButton quitButton;
 	private JPanel mainPanel;
 	private JButton leaderboard;
 	private JButton instructions;
@@ -60,6 +60,8 @@ public class Game {
     public static final Image PLAYER_0_IMAGE;
     public static final Image PLAYER_1_IMAGE;
     public static final Image PLAYER_2_IMAGE;
+    public static final Image PLAYER_1_TEXT_IMAGE;
+    public static final Image PLAYER_2_TEXT_IMAGE;
     public static final Image PLAYER_2_RIGHT_IMAGE;
     public static final Image THE_AMAZING_MAZE_HEADING;
     public static final Image YOSHI_TONGUE_IMAGE;
@@ -83,7 +85,7 @@ public class Game {
     // The player characters.
     public static final int PLAYER_0 = 0;
     public static final int PLAYER_1 = 1;
-    public static final int PLAYER_2 = 2;
+    public static final int PLAYER_2 = 2;  
 
     // Directions in the game.
     public static final Direction NORTH = new Direction(0, -1);
@@ -104,6 +106,7 @@ public class Game {
     
     // Background For MazeGame
     public static final ImageIcon BACKGROUND;
+    
 
     /**
      * Load the images from the files.
@@ -130,11 +133,13 @@ public class Game {
         File player1File = new File("Peach.jpg");
         File player2File = new File("Yoshi.jpg");
         File backgroundFile = new File("Background.jpg");
+        File player1TextFile = new File("Player_1_Text.jpg");
+        File player2TextFile = new File("Player_2_Text.jpg");
         File theAmazingMazeHeadingFile = new File("theAmazingMazeLogo.gif");
         File yoshiTongueFile = new File("yoshiTongue.jpg");
         File mario2File = new File("mario2.png");
         File peach2File = new File("peach2.jpg");
-        
+
         Image wallImg = null;
         Image roadImg = null;
         Image hintImg = null;
@@ -155,11 +160,14 @@ public class Game {
         Image player1Img = null;
         Image player2Img = null;
         Image backgroundImg = null;
+        Image player1TextImg = null;
+        Image player2TextImg = null;
         Image theAmazingMazeHeadingImg = null;
         Image yoshiTongueImg = null;
         Image mario2Img = null;
         Image peach2Img = null;
         
+
         try {
             wallImg = ImageIO.read(wallFile);
             roadImg = ImageIO.read(roadFile);
@@ -181,10 +189,13 @@ public class Game {
             player1Img = ImageIO.read(player1File);
             player2Img = ImageIO.read(player2File);
             backgroundImg = ImageIO.read(backgroundFile);
+            player1TextImg = ImageIO.read(player1TextFile);
+            player2TextImg = ImageIO.read(player2TextFile);
             theAmazingMazeHeadingImg = ImageIO.read(theAmazingMazeHeadingFile);
             yoshiTongueImg = ImageIO.read(yoshiTongueFile);
             mario2Img = ImageIO.read(mario2File);
             peach2Img = ImageIO.read(peach2File);
+
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -206,6 +217,8 @@ public class Game {
             PLAYER_0_IMAGE = player0Img;
             PLAYER_1_IMAGE = player1Img;
             PLAYER_2_IMAGE = player2Img;
+            PLAYER_1_TEXT_IMAGE = player1TextImg;
+            PLAYER_2_TEXT_IMAGE = player2TextImg;
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
             THE_AMAZING_MAZE_HEADING = theAmazingMazeHeadingImg;
             YOSHI_TONGUE_IMAGE = yoshiTongueImg;
@@ -217,8 +230,9 @@ public class Game {
 	public Game(){
 	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
+		
 		newGameButton = new StyledButton("New Game");
-		cancelButton = new StyledButton("Quit");
+		quitButton = new QuitButton(mainFrame);
 		leaderboard = new StyledButton("Leaderboard");
 		instructions = new StyledButton("Instructions");
 		//images
@@ -232,15 +246,11 @@ public class Game {
 		peachIcon = new ImageIcon(PEACH2_IMAGE);
 		peachLabel = new JLabel();
 		
-		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		
-		newGameButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		
 		//Setting the size of the Frame
 		Dimension mainFrameDimension = new Dimension(FRAME_SIZE, FRAME_SIZE);
 		mainFrame.setSize(mainFrameDimension);
+		mainFrame.setResizable(false);
+		
 		mainPanel = new MainPanel(mainFrameDimension);		
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
@@ -252,9 +262,9 @@ public class Game {
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
-		cancelButton.setSize(150, 90);
-		cancelButton.setVisible(true);
+		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
+		quitButton.setSize(150, 90);
+		quitButton.setVisible(true);
 		
 		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
@@ -290,7 +300,7 @@ public class Game {
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
-		mainPanel.add(cancelButton);
+		mainPanel.add(quitButton);
 		mainPanel.add(instructions);
 		mainPanel.add(title);
 		mainPanel.add(yoshiLabel);
@@ -315,36 +325,11 @@ public class Game {
             }
 		});
 		
-		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                System.out.println("You clicked the Exit Button");
-                mainFrame.dispose();
-            }
-		});
-		
 		
 		leaderboard.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
-				/*ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
-				ArrayList<ArrayList<LeaderBoardEntry>> test = new ArrayList<ArrayList<LeaderBoardEntry>>();
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
-				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
-				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
-				leaders.add(a);
-				leaders.add(b);
-				leaders.add(t);*/
 				
 				ArrayList<ArrayList<LeaderBoardEntry>> leaderBoards = new ArrayList<ArrayList<LeaderBoardEntry>>();
 				ScoreManager manager = new ScoreManager();

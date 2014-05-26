@@ -1,5 +1,10 @@
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Point;
 import java.awt.event.*;
+
 import javax.swing.*;
+
 import java.util.ArrayList;
 
 /**
@@ -170,15 +175,22 @@ public class SinglePlayer extends PlayerModes {
         disposeFrame();
         int currSec = timer.getCurrentSecond();
         int score = currSec * Game.SCORE_MULTIPLIER;
-        // CREATE A FRAME FOR WINNING PLAYER HERE.
-        // Store the score in the leader board.
+        
         ScoreManager manageScore = new ScoreManager();
         manageScore.setNewScore(getMode(), difficulty, playerName, score);
-        ArrayList<LeaderBoardEntry> lists = manageScore.getScores(getMode(), difficulty);
-        for (LeaderBoardEntry each : lists) {
-            System.out.println(each.getScoreName() + " " + each.getScoreNum());
-        }
-        System.out.println(playerName + " wins! The score = " + score);
+        
+        // Create a frame for winning player.
+        JFrame newFrame = new JFrame();
+        newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        newFrame.setResizable(false);
+        newFrame.setLayout(null);
+        JPanel winPanel = new WinPanel(newFrame, playerName, score, getMode(), difficulty);
+        winPanel.setLocation(new Point(0, 0));
+        newFrame.add(winPanel);
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+        newFrame.setLocationRelativeTo(null);
+        newFrame.setVisible(true);
+       
     }
     
     /**
@@ -189,8 +201,17 @@ public class SinglePlayer extends PlayerModes {
         gameFinished = true;
         freeze();
         disposeFrame();
-        // CREATE A FRAME FOR LOSING PLAYER HERE
-        System.out.println("You lose...");
+        // Create a frame for losing player.
+        JFrame newFrame = new JFrame();
+        newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        newFrame.setResizable(false);
+        newFrame.setLayout(null);
+        JPanel losePanel = new LosePanel(newFrame);
+        losePanel.setLocation(new Point(0, 0));
+        newFrame.add(losePanel);
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+        newFrame.setLocationRelativeTo(null);
+        newFrame.setVisible(true);
     }
     
     /**
