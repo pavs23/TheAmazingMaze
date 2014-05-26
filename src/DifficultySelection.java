@@ -29,10 +29,10 @@ public class DifficultySelection extends JPanel {
 	private JPanel current;
 	
 	private static final int xPositionButton = 225;
-	private static final int yPositionButton = 100;
+	private static final int yPositionButton = 150;
 	private static final int xDifficultyLabel = 150;
 	private static final int yDifficultyLabel = 90;
-	private static final int vGap = 30;
+	private static final int vGap = 20;
 	
 	//public JFrame difficultySelection;
 	private JLabel easyLabel;
@@ -75,8 +75,8 @@ public class DifficultySelection extends JPanel {
         hardLabel.setIcon(hardIcon);
 		
 		easyButton = new DifficultyButton(easyLabel, new Point(xPositionButton, yPositionButton));
-		mediumButton = new DifficultyButton(mediumLabel, new Point(xPositionButton, (2 * yPositionButton + vGap)));
-		hardButton = new DifficultyButton(hardLabel, new Point(xPositionButton,3 * yPositionButton + (2 * vGap)));
+		mediumButton = new DifficultyButton(mediumLabel, new Point(xPositionButton, (yPositionButton + yPositionButton/2)));
+		hardButton = new DifficultyButton(hardLabel, new Point(xPositionButton, 3 * yPositionButton));
 		backButton = new BackButton(prev, mainFrame, this);
 
 		current = this;

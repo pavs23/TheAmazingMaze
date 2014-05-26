@@ -17,16 +17,9 @@ public class DifficultyButton extends StyledButton{
 	public DifficultyButton(JLabel difficultyLabel, Point p){
 
 		this.setLocation(p);
-		//this.setText(text);
 
 		this.setSize(150, 90);	
-
-		Font myFont = new Font("AR Destine", Font.PLAIN, 25);
-				
-		this.setFont(myFont);
-		this.setBackground(Color.black);
-		
-		this.setForeground(Color.white);
+		this.add(difficultyLabel);
 		this.setOpaque(true);
 
 	}
