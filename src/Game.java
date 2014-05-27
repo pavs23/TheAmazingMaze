@@ -235,6 +235,7 @@ public class Game {
 		quitButton = new QuitButton(mainFrame);
 		leaderboard = new StyledButton("Leaderboard");
 		instructions = new StyledButton("Instructions");
+		
 		//images
 		Image scaledHeading = THE_AMAZING_MAZE_HEADING.getScaledInstance(519, 51, Image.SCALE_SMOOTH);
 		heading = new ImageIcon(scaledHeading);

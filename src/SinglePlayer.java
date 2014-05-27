@@ -1,9 +1,16 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import java.util.ArrayList;
 
@@ -40,8 +47,58 @@ public class SinglePlayer extends PlayerModes {
         // Create the labels, mazePanel, and player.
         labels = generateLabels();
         mazePanel = generateMazePanel(labels);
+        mazePanel.setBackground(Color.YELLOW);
         
-        addToGamePanel(mazePanel);
+        JPanel mazeAndInst = new JPanel();
+        mazeAndInst.setLayout(new BoxLayout(mazeAndInst, BoxLayout.Y_AXIS));
+        
+        JPanel instruction = new JPanel();
+        instruction.setBackground(Color.YELLOW);
+        instruction.setLayout(new FlowLayout());
+        
+        JLabel playerLabel = new JLabel();
+        playerLabel.setBorder(new EmptyBorder(0, 0, 0, 50) );
+        playerLabel.setLayout(new BoxLayout(playerLabel, BoxLayout.Y_AXIS));
+        
+        JLabel playerIcon = new JLabel();
+        Image playerImg;
+        if (playerCode == Game.PLAYER_0) {
+            playerImg = Game.PLAYER_0_IMAGE;
+        } else if (playerCode == Game.PLAYER_1) {
+            playerImg = Game.PLAYER_1_IMAGE;
+        } else {
+            playerImg = Game.PLAYER_2_IMAGE;
+        }
+        ImageIcon icon = new ImageIcon(playerImg.getScaledInstance(50, 80, Image.SCALE_SMOOTH));
+        playerIcon.setIcon(icon);
+        
+        
+        JLabel namePlayer = new JLabel();
+        namePlayer.setText(playerName);
+        namePlayer.setOpaque(false);
+        namePlayer.setFont(new Font("Arial", Font.BOLD, 24));
+        namePlayer.setBorder(new EmptyBorder(0, 0, 0, 50) );
+        JLabel playerKeys = new JLabel();
+        
+        File arrowFile = new File("Arrow_Key.jpg");
+        Image arrowImage = null;
+        try {
+            arrowImage = ImageIO.read(arrowFile);
+        } catch (IOException e) {}
+        Image scaledArrow = arrowImage.getScaledInstance(250, 100, Image.SCALE_SMOOTH);    
+        ImageIcon arrowIcon = new ImageIcon(scaledArrow);
+        playerKeys.setIcon(arrowIcon);
+        
+        playerLabel.add(namePlayer);
+        playerLabel.add(playerIcon);
+        
+        instruction.add(playerLabel);
+        instruction.add(playerKeys);
+        
+        mazeAndInst.add(instruction);
+        mazeAndInst.add(mazePanel);
+        
+        addToGamePanel(mazeAndInst);
         player = generatePlayer(playerName, playerCode);
         generateHint();
         generateTimer();
@@ -49,7 +106,7 @@ public class SinglePlayer extends PlayerModes {
         // Paint the player.
         paintPlayer(player, player.getCoordinate(), Game.EAST, labels);
         
-        // All components are added, how the frame.
+        // All components are added, show the frame.
         showFrame();
     }
     
@@ -218,7 +275,9 @@ public class SinglePlayer extends PlayerModes {
      * Create the side menu with a hint button.
      */
     private void generateHint() {
-        hintButton = new JButton("Get Hint : " + hintRemaining);
+        hintButton = new StyledButton("Get Hint : " + hintRemaining);
+        hintButton.setSize(new Dimension(80, 40));
+        hintButton.setLocation(new Point(10, 130));
         hintButton.setFocusable(false);
         // Print the first few steps to goal.
         // The number of steps are depending on the maze size.
