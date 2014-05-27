@@ -26,46 +26,34 @@ public class SingleOrMulti extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel titleLabel;
-	private JLabel onePlayerLabel;
-	private JLabel twoPlayerLabel;
 	
 	private SingleOrMulti currentScreen;
 	private BackButton back;
-	private NumberOfPlayersButton onePlayer;
-	private NumberOfPlayersButton twoPlayer;
-	//private JLabel heading;
-	
-	private static final int lengthNumOfPlayerLabel = 150;
-	private static final int widthNumOfPlayerLabel = 70;
-	private final int xPositionButton = 225;
-	private final int yPositionButton = 150;
-	private static final int vGap = 30;
+	private StyledButton onePlayer;
+	private StyledButton twoPlayer;
 	
 	public SingleOrMulti(final int mode, final JFrame mainFrame, final JPanel prev){
+		
+		final int lengthNumOfPlayerLabel = 150;
+		final int widthNumOfPlayerLabel = 70;
+		final int xPositionButton = 225;
+		final int yPositionButton = 150;
+		final int vGap = 30;
+		
+		
 		this.setSize(new Dimension(600, 600));
 		this.setLayout(null);
-		
-		
-		JLabel panelLabel = new JLabel();
-        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
-        panelLabel.setLayout(null);
-        panelLabel.setIcon(Game.BACKGROUND);
         
 		currentScreen = this;
 		
 		//input image
 		File titleFile = new File("numOfPlayer.png");
-		File onePlayerFile = new File("onePlayer.png");
-		File twoPlayerFile = new File("twoPlayer.png");
 		
 		Image titleImage = null;
-		Image onePlayerImage = null;
-		Image twoPlayerImage = null;
 		
 		try{
 			titleImage = ImageIO.read(titleFile);
-			onePlayerImage = ImageIO.read(onePlayerFile);
-			twoPlayerImage = ImageIO.read(twoPlayerFile);
+		
 		}catch (IOException e) {}
 		
 		titleLabel = new JLabel();
@@ -75,25 +63,21 @@ public class SingleOrMulti extends JPanel{
         ImageIcon titleIcon = new ImageIcon(scaledTitleButton);
         titleLabel.setIcon(titleIcon);
 		
-        onePlayerLabel = new JLabel();
-        onePlayerLabel.setSize(new Dimension(lengthNumOfPlayerLabel, widthNumOfPlayerLabel));
-        onePlayerLabel.setLocation(new Point(100, 20));
-        Image scaledOnePButton = onePlayerImage.getScaledInstance(onePlayerLabel.getWidth(), onePlayerLabel.getHeight(), Image.SCALE_SMOOTH);    
-        ImageIcon onePIcon = new ImageIcon(scaledOnePButton);
-        onePlayerLabel.setIcon(onePIcon);
-		
-        twoPlayerLabel = new JLabel();
-        twoPlayerLabel.setSize(new Dimension(lengthNumOfPlayerLabel, widthNumOfPlayerLabel));
-        twoPlayerLabel.setLocation(new Point(100, 20));
-        Image scaledTwoPButton = twoPlayerImage.getScaledInstance(twoPlayerLabel.getWidth(), twoPlayerLabel.getHeight(), Image.SCALE_SMOOTH);    
-        ImageIcon twoPIcon = new ImageIcon(scaledTwoPButton);
-        twoPlayerLabel.setIcon(twoPIcon);
-		
-		onePlayer = new NumberOfPlayersButton(onePlayerLabel, new Point(xPositionButton, yPositionButton));
-		twoPlayer = new NumberOfPlayersButton(twoPlayerLabel, new Point(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap));
+        
+        onePlayer = new StyledButton("One Player");
+		twoPlayer = new StyledButton("Two Player");
+		onePlayer.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
+		twoPlayer.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
+		onePlayer.setLocation(xPositionButton, yPositionButton);
+		twoPlayer.setLocation(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap);
 		
 		back = new BackButton(prev, mainFrame, this);
 		
+		JLabel panelLabel = new JLabel();
+        panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        panelLabel.setLayout(null);
+        panelLabel.setIcon(Game.BACKGROUND);
+        
 		panelLabel.add(titleLabel);
 		panelLabel.add(onePlayer);
 		panelLabel.add(twoPlayer);
@@ -101,7 +85,7 @@ public class SingleOrMulti extends JPanel{
 		
 		this.add(panelLabel);
 		
-		//Set the colour of the buttons in this class as well as other formatting
+		//Set the color of the buttons in this class as well as other formatting
 		
 		onePlayer.addActionListener(new ActionListener() {
 			

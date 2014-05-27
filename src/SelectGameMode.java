@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
@@ -20,8 +19,8 @@ public class SelectGameMode extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel;
-	private GameModeButton coinMode;
-	private GameModeButton adventureMode;
+	private StyledButton coinMode;
+	private StyledButton adventureMode;
 	private SelectGameMode currentScreen;
 	private BackButton back;
 	
@@ -50,25 +49,27 @@ public class SelectGameMode extends JPanel {
         ImageIcon titleIcon = new ImageIcon(scaledTitleButton);
         titleLabel.setIcon(titleIcon);
 		
-		coinMode = new GameModeButton("Coin", Color.orange);
-		
-		adventureMode = new GameModeButton("Adventure", Color.orange);
+		coinMode = new StyledButton("Coin");
+		adventureMode = new StyledButton("Adventure");
 		coinMode.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
 		adventureMode.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
+		adventureMode.setLocation(xPositionButton, yPositionButton);
+		coinMode.setLocation(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap);
 
+		back = new BackButton(prev, mainFrame, this);
+		
 		JLabel panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
         
         panelLabel.add(titleLabel);
-        
-		//Insets insets = this.getInsets();
-		adventureMode.setLocation(xPositionButton, yPositionButton);
-		coinMode.setLocation(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap);
-
-		back = new BackButton(prev, mainFrame, this);
-
+        panelLabel.add(back);
+		panelLabel.add(adventureMode);
+		panelLabel.add(coinMode);
+		
+		this.add(panelLabel);
+		
 		// Still need to hook up this panel to the frame.
 		// also need to put the frame into the chain of the frames.
 
@@ -105,9 +106,5 @@ public class SelectGameMode extends JPanel {
 			}
 		});
 		
-		panelLabel.add(back);
-		panelLabel.add(adventureMode);
-		panelLabel.add(coinMode);
-		this.add(panelLabel);
 	}
 }

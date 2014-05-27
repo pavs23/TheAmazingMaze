@@ -429,8 +429,7 @@ public abstract class PlayerModes {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
-                StyledButton resumeButton = new StyledButton();
-                resumeButton.setText("Resume");
+                StyledButton resumeButton = new StyledButton("Resume");
                 resumeButton.setVisible(true);
                 resumeButton.setPreferredSize(new Dimension(250, 150));
                 resumeButton.setFont(new Font("Arial", Font.PLAIN, 60));
