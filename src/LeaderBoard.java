@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -28,34 +29,9 @@ public class LeaderBoard extends JPanel{
 	private static final int X_INCREMENT = 200;
 	private static final int Y_INCREMENT = 140;
 	private static final int SCORE_INCREMENT = 100;
-	private static final int HEADING_DECREMENT = 15;
+	private static final int HEADING_DECREMENT = 5;
 	private static final Dimension LEADER_BOARD_TITLE_SIZE = new Dimension(150, 40);
 	private static final Dimension LEADER_BOARD_SIZE = new Dimension(100, 100);
-	
-	//general GUI things
-	private BackButton back;
-	private ImageIcon headingIcon;
-	private JLabel headingLabel;
-
-	//score displaying JLabels
-	private JLabel easyNormalTitle;
-	private JLabel easyNormalNames;
-	private JLabel easyNormalScores;
-	private JLabel easyCoinTitle;
-	private JLabel easyCoinNames;
-	private JLabel easyCoinScores;
-	private JLabel mediumNormalTitle;
-	private JLabel mediumNormalNames;
-	private JLabel mediumNormalScores;
-	private JLabel mediumCoinTitle;
-	private JLabel mediumCoinNames;
-	private JLabel mediumCoinScores;
-	private JLabel hardNormalTitle;
-	private JLabel hardNormalNames;
-	private JLabel hardNormalScores;
-	private JLabel hardCoinTitle;
-	private JLabel hardCoinNames;
-	private JLabel hardCoinScores;
 	
 	/**
 	 * Sets up all of the leader boards and displays them.
@@ -64,6 +40,38 @@ public class LeaderBoard extends JPanel{
 	 * @param mainFrame is the main window
 	 */
 	public LeaderBoard(ArrayList<ArrayList<LeaderBoardEntry>> leaders, final JPanel prev, final JFrame mainFrame){
+		
+		//j labels
+		//images
+		BackButton back;
+		ImageIcon headingIcon;
+		JLabel headingLabel;
+		ImageIcon easyNormalIcon;
+		ImageIcon easyCoinIcon;
+		ImageIcon mediumNormalIcon;
+		ImageIcon mediumCoinIcon;
+		ImageIcon hardAdventureIcon;
+		ImageIcon hardCoinIcon;
+
+		//score displaying JLabels
+		JLabel easyNormalTitle;
+		JLabel easyNormalNames;
+		JLabel easyNormalScores;
+		JLabel easyCoinTitle;
+		JLabel easyCoinNames;
+		JLabel easyCoinScores;
+		JLabel mediumNormalTitle;
+		JLabel mediumNormalNames;
+		JLabel mediumNormalScores;
+		JLabel mediumCoinTitle;
+		JLabel mediumCoinNames;
+		JLabel mediumCoinScores;
+		JLabel hardNormalTitle;
+		JLabel hardNormalNames;
+		JLabel hardNormalScores;
+		JLabel hardCoinTitle;
+		JLabel hardCoinNames;
+		JLabel hardCoinScores;
 		
 		//set current panel
 		this.setSize(new Dimension(600, 600));
@@ -88,8 +96,11 @@ public class LeaderBoard extends JPanel{
         
 		//set leader board
 		//easy normal
-		easyNormalTitle = new JLabel("Easy Adventure Mode");
-		easyNormalTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+        Image scaledEasyNormal = Game.EASY_ADVENTURE_HEADING.getScaledInstance(135, 7, Image.SCALE_SMOOTH);
+		easyNormalIcon = new ImageIcon(scaledEasyNormal);
+		easyNormalTitle = new JLabel();
+		easyNormalTitle.setIcon(easyNormalIcon);
+		easyNormalTitle.setSize(269, 13);
 		easyNormalTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
 		easyNormalTitle.setVisible(true);
 		easyNormalNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_NORMAL_LOC)));
@@ -101,8 +112,11 @@ public class LeaderBoard extends JPanel{
 		easyNormalScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE));
 		easyNormalScores.setVisible(true);
 		//easy coin
-		easyCoinTitle = new JLabel("Easy Coin Mode");
-		easyCoinTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		Image scaledCoinNormal = Game.EASY_COIN_HEADING.getScaledInstance(97, 7, Image.SCALE_SMOOTH);
+		easyCoinIcon = new ImageIcon(scaledCoinNormal);
+		easyCoinTitle = new JLabel();
+		easyCoinTitle.setIcon(easyNormalIcon);
+		easyCoinTitle.setSize(269, 13);
 		easyCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
 		easyCoinTitle.setVisible(true);
 		easyCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_COIN_LOC)));
