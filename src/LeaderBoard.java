@@ -2,6 +2,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,16 +15,27 @@ import javax.swing.JPanel;
 public class LeaderBoard extends JPanel{
 	
 	//constants for iterating through array list of array lists
-	private final int EASY_NORMAL_LOC = 0;
-	private final int EASY_COIN_LOC = 1;
-	private final int MEDIUM_NORMAL_LOC = 2;
-	private final int MEDIUM_COIN_LOC = 3;
-	private final int HARD_NORMAL_LOC = 4;
-	private final int HARD_COIN_LOC = 5;
+	private static final int EASY_NORMAL_LOC = 0;
+	private static final int EASY_COIN_LOC = 1;
+	private static final int MEDIUM_NORMAL_LOC = 2;
+	private static final int MEDIUM_COIN_LOC = 3;
+	private static final int HARD_NORMAL_LOC = 4;
+	private static final int HARD_COIN_LOC = 5;
+	
+	//constants for GUI positions
+	private static final int LEADER_BOARD_X_COORDINATE = 110;
+	private static final int LEADER_BOARD_Y_COORDINATE = 70;
+	private static final int X_INCREMENT = 200;
+	private static final int Y_INCREMENT = 140;
+	private static final int SCORE_INCREMENT = 100;
+	private static final int HEADING_DECREMENT = 15;
+	private static final Dimension LEADER_BOARD_TITLE_SIZE = new Dimension(150, 40);
+	private static final Dimension LEADER_BOARD_SIZE = new Dimension(100, 100);
 	
 	//general GUI things
-	private JLabel title;
 	private BackButton back;
+	private ImageIcon headingIcon;
+	private JLabel headingLabel;
 
 	//score displaying JLabels
 	private JLabel easyNormalTitle;
@@ -66,95 +78,97 @@ public class LeaderBoard extends JPanel{
 		back = new BackButton(prev, mainFrame, this);
 		back.setVisible(true);
 		
-		//set title
-		title = new JLabel("Our Amazing Champions!");
-		title.setSize(new Dimension(250, 40));
-		title.setLocation(new Point(160, 20));
-		title.setVisible(true);
+		//set heading
+		headingIcon = new ImageIcon(Game.LEADER_BOARD_HEADING);
+        headingLabel = new JLabel();
+        headingLabel.setIcon(headingIcon);
+        headingLabel.setSize(new Dimension(377, 19));
+        headingLabel.setLocation(new Point(110, 20));
+        headingLabel.setVisible(true);
         
 		//set leader board
 		//easy normal
 		easyNormalTitle = new JLabel("Easy Adventure Mode");
-		easyNormalTitle.setSize(new Dimension(150, 40));
-		easyNormalTitle.setLocation(new Point(20, 55));
+		easyNormalTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		easyNormalTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
 		easyNormalTitle.setVisible(true);
 		easyNormalNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_NORMAL_LOC)));
-		easyNormalNames.setSize(new Dimension(100, 100));
-		easyNormalNames.setLocation(new Point(20, 70));
+		easyNormalNames.setSize(LEADER_BOARD_SIZE);
+		easyNormalNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE));
 		easyNormalNames.setVisible(true);		
 		easyNormalScores = new JLabel(displayLeaderBoardScores(leaders.get(EASY_NORMAL_LOC)));
-		easyNormalScores.setSize(new Dimension(100, 100));
-		easyNormalScores.setLocation(new Point(120, 70));
+		easyNormalScores.setSize(LEADER_BOARD_SIZE);
+		easyNormalScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE));
 		easyNormalScores.setVisible(true);
 		//easy coin
 		easyCoinTitle = new JLabel("Easy Coin Mode");
-		easyCoinTitle.setSize(new Dimension(150, 40));
-		easyCoinTitle.setLocation(new Point(270, 55));
+		easyCoinTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		easyCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
 		easyCoinTitle.setVisible(true);
 		easyCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_COIN_LOC)));
-		easyCoinNames.setSize(new Dimension(100, 100));
-		easyCoinNames.setLocation(new Point(270, 70));
+		easyCoinNames.setSize(LEADER_BOARD_SIZE);
+		easyCoinNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE));
 		easyCoinNames.setVisible(true);		
 		easyCoinScores = new JLabel(displayLeaderBoardScores(leaders.get(EASY_COIN_LOC)));
-		easyCoinScores.setSize(new Dimension(100, 100));
-		easyCoinScores.setLocation(new Point(370, 70));
+		easyCoinScores.setSize(LEADER_BOARD_SIZE);
+		easyCoinScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE));
 		easyCoinScores.setVisible(true);
 		//medium normal
 		mediumNormalTitle = new JLabel("Medium Adventure Mode");
-		mediumNormalTitle.setSize(new Dimension(150, 40));
-		mediumNormalTitle.setLocation(new Point(20, 155));
+		mediumNormalTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		mediumNormalTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT-HEADING_DECREMENT));
 		mediumNormalTitle.setVisible(true);
 		mediumNormalNames = new JLabel(displayLeaderBoardNames(leaders.get(MEDIUM_NORMAL_LOC)));
-		mediumNormalNames.setSize(new Dimension(100, 100));
-		mediumNormalNames.setLocation(new Point(20, 170));
+		mediumNormalNames.setSize(LEADER_BOARD_SIZE);
+		mediumNormalNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
 		mediumNormalNames.setVisible(true);		
 		mediumNormalScores = new JLabel(displayLeaderBoardScores(leaders.get(MEDIUM_NORMAL_LOC)));
-		mediumNormalScores.setSize(new Dimension(100, 100));
-		mediumNormalScores.setLocation(new Point(120, 170));
+		mediumNormalScores.setSize(LEADER_BOARD_SIZE);
+		mediumNormalScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
 		mediumNormalScores.setVisible(true);
 		//medium coin
 		mediumCoinTitle = new JLabel("Medium Coin Mode");
-		mediumCoinTitle.setSize(new Dimension(150, 40));
-		mediumCoinTitle.setLocation(new Point(270, 155));
+		mediumCoinTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		mediumCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT-HEADING_DECREMENT));
 		mediumCoinTitle.setVisible(true);
 		mediumCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(MEDIUM_COIN_LOC)));
-		mediumCoinNames.setSize(new Dimension(100, 100));
-		mediumCoinNames.setLocation(new Point(270, 170));
+		mediumCoinNames.setSize(LEADER_BOARD_SIZE);
+		mediumCoinNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
 		mediumCoinNames.setVisible(true);		
 		mediumCoinScores = new JLabel(displayLeaderBoardScores(leaders.get(MEDIUM_COIN_LOC)));
-		mediumCoinScores.setSize(new Dimension(100, 100));
-		mediumCoinScores.setLocation(new Point(370, 170));
+		mediumCoinScores.setSize(LEADER_BOARD_SIZE);
+		mediumCoinScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
 		mediumCoinScores.setVisible(true);
 		//hard normal
 		hardNormalTitle = new JLabel("Hard Adventure Mode");
-		hardNormalTitle.setSize(new Dimension(150, 40));
-		hardNormalTitle.setLocation(new Point(20, 255));
+		hardNormalTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		hardNormalTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)-HEADING_DECREMENT));
 		hardNormalTitle.setVisible(true);
 		hardNormalNames = new JLabel(displayLeaderBoardNames(leaders.get(HARD_NORMAL_LOC)));
-		hardNormalNames.setSize(new Dimension(100, 100));
-		hardNormalNames.setLocation(new Point(20, 270));
+		hardNormalNames.setSize(LEADER_BOARD_SIZE);
+		hardNormalNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
 		hardNormalNames.setVisible(true);		
 		hardNormalScores = new JLabel(displayLeaderBoardScores(leaders.get(HARD_NORMAL_LOC)));
-		hardNormalScores.setSize(new Dimension(100, 100));
-		hardNormalScores.setLocation(new Point(120, 270));
+		hardNormalScores.setSize(LEADER_BOARD_SIZE);
+		hardNormalScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
 		hardNormalScores.setVisible(true);
 		//hard coin
 		hardCoinTitle = new JLabel("Hard Coin Mode");
-		hardCoinTitle.setSize(new Dimension(150, 40));
-		hardCoinTitle.setLocation(new Point(270, 255));
+		hardCoinTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+		hardCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)-HEADING_DECREMENT));
 		hardCoinTitle.setVisible(true);
 		hardCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(HARD_COIN_LOC)));
-		hardCoinNames.setSize(new Dimension(100, 100));
-		hardCoinNames.setLocation(new Point(270, 270));
+		hardCoinNames.setSize(LEADER_BOARD_SIZE);
+		hardCoinNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
 		hardCoinNames.setVisible(true);		
 		hardCoinScores = new JLabel(displayLeaderBoardScores(leaders.get(HARD_COIN_LOC)));
-		hardCoinScores.setSize(new Dimension(100, 100));
-		hardCoinScores.setLocation(new Point(370, 270));
+		hardCoinScores.setSize(LEADER_BOARD_SIZE);
+		hardCoinScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
 		hardCoinScores.setVisible(true);
 		
 		//generate frame
 		panelLabel.add(back);
-		panelLabel.add(title);
+		panelLabel.add(headingLabel);
 		panelLabel.add(easyNormalTitle);
 		panelLabel.add(easyNormalNames);
 		panelLabel.add(easyNormalScores);

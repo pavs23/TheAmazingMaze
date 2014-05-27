@@ -1,3 +1,5 @@
+import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.event.*;
 
 import javax.swing.*;
@@ -250,8 +252,17 @@ public class MultiPlayer extends PlayerModes {
         gameFinished = true;
         freeze();
         disposeFrame();
-        // CREATE FRAME FOR WINNING PLAYER IN MULTI GAME HERE
-        System.out.println(playerName + " wins!");
+        // Create a frame for winning player.
+        JFrame newFrame = new JFrame();
+        newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+        newFrame.setResizable(false);
+        newFrame.setLayout(null);
+        JPanel winPanel = new WinPanel(newFrame, playerName);
+        winPanel.setLocation(new Point(0, 0));
+        newFrame.add(winPanel);
+        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+        newFrame.setLocationRelativeTo(null);
+        newFrame.setVisible(true);
     }
     
     /**

@@ -14,21 +14,32 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 public class Game {
 	private JFrame mainFrame;
 	private JButton newGameButton;
-	private JButton cancelButton;
+	private JButton quitButton;
 	private JPanel mainPanel;
 	private JButton leaderboard;
 	private JButton instructions;
 	
+	//image files
+	private ImageIcon heading;
+	private JLabel title;
+	private ImageIcon yoshiIcon;
+	private JLabel yoshiLabel;
+	private ImageIcon marioIcon;
+	private JLabel marioLabel;
+	private ImageIcon peachIcon;
+	private JLabel peachLabel;
+	
 	// Positions of the buttons on the panel
-	private static final int xButtonPosition = 225;
-	private static final int yButtonPosition = 100;
-	private static final int verticalGap = 110;
+	private static final int X_BUTTON_POSITION = 225;
+	private static final int Y_BUTTON_POSITION = 80;
+	private static final int VERTICAL_GAP = 130;
 	
 	// The Images used in the game.
 	public static final Image ROAD_IMAGE;
@@ -46,10 +57,20 @@ public class Game {
     public static final Image PLAYER_2_FRONT_IMAGE;
     public static final Image PLAYER_2_BACK_IMAGE;
     public static final Image PLAYER_2_LEFT_IMAGE;
-    public static final Image PLAYER_2_RIGHT_IMAGE;
     public static final Image PLAYER_0_IMAGE;
     public static final Image PLAYER_1_IMAGE;
     public static final Image PLAYER_2_IMAGE;
+    public static final Image PLAYER_1_TEXT_IMAGE;
+    public static final Image PLAYER_2_TEXT_IMAGE;
+    public static final Image PLAYER_2_RIGHT_IMAGE;
+    public static final Image THE_AMAZING_MAZE_HEADING;
+    public static final Image YOSHI_TONGUE_IMAGE;
+    public static final Image MARIO2_IMAGE;
+    public static final Image PEACH2_IMAGE;
+    public static final Image INSTRUCTIONS_HEADING;
+    public static final Image ADVENTURE_MODE_INSTRUCTIONS_HEADING;
+    public static final Image COIN_MODE_INSTRUCTIONS_HEADING;
+    public static final Image LEADER_BOARD_HEADING;
 	
 	
 	// Constants in the game.
@@ -68,7 +89,7 @@ public class Game {
     // The player characters.
     public static final int PLAYER_0 = 0;
     public static final int PLAYER_1 = 1;
-    public static final int PLAYER_2 = 2;
+    public static final int PLAYER_2 = 2;  
 
     // Directions in the game.
     public static final Direction NORTH = new Direction(0, -1);
@@ -89,11 +110,13 @@ public class Game {
     
     // Background For MazeGame
     public static final ImageIcon BACKGROUND;
+    
 
     /**
      * Load the images from the files.
      */
     static {
+
         File wallFile = new File("wall.jpg");
         File roadFile = new File("road.jpg");
         File hintFile = new File("hint.jpg");
@@ -114,7 +137,17 @@ public class Game {
         File player1File = new File("Peach.jpg");
         File player2File = new File("Yoshi.jpg");
         File backgroundFile = new File("Background.jpg");
-        
+        File player1TextFile = new File("Player_1_Text.jpg");
+        File player2TextFile = new File("Player_2_Text.jpg");
+        File theAmazingMazeHeadingFile = new File("theAmazingMazeLogo.gif");
+        File yoshiTongueFile = new File("yoshiTongue.jpg");
+        File mario2File = new File("mario2.png");
+        File peach2File = new File("peach2.jpg");
+        File instructionsHeadingFile = new File ("instructionsHeading.png");
+        File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
+        File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
+        File leaderBoardHeadingFile = new File ("leaderBoardHeading.png");
+
         Image wallImg = null;
         Image roadImg = null;
         Image hintImg = null;
@@ -135,8 +168,17 @@ public class Game {
         Image player1Img = null;
         Image player2Img = null;
         Image backgroundImg = null;
-        
-        
+        Image player1TextImg = null;
+        Image player2TextImg = null;
+        Image theAmazingMazeHeadingImg = null;
+        Image yoshiTongueImg = null;
+        Image mario2Img = null;
+        Image peach2Img = null;
+        Image instructionsHeadingImg = null;
+        Image adventureModeInstructionsHeadingImg = null;
+        Image coinModeInstructionsHeadingImg = null;
+        Image leaderBoardHeadingImg = null;
+
         try {
             wallImg = ImageIO.read(wallFile);
             roadImg = ImageIO.read(roadFile);
@@ -158,6 +200,17 @@ public class Game {
             player1Img = ImageIO.read(player1File);
             player2Img = ImageIO.read(player2File);
             backgroundImg = ImageIO.read(backgroundFile);
+            player1TextImg = ImageIO.read(player1TextFile);
+            player2TextImg = ImageIO.read(player2TextFile);
+            theAmazingMazeHeadingImg = ImageIO.read(theAmazingMazeHeadingFile);
+            yoshiTongueImg = ImageIO.read(yoshiTongueFile);
+            mario2Img = ImageIO.read(mario2File);
+            peach2Img = ImageIO.read(peach2File);
+            instructionsHeadingImg = ImageIO.read(instructionsHeadingFile);
+            adventureModeInstructionsHeadingImg = ImageIO.read(adventureModeInstructionsHeadingFile);
+            coinModeInstructionsHeadingImg = ImageIO.read(coinModeInstructionsHeadingFile);
+            leaderBoardHeadingImg = ImageIO.read(leaderBoardHeadingFile);
+            
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -179,27 +232,44 @@ public class Game {
             PLAYER_0_IMAGE = player0Img;
             PLAYER_1_IMAGE = player1Img;
             PLAYER_2_IMAGE = player2Img;
+            PLAYER_1_TEXT_IMAGE = player1TextImg;
+            PLAYER_2_TEXT_IMAGE = player2TextImg;
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
+            THE_AMAZING_MAZE_HEADING = theAmazingMazeHeadingImg;
+            YOSHI_TONGUE_IMAGE = yoshiTongueImg;
+            MARIO2_IMAGE = mario2Img;
+            PEACH2_IMAGE = peach2Img;
+            INSTRUCTIONS_HEADING = instructionsHeadingImg;
+            ADVENTURE_MODE_INSTRUCTIONS_HEADING = adventureModeInstructionsHeadingImg;
+            COIN_MODE_INSTRUCTIONS_HEADING = coinModeInstructionsHeadingImg;
+            LEADER_BOARD_HEADING = leaderBoardHeadingImg;
         }   
     }
     
 	public Game(){
 	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
+		
 		newGameButton = new StyledButton("New Game");
-		cancelButton = new StyledButton("Quit");
+		quitButton = new QuitButton(mainFrame);
 		leaderboard = new StyledButton("Leaderboard");
 		instructions = new StyledButton("Instructions");
-		
-		//newGameButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		//cancelButton.setBorder(BorderFactory.createBevelBorder(0, null, null, Color.black, null));
-		
-		newGameButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		cancelButton.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
+		//images
+		Image scaledHeading = THE_AMAZING_MAZE_HEADING.getScaledInstance(519, 51, Image.SCALE_SMOOTH);
+		heading = new ImageIcon(scaledHeading);
+		title = new JLabel();
+		yoshiIcon = new ImageIcon(YOSHI_TONGUE_IMAGE);
+		yoshiLabel = new JLabel();
+		marioIcon = new ImageIcon(MARIO2_IMAGE);
+		marioLabel = new JLabel();
+		peachIcon = new ImageIcon(PEACH2_IMAGE);
+		peachLabel = new JLabel();
 		
 		//Setting the size of the Frame
 		Dimension mainFrameDimension = new Dimension(FRAME_SIZE, FRAME_SIZE);
 		mainFrame.setSize(mainFrameDimension);
+		mainFrame.setResizable(false);
+		
 		mainPanel = new MainPanel(mainFrameDimension);		
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
@@ -209,28 +279,55 @@ public class Game {
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		Insets insets = mainPanel.getInsets();
-		newGameButton.setLocation(xButtonPosition, yButtonPosition);
+		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
 		
-		cancelButton.setLocation(new Point(xButtonPosition, yButtonPosition + (2 * verticalGap)));
-		cancelButton.setSize(150, 90);
-		cancelButton.setVisible(true);
+		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
+		quitButton.setSize(150, 90);
+		quitButton.setVisible(true);
 		
-		leaderboard.setLocation(new Point(xButtonPosition, yButtonPosition + verticalGap));
+		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setSize(new Dimension(150, 90));
 		leaderboard.setVisible(true);
 		
-		instructions.setLocation(175, 400);
+		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
+		instructions.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		instructions.setSize(150, 90);
 		instructions.setVisible(true);
+		
+		//images
+		title.setIcon(heading);
+		title.setLocation(new Point(40, 20));
+		title.setSize(new Dimension(519, 51));
+		title.setVisible(true);
+		
+		yoshiLabel.setIcon(yoshiIcon);
+		yoshiLabel.setLocation(new Point(20, 347));
+		yoshiLabel.setSize(new Dimension(320, 206));
+		yoshiLabel.setVisible(true);
+		
+		marioLabel.setIcon(marioIcon);
+		marioLabel.setLocation(new Point(380, 150));
+		marioLabel.setSize(new Dimension(192, 292));
+		marioLabel.setVisible(true);
+		
+		peachLabel.setIcon(peachIcon);
+		peachLabel.setLocation(new Point(5, 60));
+		peachLabel.setSize(new Dimension(237, 300));
+		peachLabel.setVisible(true);
 		
 		//Adding the newGameButton to the frame
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
-		mainPanel.add(cancelButton);
+		mainPanel.add(quitButton);
 		mainPanel.add(instructions);
+		mainPanel.add(title);
+		mainPanel.add(yoshiLabel);
+		mainPanel.add(marioLabel);
+		mainPanel.add(peachLabel);
+		mainPanel.setBackground(Color.WHITE);
 		
 		mainFrame.add(mainPanel);
 		
@@ -249,36 +346,11 @@ public class Game {
             }
 		});
 		
-		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                System.out.println("You clicked the Exit Button");
-                mainFrame.dispose();
-            }
-		});
-		
 		
 		leaderboard.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
-			    // READ THE LEADERBOARDS FOR THE MODES & DIFFICULTY HERE.
-				/*ArrayList<LeaderBoardEntry> leaders = new ArrayList<LeaderBoardEntry>();
-				ArrayList<ArrayList<LeaderBoardEntry>> test = new ArrayList<ArrayList<LeaderBoardEntry>>();
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				test.add(leaders);
-				LeaderBoardEntry a = new LeaderBoardEntry("Pavan", 1000);
-				LeaderBoardEntry b = new LeaderBoardEntry("Jo", 800);
-				LeaderBoardEntry t = new LeaderBoardEntry("Tim", 100);
-				leaders.add(a);
-				leaders.add(b);
-				leaders.add(t);*/
 				
 				ArrayList<ArrayList<LeaderBoardEntry>> leaderBoards = new ArrayList<ArrayList<LeaderBoardEntry>>();
 				ScoreManager manager = new ScoreManager();
