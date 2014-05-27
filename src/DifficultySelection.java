@@ -1,6 +1,6 @@
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Insets;
+
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,19 +9,24 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 /**
  * 
- * @author pavan
+ * @author pavan & Jo
  *
  */
 
 public class DifficultySelection extends JPanel {
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private DifficultyButton easyButton;
 	private DifficultyButton mediumButton;
 	private DifficultyButton hardButton;
@@ -35,24 +40,43 @@ public class DifficultySelection extends JPanel {
 	private static final int vGap = 30;
 	
 	//public JFrame difficultySelection;
+	private JLabel titleLabel;
 	private JLabel easyLabel;
 	private JLabel mediumLabel;
 	private JLabel hardLabel;
 	
+	/**
+	 * Select Difficulty Level
+	 * @param mainFrame main frame
+	 * @param mode game mode
+	 * @param players 
+	 * @param prev
+	 */
 	public DifficultySelection(final JFrame mainFrame, final int mode, final int players, final JPanel prev){
 		
-
+		File titleFile = new File("selectDifficulty.png");
 		File easyFile = new File("easy.png");
 		File mediumFile = new File("Medium.png");
 		File hardFile = new File("Hard.png");
+		
+		Image titleImage = null;
         Image easyImage = null;
         Image mediumImage = null;
         Image hardImage = null;
         try {
+        	titleImage = ImageIO.read(titleFile);
             easyImage = ImageIO.read(easyFile);
             mediumImage = ImageIO.read(mediumFile);
             hardImage = ImageIO.read(hardFile);
         } catch (IOException e) {}
+        
+        titleLabel = new JLabel();
+        titleLabel.setSize(new Dimension(400, 70));
+        titleLabel.setLocation(new Point(100, 20));
+        Image scaledTitleButton = titleImage.getScaledInstance(titleLabel.getWidth(), titleLabel.getHeight(), Image.SCALE_SMOOTH);    
+        ImageIcon titleIcon = new ImageIcon(scaledTitleButton);
+        titleLabel.setIcon(titleIcon);
+        
         easyLabel = new JLabel();
         easyLabel.setSize(new Dimension(lengthDifficultyLabel, widthDifficultyLabel));
         easyLabel.setLocation(new Point(100, 20));
@@ -74,7 +98,7 @@ public class DifficultySelection extends JPanel {
         ImageIcon hardIcon = new ImageIcon(scaledHardButton);
         hardLabel.setIcon(hardIcon);
 		
-		easyButton = new DifficultyButton(easyLabel, new Point(xPositionButton, yPositionButton));
+        easyButton = new DifficultyButton(easyLabel, new Point(xPositionButton, yPositionButton));
 		mediumButton = new DifficultyButton(mediumLabel, new Point(xPositionButton, (yPositionButton + widthDifficultyLabel + vGap)));
 		hardButton = new DifficultyButton(hardLabel, new Point(xPositionButton, (yPositionButton + 2 * widthDifficultyLabel + 2 * vGap)));
 		backButton = new BackButton(prev, mainFrame, this);
@@ -89,13 +113,14 @@ public class DifficultySelection extends JPanel {
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
         
+        panelLabel.add(titleLabel);
         panelLabel.add(easyButton);
         panelLabel.add(mediumButton);
         panelLabel.add(hardButton);
         panelLabel.add(backButton);
         
         this.add(panelLabel);
-        
+       
 		easyButton.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
