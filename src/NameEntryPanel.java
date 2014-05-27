@@ -1,4 +1,5 @@
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -152,9 +153,11 @@ public class NameEntryPanel extends JPanel {
 		          if (playerOneNameField.getText().trim().length() == 0
 		              || playerTwoNameField.getText().trim().length() == 0) {
 		              done.setEnabled(false);
+		              done.setFont(done.getFont().deriveFont(Font.PLAIN));
 		          } else if (playerOneNameField.getText().length() > MAX_CHAR
 		              || playerTwoNameField.getText().length() > MAX_CHAR) {
 		              done.setEnabled(false);
+		              done.setFont(done.getFont().deriveFont(Font.PLAIN));
 		          } else {
 		              done.setEnabled(true);
 		          }

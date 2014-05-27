@@ -85,7 +85,6 @@ public class DifficultySelection extends JPanel {
        
 		easyButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Create an easy game");
 				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.EASY);
 				current.setVisible(false);
 				mainFrame.add(nameEntry);
@@ -95,7 +94,6 @@ public class DifficultySelection extends JPanel {
 		
 		mediumButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Create a medium game");
 				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.MEDIUM);
 				current.setVisible(false);
 				mainFrame.add(nameEntry);
@@ -106,7 +104,6 @@ public class DifficultySelection extends JPanel {
 		
 		hardButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Create a hard game");
 				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.HARD);
 				current.setVisible(false);
 				mainFrame.add(nameEntry);

@@ -34,8 +34,8 @@ public abstract class PlayerModes {
     private JPanel sidePanel;
     private GamePausedPanel pausePanel = null;
     
-    private GameButton mainMenuButton;
-    private GameButton pauseButton;
+    private StyledButton mainMenuButton;
+    private StyledButton pauseButton;
     
     
     /**
@@ -89,7 +89,6 @@ public abstract class PlayerModes {
         // Create the sidePanel and menu. 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         sidePanel.setBackground(Color.BLACK);
         sidePanel.setVisible(true);    
         generateSideMenu();
@@ -412,7 +411,7 @@ public abstract class PlayerModes {
         mainMenu.setBorder(new EmptyBorder(0, 0, 50, 0));
         mainMenu.setBackground(Color.BLACK);
  
-        mainMenuButton = new GameButton("Main Menu");
+        mainMenuButton = new StyledButton("Main Menu");
         mainMenu.add(mainMenuButton);
         mainMenu.setVisible(true);
         
@@ -421,7 +420,7 @@ public abstract class PlayerModes {
         pause.setBorder(new EmptyBorder(0, 0, 50, 0));
         pause.setBackground(Color.BLACK);
         
-        pauseButton = new GameButton("Pause");
+        pauseButton = new StyledButton("Pause");
         pause.add(pauseButton);
         pause.setVisible(true);
         

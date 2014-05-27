@@ -28,9 +28,14 @@ public class StyledButton extends JButton{
 		 this.setText(text); 
 		 this.setFont(new Font("Arial", Font.PLAIN, 20));
 		 this.setSize(new Dimension(150, 50));
+		 this.setPreferredSize(new Dimension(150, 50));
 		 this.addMouseListener(new MouseAdapter(){
 		     public void mouseEntered(MouseEvent e) {
-		         curr.setFont(curr.getFont().deriveFont(Font.BOLD));
+		         if (curr.isEnabled()) {
+		             curr.setFont(curr.getFont().deriveFont(Font.BOLD));
+		         } else {
+		             curr.setFont(curr.getFont().deriveFont(Font.PLAIN));
+		         }
 		     }
              public void mouseExited(MouseEvent e) {
                  curr.setFont(curr.getFont().deriveFont(Font.PLAIN));        
