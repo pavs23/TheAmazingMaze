@@ -281,6 +281,7 @@ public class SinglePlayer extends PlayerModes {
         JPanel hintPanel = new JPanel();
         hintPanel.setBorder(new EmptyBorder(0, 0, 50, 0));
         hintPanel.setLayout(new FlowLayout());
+        hintPanel.setBackground(Color.BLACK);
         hintButton = new GameButton("Get Hint : " + hintRemaining);
         hintButton.setFocusable(false);
         hintPanel.add(hintButton);

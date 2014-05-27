@@ -20,8 +20,8 @@ import javax.swing.JTextField;
  *
  */
 public class NameEntryPanel extends JPanel{
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
     private JTextField playerOneNameField;
     private JTextField playerTwoNameField;
 	private StyledButton done;
@@ -99,8 +99,7 @@ public class NameEntryPanel extends JPanel{
         playerTwoNameField.setSize(new Dimension(170,40));
         playerTwoNameField.setLocation(new Point(X_POSITION, Y_POSITION + 125));
         
-        done = new StyledButton();
-        done.setText("Submit");
+        done = new StyledButton("Submit");
         done.setSize(new Dimension(140, 40));
         done.setEnabled(false);
         done.setLocation(new Point(X_POSITION + 15, Y_POSITION + 210));

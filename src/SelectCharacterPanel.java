@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -19,6 +20,7 @@ public class SelectCharacterPanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
     private JRadioButton button1;
+
     private JRadioButton button2;
     private JRadioButton button3;
     private JRadioButton button4;
@@ -158,8 +160,8 @@ public class SelectCharacterPanel extends JPanel {
         imageLabel2.setLocation(new Point(X_IMAGE_LABEL_POSITION, Y_IMAGE_LABEL_POSITION + 205));
         imageLabel2.setIcon(player0);
         
-        done = new StyledButton();
-        done.setText("Start Game!");
+        done = new StyledButton("Start Game");
+        
         done.setSize(new Dimension(150, 40));
         done.setLocation(new Point(220, 510));
         
