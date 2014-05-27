@@ -152,14 +152,16 @@ public class Game {
         File mario2File = new File("mario2.png");
         File peach2File = new File("peach2.jpg");
         File instructionsHeadingFile = new File ("instructionsHeading.png");
+        
         File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
         File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
         File leaderBoardHeadingFile = new File("leaderBoardHeading.png");
+        
         File easyAdventureHeadingFile = new File("easyAdventureHeading.png");
         File easyCoinHeadingFile = new File("easyCoinHeading.png");
         File mediumAdventureHeadingFile = new File("mediumAdventureHeading.png");
         File mediumCoinHeadingFile = new File("mediumCoinHeading.png");
-        File hardAdventureHeadingFile = new File ("hardAdventureHeading");
+        File hardAdventureHeadingFile = new File ("hardAdventureHeading.png");
         File hardCoinHeadingFile = new File("hardCoinHeading.png");
 
         Image wallImg = null;
@@ -268,6 +270,7 @@ public class Game {
             ADVENTURE_MODE_INSTRUCTIONS_HEADING = adventureModeInstructionsHeadingImg;
             COIN_MODE_INSTRUCTIONS_HEADING = coinModeInstructionsHeadingImg;
             LEADER_BOARD_HEADING = leaderBoardHeadingImg;
+           
             EASY_ADVENTURE_HEADING = easyAdventureHeadingImg;
             EASY_COIN_HEADING = easyCoinHeadingImg;
             MEDIUM_ADVENTURE_HEADING = mediumAdventureHeadingImg;
@@ -316,15 +319,13 @@ public class Game {
 		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
 		newGameButton.setVisible(true);
 		
-		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
+		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
 		quitButton.setVisible(true);
 		
 		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
-		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setVisible(true);
 		
 		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
-		instructions.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		instructions.setVisible(true);
 		
 		//images
@@ -353,7 +354,7 @@ public class Game {
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
 		mainPanel.add(quitButton);
-		mainPanel.add(instructions);
+		//mainPanel.add(instructions);
 		mainPanel.add(title);
 		mainPanel.add(yoshiLabel);
 		mainPanel.add(peachLabel);
@@ -395,6 +396,7 @@ public class Game {
 			}
 		});
 		
+		/*
 		instructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 InstructionPanel instructionScreen = new InstructionPanel(mainFrame, mainPanel);
@@ -404,6 +406,7 @@ public class Game {
                 mainFrame.add(instructionScreen);
             }
 		});
+		*/
 		
 	}
 	
