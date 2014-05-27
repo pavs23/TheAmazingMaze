@@ -429,14 +429,19 @@ public abstract class PlayerModes {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
+                JPanel resumePanel = new JPanel();
+                resumePanel.setLayout(new FlowLayout());
+                resumePanel.setBorder(new EmptyBorder(500, 0, 0, 0));
+                resumePanel.setOpaque(false);
                 StyledButton resumeButton = new StyledButton("Resume");
                 resumeButton.setVisible(true);
-                resumeButton.setPreferredSize(new Dimension(250, 150));
-                resumeButton.setFont(new Font("Arial", Font.PLAIN, 60));
+                resumeButton.setPreferredSize(new Dimension(200, 100));
+                resumeButton.setFont(new Font("Arial", Font.PLAIN, 40));
+                resumePanel.add(resumeButton);
                 if (pausePanel == null) {
                     pausePanel = new GamePausedPanel(frame.getWidth(), frame.getHeight());
                     pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
-                    pausePanel.addToPanel(resumeButton);
+                    pausePanel.addToPanel(resumePanel);
                     addToFrame(pausePanel);
                 }
                 

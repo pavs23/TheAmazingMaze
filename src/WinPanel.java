@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 /**
  * Create a winning panel for the game.
@@ -51,9 +52,9 @@ public class WinPanel extends FinishingPanel {
         messageIcon.setLocation(new Point(0, 10));
         
         JLabel happyIcon = new JLabel();
-        happyIcon.setIcon(new ImageIcon(winImage.getScaledInstance(150, 250, Image.SCALE_SMOOTH)));
-        happyIcon.setSize(new Dimension(150, 250));
-        happyIcon.setLocation(new Point(100, 140));
+        happyIcon.setIcon(new ImageIcon(winImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
+        happyIcon.setSize(new Dimension(250, 250));
+        happyIcon.setLocation(new Point(60, 140));
         
         JLabel scoreLabel = new JLabel();
         scoreLabel.setBackground(Color.WHITE);
@@ -64,35 +65,38 @@ public class WinPanel extends FinishingPanel {
         scoreLabel.setLocation(new Point(225, 80));
         
         JLabel leaderBoard = new JLabel();
-        leaderBoard.setBackground(Color.YELLOW);
+        leaderBoard.setBackground(Color.BLACK);
         leaderBoard.setOpaque(true);
-        leaderBoard.setSize(new Dimension(280, 200));
-        leaderBoard.setLocation(new Point(280, 160));
+        leaderBoard.setSize(new Dimension(250, 180));
+        leaderBoard.setLocation(new Point(320, 160));
         
         JLabel leaderBoardLabel = new JLabel();
         leaderBoardLabel.setText("Leaderboard");
-        leaderBoardLabel.setBackground(Color.YELLOW);
+        leaderBoardLabel.setBackground(Color.BLACK);
+        leaderBoardLabel.setForeground(Color.YELLOW);
         leaderBoardLabel.setOpaque(true);
         leaderBoardLabel.setFont(new Font("Arial", Font.BOLD, 20));
         leaderBoardLabel.setSize(new Dimension(250, 30));
-        leaderBoardLabel.setLocation(new Point(10, 10));
+        leaderBoardLabel.setLocation(new Point(30, 20));
                     
         JLabel leaderBoardNames = new JLabel();
-        leaderBoardNames.setBackground(Color.YELLOW);
+        leaderBoardNames.setBackground(Color.BLACK);
+        leaderBoardNames.setForeground(Color.WHITE);
         leaderBoardNames.setOpaque(true);
         leaderBoardNames.setText(getLeaderBoardNames(mode, difficulty));
         leaderBoardNames.setFont(new Font("Arial", Font.PLAIN, 16));
-        leaderBoardNames.setSize(new Dimension(150, 200));
-        leaderBoardNames.setLocation(new Point(10, 60));
+        leaderBoardNames.setSize(new Dimension(120, 140));
+        leaderBoardNames.setLocation(new Point(30, 60));
         leaderBoardNames.setVerticalAlignment(JLabel.TOP);
         
         JLabel leaderBoardScores = new JLabel();
-        leaderBoardScores.setBackground(Color.YELLOW);
+        leaderBoardScores.setBackground(Color.BLACK);
+        leaderBoardScores.setForeground(Color.WHITE);
         leaderBoardScores.setOpaque(true);
         leaderBoardScores.setText(getLeaderBoardScores(mode, difficulty));
         leaderBoardScores.setFont(new Font("Arial", Font.PLAIN, 16));
-        leaderBoardScores.setSize(new Dimension(150, 200));
-        leaderBoardScores.setLocation(new Point(200, 60));
+        leaderBoardScores.setSize(new Dimension(100, 140));
+        leaderBoardScores.setLocation(new Point(180, 60));
         leaderBoardScores.setVerticalAlignment(JLabel.TOP);
         
         
