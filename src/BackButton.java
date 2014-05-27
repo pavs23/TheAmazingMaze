@@ -13,10 +13,13 @@ import javax.swing.JPanel;
 public class BackButton extends StyledButton{
 	
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    /**
+     * Create a back button constructor.
+     * @param prev the previous panel that the back button will go to.
+     * @param mainFrame the frame that contains the panel.
+     * @param currentPanel the current panel that contains the button.
+     */
 
 	public BackButton(final JPanel prev, final JFrame mainFrame, final JPanel currentPanel){
 		super("Back");

@@ -9,7 +9,11 @@ import java.awt.event.*;
 
 
 public class GameButton extends JButton{
-
+     private static final long serialVersionUID = 1L;
+     
+     /**
+      * Constructor to create a button in the game.
+      */
      public GameButton() {
          this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
          this.setOpaque(true);
@@ -28,6 +32,10 @@ public class GameButton extends JButton{
          });
      }
      
+     /**
+      * Constructor to create a button with a specific text in the game.
+      * @param text the text in the button.
+      */
      public GameButton(String text) {
          this();
          this.setText(text);   

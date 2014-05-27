@@ -16,6 +16,8 @@ import javax.swing.*;
  *
  */
 public class WinPanel extends FinishingPanel {
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Constructor of the class for SinglePlayer game.
      * @param frame the frame that contains the panel.

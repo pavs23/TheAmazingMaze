@@ -12,22 +12,7 @@ import javax.swing.JPanel;
  *
  */
 public class InstructionPanel extends JPanel {
-	
-	private static final int INSTRUCTIONS_X_COORDINATE = 125;
-	private static final int INSTRUCTIONS_Y_COORDINATE = 150;
-	private static final Dimension INSTRUCTIONS_DIMENSION = new Dimension(350, 100);
-	private static final int MODE_HEADING_X_COORDINATE = 130;
-	private static final int MODE_HEADING_Y_COORDINATE = 120;
-	
-	private BackButton backButton;
-	private JLabel adventureInstructions;
-	private JLabel coinInstructions;
-	private ImageIcon headingIcon;
-	private JLabel headingLabel;
-	private ImageIcon adventureIcon;
-	private JLabel adventureLabel;
-	private ImageIcon coinIcon;
-	private JLabel coinLabel;
+    private static final long serialVersionUID = 1L;
 	
 	/**
 	 * A constructor to generate the instruction panel
@@ -36,7 +21,22 @@ public class InstructionPanel extends JPanel {
 	 * button is pressed
 	 */
 	public InstructionPanel(final JFrame mainFrame, final JPanel prev){
-		
+	    final int INSTRUCTIONS_X_COORDINATE = 125;
+	    final int INSTRUCTIONS_Y_COORDINATE = 150;
+	    final Dimension INSTRUCTIONS_DIMENSION = new Dimension(350, 100);
+	    final int MODE_HEADING_X_COORDINATE = 130;
+	    final int MODE_HEADING_Y_COORDINATE = 120;
+	    
+	    BackButton backButton;
+	    JLabel adventureInstructions;
+	    JLabel coinInstructions;
+	    ImageIcon headingIcon;
+	    JLabel headingLabel;
+	    ImageIcon adventureIcon;
+	    JLabel adventureLabel;
+	    ImageIcon coinIcon;
+	    JLabel coinLabel;
+	    
 		//set current panel
 		this.setLayout(null);
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));

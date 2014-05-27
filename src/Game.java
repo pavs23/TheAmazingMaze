@@ -271,7 +271,8 @@ public class Game {
 		mainFrame.setSize(mainFrameDimension);
 		mainFrame.setResizable(false);
 		
-		mainPanel = new MainPanel(mainFrameDimension);		
+		mainPanel = new JPanel();
+		mainPanel.setSize(mainFrameDimension);
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
@@ -279,7 +280,6 @@ public class Game {
 		
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
-		Insets insets = mainPanel.getInsets();
 		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
 		newGameButton.setSize(150, 90);
 		newGameButton.setVisible(true);
