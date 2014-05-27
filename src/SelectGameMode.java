@@ -12,27 +12,34 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * A class that create a panel for selecting game mode (coin/adventure).
+ * @author pavan & JosephineJs
+ *
+ */
 public class SelectGameMode extends JPanel {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel;
 	private StyledButton coinMode;
 	private StyledButton adventureMode;
 	private SelectGameMode currentScreen;
+	private JLabel panelLabel;
 	private BackButton back;
 	
-	private static final int lengthNumOfPlayerLabel = 150;
-	private static final int widthNumOfPlayerLabel = 70;
-	private final int xPositionButton = 225;
-	private final int yPositionButton = 150;
-	private static final int vGap = 30; 
+	private static final int WIDTH_BUTTON = 50;
+	private static final int X_POSITION_BUTTON = 225;
+	private static final int Y_POSITION_BUTTON = 150;
+	private static final int V_GAP = 50; 
 
-	public SelectGameMode(Dimension d, final JFrame mainFrame, final JPanel prev) {
+	/**
+	 * Create select game mode panel.
+	 * @param mainFrame the frame that contains this panel.
+	 * @param prev the previous panel before this panel.
+	 */
+	public SelectGameMode(final JFrame mainFrame, final JPanel prev) {
 		currentScreen = this;
-		this.setSize(d);
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		this.setLayout(null);
 		
 		File titleFile = new File("modeSelection.png");
@@ -51,14 +58,13 @@ public class SelectGameMode extends JPanel {
 		
 		coinMode = new StyledButton("Coin");
 		adventureMode = new StyledButton("Adventure");
-		coinMode.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
-		adventureMode.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
-		adventureMode.setLocation(xPositionButton, yPositionButton);
-		coinMode.setLocation(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap);
+
+		adventureMode.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON);
+		coinMode.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON + WIDTH_BUTTON + V_GAP);
 
 		back = new BackButton(prev, mainFrame, this);
 		
-		JLabel panelLabel = new JLabel();
+		panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
@@ -69,20 +75,13 @@ public class SelectGameMode extends JPanel {
 		panelLabel.add(coinMode);
 		
 		this.add(panelLabel);
-		
-		// Still need to hook up this panel to the frame.
-		// also need to put the frame into the chain of the frames.
 
 		coinMode.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Coin Mode");
 				SingleOrMulti players = new SingleOrMulti(
 						Game.COIN_MODE, mainFrame, currentScreen);
-				// See if remove works better rather than keeping these panels
-				// running
-
 				currentScreen.setVisible(false);
 				prev.setVisible(false);
 				mainFrame.add(players);
@@ -90,19 +89,15 @@ public class SelectGameMode extends JPanel {
 		});
 
 		adventureMode.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("You have selected Adventure Mode");
 				SingleOrMulti players = new SingleOrMulti(
 						Game.ADVENTURE_MODE, mainFrame, currentScreen);
-				mainFrame.add(players);
-				
-				currentScreen.setVisible(false); // Passed this variable into actionListener as a private
-												
+				mainFrame.add(players);				
+				currentScreen.setVisible(false); 												
 				prev.setVisible(false);
 				players.setVisible(true);
-				// mainFrame.add(dsScreen);
 			}
 		});
 		

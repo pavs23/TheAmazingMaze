@@ -1,8 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
-import java.awt.Insets;
-import java.awt.Paint;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +16,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
+/**
+ * A class that creates the game.
+ * @author floren & pavan & Bronte Kalebic
+ *
+ */
 public class Game {
 	private JFrame mainFrame;
 	private JButton newGameButton;
@@ -123,7 +125,6 @@ public class Game {
      * Load the images from the files.
      */
     static {
-
         File wallFile = new File("wall.jpg");
         File roadFile = new File("road.jpg");
         File hintFile = new File("hint.jpg");
@@ -234,8 +235,7 @@ public class Game {
             mediumAdventureHeadingImg = ImageIO.read(mediumAdventureHeadingFile);
             mediumCoinHeadingImg = ImageIO.read(mediumCoinHeadingFile);
             hardAdventureHeadingImg = ImageIO.read(hardAdventureHeadingFile);
-            hardCoinHeadingImg = ImageIO.read(hardCoinHeadingFile);
-            
+            hardCoinHeadingImg = ImageIO.read(hardCoinHeadingFile);      
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -277,6 +277,9 @@ public class Game {
         }   
     }
     
+    /**
+     * Constructor of the game class that creates the game.
+     */
 	public Game(){
 	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
@@ -309,25 +312,19 @@ public class Game {
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
 		
-		
-		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
-		newGameButton.setSize(150, 50);
 		newGameButton.setVisible(true);
 		
 		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
-		quitButton.setSize(150, 50);
 		quitButton.setVisible(true);
 		
 		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		leaderboard.setSize(new Dimension(150, 50));
 		leaderboard.setVisible(true);
 		
 		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
 		instructions.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		instructions.setSize(150, 50);
 		instructions.setVisible(true);
 		
 		//images
@@ -366,26 +363,19 @@ public class Game {
 		mainFrame.add(mainPanel);
 		
 		newGameButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
+			public void actionPerformed(ActionEvent e) {
                 //Execute when button is pressed
-                System.out.println("You clicked the New Game Button");
-                //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
-                SelectGameMode gameModeScreen = new SelectGameMode(new Dimension(Game.FRAME_SIZE,Game.FRAME_SIZE), mainFrame, mainPanel);
+                SelectGameMode gameModeScreen = new SelectGameMode(mainFrame, mainPanel);
                 mainFrame.setVisible(true);
                 mainPanel.setVisible(false);
                 mainFrame.add(gameModeScreen);
-               
-                //dsFrame.run();
             }
 		});
 		
 		
-		leaderboard.addActionListener(new ActionListener() {
-			
+		leaderboard.addActionListener(new ActionListener() {			
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
+			public void actionPerformed(ActionEvent arg0) {			
 				ArrayList<ArrayList<LeaderBoardEntry>> leaderBoards = new ArrayList<ArrayList<LeaderBoardEntry>>();
 				ScoreManager manager = new ScoreManager();
 				leaderBoards.add(manager.getScores(ADVENTURE_MODE, EASY));
@@ -406,28 +396,21 @@ public class Game {
 		});
 		
 		instructions.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e)
-            {
-                //Execute when button is pressed
-                System.out.println("You clicked the Instructions Button");
-                //DifficultySelection dsFrame = new DifficultySelection(mainFrame);
+			public void actionPerformed(ActionEvent e) {
                 InstructionPanel instructionScreen = new InstructionPanel(mainFrame, mainPanel);
                 mainFrame.setVisible(true);
                 mainPanel.setVisible(false);
                 mainFrame.remove(mainPanel);
                 mainFrame.add(instructionScreen);
-                
-               
-                //dsFrame.run();
             }
 		});
 		
 	}
 	
-		
-	
-	public void run(){	
-		//newGameButton.setVisible(true);
+	/**	
+	 * Method to start showing the game to the players.
+	 */
+	public void run() {	
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setVisible(true);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	

@@ -13,7 +13,7 @@ public class LeaderBoardEntry {
 	 * @param newName is the name of the user that made the high score
 	 * @param newScore is the high score number
 	 */
-	public LeaderBoardEntry(String newName, int newScore){
+	public LeaderBoardEntry(String newName, int newScore) {
 		name = newName;
 		score = newScore;
 	}
@@ -22,7 +22,7 @@ public class LeaderBoardEntry {
 	 * Gets the name of the high score
 	 * @return a string of the name
 	 */
-	public String getScoreName(){
+	public String getScoreName() {
 		return name;
 	}
 	
@@ -30,7 +30,7 @@ public class LeaderBoardEntry {
 	 * Gets the score of the high score
 	 * @return an int of the score
 	 */
-	public int getScoreNum(){
+	public int getScoreNum() {
 		return score;
 	}
 	

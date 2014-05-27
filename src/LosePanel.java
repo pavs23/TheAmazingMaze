@@ -15,6 +15,7 @@ import javax.swing.*;
  */
 public class LosePanel extends FinishingPanel {
     private static final long serialVersionUID = 1L;
+    private JLabel loseLabel;
     
     /**
      * Create panel for losing game.
@@ -22,7 +23,8 @@ public class LosePanel extends FinishingPanel {
      */
 	public LosePanel(JFrame frame) {
 		super(frame);
-		JLabel loseLabel = new JLabel();
+		
+		loseLabel = new JLabel();
 		loseLabel.setSize(new Dimension(500, 430));
 		loseLabel.setLocation(new Point(0, 0));
 		loseLabel.setLayout(null);

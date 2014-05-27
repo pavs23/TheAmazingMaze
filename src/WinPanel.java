@@ -17,6 +17,7 @@ import javax.swing.*;
  */
 public class WinPanel extends FinishingPanel {
     private static final long serialVersionUID = 1L;
+    private JLabel winLabel;
     
     /**
      * Constructor of the class for SinglePlayer game.
@@ -28,7 +29,8 @@ public class WinPanel extends FinishingPanel {
      */
 	public WinPanel(JFrame frame, String playerName, int score, int mode, int difficulty) {
 		super(frame);
-        JLabel winLabel = new JLabel();
+		
+        winLabel = new JLabel();
         winLabel.setSize(new Dimension(600, 430));
         winLabel.setLocation(new Point(0, 0));
         winLabel.setLayout(null);
@@ -102,9 +104,7 @@ public class WinPanel extends FinishingPanel {
         winLabel.add(happyIcon);
         winLabel.add(scoreLabel);
         winLabel.add(leaderBoard);
-        
-
-        
+  
         setMessage(winLabel);
 	}
 	

@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -15,12 +14,10 @@ import javax.swing.*;
  * @author floren
  *
  */
-
 public class SelectCharacterPanel extends JPanel {
     private static final long serialVersionUID = 1L;
 
     private JRadioButton button1;
-
     private JRadioButton button2;
     private JRadioButton button3;
     private JRadioButton button4;
@@ -33,10 +30,25 @@ public class SelectCharacterPanel extends JPanel {
     
     private JLabel imageLabel1;
     private JLabel imageLabel2;
+    private JLabel title;
+    private JLabel playerOneLabel;
+    private JLabel playerTwoLabel;
+    private JLabel panelLabel;
     
     private StyledButton done;
     private JPanel current;
+    private BackButton backButton;
     
+    private final int X_LABEL_POSITION = 240;
+	private final int Y_LABEL_POSITION = 120;
+	
+	private final int X_IMAGE_LABEL_POSITION = 255;
+	private final int Y_IMAGE_LABEL_POSITION = 190;
+	
+	private final int X_BUTTON = 150;
+    
+    private static final int CHAR_X_DIMENSION = 75;
+    private static final int CHAR_Y_DIMENSION = 100;
     
     /**
      * Constructor of the panel.
@@ -50,16 +62,6 @@ public class SelectCharacterPanel extends JPanel {
      */
     public SelectCharacterPanel(final JFrame mainFrame, final int mode, final JPanel prev, final int singleOrMulti, 
                                 final int difficulty, final String player1Name, final String player2Name){
-        
-        final int X_LABEL_POSITION = 240;
-        final int Y_LABEL_POSITION = 120;     
-        final int X_IMAGE_LABEL_POSITION = 255;
-        final int Y_IMAGE_LABEL_POSITION = 190;
-        final int X_BUTTON = 150;
-        final int CHAR_X_DIMENSION = 75;
-        final int CHAR_Y_DIMENSION = 100;
-        
-        BackButton backButton;
         
         // Set the image dimension.
         Image scaledPlayer0 = Game.PLAYER_0_IMAGE.getScaledInstance(CHAR_X_DIMENSION, CHAR_Y_DIMENSION, Image.SCALE_SMOOTH);
@@ -75,11 +77,7 @@ public class SelectCharacterPanel extends JPanel {
         this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         this.setLayout(null);
         
-        JLabel title;
-        JLabel playerOneLabel;
-        JLabel playerTwoLabel;
-        
-        JLabel panelLabel = new JLabel();
+        panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
@@ -160,9 +158,7 @@ public class SelectCharacterPanel extends JPanel {
         imageLabel2.setLocation(new Point(X_IMAGE_LABEL_POSITION, Y_IMAGE_LABEL_POSITION + 205));
         imageLabel2.setIcon(player0);
         
-        done = new StyledButton("Start Game");
-        
-        done.setSize(new Dimension(150, 40));
+        done = new StyledButton("Start Game!");
         done.setLocation(new Point(220, 510));
         
         backButton = new BackButton(prev, mainFrame, this);

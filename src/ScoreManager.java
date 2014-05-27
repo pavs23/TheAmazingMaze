@@ -11,11 +11,8 @@ import java.util.Scanner;
  * @author Bronte Kalebic
  *
  */
-public class ScoreManager {
-	
-	/*
-	 * A bunch of constants for scoring.
-	 */
+public class ScoreManager {	
+	// A bunch of constants for scoring.
 	private static final int NUM_SCORES = 5;
 	private static final int REDUNDANT_SCORE = NUM_SCORES;
 	private static final int NUM_ELEMENTS = 2;
@@ -28,7 +25,7 @@ public class ScoreManager {
 	 * @param difficultyFlag is the integer indicating the game difficulty
 	 * @return An array list of scores
 	 */
-	public ArrayList<LeaderBoardEntry> getScores(int modeFlag, int difficultyFlag){
+	public ArrayList<LeaderBoardEntry> getScores(int modeFlag, int difficultyFlag) {
 
 		ArrayList<LeaderBoardEntry> scoreArray = new ArrayList<LeaderBoardEntry>();
 		String score; //stores whole line of input
@@ -48,7 +45,7 @@ public class ScoreManager {
 		
 		//scan all the high score records and store them in an array list
 		Scanner scanner = new Scanner(scoreFile);
-		while(scanner.hasNextLine()){
+		while(scanner.hasNextLine()) {
 			score = scanner.nextLine();
 			splitString = score.split(" ");
 			
@@ -56,7 +53,7 @@ public class ScoreManager {
 			i = 0;
 			size = splitString.length;
 			tempName = "";
-			while (i < size-1){
+			while (i < size-1) {
 				tempName += splitString[i] + " ";
 				i++;
 			}
@@ -81,23 +78,23 @@ public class ScoreManager {
 	 * @param newName is the name of the new high score
 	 * @param newScore is the score number of the new high score
 	 */
-	public void setNewScore(int modeFlag, int difficultyFlag, String newName, int newScore){
+	public void setNewScore(int modeFlag, int difficultyFlag, String newName, int newScore) {
 		ArrayList<LeaderBoardEntry> scoreArray = getScores(modeFlag, difficultyFlag);
 		boolean savedNewScore;
 		
-		if (scoreArray.isEmpty()){
+		if (scoreArray.isEmpty()) {
 			LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 			scoreArray.add(newLBE);
 			savedNewScore = true;
 		} else {
 			savedNewScore = false;
 			int i = 0;
-			while (i < NUM_SCORES && i < scoreArray.size() + 1 && !savedNewScore){
-				if (i == scoreArray.size()){
+			while (i < NUM_SCORES && i < scoreArray.size() + 1 && !savedNewScore) {
+				if (i == scoreArray.size()) {
 					LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 					scoreArray.add(i, newLBE);
 					savedNewScore = true;
-				} else if (newScore >= scoreArray.get(i).getScoreNum()){
+				} else if (newScore >= scoreArray.get(i).getScoreNum()) {
 					LeaderBoardEntry newLBE = new LeaderBoardEntry(newName, newScore);
 					scoreArray.add(i, newLBE);
 					savedNewScore = true;
@@ -109,7 +106,7 @@ public class ScoreManager {
 			}		
 		}
 			
-		if (savedNewScore){
+		if (savedNewScore) {
 			storeLeaderBoard(scoreArray, modeFlag, difficultyFlag);
 		}
 			
@@ -121,7 +118,7 @@ public class ScoreManager {
 	 * @param modeFlag is the integer indicating the game mode
 	 * @param difficultyFlag is the integer indicating the game difficulty
 	 */
-	private void storeLeaderBoard(ArrayList<LeaderBoardEntry> scoreArray, int modeFlag, int difficultyFlag){
+	private void storeLeaderBoard(ArrayList<LeaderBoardEntry> scoreArray, int modeFlag, int difficultyFlag) {
 		BufferedWriter writer = null;
 		try{
 			File file = getFile(modeFlag, difficultyFlag);
@@ -135,20 +132,17 @@ public class ScoreManager {
 			//write scores to file
 			int i = 0;
 			String outputString;
-			while (i < scoreArray.size()){
+			while (i < scoreArray.size()) {
 				outputString = scoreArray.get(i).getScoreName() + " " + scoreArray.get(i).getScoreNum();
 				writer.write(outputString + "\n");
 				i++;
 			}
 			file.setReadOnly();
-		} catch (IOException e){
+		} catch (IOException e) {
 		} finally {
-			try{
+			try {
 				writer.close();
-			} catch (Exception e){
-				
-			}
-
+			} catch (Exception e) {}
 		}
 	}
 	
@@ -158,7 +152,7 @@ public class ScoreManager {
 	 * @param difficultyFlag is an integer that indicates the game difficulty
 	 * @return a file input stream to be used to read input
 	 */
-	private FileInputStream getFileInputStream(int modeFlag, int difficultyFlag){
+	private FileInputStream getFileInputStream(int modeFlag, int difficultyFlag) {
 		FileInputStream stream = null;
 		try{
 		    File file = getFile(modeFlag, difficultyFlag);
@@ -167,9 +161,8 @@ public class ScoreManager {
 		    } 
 		    stream = new FileInputStream(file);
 		    return stream;
-		} catch (Exception e){
-			System.out.println("File not found");
-			return null;
+		} catch (Exception e) {
+		    return null;
 		}
 	}
 
@@ -180,37 +173,30 @@ public class ScoreManager {
 	 * @param difficultyFlag is an integer that indicates the game difficulty
 	 * @return a file to write output to
 	 */
-	private File getFile(int modeFlag, int difficultyFlag){
+	private File getFile(int modeFlag, int difficultyFlag) {
 		File file = null;
 		try{
-			if (difficultyFlag == Game.EASY){
-				if (modeFlag == Game.ADVENTURE_MODE){
-					//System.out.println("easy normal");
+			if (difficultyFlag == Game.EASY) {
+				if (modeFlag == Game.ADVENTURE_MODE) {
 					file = new File("easyNormalScore.txt");
-				} else if (modeFlag == Game.COIN_MODE){
-					//System.out.println("easy coin");
+				} else if (modeFlag == Game.COIN_MODE) {
 					file = new File("easyCoinScore.txt");
 				}
-			} else if (difficultyFlag == Game.MEDIUM){
+			} else if (difficultyFlag == Game.MEDIUM) {
 				if (modeFlag == Game.ADVENTURE_MODE){
-					//System.out.println("medium normal");
 					file = new File("mediumNormalScore.txt");
-				} else if (modeFlag == Game.COIN_MODE){
-					//System.out.println("medium coin");
+				} else if (modeFlag == Game.COIN_MODE) {
 					file = new File("mediumCoinScore.txt");
 				}
-			} else if (difficultyFlag == Game.HARD){
-				if (modeFlag == Game.ADVENTURE_MODE){
-					//System.out.println("hard normal");
+			} else if (difficultyFlag == Game.HARD) {
+				if (modeFlag == Game.ADVENTURE_MODE) {
 					file = new File("hardNormalScore.txt");
 				} else if (modeFlag == Game.COIN_MODE) {
-					//System.out.println("hard coin");
 					file = new File("hardCoinScore.txt");
 				}
 			}
 			return file;
-		} catch (Exception e){
-			System.out.println("File not found");
+		} catch (Exception e) {
 			return null;
 		}
 	}

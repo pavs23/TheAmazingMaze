@@ -13,6 +13,22 @@ import javax.swing.JPanel;
  */
 public class InstructionPanel extends JPanel {
     private static final long serialVersionUID = 1L;
+    
+	private static final int INSTRUCTIONS_X_COORDINATE = 125;
+	private static final int INSTRUCTIONS_Y_COORDINATE = 150;
+	private static final Dimension INSTRUCTIONS_DIMENSION = new Dimension(350, 100);
+	private static final int MODE_HEADING_X_COORDINATE = 130;
+	private static final int MODE_HEADING_Y_COORDINATE = 120;
+	
+	private BackButton backButton;
+	private JLabel adventureInstructions;
+	private JLabel coinInstructions;
+	private ImageIcon headingIcon;
+	private JLabel headingLabel;
+	private ImageIcon adventureIcon;
+	private JLabel adventureLabel;
+	private ImageIcon coinIcon;
+	private JLabel coinLabel;
 	
 	/**
 	 * A constructor to generate the instruction panel
@@ -20,23 +36,7 @@ public class InstructionPanel extends JPanel {
 	 * @param prev is the previous frame to go back to if the back 
 	 * button is pressed
 	 */
-	public InstructionPanel(final JFrame mainFrame, final JPanel prev){
-	    final int INSTRUCTIONS_X_COORDINATE = 125;
-	    final int INSTRUCTIONS_Y_COORDINATE = 150;
-	    final Dimension INSTRUCTIONS_DIMENSION = new Dimension(350, 100);
-	    final int MODE_HEADING_X_COORDINATE = 130;
-	    final int MODE_HEADING_Y_COORDINATE = 120;
-	    
-	    BackButton backButton;
-	    JLabel adventureInstructions;
-	    JLabel coinInstructions;
-	    ImageIcon headingIcon;
-	    JLabel headingLabel;
-	    ImageIcon adventureIcon;
-	    JLabel adventureLabel;
-	    ImageIcon coinIcon;
-	    JLabel coinLabel;
-	    
+	public InstructionPanel(final JFrame mainFrame, final JPanel prev) {
 		//set current panel
 		this.setLayout(null);
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
@@ -101,7 +101,7 @@ public class InstructionPanel extends JPanel {
 	 * @return a string with all the text in it. The text is formatted 
 	 * using HTML.
 	 */
-	private String getAdventureInstructionText(){
+	private String getAdventureInstructionText() {
 		String adventureText = "<html>In this mode, the player will "
 				+ "need to reach the end of the maze in the fastest "
 				+ "time possible. If the end is not reached within "
@@ -112,7 +112,7 @@ public class InstructionPanel extends JPanel {
 		return adventureText;
 	}
 	
-	private String getCoinInstructionText(){
+	private String getCoinInstructionText() {
 		String coinText = "<html>In this mode, the player will need to "
 				+ "collect all the coins in the fastest time possible. "
 				+ "If all the coins are not collected in three minutes, "

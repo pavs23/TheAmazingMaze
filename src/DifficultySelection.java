@@ -14,41 +14,33 @@ import javax.swing.JPanel;
 
 
 /**
- * 
- * @author pavan & Jo
+ * A class to create difficulty selection panel.
+ * @author pavan & josephine
  *
  */
-
 public class DifficultySelection extends JPanel {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private StyledButton easyButton;
 	private StyledButton mediumButton;
 	private StyledButton hardButton;
 	private BackButton back;
-	private JPanel current;
-	
-	//public JFrame difficultySelection;
+	private JLabel panelLabel;
+	private JPanel current;	
 	private JLabel titleLabel;
 	
+	private static final int WIDTH_BUTTON = 50;
+    private final int X_POSITION_BUTTON = 225;
+    private final int Y_POSITION_BUTTON = 150;
+    private static final int V_GAP = 50; 
+    
 	/**
 	 * Select Difficulty Level
-	 * @param mainFrame main frame
-	 * @param mode game mode
-	 * @param players 
-	 * @param prev
+	 * @param mainFrame the frame that will contain this panel.
+	 * @param mode coin/adventure mode.
+	 * @param players single or multi players.
+	 * @param prev the previous panel before this panel.
 	 */
-	public DifficultySelection(final JFrame mainFrame, final int mode, final int players, final JPanel prev){
-		
-		final int xPositionButton = 225;
-		final int yPositionButton = 150;
-		final int lengthDifficultyLabel = 150;
-		final int widthDifficultyLabel = 70;
-		final int vGap = 30;
-		
+	public DifficultySelection(final JFrame mainFrame, final int mode, final int players, final JPanel prev) {		
 		File titleFile = new File("selectDifficulty.png");
 		
 		Image titleImage = null;
@@ -67,13 +59,9 @@ public class DifficultySelection extends JPanel {
 		mediumButton = new StyledButton("Medium");
 		hardButton = new StyledButton("Hard");
 		
-		easyButton.setSize(lengthDifficultyLabel, widthDifficultyLabel);
-		mediumButton.setSize(lengthDifficultyLabel, widthDifficultyLabel);
-		hardButton.setSize(lengthDifficultyLabel, widthDifficultyLabel);
-		
-		easyButton.setLocation(xPositionButton, yPositionButton);
-		mediumButton.setLocation(xPositionButton, yPositionButton + widthDifficultyLabel + vGap);
-		hardButton.setLocation(xPositionButton, yPositionButton + 2 * widthDifficultyLabel + 2 * vGap);
+		easyButton.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON);
+		mediumButton.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON + WIDTH_BUTTON + V_GAP);
+		hardButton.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON + 2 * WIDTH_BUTTON + 2 * V_GAP);
 		
         back = new BackButton(prev, mainFrame, this);
 
@@ -82,7 +70,7 @@ public class DifficultySelection extends JPanel {
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         this.setLayout(null);
 		
-		JLabel panelLabel = new JLabel();
+		panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
@@ -95,8 +83,7 @@ public class DifficultySelection extends JPanel {
         
         this.add(panelLabel);
        
-		easyButton.addActionListener(new ActionListener() {
-			
+		easyButton.addActionListener(new ActionListener() {	
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create an easy game");
 				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.EASY);
@@ -106,8 +93,7 @@ public class DifficultySelection extends JPanel {
 			}
 		});
 		
-		mediumButton.addActionListener(new ActionListener() {
-			
+		mediumButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a medium game");
 				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.MEDIUM);
@@ -118,23 +104,14 @@ public class DifficultySelection extends JPanel {
 			}
 		});
 		
-		hardButton.addActionListener(new ActionListener() {
-			
+		hardButton.addActionListener(new ActionListener() {		
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Create a hard game");
 				NameEntryPanel nameEntry = new NameEntryPanel(mainFrame, mode, current, players, Game.HARD);
 				current.setVisible(false);
 				mainFrame.add(nameEntry);
 				nameEntry.setVisible(true);
-
 			}
-		});
-				
-	}
-	
-	
-	public void run(){
-		this.setVisible(true);
-		//difficultySelection.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		});				
 	}
 }

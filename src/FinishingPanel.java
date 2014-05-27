@@ -4,9 +4,15 @@ import java.awt.Point;
 
 import javax.swing.*;
 
-
+/**
+ * A class to create the finish panel of the game.
+ * @author floren
+ *
+ */
 public class FinishingPanel extends JPanel {
     private JPanel message;
+    private MainMenuButton menu;
+    private QuitButton quit;
     private static final long serialVersionUID = 1L;
     
 	/**
@@ -25,13 +31,11 @@ public class FinishingPanel extends JPanel {
 		message.setLayout(null);
 		message.setBackground(Color.WHITE);
 			
-		MainMenuButton menu = new MainMenuButton(frame);
+		menu = new MainMenuButton(frame);
 		menu.setLocation(new Point(225, 450));
-		menu.setSize(new Dimension(150, 40));
 		
-		QuitButton quit = new QuitButton(frame);
-		quit.setLocation(new Point(225, 500));
-		quit.setSize(new Dimension(150, 40));
+		quit = new QuitButton(frame);
+		quit.setLocation(new Point(225, 510));
 		
 		this.add(message);
 		this.add(menu);

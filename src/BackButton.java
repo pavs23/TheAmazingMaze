@@ -9,7 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+/**
+ * A class that represents a "Back" button.
+ * @author floren
+ *
+ */
 public class BackButton extends StyledButton{
     private static final long serialVersionUID = 1L;
     
@@ -20,7 +24,7 @@ public class BackButton extends StyledButton{
      * @param currentPanel the current panel that contains the button.
      */
 
-	public BackButton(final JPanel prev, final JFrame mainFrame, final JPanel currentPanel){
+	public BackButton(final JPanel prev, final JFrame mainFrame, final JPanel currentPanel) {
 		super("Back");
 		this.setSize(new Dimension(120,40));
 		this.setVisible(true);
@@ -31,11 +35,9 @@ public class BackButton extends StyledButton{
 		this.setBackground(Color.RED);
         this.setForeground(Color.WHITE);
 	        
-		this.addActionListener(new ActionListener() {
-			
+		this.addActionListener(new ActionListener() {		
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
+			public void actionPerformed(ActionEvent arg0) {		
 				currentPanel.setVisible(false);
 				remove(currentPanel);
 				mainFrame.add(prev);

@@ -13,48 +13,45 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * 
- * @author pavan & Jo
+ * Create a panel for single or multiplayer game.
+ * @author pavan & JosephineJs
  *
  */
-
 public class SingleOrMulti extends JPanel{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private JLabel titleLabel;
-	
+	private JLabel panelLabel;
 	private SingleOrMulti currentScreen;
 	private BackButton back;
 	private StyledButton onePlayer;
 	private StyledButton twoPlayer;
 	
-	public SingleOrMulti(final int mode, final JFrame mainFrame, final JPanel prev){
-		
-		final int lengthNumOfPlayerLabel = 150;
-		final int widthNumOfPlayerLabel = 70;
-		final int xPositionButton = 225;
-		final int yPositionButton = 150;
-		final int vGap = 30;
-		
-		
-		this.setSize(new Dimension(600, 600));
+	private static final int WIDTH_BUTTON = 50;
+    private static final int X_POSITION_BUTTON = 225;
+    private static final int Y_POSITION_BUTTON = 150;
+    private static final int V_GAP = 50; 
+	
+    /**
+     * Create a panel for single or multiplayer game.
+     * @param mode the mode of the game.
+     * @param mainFrame the frame that contains this panel.
+     * @param prev the previous panel before this panel.
+     */
+	public SingleOrMulti(final int mode, final JFrame mainFrame, final JPanel prev) {
+		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		this.setLayout(null);
         
 		currentScreen = this;
 		
 		//input image
 		File titleFile = new File("numOfPlayer.png");
-		
 		Image titleImage = null;
 		
-		try{
+		try {
 			titleImage = ImageIO.read(titleFile);
 		
-		}catch (IOException e) {}
+		} catch (IOException e) {}
 		
 		titleLabel = new JLabel();
         titleLabel.setSize(new Dimension(400, 70));
@@ -66,14 +63,12 @@ public class SingleOrMulti extends JPanel{
         
         onePlayer = new StyledButton("One Player");
 		twoPlayer = new StyledButton("Two Player");
-		onePlayer.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
-		twoPlayer.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
-		onePlayer.setLocation(xPositionButton, yPositionButton);
-		twoPlayer.setLocation(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap);
+		onePlayer.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON);
+		twoPlayer.setLocation(X_POSITION_BUTTON, Y_POSITION_BUTTON + WIDTH_BUTTON + V_GAP);
 		
 		back = new BackButton(prev, mainFrame, this);
 		
-		JLabel panelLabel = new JLabel();
+		panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
@@ -84,21 +79,12 @@ public class SingleOrMulti extends JPanel{
 		panelLabel.add(back);
 		
 		this.add(panelLabel);
-		
-		//Set the color of the buttons in this class as well as other formatting
-		
-		onePlayer.addActionListener(new ActionListener() {
-			
+				
+		onePlayer.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				//Open up difficulty selection mode which takes in number of game mode
-				//		and number of players. That creates the game
 				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.SINGLE_PLAYER, currentScreen);
-				//NameEntrySinglePlayer enterName = new NameEntrySinglePlayer(mainFrame, mode, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
-				//mainFrame.add(enterName);
 				mainFrame.add(dsScreen);
 				dsScreen.setVisible(true);
 				
@@ -106,20 +92,12 @@ public class SingleOrMulti extends JPanel{
 		});
 		
 		twoPlayer.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				
-				//Open up difficulty selection mode which takes in number of game mode
-				//		and number of players. That creates the game
+			public void actionPerformed(ActionEvent e) {			
 				DifficultySelection dsScreen = new DifficultySelection(mainFrame, mode, Game.MULTI_PLAYER, currentScreen);
-				//NameEntryDoublePlayer enterName = new NameEntryDoublePlayer(mainFrame, mode, currentScreen);
 				currentScreen.setVisible(false);
 				mainFrame.remove(currentScreen);
-				//mainFrame.add(enterName);
 				mainFrame.add(dsScreen);
 				dsScreen.setVisible(true);
-				
-				//Add another panel here to take the user to enter the both the usernames
 			}
 		});
 		

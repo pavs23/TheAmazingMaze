@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import java.awt.event.*;
 
 
-public class GameButton extends JButton{
+public class GameButton extends JButton {
      private static final long serialVersionUID = 1L;
      
      /**

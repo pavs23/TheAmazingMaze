@@ -14,7 +14,6 @@ import javax.swing.JPanel;
  * @author floren
  *
  */
-
 public class GamePausedPanel extends JPanel{	
     private static final long serialVersionUID = 1L;
     JLabel pauseLabel;
@@ -24,7 +23,7 @@ public class GamePausedPanel extends JPanel{
 	 * @param x the x dimension of pause panel.
 	 * @param y the y dimension of pause panel.
 	 */
-	public GamePausedPanel(int x, int y){
+	public GamePausedPanel(int x, int y) {
 	    File pauseFile = new File("Pause.jpg");
         Image pauseImage = null;
         try {
