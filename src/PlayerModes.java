@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.util.ArrayList;
 
 /**
@@ -32,8 +34,8 @@ public abstract class PlayerModes {
     private JPanel sidePanel;
     private GamePausedPanel pausePanel = null;
     
-    private StyledButton mainMenuButton;
-    private StyledButton pauseButton;
+    private GameButton mainMenuButton;
+    private GameButton pauseButton;
     
     
     /**
@@ -76,15 +78,19 @@ public abstract class PlayerModes {
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
+        frame.setBackground(Color.BLACK);
         
         // Create the gamePanel.
         gamePanel = new JPanel();
         gamePanel.setLayout(new FlowLayout());
+        gamePanel.setBackground(Color.BLACK);
         gamePanel.setVisible(true);
         
         // Create the sidePanel and menu. 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
+        sidePanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
+        sidePanel.setBackground(Color.BLACK);
         sidePanel.setVisible(true);    
         generateSideMenu();
         
@@ -163,7 +169,6 @@ public abstract class PlayerModes {
         sidePanel.setEnabled(false);
         mainMenuButton.setEnabled(false);
         pauseButton.setEnabled(false);
-        //also freeze timer here
     }
     
     /**
@@ -400,27 +405,37 @@ public abstract class PlayerModes {
      * Generate the common buttons on the side menu and their listeners.
      */
     private void generateSideMenu() {
-        mainMenuButton = new StyledButton();
-        mainMenuButton.setText("Main Menu");
+        JPanel mainMenu = new JPanel();
+        mainMenu.setLayout(new FlowLayout());       
+        mainMenu.setBorder(new EmptyBorder(0, 0, 50, 0));
+       
+ 
+        mainMenuButton = new GameButton("Main Menu");
+        mainMenu.add(mainMenuButton);
+        mainMenu.setVisible(true);
         
-        pauseButton = new StyledButton();
-        pauseButton.setText("Pause");
+        JPanel pause = new JPanel();
+        pause.setLayout(new FlowLayout()); 
+        pause.setBorder(new EmptyBorder(0, 0, 50, 0));
+        
+        pauseButton = new GameButton("Pause");
+        pause.add(pauseButton);
+        pause.setVisible(true);
         
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
-                JButton resumeButton = new StyledButton();
+                StyledButton resumeButton = new StyledButton();
                 resumeButton.setText("Resume");
-                resumeButton.setLocation(new Point(200, 400));
-                resumeButton.setSize(new Dimension(100, 40));
                 resumeButton.setVisible(true);
+                resumeButton.setPreferredSize(new Dimension(150, 80));
                 
                 if (pausePanel == null) {
-                    pausePanel = new GamePausedPanel();
+                    pausePanel = new GamePausedPanel(frame.getWidth(), frame.getHeight());
                     pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
-                    pausePanel.add(resumeButton);
+                    pausePanel.addToPanel(resumeButton);
                     addToFrame(pausePanel);
                 }
                 
@@ -449,8 +464,8 @@ public abstract class PlayerModes {
             }
         });
         
-        addToSidePanel(mainMenuButton);
-        addToSidePanel(pauseButton);
+        addToSidePanel(mainMenu);
+        addToSidePanel(pause);
     }
    
     /**

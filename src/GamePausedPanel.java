@@ -1,48 +1,54 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  * 
- * @author pavan
+ * @author floren
  *
  */
 
-public class GamePausedPanel extends JPanel{
-
-	private StyledButton continueButton;
-	private JLabel title;
-	
+public class GamePausedPanel extends JPanel{	
+    JLabel pauseLabel;
 	/**
-	 * 
-	 * @param resume
+	 * Constructor of the class.
+	 * @param x the x dimension of pause panel.
+	 * @param y the y dimension of pause panel.
 	 */
-	public GamePausedPanel(){
+	public GamePausedPanel(int x, int y){
+	    File pauseFile = new File("Pause.jpg");
+        Image pauseImage = null;
+        try {
+            pauseImage = ImageIO.read(pauseFile);
+        } catch (IOException e) {}
+        Image scaledPause = pauseImage.getScaledInstance(x, y, Image.SCALE_SMOOTH);    
+        ImageIcon pauseIcon = new ImageIcon(scaledPause);
+        
+		this.setLayout(new FlowLayout());
 		
-		//Still need to add the action listener for the button,
-		//	which is to resume() the game.
-		/*
-		continueButton = new JButton("Continue...");
-		continueButton.setBackground(Color.green);
-		continueButton.setLocation(250, 250);
-		continueButton.setSize(new Dimension(80,50));
-		this.add(continueButton);
-		*/
-		this.setLayout(null);
-		title = new JLabel("Paused");
-		title.setFont(title.getFont().deriveFont(64.0f));
-		title.setLocation(new Point(100, 30));
-		title.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
-		this.add(title);
-		
+		pauseLabel = new JLabel();
+		pauseLabel.setLayout(new FlowLayout());
+		pauseLabel.setIcon(pauseIcon);
+		this.add(pauseLabel);
 	}
 	
-	private StyledButton getContinueButton(){
-		return continueButton;
+	/**
+	 * Add a JComponent to the panel.
+	 * @param comp the component that will be added to the panel.
+	 */
+	public void addToPanel(JComponent comp) {
+	    pauseLabel.add(comp);
 	}
 }

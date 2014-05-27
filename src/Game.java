@@ -63,7 +63,7 @@ public class Game {
     public static final Image PLAYER_1_TEXT_IMAGE;
     public static final Image PLAYER_2_TEXT_IMAGE;
     public static final Image PLAYER_2_RIGHT_IMAGE;
-    public static final Image THE_AMAZING_MAZE_HEADING;
+    //public static final Image THE_AMAZING_MAZE_HEADING;
     public static final Image YOSHI_TONGUE_IMAGE;
     public static final Image MARIO2_IMAGE;
     public static final Image PEACH2_IMAGE;
@@ -202,7 +202,7 @@ public class Game {
             backgroundImg = ImageIO.read(backgroundFile);
             player1TextImg = ImageIO.read(player1TextFile);
             player2TextImg = ImageIO.read(player2TextFile);
-            theAmazingMazeHeadingImg = ImageIO.read(theAmazingMazeHeadingFile);
+           // theAmazingMazeHeadingImg = ImageIO.read(theAmazingMazeHeadingFile);
             yoshiTongueImg = ImageIO.read(yoshiTongueFile);
             mario2Img = ImageIO.read(mario2File);
             peach2Img = ImageIO.read(peach2File);
@@ -235,7 +235,7 @@ public class Game {
             PLAYER_1_TEXT_IMAGE = player1TextImg;
             PLAYER_2_TEXT_IMAGE = player2TextImg;
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
-            THE_AMAZING_MAZE_HEADING = theAmazingMazeHeadingImg;
+            //THE_AMAZING_MAZE_HEADING = theAmazingMazeHeadingImg;
             YOSHI_TONGUE_IMAGE = yoshiTongueImg;
             MARIO2_IMAGE = mario2Img;
             PEACH2_IMAGE = peach2Img;
@@ -256,8 +256,8 @@ public class Game {
 		instructions = new StyledButton("Instructions");
 		
 		//images
-		Image scaledHeading = THE_AMAZING_MAZE_HEADING.getScaledInstance(519, 51, Image.SCALE_SMOOTH);
-		heading = new ImageIcon(scaledHeading);
+		//Image scaledHeading = THE_AMAZING_MAZE_HEADING.getScaledInstance(519, 51, Image.SCALE_SMOOTH);
+		//heading = new ImageIcon(scaledHeading);
 		title = new JLabel();
 		yoshiIcon = new ImageIcon(YOSHI_TONGUE_IMAGE);
 		yoshiLabel = new JLabel();
@@ -297,7 +297,7 @@ public class Game {
 		instructions.setVisible(true);
 		
 		//images
-		title.setIcon(heading);
+		//title.setIcon(heading);
 		title.setLocation(new Point(40, 20));
 		title.setSize(new Dimension(519, 51));
 		title.setVisible(true);

@@ -1,8 +1,16 @@
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 /**
  *
  * A class that represents Multiplayer Game.
@@ -48,8 +56,115 @@ public class MultiPlayer extends PlayerModes {
         labels2 = generateLabels();
         mazePanel1 = generateMazePanel(labels1);
         mazePanel2 = generateMazePanel(labels2);
-        addToGamePanel(mazePanel1);
-        addToGamePanel(mazePanel2);
+        
+        
+        JPanel mazeAndInst1 = new JPanel();
+        mazeAndInst1.setLayout(new BoxLayout(mazeAndInst1, BoxLayout.Y_AXIS));
+        mazeAndInst1.setBorder(new EmptyBorder(0, 0, 0, 30));
+        
+        JPanel mazeAndInst2 = new JPanel();
+        mazeAndInst2.setLayout(new BoxLayout(mazeAndInst2, BoxLayout.Y_AXIS));
+        
+        JPanel instruction1 = new JPanel();
+        instruction1.setBackground(Color.BLACK);
+        instruction1.setLayout(new FlowLayout());
+        
+        JPanel instruction2 = new JPanel();
+        instruction2.setBackground(Color.BLACK);
+        instruction2.setLayout(new FlowLayout());
+        
+        JPanel playerLabel1 = new JPanel();
+        playerLabel1.setBorder(new EmptyBorder(0, 0, 0, 20) );
+        playerLabel1.setLayout(new BoxLayout(playerLabel1, BoxLayout.X_AXIS));
+        playerLabel1.setBackground(Color.BLACK);
+        
+        JPanel playerLabel2 = new JPanel();
+        playerLabel2.setBorder(new EmptyBorder(0, 0, 0, 20) );
+        playerLabel2.setLayout(new BoxLayout(playerLabel2, BoxLayout.X_AXIS));
+        playerLabel2.setBackground(Color.BLACK);
+        
+        JLabel player1Icon = new JLabel();
+        Image player1Img;
+        if (player1Code == Game.PLAYER_0) {
+            player1Img = Game.PLAYER_0_IMAGE;
+        } else if (player1Code == Game.PLAYER_1) {
+            player1Img = Game.PLAYER_1_IMAGE;
+        } else {
+            player1Img = Game.PLAYER_2_IMAGE;
+        }
+        ImageIcon icon1 = new ImageIcon(player1Img.getScaledInstance(50, 80, Image.SCALE_SMOOTH));
+        player1Icon.setIcon(icon1);
+        player1Icon.setBorder(new EmptyBorder(0, 0, 0, 20) );
+        
+        JLabel player2Icon = new JLabel();
+        Image player2Img;
+        if (player2Code == Game.PLAYER_0) {
+            player2Img = Game.PLAYER_0_IMAGE;
+        } else if (player1Code == Game.PLAYER_1) {
+            player2Img = Game.PLAYER_1_IMAGE;
+        } else {
+            player2Img = Game.PLAYER_2_IMAGE;
+        }
+        ImageIcon icon2 = new ImageIcon(player2Img.getScaledInstance(50, 80, Image.SCALE_SMOOTH));
+        player2Icon.setIcon(icon2);
+        player2Icon.setBorder(new EmptyBorder(0, 0, 0, 20) );
+        
+        JLabel namePlayer1 = new JLabel();
+        namePlayer1.setText(player1Name);
+        namePlayer1.setHorizontalAlignment(JLabel.CENTER);
+        namePlayer1.setForeground(Color.WHITE);
+        namePlayer1.setOpaque(false);
+        namePlayer1.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel player1Keys = new JLabel();
+        
+        JLabel namePlayer2 = new JLabel();
+        namePlayer2.setText(player2Name);
+        namePlayer2.setHorizontalAlignment(JLabel.CENTER);
+        namePlayer2.setForeground(Color.WHITE);
+        namePlayer2.setOpaque(false);
+        namePlayer2.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel player2Keys = new JLabel();
+        
+        
+        File aswdFile = new File("ASWD_Key.jpg");
+        Image aswdImage = null;
+        try {
+            aswdImage = ImageIO.read(aswdFile);
+        } catch (IOException e) {}
+        Image scaledAswd = aswdImage.getScaledInstance(220, 80, Image.SCALE_SMOOTH);    
+        ImageIcon aswdIcon = new ImageIcon(scaledAswd);
+        player1Keys.setIcon(aswdIcon);
+         
+        File arrowFile = new File("Arrow_Key.jpg");
+        Image arrowImage = null;
+        try {
+            arrowImage = ImageIO.read(arrowFile);
+        } catch (IOException e) {}
+        Image scaledArrow = arrowImage.getScaledInstance(220, 80, Image.SCALE_SMOOTH);    
+        ImageIcon arrowIcon = new ImageIcon(scaledArrow);
+        player2Keys.setIcon(arrowIcon);
+        
+        playerLabel1.add(player1Icon);
+        playerLabel1.add(namePlayer1);
+        
+        instruction1.add(playerLabel1);
+        instruction1.add(player1Keys);
+        
+        mazeAndInst1.add(instruction1);
+        mazeAndInst1.add(mazePanel1);
+        
+        playerLabel2.add(player2Icon);
+        playerLabel2.add(namePlayer2);
+        
+        instruction2.add(playerLabel2);
+        instruction2.add(player2Keys);
+        
+        mazeAndInst2.add(instruction2);
+        mazeAndInst2.add(mazePanel2);
+        
+        addToGamePanel(mazeAndInst1);
+        addToGamePanel(mazeAndInst2);
+        
         player1 = generatePlayer(player1Name, player1Code);
         player2 = generatePlayer(player2Name, player2Code);
         

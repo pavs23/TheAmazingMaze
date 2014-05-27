@@ -24,7 +24,7 @@ public class SinglePlayer extends PlayerModes {
     private GameMode maze;
     private JPanel mazePanel;
     private JLabel[][] labels;
-    private JButton hintButton;
+    private GameButton hintButton;
     private GameTimer timer;
     private Timer[] timers = new Timer[4];
     private boolean gameFinished = false;
@@ -47,18 +47,18 @@ public class SinglePlayer extends PlayerModes {
         // Create the labels, mazePanel, and player.
         labels = generateLabels();
         mazePanel = generateMazePanel(labels);
-        mazePanel.setBackground(Color.YELLOW);
         
         JPanel mazeAndInst = new JPanel();
         mazeAndInst.setLayout(new BoxLayout(mazeAndInst, BoxLayout.Y_AXIS));
         
         JPanel instruction = new JPanel();
-        instruction.setBackground(Color.YELLOW);
+        instruction.setBackground(Color.BLACK);
         instruction.setLayout(new FlowLayout());
         
-        JLabel playerLabel = new JLabel();
-        playerLabel.setBorder(new EmptyBorder(0, 0, 0, 50) );
-        playerLabel.setLayout(new BoxLayout(playerLabel, BoxLayout.Y_AXIS));
+        JPanel playerLabel = new JPanel();
+        playerLabel.setBorder(new EmptyBorder(0, 0, 0, 20) );
+        playerLabel.setLayout(new BoxLayout(playerLabel, BoxLayout.X_AXIS));
+        playerLabel.setBackground(Color.BLACK);
         
         JLabel playerIcon = new JLabel();
         Image playerImg;
@@ -71,13 +71,14 @@ public class SinglePlayer extends PlayerModes {
         }
         ImageIcon icon = new ImageIcon(playerImg.getScaledInstance(50, 80, Image.SCALE_SMOOTH));
         playerIcon.setIcon(icon);
-        
+        playerIcon.setBorder(new EmptyBorder(0, 0, 0, 20) );
         
         JLabel namePlayer = new JLabel();
         namePlayer.setText(playerName);
+        namePlayer.setHorizontalAlignment(JLabel.CENTER);
+        namePlayer.setForeground(Color.WHITE);
         namePlayer.setOpaque(false);
-        namePlayer.setFont(new Font("Arial", Font.BOLD, 24));
-        namePlayer.setBorder(new EmptyBorder(0, 0, 0, 50) );
+        namePlayer.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel playerKeys = new JLabel();
         
         File arrowFile = new File("Arrow_Key.jpg");
@@ -85,12 +86,12 @@ public class SinglePlayer extends PlayerModes {
         try {
             arrowImage = ImageIO.read(arrowFile);
         } catch (IOException e) {}
-        Image scaledArrow = arrowImage.getScaledInstance(250, 100, Image.SCALE_SMOOTH);    
+        Image scaledArrow = arrowImage.getScaledInstance(220, 80, Image.SCALE_SMOOTH);    
         ImageIcon arrowIcon = new ImageIcon(scaledArrow);
         playerKeys.setIcon(arrowIcon);
-        
-        playerLabel.add(namePlayer);
+         
         playerLabel.add(playerIcon);
+        playerLabel.add(namePlayer);
         
         instruction.add(playerLabel);
         instruction.add(playerKeys);
@@ -100,6 +101,7 @@ public class SinglePlayer extends PlayerModes {
         
         addToGamePanel(mazeAndInst);
         player = generatePlayer(playerName, playerCode);
+        
         generateHint();
         generateTimer();
         
@@ -275,10 +277,12 @@ public class SinglePlayer extends PlayerModes {
      * Create the side menu with a hint button.
      */
     private void generateHint() {
-        hintButton = new StyledButton("Get Hint : " + hintRemaining);
-        hintButton.setSize(new Dimension(80, 40));
-        hintButton.setLocation(new Point(10, 130));
+        JPanel hintPanel = new JPanel();
+        hintPanel.setBorder(new EmptyBorder(0, 0, 50, 0));
+        hintPanel.setLayout(new FlowLayout());
+        hintButton = new GameButton("Get Hint : " + hintRemaining);
         hintButton.setFocusable(false);
+        hintPanel.add(hintButton);
         // Print the first few steps to goal.
         // The number of steps are depending on the maze size.
         hintButton.addActionListener(new ActionListener() {
@@ -306,7 +310,7 @@ public class SinglePlayer extends PlayerModes {
                 newTimer.start();
             }
         });
-        addToSidePanel(hintButton);
+        addToSidePanel(hintPanel);
     }
     
     /**
@@ -314,7 +318,12 @@ public class SinglePlayer extends PlayerModes {
      */
     private void generateTimer() {
         JLabel timeLabel = new JLabel();
+        timeLabel.setBackground(Color.BLACK);
+        timeLabel.setForeground(Color.WHITE);
+        timeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         timeLabel.setVisible(true);
+        timeLabel.setHorizontalAlignment(JLabel.CENTER);
+        timeLabel.setPreferredSize(new Dimension(150, 50));
         addToSidePanel(timeLabel);
         timer = new GameTimer(timeLabel, this);
         timer.start();    
