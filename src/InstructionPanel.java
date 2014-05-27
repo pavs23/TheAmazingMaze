@@ -1,6 +1,10 @@
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,6 +41,20 @@ public class InstructionPanel extends JPanel {
 	 * button is pressed
 	 */
 	public InstructionPanel(final JFrame mainFrame, final JPanel prev) {
+	    // Load the image headings
+	    Image instructionsHeading = null;
+	    Image adventureModeInstructionsHeading = null;
+	    Image coinModeInstructionsHeading = null;
+	    File instructionsHeadingFile = new File ("instructionsHeading.png");
+        File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
+        File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
+        
+        try {
+            instructionsHeading = ImageIO.read(instructionsHeadingFile);
+            adventureModeInstructionsHeading = ImageIO.read(adventureModeInstructionsHeadingFile);
+            coinModeInstructionsHeading = ImageIO.read(coinModeInstructionsHeadingFile);
+        } catch (IOException e) {}
+	    
 		//set current panel
 		this.setLayout(null);
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
@@ -64,21 +82,21 @@ public class InstructionPanel extends JPanel {
         
         //set images
         //heading
-        headingIcon = new ImageIcon(Game.INSTRUCTIONS_HEADING);
+        headingIcon = new ImageIcon(instructionsHeading);
         headingLabel = new JLabel();
         headingLabel.setIcon(headingIcon);
         headingLabel.setSize(new Dimension(286, 30));
         headingLabel.setLocation(new Point(155, 20));
         headingLabel.setVisible(true);
         //adventure mode
-        adventureIcon = new ImageIcon(Game.ADVENTURE_MODE_INSTRUCTIONS_HEADING);
+        adventureIcon = new ImageIcon(adventureModeInstructionsHeading);
         adventureLabel = new JLabel();
         adventureLabel.setIcon(adventureIcon);
         adventureLabel.setSize(new Dimension(240, 21));
         adventureLabel.setLocation(new Point(MODE_HEADING_X_COORDINATE, MODE_HEADING_Y_COORDINATE));
         adventureLabel.setVisible(true);
         //coin mode
-        coinIcon = new ImageIcon(Game.COIN_MODE_INSTRUCTIONS_HEADING);
+        coinIcon = new ImageIcon(coinModeInstructionsHeading);
         coinLabel = new JLabel();
         coinLabel.setIcon(coinIcon);
         coinLabel.setSize(new Dimension(151, 22));

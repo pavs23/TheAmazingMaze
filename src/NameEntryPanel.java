@@ -28,6 +28,7 @@ public class NameEntryPanel extends JPanel {
 	private JPanel current;
 	private JLabel panelLabel;
 	private BackButton backButton;
+	
 	private static final int X_POSITION = 215;
 	private static final int Y_POSITION = 130;
 	private static final int MAX_CHAR = 15;

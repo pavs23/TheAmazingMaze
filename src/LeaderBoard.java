@@ -1,8 +1,11 @@
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -66,6 +69,31 @@ public class LeaderBoard extends JPanel{
     * @param mainFrame is the main window
     */
     public LeaderBoard(ArrayList<ArrayList<LeaderBoardEntry>> leaders, final JPanel prev, final JFrame mainFrame){
+        // Load images
+        Image leaderBoardHeadingImg = null;
+        Image easyAdventureHeadingImg = null;
+        Image easyCoinHeadingImg = null;
+        Image mediumAdventureHeadingImg = null;
+        Image mediumCoinHeadingImg = null;
+        Image hardAdventureHeadingImg = null;
+        Image hardCoinHeadingImg = null;
+        File leaderBoardHeadingFile = new File("leaderBoardHeading.png");
+        File easyAdventureHeadingFile = new File("easyAdventureHeading.png");
+        File easyCoinHeadingFile = new File("easyCoinHeading.png");
+        File mediumAdventureHeadingFile = new File("mediumAdventureHeading.png");
+        File mediumCoinHeadingFile = new File("mediumCoinHeading.png");
+        File hardAdventureHeadingFile = new File ("hardAdventureHeading");
+        File hardCoinHeadingFile = new File("hardCoinHeading.png");
+        try {
+            leaderBoardHeadingImg = ImageIO.read(leaderBoardHeadingFile);
+            easyAdventureHeadingImg = ImageIO.read(easyAdventureHeadingFile);
+            easyCoinHeadingImg = ImageIO.read(easyCoinHeadingFile);
+            mediumAdventureHeadingImg = ImageIO.read(mediumAdventureHeadingFile);
+            mediumCoinHeadingImg = ImageIO.read(mediumCoinHeadingFile);
+            hardAdventureHeadingImg = ImageIO.read(hardAdventureHeadingFile);
+            hardCoinHeadingImg = ImageIO.read(hardCoinHeadingFile);  
+        } catch (IOException e) {}
+        
         //images
         ImageIcon headingIcon;
         ImageIcon easyNormalIcon;
@@ -89,7 +117,7 @@ public class LeaderBoard extends JPanel{
         back.setVisible(true);
         
         //set heading
-        headingIcon = new ImageIcon(Game.LEADER_BOARD_HEADING);
+        headingIcon = new ImageIcon(leaderBoardHeadingImg);
         headingLabel = new JLabel();
         headingLabel.setIcon(headingIcon);
         headingLabel.setSize(new Dimension(377, 19));
@@ -98,7 +126,7 @@ public class LeaderBoard extends JPanel{
                 
         //set leader board
         //easy normal
-        Image scaledEasyNormal = Game.EASY_ADVENTURE_HEADING.getScaledInstance(135, 7, Image.SCALE_SMOOTH);
+        Image scaledEasyNormal = easyAdventureHeadingImg.getScaledInstance(135, 7, Image.SCALE_SMOOTH);
         easyNormalIcon = new ImageIcon(scaledEasyNormal);
         easyNormalTitle = new JLabel();
         easyNormalTitle.setIcon(easyNormalIcon);
@@ -114,7 +142,7 @@ public class LeaderBoard extends JPanel{
         easyNormalScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE));
         easyNormalScores.setVisible(true);
         //easy coin
-        Image scaledCoinNormal = Game.EASY_COIN_HEADING.getScaledInstance(97, 7, Image.SCALE_SMOOTH);
+        Image scaledCoinNormal = easyCoinHeadingImg.getScaledInstance(97, 7, Image.SCALE_SMOOTH);
         easyCoinIcon = new ImageIcon(scaledCoinNormal);
         easyCoinTitle = new JLabel();
         easyCoinTitle.setIcon(easyNormalIcon);

@@ -65,22 +65,7 @@ public class Game {
     public static final Image PLAYER_2_IMAGE;
     public static final Image PLAYER_1_TEXT_IMAGE;
     public static final Image PLAYER_2_TEXT_IMAGE;
-    public static final Image PLAYER_2_RIGHT_IMAGE;
-    public static final Image SUPER_MARIO_MAZE_HEADING;
-    public static final Image YOSHI_TONGUE_IMAGE;
-    public static final Image MARIO2_IMAGE;
-    public static final Image PEACH2_IMAGE;
-    public static final Image INSTRUCTIONS_HEADING;
-    public static final Image ADVENTURE_MODE_INSTRUCTIONS_HEADING;
-    public static final Image COIN_MODE_INSTRUCTIONS_HEADING;
-    public static final Image LEADER_BOARD_HEADING;
-    public static final Image EASY_ADVENTURE_HEADING;
-    public static final Image EASY_COIN_HEADING;
-    public static final Image MEDIUM_ADVENTURE_HEADING;
-    public static final Image MEDIUM_COIN_HEADING;
-    public static final Image HARD_ADVENTURE_HEADING;
-    public static final Image HARD_COIN_HEADING;
-	
+    public static final Image PLAYER_2_RIGHT_IMAGE;	
 	
 	// Constants in the game.
     public static final int SINGLE_PLAYER = 0;
@@ -147,20 +132,6 @@ public class Game {
         File backgroundFile = new File("Background.jpg");
         File player1TextFile = new File("Player_1_Text.jpg");
         File player2TextFile = new File("Player_2_Text.jpg");
-        File superMarioMazeHeadingFile = new File("superMarioMaze.jpg");
-        File yoshiTongueFile = new File("yoshiTongue.jpg");
-        File mario2File = new File("mario2.png");
-        File peach2File = new File("peach2.jpg");
-        File instructionsHeadingFile = new File ("instructionsHeading.png");
-        File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
-        File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
-        File leaderBoardHeadingFile = new File("leaderBoardHeading.png");
-        File easyAdventureHeadingFile = new File("easyAdventureHeading.png");
-        File easyCoinHeadingFile = new File("easyCoinHeading.png");
-        File mediumAdventureHeadingFile = new File("mediumAdventureHeading.png");
-        File mediumCoinHeadingFile = new File("mediumCoinHeading.png");
-        File hardAdventureHeadingFile = new File ("hardAdventureHeading");
-        File hardCoinHeadingFile = new File("hardCoinHeading.png");
 
         Image wallImg = null;
         Image roadImg = null;
@@ -184,20 +155,6 @@ public class Game {
         Image backgroundImg = null;
         Image player1TextImg = null;
         Image player2TextImg = null;
-        Image superMarioMazeHeadingImg = null;
-        Image yoshiTongueImg = null;
-        Image mario2Img = null;
-        Image peach2Img = null;
-        Image instructionsHeadingImg = null;
-        Image adventureModeInstructionsHeadingImg = null;
-        Image coinModeInstructionsHeadingImg = null;
-        Image leaderBoardHeadingImg = null;
-        Image easyAdventureHeadingImg = null;
-        Image easyCoinHeadingImg = null;
-        Image mediumAdventureHeadingImg = null;
-        Image mediumCoinHeadingImg = null;
-        Image hardAdventureHeadingImg = null;
-        Image hardCoinHeadingImg = null;
 
         try {
             wallImg = ImageIO.read(wallFile);
@@ -221,21 +178,7 @@ public class Game {
             player2Img = ImageIO.read(player2File);
             backgroundImg = ImageIO.read(backgroundFile);
             player1TextImg = ImageIO.read(player1TextFile);
-            player2TextImg = ImageIO.read(player2TextFile);
-            superMarioMazeHeadingImg = ImageIO.read(superMarioMazeHeadingFile);
-            yoshiTongueImg = ImageIO.read(yoshiTongueFile);
-            mario2Img = ImageIO.read(mario2File);
-            peach2Img = ImageIO.read(peach2File);
-            instructionsHeadingImg = ImageIO.read(instructionsHeadingFile);
-            adventureModeInstructionsHeadingImg = ImageIO.read(adventureModeInstructionsHeadingFile);
-            coinModeInstructionsHeadingImg = ImageIO.read(coinModeInstructionsHeadingFile);
-            leaderBoardHeadingImg = ImageIO.read(leaderBoardHeadingFile);
-            easyAdventureHeadingImg = ImageIO.read(easyAdventureHeadingFile);
-            easyCoinHeadingImg = ImageIO.read(easyCoinHeadingFile);
-            mediumAdventureHeadingImg = ImageIO.read(mediumAdventureHeadingFile);
-            mediumCoinHeadingImg = ImageIO.read(mediumCoinHeadingFile);
-            hardAdventureHeadingImg = ImageIO.read(hardAdventureHeadingFile);
-            hardCoinHeadingImg = ImageIO.read(hardCoinHeadingFile);      
+            player2TextImg = ImageIO.read(player2TextFile);   
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -260,20 +203,6 @@ public class Game {
             PLAYER_1_TEXT_IMAGE = player1TextImg;
             PLAYER_2_TEXT_IMAGE = player2TextImg;
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
-            SUPER_MARIO_MAZE_HEADING = superMarioMazeHeadingImg;
-            YOSHI_TONGUE_IMAGE = yoshiTongueImg;
-            MARIO2_IMAGE = mario2Img;
-            PEACH2_IMAGE = peach2Img;
-            INSTRUCTIONS_HEADING = instructionsHeadingImg;
-            ADVENTURE_MODE_INSTRUCTIONS_HEADING = adventureModeInstructionsHeadingImg;
-            COIN_MODE_INSTRUCTIONS_HEADING = coinModeInstructionsHeadingImg;
-            LEADER_BOARD_HEADING = leaderBoardHeadingImg;
-            EASY_ADVENTURE_HEADING = easyAdventureHeadingImg;
-            EASY_COIN_HEADING = easyCoinHeadingImg;
-            MEDIUM_ADVENTURE_HEADING = mediumAdventureHeadingImg;
-            MEDIUM_COIN_HEADING = mediumCoinHeadingImg;
-            HARD_ADVENTURE_HEADING = hardAdventureHeadingImg;
-            HARD_COIN_HEADING = hardCoinHeadingImg;
         }   
     }
     
@@ -289,14 +218,32 @@ public class Game {
 		leaderboard = new StyledButton("Leaderboard");
 		instructions = new StyledButton("Instructions");
 		
+		// Load images
+	    Image superMarioMazeHeading = null;
+	    Image yoshiTongueImage = null;
+	    Image mario2Image = null;
+	    Image peach2Image = null;
+	    
+	    File superMarioMazeHeadingFile = new File("superMarioMaze.jpg");
+        File yoshiTongueFile = new File("yoshiTongue.jpg");
+        File mario2File = new File("mario2.png");
+        File peach2File = new File("peach2.jpg");
+        
+        try {
+            superMarioMazeHeading = ImageIO.read(superMarioMazeHeadingFile);
+            yoshiTongueImage = ImageIO.read(yoshiTongueFile);
+            mario2Image = ImageIO.read(mario2File);
+            peach2Image = ImageIO.read(peach2File);
+        } catch (IOException e) {}
+        
 		//images
-		Image scaledHeading = SUPER_MARIO_MAZE_HEADING.getScaledInstance(394, 122, Image.SCALE_SMOOTH);
-		Image scaledPeach = PEACH2_IMAGE.getScaledInstance(190, 240, Image.SCALE_SMOOTH);		
+		Image scaledHeading = superMarioMazeHeading.getScaledInstance(394, 122, Image.SCALE_SMOOTH);
+		Image scaledPeach = peach2Image.getScaledInstance(190, 240, Image.SCALE_SMOOTH);		
 		heading = new ImageIcon(scaledHeading);
 		title = new JLabel();
-		yoshiIcon = new ImageIcon(YOSHI_TONGUE_IMAGE);
+		yoshiIcon = new ImageIcon(yoshiTongueImage);
 		yoshiLabel = new JLabel();
-		marioIcon = new ImageIcon(MARIO2_IMAGE);
+		marioIcon = new ImageIcon(mario2Image);
 		marioLabel = new JLabel();
 		peachIcon = new ImageIcon(scaledPeach);
 		peachLabel = new JLabel();

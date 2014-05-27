@@ -10,7 +10,7 @@ import javax.swing.JFrame;
  */
 public class MainMenuButton extends StyledButton {
     private static final long serialVersionUID = 1L;
-    JFrame disposedFrame;
+    private JFrame disposedFrame;
     
     /**
      * Create a mainMenu button.

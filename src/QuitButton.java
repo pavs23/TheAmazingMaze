@@ -9,8 +9,8 @@ import javax.swing.JFrame;
  */
 public class QuitButton extends StyledButton {
     private static final long serialVersionUID = 1L;
-
-    JFrame disposedFrame;
+    private JFrame disposedFrame;
+    
     /**
      * Create a quit button.
      * @param frame the frame that will be disposed after quitting the game.
