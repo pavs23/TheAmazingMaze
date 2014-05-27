@@ -146,7 +146,7 @@ public class Game {
         File backgroundFile = new File("Background.jpg");
         File player1TextFile = new File("Player_1_Text.jpg");
         File player2TextFile = new File("Player_2_Text.jpg");
-        File superMarioMazeHeadingFile = new File("superMarioMazeHeading.jpg");
+        File superMarioMazeHeadingFile = new File("superMarioMaze.jpg");
         File yoshiTongueFile = new File("yoshiTongue.jpg");
         File mario2File = new File("mario2.png");
         File peach2File = new File("peach2.jpg");
@@ -285,10 +285,10 @@ public class Game {
 		quitButton = new QuitButton(mainFrame);
 		leaderboard = new StyledButton("Leaderboard");
 		instructions = new StyledButton("Instructions");
+		
 		//images
 		Image scaledHeading = SUPER_MARIO_MAZE_HEADING.getScaledInstance(394, 122, Image.SCALE_SMOOTH);
-		Image scaledPeach = PEACH2_IMAGE.getScaledInstance(190, 240, Image.SCALE_SMOOTH);
-		
+		Image scaledPeach = PEACH2_IMAGE.getScaledInstance(190, 240, Image.SCALE_SMOOTH);		
 		heading = new ImageIcon(scaledHeading);
 		title = new JLabel();
 		yoshiIcon = new ImageIcon(YOSHI_TONGUE_IMAGE);
@@ -303,13 +303,15 @@ public class Game {
 		mainFrame.setSize(mainFrameDimension);
 		mainFrame.setResizable(false);
 		
-		mainPanel = new MainPanel(mainFrameDimension);		
+		mainPanel = new JPanel();
+		mainPanel.setSize(mainFrameDimension);
 		//Setting the layout of the Frame
 		mainFrame.setLayout(null);
 		mainPanel.setLayout(null);
 		
+		
+		
 		//Setting the dimensions of the newGameButton and setting it to visible
-		Insets insets = mainPanel.getInsets();
 		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
 		newGameButton.setSize(150, 50);
 		newGameButton.setVisible(true);
@@ -337,7 +339,7 @@ public class Game {
 		
 		yoshiLabel.setIcon(yoshiIcon);
 		yoshiLabel.setLocation(new Point(20, 375));
-		yoshiLabel.setSize(new Dimension(318, 178));
+		yoshiLabel.setSize(new Dimension(320, 180));
 		yoshiLabel.setVisible(true);
 		
 		marioLabel.setIcon(marioIcon);

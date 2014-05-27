@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Point;
 
 import javax.swing.*;
@@ -8,6 +7,8 @@ import javax.swing.*;
 
 public class FinishingPanel extends JPanel {
     private JPanel message;
+    private static final long serialVersionUID = 1L;
+    
 	/**
 	 * Create a finishing panel.
 	 * @param frame the frame associated with the panel.

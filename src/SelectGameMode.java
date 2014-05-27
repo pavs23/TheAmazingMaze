@@ -1,43 +1,75 @@
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Insets;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class SelectGameMode extends JPanel {
-
-	private GameModeButton coinMode;
-	private GameModeButton adventureMode;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JLabel titleLabel;
+	private StyledButton coinMode;
+	private StyledButton adventureMode;
 	private SelectGameMode currentScreen;
 	private BackButton back;
-	private final int xPosition = 225;
-	private final int yPosition = 100;
+	
+	private static final int lengthNumOfPlayerLabel = 150;
+	private static final int widthNumOfPlayerLabel = 70;
+	private final int xPositionButton = 225;
+	private final int yPositionButton = 150;
+	private static final int vGap = 30; 
 
 	public SelectGameMode(Dimension d, final JFrame mainFrame, final JPanel prev) {
 		currentScreen = this;
 		this.setSize(d);
 		this.setLayout(null);
-		coinMode = new GameModeButton("Coin Mode", Color.YELLOW);
-		adventureMode = new GameModeButton("Adventure", Color.green);
-		coinMode.setSize(150, 90);
-		adventureMode.setSize(150, 90);
+		
+		File titleFile = new File("modeSelection.png");
+		
+		Image titleImage = null;
+		try{
+			titleImage = ImageIO.read(titleFile);
+		}catch (IOException e) {}
+		
+		titleLabel = new JLabel();
+        titleLabel.setSize(new Dimension(400, 70));
+        titleLabel.setLocation(new Point(100, 20));
+        Image scaledTitleButton = titleImage.getScaledInstance(titleLabel.getWidth(), titleLabel.getHeight(), Image.SCALE_SMOOTH);    
+        ImageIcon titleIcon = new ImageIcon(scaledTitleButton);
+        titleLabel.setIcon(titleIcon);
+		
+		coinMode = new StyledButton("Coin");
+		adventureMode = new StyledButton("Adventure");
+		coinMode.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
+		adventureMode.setSize(lengthNumOfPlayerLabel, widthNumOfPlayerLabel);
+		adventureMode.setLocation(xPositionButton, yPositionButton);
+		coinMode.setLocation(xPositionButton, yPositionButton + widthNumOfPlayerLabel + vGap);
 
+		back = new BackButton(prev, mainFrame, this);
+		
 		JLabel panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
         
-		Insets insets = this.getInsets();
-		adventureMode.setLocation(xPosition, yPosition);
-		coinMode.setLocation(xPosition, yPosition + 160);
-
-		back = new BackButton(prev, mainFrame, this);
-
+        panelLabel.add(titleLabel);
+        panelLabel.add(back);
+		panelLabel.add(adventureMode);
+		panelLabel.add(coinMode);
+		
+		this.add(panelLabel);
+		
 		// Still need to hook up this panel to the frame.
 		// also need to put the frame into the chain of the frames.
 
@@ -74,9 +106,5 @@ public class SelectGameMode extends JPanel {
 			}
 		});
 		
-		panelLabel.add(back);
-		panelLabel.add(adventureMode);
-		panelLabel.add(coinMode);
-		this.add(panelLabel);
 	}
 }

@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
 import java.io.File;
@@ -9,7 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class LosePanel extends FinishingPanel{
+/**
+ * Create a panel when a player lost a game.
+ * @author floren
+ *
+ */
+public class LosePanel extends FinishingPanel {
+    private static final long serialVersionUID = 1L;
+    
     /**
      * Create panel for losing game.
      * @param frame the frame that contains the panel.
@@ -46,6 +52,4 @@ public class LosePanel extends FinishingPanel{
 		
 		setMessage(loseLabel);
 	}
-	
-
 }

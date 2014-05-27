@@ -14,20 +14,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+/**
+ * Create a panel for name entry.
+ * @author floren
+ *
+ */
 public class NameEntryPanel extends JPanel{
-	
+
+    private static final long serialVersionUID = 1L;
     private JTextField playerOneNameField;
     private JTextField playerTwoNameField;
 	private StyledButton done;
 	private JPanel current;
-	private BackButton backButton;
-	private static final int X_POSITION = 215;
-	private static final int Y_POSITION = 130;
-	private static final int MAX_CHAR = 15;
 	
+	/**
+	 * Create a name entry panel.
+	 * @param mainFrame the frame where the panel will be made.
+	 * @param mode the mode of the game (coin/adventure).
+	 * @param prev the previous panel before this panel is made.
+	 * @param singleOrMulti the number of players in the game.
+	 * @param difficulty the difficulty of the game.
+	 */
 	public NameEntryPanel(final JFrame mainFrame, final int mode, final JPanel prev, final int singleOrMulti, final int difficulty){
-		current = this;
+	    final int X_POSITION = 215;
+	    final int Y_POSITION = 130;
+	    final int MAX_CHAR = 15;
+	    
+	    current = this;
 		this.setSize(new Dimension(600, 600));
 		this.setLayout(null);
 		
@@ -40,7 +53,9 @@ public class NameEntryPanel extends JPanel{
 		JLabel subTitle;
 	    JLabel playerOneLabel;
 	    JLabel playerTwoLabel;
-        
+	    
+	    BackButton backButton;
+	    
         File enterNameFile = new File("Enter_Players_Name.jpg");
         File maxCharFile = new File("Max_Char.jpg");
         Image enterNameImage = null;
@@ -84,8 +99,7 @@ public class NameEntryPanel extends JPanel{
         playerTwoNameField.setSize(new Dimension(170,40));
         playerTwoNameField.setLocation(new Point(X_POSITION, Y_POSITION + 125));
         
-        done = new StyledButton();
-        done.setText("Submit");
+        done = new StyledButton("Submit");
         done.setSize(new Dimension(140, 40));
         done.setEnabled(false);
         done.setLocation(new Point(X_POSITION + 15, Y_POSITION + 210));

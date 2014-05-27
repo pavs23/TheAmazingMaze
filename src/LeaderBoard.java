@@ -14,7 +14,8 @@ import javax.swing.JPanel;
  *
  */
 public class LeaderBoard extends JPanel{
-	
+    private static final long serialVersionUID = 1L;
+    
 	//constants for iterating through array list of array lists
 	private static final int EASY_NORMAL_LOC = 0;
 	private static final int EASY_COIN_LOC = 1;
