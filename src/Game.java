@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Paint;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,8 +39,8 @@ public class Game {
 	
 	// Positions of the buttons on the panel
 	private static final int X_BUTTON_POSITION = 225;
-	private static final int Y_BUTTON_POSITION = 80;
-	private static final int VERTICAL_GAP = 130;
+	private static final int Y_BUTTON_POSITION = 200;
+	private static final int VERTICAL_GAP = 90;
 	
 	// The Images used in the game.
 	public static final Image ROAD_IMAGE;
@@ -63,7 +64,7 @@ public class Game {
     public static final Image PLAYER_1_TEXT_IMAGE;
     public static final Image PLAYER_2_TEXT_IMAGE;
     public static final Image PLAYER_2_RIGHT_IMAGE;
-    //public static final Image THE_AMAZING_MAZE_HEADING;
+    public static final Image SUPER_MARIO_MAZE_HEADING;
     public static final Image YOSHI_TONGUE_IMAGE;
     public static final Image MARIO2_IMAGE;
     public static final Image PEACH2_IMAGE;
@@ -71,6 +72,12 @@ public class Game {
     public static final Image ADVENTURE_MODE_INSTRUCTIONS_HEADING;
     public static final Image COIN_MODE_INSTRUCTIONS_HEADING;
     public static final Image LEADER_BOARD_HEADING;
+    public static final Image EASY_ADVENTURE_HEADING;
+    public static final Image EASY_COIN_HEADING;
+    public static final Image MEDIUM_ADVENTURE_HEADING;
+    public static final Image MEDIUM_COIN_HEADING;
+    public static final Image HARD_ADVENTURE_HEADING;
+    public static final Image HARD_COIN_HEADING;
 	
 	
 	// Constants in the game.
@@ -139,14 +146,20 @@ public class Game {
         File backgroundFile = new File("Background.jpg");
         File player1TextFile = new File("Player_1_Text.jpg");
         File player2TextFile = new File("Player_2_Text.jpg");
-        File theAmazingMazeHeadingFile = new File("theAmazingMazeLogo.gif");
+        File superMarioMazeHeadingFile = new File("superMarioMaze.jpg");
         File yoshiTongueFile = new File("yoshiTongue.jpg");
         File mario2File = new File("mario2.png");
         File peach2File = new File("peach2.jpg");
         File instructionsHeadingFile = new File ("instructionsHeading.png");
         File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
         File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
-        File leaderBoardHeadingFile = new File ("leaderBoardHeading.png");
+        File leaderBoardHeadingFile = new File("leaderBoardHeading.png");
+        File easyAdventureHeadingFile = new File("easyAdventureHeading.png");
+        File easyCoinHeadingFile = new File("easyCoinHeading.png");
+        File mediumAdventureHeadingFile = new File("mediumAdventureHeading.png");
+        File mediumCoinHeadingFile = new File("mediumCoinHeading.png");
+        File hardAdventureHeadingFile = new File ("hardAdventureHeading");
+        File hardCoinHeadingFile = new File("hardCoinHeading.png");
 
         Image wallImg = null;
         Image roadImg = null;
@@ -170,7 +183,7 @@ public class Game {
         Image backgroundImg = null;
         Image player1TextImg = null;
         Image player2TextImg = null;
-        Image theAmazingMazeHeadingImg = null;
+        Image superMarioMazeHeadingImg = null;
         Image yoshiTongueImg = null;
         Image mario2Img = null;
         Image peach2Img = null;
@@ -178,6 +191,12 @@ public class Game {
         Image adventureModeInstructionsHeadingImg = null;
         Image coinModeInstructionsHeadingImg = null;
         Image leaderBoardHeadingImg = null;
+        Image easyAdventureHeadingImg = null;
+        Image easyCoinHeadingImg = null;
+        Image mediumAdventureHeadingImg = null;
+        Image mediumCoinHeadingImg = null;
+        Image hardAdventureHeadingImg = null;
+        Image hardCoinHeadingImg = null;
 
         try {
             wallImg = ImageIO.read(wallFile);
@@ -202,7 +221,7 @@ public class Game {
             backgroundImg = ImageIO.read(backgroundFile);
             player1TextImg = ImageIO.read(player1TextFile);
             player2TextImg = ImageIO.read(player2TextFile);
-           // theAmazingMazeHeadingImg = ImageIO.read(theAmazingMazeHeadingFile);
+            superMarioMazeHeadingImg = ImageIO.read(superMarioMazeHeadingFile);
             yoshiTongueImg = ImageIO.read(yoshiTongueFile);
             mario2Img = ImageIO.read(mario2File);
             peach2Img = ImageIO.read(peach2File);
@@ -210,6 +229,12 @@ public class Game {
             adventureModeInstructionsHeadingImg = ImageIO.read(adventureModeInstructionsHeadingFile);
             coinModeInstructionsHeadingImg = ImageIO.read(coinModeInstructionsHeadingFile);
             leaderBoardHeadingImg = ImageIO.read(leaderBoardHeadingFile);
+            easyAdventureHeadingImg = ImageIO.read(easyAdventureHeadingFile);
+            easyCoinHeadingImg = ImageIO.read(easyCoinHeadingFile);
+            mediumAdventureHeadingImg = ImageIO.read(mediumAdventureHeadingFile);
+            mediumCoinHeadingImg = ImageIO.read(mediumCoinHeadingFile);
+            hardAdventureHeadingImg = ImageIO.read(hardAdventureHeadingFile);
+            hardCoinHeadingImg = ImageIO.read(hardCoinHeadingFile);
             
         } catch (IOException e) {
         } finally {
@@ -235,7 +260,7 @@ public class Game {
             PLAYER_1_TEXT_IMAGE = player1TextImg;
             PLAYER_2_TEXT_IMAGE = player2TextImg;
             BACKGROUND = new ImageIcon(backgroundImg.getScaledInstance(FRAME_SIZE, FRAME_SIZE, Image.SCALE_SMOOTH));
-            //THE_AMAZING_MAZE_HEADING = theAmazingMazeHeadingImg;
+            SUPER_MARIO_MAZE_HEADING = superMarioMazeHeadingImg;
             YOSHI_TONGUE_IMAGE = yoshiTongueImg;
             MARIO2_IMAGE = mario2Img;
             PEACH2_IMAGE = peach2Img;
@@ -243,6 +268,12 @@ public class Game {
             ADVENTURE_MODE_INSTRUCTIONS_HEADING = adventureModeInstructionsHeadingImg;
             COIN_MODE_INSTRUCTIONS_HEADING = coinModeInstructionsHeadingImg;
             LEADER_BOARD_HEADING = leaderBoardHeadingImg;
+            EASY_ADVENTURE_HEADING = easyAdventureHeadingImg;
+            EASY_COIN_HEADING = easyCoinHeadingImg;
+            MEDIUM_ADVENTURE_HEADING = mediumAdventureHeadingImg;
+            MEDIUM_COIN_HEADING = mediumCoinHeadingImg;
+            HARD_ADVENTURE_HEADING = hardAdventureHeadingImg;
+            HARD_COIN_HEADING = hardCoinHeadingImg;
         }   
     }
     
@@ -256,14 +287,15 @@ public class Game {
 		instructions = new StyledButton("Instructions");
 		
 		//images
-		//Image scaledHeading = THE_AMAZING_MAZE_HEADING.getScaledInstance(519, 51, Image.SCALE_SMOOTH);
-		//heading = new ImageIcon(scaledHeading);
+		Image scaledHeading = SUPER_MARIO_MAZE_HEADING.getScaledInstance(394, 122, Image.SCALE_SMOOTH);
+		Image scaledPeach = PEACH2_IMAGE.getScaledInstance(190, 240, Image.SCALE_SMOOTH);		
+		heading = new ImageIcon(scaledHeading);
 		title = new JLabel();
 		yoshiIcon = new ImageIcon(YOSHI_TONGUE_IMAGE);
 		yoshiLabel = new JLabel();
 		marioIcon = new ImageIcon(MARIO2_IMAGE);
 		marioLabel = new JLabel();
-		peachIcon = new ImageIcon(PEACH2_IMAGE);
+		peachIcon = new ImageIcon(scaledPeach);
 		peachLabel = new JLabel();
 		
 		//Setting the size of the Frame
@@ -281,32 +313,33 @@ public class Game {
 		
 		//Setting the dimensions of the newGameButton and setting it to visible
 		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
-		newGameButton.setSize(150, 90);
+		newGameButton.setSize(150, 50);
 		newGameButton.setVisible(true);
 		
 		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
-		quitButton.setSize(150, 90);
+		quitButton.setSize(150, 50);
 		quitButton.setVisible(true);
 		
 		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
 		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		leaderboard.setSize(new Dimension(150, 90));
+		leaderboard.setSize(new Dimension(150, 50));
 		leaderboard.setVisible(true);
 		
 		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
 		instructions.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
-		instructions.setSize(150, 90);
+		instructions.setSize(150, 50);
 		instructions.setVisible(true);
 		
 		//images
-		//title.setIcon(heading);
-		title.setLocation(new Point(40, 20));
-		title.setSize(new Dimension(519, 51));
+		title.setIcon(heading);
+		title.setLocation(new Point(100, 0));
+		title.setSize(new Dimension(398, 146));
+		title.setBackground(null);
 		title.setVisible(true);
 		
 		yoshiLabel.setIcon(yoshiIcon);
-		yoshiLabel.setLocation(new Point(20, 347));
-		yoshiLabel.setSize(new Dimension(320, 206));
+		yoshiLabel.setLocation(new Point(20, 375));
+		yoshiLabel.setSize(new Dimension(320, 180));
 		yoshiLabel.setVisible(true);
 		
 		marioLabel.setIcon(marioIcon);
@@ -315,8 +348,8 @@ public class Game {
 		marioLabel.setVisible(true);
 		
 		peachLabel.setIcon(peachIcon);
-		peachLabel.setLocation(new Point(5, 60));
-		peachLabel.setSize(new Dimension(237, 300));
+		peachLabel.setLocation(new Point(20, 140));
+		peachLabel.setSize(new Dimension(190, 240));
 		peachLabel.setVisible(true);
 		
 		//Adding the newGameButton to the frame
@@ -326,8 +359,8 @@ public class Game {
 		mainPanel.add(instructions);
 		mainPanel.add(title);
 		mainPanel.add(yoshiLabel);
-		mainPanel.add(marioLabel);
 		mainPanel.add(peachLabel);
+		mainPanel.add(marioLabel);
 		mainPanel.setBackground(Color.WHITE);
 		
 		mainFrame.add(mainPanel);
