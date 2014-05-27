@@ -9,7 +9,13 @@ import java.awt.event.*;
 
 public class StyledButton extends JButton{
 
-	 public StyledButton() {
+
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public StyledButton() {
 		 this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		 this.setOpaque(true);
 		 final StyledButton curr = this;
@@ -26,8 +32,8 @@ public class StyledButton extends JButton{
 		 });
 	 }
 	 
-	 public StyledButton(String text) {
-	     this();
-	     this.setText(text);   
-	 }
+	public StyledButton(String text) {
+	    this();
+	    this.setText(text);   
+	}
 }
