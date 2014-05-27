@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 
 public class BackButton extends StyledButton{
-	
     private static final long serialVersionUID = 1L;
+    
     /**
      * Create a back button constructor.
      * @param prev the previous panel that the back button will go to.

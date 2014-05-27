@@ -78,7 +78,7 @@ public abstract class PlayerModes {
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
-        frame.setBackground(Color.BLACK);
+        frame.getContentPane().setBackground(Color.BLACK);
         
         // Create the gamePanel.
         gamePanel = new JPanel();

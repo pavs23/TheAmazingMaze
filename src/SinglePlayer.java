@@ -50,6 +50,7 @@ public class SinglePlayer extends PlayerModes {
         
         JPanel mazeAndInst = new JPanel();
         mazeAndInst.setLayout(new BoxLayout(mazeAndInst, BoxLayout.Y_AXIS));
+        mazeAndInst.setBackground(Color.BLACK);
         
         JPanel instruction = new JPanel();
         instruction.setBackground(Color.BLACK);

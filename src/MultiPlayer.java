@@ -61,9 +61,11 @@ public class MultiPlayer extends PlayerModes {
         JPanel mazeAndInst1 = new JPanel();
         mazeAndInst1.setLayout(new BoxLayout(mazeAndInst1, BoxLayout.Y_AXIS));
         mazeAndInst1.setBorder(new EmptyBorder(0, 0, 0, 30));
+        mazeAndInst1.setBackground(Color.BLACK);
         
         JPanel mazeAndInst2 = new JPanel();
         mazeAndInst2.setLayout(new BoxLayout(mazeAndInst2, BoxLayout.Y_AXIS));
+        mazeAndInst2.setBackground(Color.BLACK);
         
         JPanel instruction1 = new JPanel();
         instruction1.setBackground(Color.BLACK);
