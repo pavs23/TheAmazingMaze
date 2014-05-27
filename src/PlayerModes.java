@@ -263,6 +263,8 @@ public abstract class PlayerModes {
             }
         }
         
+        mazePanel.setBackground(Color.BLACK);
+        
         // Paint the coin if it's coin mode.
         if (mode == Game.COIN_MODE) {
             CoinMaze coinMaze = (CoinMaze) maze;
@@ -430,8 +432,8 @@ public abstract class PlayerModes {
                 StyledButton resumeButton = new StyledButton();
                 resumeButton.setText("Resume");
                 resumeButton.setVisible(true);
-                resumeButton.setPreferredSize(new Dimension(150, 80));
-                
+                resumeButton.setPreferredSize(new Dimension(250, 150));
+                resumeButton.setFont(new Font("Arial", Font.PLAIN, 60));
                 if (pausePanel == null) {
                     pausePanel = new GamePausedPanel(frame.getWidth(), frame.getHeight());
                     pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
