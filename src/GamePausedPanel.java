@@ -33,7 +33,6 @@ public class GamePausedPanel extends JPanel{
         ImageIcon pauseIcon = new ImageIcon(scaledPause);
         
 		this.setLayout(new FlowLayout());
-		
 		pauseLabel = new JLabel();
 		pauseLabel.setLayout(new FlowLayout());
 		pauseLabel.setIcon(pauseIcon);

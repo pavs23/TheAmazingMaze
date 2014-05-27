@@ -11,8 +11,8 @@ public class AdventureMaze extends GameModeImp {
     private MazeGenerator maze;  
     
     private static final int EASY_BOUNDARY = 70;
-    private static final int MEDIUM_BOUNDARY = 150;
-    private static final int HARD_BOUNDARY = 220;
+    private static final int MEDIUM_BOUNDARY = 110;
+    private static final int HARD_BOUNDARY = 150;
     
     /**
      * Constructor of the class
@@ -70,7 +70,6 @@ public class AdventureMaze extends GameModeImp {
                 length = currLength;
                 finishCoor = currFinishCoor;
                 setMazeArray(mazeArray);
-                System.out.println("yoohoo");
             }
             
             // If the length is now greater than boundary, exit the loop.

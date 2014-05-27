@@ -76,7 +76,7 @@ public class LeaderBoard extends JPanel{
         ImageIcon hardCoinIcon;  
         
         //set current panel
-        this.setSize(new Dimension(600, 600));
+        this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         this.setLayout(null);   
         
         panelLabel = new JLabel();

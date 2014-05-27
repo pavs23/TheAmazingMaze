@@ -79,7 +79,6 @@ public class SelectGameMode extends JPanel {
 		coinMode.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("You have selected Coin Mode");
 				SingleOrMulti players = new SingleOrMulti(
 						Game.COIN_MODE, mainFrame, currentScreen);
 				currentScreen.setVisible(false);
@@ -91,7 +90,6 @@ public class SelectGameMode extends JPanel {
 		adventureMode.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("You have selected Adventure Mode");
 				SingleOrMulti players = new SingleOrMulti(
 						Game.ADVENTURE_MODE, mainFrame, currentScreen);
 				mainFrame.add(players);				

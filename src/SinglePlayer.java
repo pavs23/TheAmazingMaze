@@ -24,7 +24,7 @@ public class SinglePlayer extends PlayerModes {
     private GameMode maze;
     private JPanel mazePanel;
     private JLabel[][] labels;
-    private GameButton hintButton;
+    private StyledButton hintButton;
     private GameTimer timer;
     private Timer[] timers = new Timer[4];
     private boolean gameFinished = false;
@@ -282,7 +282,7 @@ public class SinglePlayer extends PlayerModes {
         hintPanel.setBorder(new EmptyBorder(0, 0, 50, 0));
         hintPanel.setLayout(new FlowLayout());
         hintPanel.setBackground(Color.BLACK);
-        hintButton = new GameButton("Get Hint : " + hintRemaining);
+        hintButton = new StyledButton ("Get Hint : " + hintRemaining);
         hintButton.setFocusable(false);
         hintPanel.add(hintButton);
         // Print the first few steps to goal.
@@ -319,15 +319,19 @@ public class SinglePlayer extends PlayerModes {
      * Method to create timer for the game.
      */
     private void generateTimer() {
+        JPanel timePanel = new JPanel();
+        timePanel.setLayout(new FlowLayout());
+        timePanel.setBackground(Color.BLACK);
+        timePanel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         JLabel timeLabel = new JLabel();
         timeLabel.setBackground(Color.BLACK);
         timeLabel.setForeground(Color.WHITE);
         timeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         timeLabel.setVisible(true);
-        timeLabel.setHorizontalAlignment(JLabel.CENTER);
         timeLabel.setPreferredSize(new Dimension(150, 50));
-        addToSidePanel(timeLabel);
-        timer = new GameTimer(timeLabel, this);
+        timePanel.add(timeLabel);
+        addToSidePanel(timePanel);
+        timer = new GameTimer(timeLabel, this);        
         timer.start();    
     }
     

@@ -34,8 +34,8 @@ public abstract class PlayerModes {
     private JPanel sidePanel;
     private GamePausedPanel pausePanel = null;
     
-    private GameButton mainMenuButton;
-    private GameButton pauseButton;
+    private StyledButton mainMenuButton;
+    private StyledButton pauseButton;
     
     
     /**
@@ -89,7 +89,6 @@ public abstract class PlayerModes {
         // Create the sidePanel and menu. 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setAlignmentX(JPanel.CENTER_ALIGNMENT);
         sidePanel.setBackground(Color.BLACK);
         sidePanel.setVisible(true);    
         generateSideMenu();
@@ -412,7 +411,7 @@ public abstract class PlayerModes {
         mainMenu.setBorder(new EmptyBorder(0, 0, 50, 0));
         mainMenu.setBackground(Color.BLACK);
  
-        mainMenuButton = new GameButton("Main Menu");
+        mainMenuButton = new StyledButton("Main Menu");
         mainMenu.add(mainMenuButton);
         mainMenu.setVisible(true);
         
@@ -421,7 +420,7 @@ public abstract class PlayerModes {
         pause.setBorder(new EmptyBorder(0, 0, 50, 0));
         pause.setBackground(Color.BLACK);
         
-        pauseButton = new GameButton("Pause");
+        pauseButton = new StyledButton("Pause");
         pause.add(pauseButton);
         pause.setVisible(true);
         
@@ -430,14 +429,19 @@ public abstract class PlayerModes {
                 freeze();
                 gamePanel.setVisible(false);
                 sidePanel.setVisible(false);
+                JPanel resumePanel = new JPanel();
+                resumePanel.setLayout(new FlowLayout());
+                resumePanel.setBorder(new EmptyBorder(500, 0, 0, 0));
+                resumePanel.setOpaque(false);
                 StyledButton resumeButton = new StyledButton("Resume");
                 resumeButton.setVisible(true);
-                resumeButton.setPreferredSize(new Dimension(250, 150));
-                resumeButton.setFont(new Font("Arial", Font.PLAIN, 60));
+                resumeButton.setPreferredSize(new Dimension(200, 100));
+                resumeButton.setFont(new Font("Arial", Font.PLAIN, 40));
+                resumePanel.add(resumeButton);
                 if (pausePanel == null) {
                     pausePanel = new GamePausedPanel(frame.getWidth(), frame.getHeight());
                     pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
-                    pausePanel.addToPanel(resumeButton);
+                    pausePanel.addToPanel(resumePanel);
                     addToFrame(pausePanel);
                 }
                 
