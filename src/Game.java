@@ -263,15 +263,13 @@ public class Game {
 		newGameButton.setLocation(X_BUTTON_POSITION, Y_BUTTON_POSITION);
 		newGameButton.setVisible(true);
 		
-		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (3 * VERTICAL_GAP)));
+		quitButton.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
 		quitButton.setVisible(true);
 		
 		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
-		leaderboard.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		leaderboard.setVisible(true);
 		
 		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
-		instructions.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		instructions.setVisible(true);
 		
 		//images
@@ -300,7 +298,7 @@ public class Game {
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
 		mainPanel.add(quitButton);
-		mainPanel.add(instructions);
+		//mainPanel.add(instructions);
 		mainPanel.add(title);
 		mainPanel.add(yoshiLabel);
 		mainPanel.add(peachLabel);
@@ -342,6 +340,7 @@ public class Game {
 			}
 		});
 		
+		/*
 		instructions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 InstructionPanel instructionScreen = new InstructionPanel(mainFrame, mainPanel);
@@ -351,6 +350,7 @@ public class Game {
                 mainFrame.add(instructionScreen);
             }
 		});
+		*/
 		
 	}
 	
