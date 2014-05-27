@@ -410,7 +410,7 @@ public abstract class PlayerModes {
         JPanel mainMenu = new JPanel();
         mainMenu.setLayout(new FlowLayout());       
         mainMenu.setBorder(new EmptyBorder(0, 0, 50, 0));
-       
+        mainMenu.setBackground(Color.BLACK);
  
         mainMenuButton = new GameButton("Main Menu");
         mainMenu.add(mainMenuButton);
@@ -419,6 +419,7 @@ public abstract class PlayerModes {
         JPanel pause = new JPanel();
         pause.setLayout(new FlowLayout()); 
         pause.setBorder(new EmptyBorder(0, 0, 50, 0));
+        pause.setBackground(Color.BLACK);
         
         pauseButton = new GameButton("Pause");
         pause.add(pauseButton);
