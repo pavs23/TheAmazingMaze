@@ -67,6 +67,10 @@ public class Game {
     public static final Image YOSHI_TONGUE_IMAGE;
     public static final Image MARIO2_IMAGE;
     public static final Image PEACH2_IMAGE;
+    public static final Image INSTRUCTIONS_HEADING;
+    public static final Image ADVENTURE_MODE_INSTRUCTIONS_HEADING;
+    public static final Image COIN_MODE_INSTRUCTIONS_HEADING;
+    public static final Image LEADER_BOARD_HEADING;
 	
 	
 	// Constants in the game.
@@ -139,6 +143,10 @@ public class Game {
         File yoshiTongueFile = new File("yoshiTongue.jpg");
         File mario2File = new File("mario2.png");
         File peach2File = new File("peach2.jpg");
+        File instructionsHeadingFile = new File ("instructionsHeading.png");
+        File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
+        File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
+        File leaderBoardHeadingFile = new File ("leaderBoardHeading.png");
 
         Image wallImg = null;
         Image roadImg = null;
@@ -166,7 +174,10 @@ public class Game {
         Image yoshiTongueImg = null;
         Image mario2Img = null;
         Image peach2Img = null;
-        
+        Image instructionsHeadingImg = null;
+        Image adventureModeInstructionsHeadingImg = null;
+        Image coinModeInstructionsHeadingImg = null;
+        Image leaderBoardHeadingImg = null;
 
         try {
             wallImg = ImageIO.read(wallFile);
@@ -195,7 +206,11 @@ public class Game {
             yoshiTongueImg = ImageIO.read(yoshiTongueFile);
             mario2Img = ImageIO.read(mario2File);
             peach2Img = ImageIO.read(peach2File);
-
+            instructionsHeadingImg = ImageIO.read(instructionsHeadingFile);
+            adventureModeInstructionsHeadingImg = ImageIO.read(adventureModeInstructionsHeadingFile);
+            coinModeInstructionsHeadingImg = ImageIO.read(coinModeInstructionsHeadingFile);
+            leaderBoardHeadingImg = ImageIO.read(leaderBoardHeadingFile);
+            
         } catch (IOException e) {
         } finally {
             WALL_IMAGE = wallImg;
@@ -224,6 +239,10 @@ public class Game {
             YOSHI_TONGUE_IMAGE = yoshiTongueImg;
             MARIO2_IMAGE = mario2Img;
             PEACH2_IMAGE = peach2Img;
+            INSTRUCTIONS_HEADING = instructionsHeadingImg;
+            ADVENTURE_MODE_INSTRUCTIONS_HEADING = adventureModeInstructionsHeadingImg;
+            COIN_MODE_INSTRUCTIONS_HEADING = coinModeInstructionsHeadingImg;
+            LEADER_BOARD_HEADING = leaderBoardHeadingImg;
         }   
     }
     
