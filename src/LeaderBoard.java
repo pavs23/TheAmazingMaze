@@ -134,8 +134,8 @@ public class LeaderBoard extends JPanel{
         easyAdventureIcon = new ImageIcon(scaledEasyAdventure);
         easyAdventureTitle = new JLabel();
         easyAdventureTitle.setIcon(easyAdventureIcon);
-        easyAdventureTitle.setSize(269, 13);
-        easyAdventureTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE + 10, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
+        easyAdventureTitle.setSize(135, 7);
+        easyAdventureTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
         easyAdventureTitle.setVisible(true);
         
         easyAdventureNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_ADVENTURE_LOC)));
@@ -152,8 +152,8 @@ public class LeaderBoard extends JPanel{
         easyCoinIcon = new ImageIcon(scaledCoinEasy);
         easyCoinTitle = new JLabel();
         easyCoinTitle.setIcon(easyCoinIcon);
-        easyCoinTitle.setSize(269, 13);
-        easyCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT + 10, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
+        easyCoinTitle.setSize(97, 7);
+        easyCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE-HEADING_DECREMENT));
         easyCoinTitle.setVisible(true);
         
         easyCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_COIN_LOC)));
@@ -167,10 +167,10 @@ public class LeaderBoard extends JPanel{
         
         
         //medium adventure
-        Image scaledAdventureMedium = mediumAdventureHeadingImg.getScaledInstance(140, 8, Image.SCALE_SMOOTH);
+        Image scaledAdventureMedium = mediumAdventureHeadingImg.getScaledInstance(150, 7 , Image.SCALE_SMOOTH);
         mediumAdventureIcon = new ImageIcon(scaledAdventureMedium);
         mediumAdventureTitle = new JLabel(mediumAdventureIcon);
-        mediumAdventureTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+        mediumAdventureTitle.setSize(150, 7);
         mediumAdventureTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT-HEADING_DECREMENT));
         mediumAdventureTitle.setVisible(true);
         
@@ -187,10 +187,10 @@ public class LeaderBoard extends JPanel{
         
         
         //medium coin
-        Image scaledCoinMedium = mediumCoinHeadingImg.getScaledInstance(135, 8, Image.SCALE_SMOOTH);
+        Image scaledCoinMedium = mediumCoinHeadingImg.getScaledInstance(112, 7, Image.SCALE_SMOOTH);
         mediumCoinIcon = new ImageIcon(scaledCoinMedium);
         mediumCoinTitle = new JLabel(mediumCoinIcon);
-        mediumCoinTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+        mediumCoinTitle.setSize(112, 7);
         mediumCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT-HEADING_DECREMENT));
         mediumCoinTitle.setVisible(true);
         mediumCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(MEDIUM_COIN_LOC)));
@@ -205,10 +205,10 @@ public class LeaderBoard extends JPanel{
         
         
         //hard adventure
-        Image scaledAdventureHard = hardAdventureHeadingImg.getScaledInstance(140, 8, Image.SCALE_SMOOTH);
+        Image scaledAdventureHard = hardAdventureHeadingImg.getScaledInstance(135, 7, Image.SCALE_SMOOTH);
         hardAdventureIcon = new ImageIcon(scaledAdventureHard);
         hardAdventureTitle = new JLabel(hardAdventureIcon);
-        hardAdventureTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+        hardAdventureTitle.setSize(135, 7);
         hardAdventureTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)-HEADING_DECREMENT));
         hardAdventureTitle.setVisible(true);
         hardAdventureNames = new JLabel(displayLeaderBoardNames(leaders.get(HARD_ADVENTURE_LOC)));
@@ -222,10 +222,10 @@ public class LeaderBoard extends JPanel{
         
         
         //hard coin
-        Image scaledCoinHard = hardCoinHeadingImg.getScaledInstance(140, 8, Image.SCALE_SMOOTH);
+        Image scaledCoinHard = hardCoinHeadingImg.getScaledInstance(97, 7, Image.SCALE_SMOOTH);
         hardCoinIcon= new ImageIcon(scaledCoinHard);
         hardCoinTitle = new JLabel(hardCoinIcon);
-        hardCoinTitle.setSize(LEADER_BOARD_TITLE_SIZE);
+        hardCoinTitle.setSize(97, 7);
         hardCoinTitle.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)-HEADING_DECREMENT));
         hardCoinTitle.setVisible(true);
         hardCoinNames = new JLabel(displayLeaderBoardNames(leaders.get(HARD_COIN_LOC)));
