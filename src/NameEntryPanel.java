@@ -1,7 +1,9 @@
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -124,7 +126,14 @@ public class NameEntryPanel extends JPanel {
             done.setLocation(new Point(X_POSITION + 15, Y_POSITION + 110));
         }
         
-		done.addActionListener(new ActionListener() {
+        // Find the button bounds to detect mouse over.
+        Rectangle buttonBound = done.getBounds();
+        final double buttonWidth = buttonBound.getWidth();
+        final double buttonHeight = buttonBound.getHeight();
+        final double buttonStartX = buttonBound.getX();
+        final double buttonStartY = buttonBound.getY();
+
+        done.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -161,6 +170,18 @@ public class NameEntryPanel extends JPanel {
 		              done.setFont(done.getFont().deriveFont(Font.PLAIN));
 		          } else {
 		              done.setEnabled(true);
+		              // Find mouse location and compare.
+		              Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+		              Point framePos = mainFrame.getContentPane().getLocationOnScreen();
+		              double framePosX = framePos.getX();
+		              double framePosY = framePos.getY();
+		              double mouseLocX = mouseLoc.getX() - framePosX;
+		              double mouseLocY = mouseLoc.getY() - framePosY;
+		              
+		              if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
+		                      && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
+		                  done.setFont(done.getFont().deriveFont(Font.BOLD));
+		              }	                  
 		          }
 		      }
 	    });
@@ -184,6 +205,17 @@ public class NameEntryPanel extends JPanel {
                     done.setEnabled(false);
                 } else {
                     done.setEnabled(true);
+                    // Find mouse location and compare.
+                    Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+                    Point framePos = mainFrame.getContentPane().getLocationOnScreen();
+                    double framePosX = framePos.getX();
+                    double framePosY = framePos.getY();
+                    double mouseLocX = mouseLoc.getX() - framePosX;
+                    double mouseLocY = mouseLoc.getY() - framePosY;
+                    if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
+                            && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
+                        done.setFont(done.getFont().deriveFont(Font.BOLD));
+                    } 
                 }
             }
       });

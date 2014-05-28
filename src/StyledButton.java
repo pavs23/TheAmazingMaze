@@ -46,6 +46,17 @@ public class StyledButton extends JButton{
                  curr.setFont(curr.getFont().deriveFont(Font.PLAIN)); 
              }
 		 });
+		 
+		 this.addMouseMotionListener(new MouseMotionAdapter() {
+		     public void mouseMoved(MouseEvent e) {
+		         if (curr.isEnabled()) {
+                     curr.setFont(curr.getFont().deriveFont(Font.BOLD));
+                 } else {
+                     curr.setFont(curr.getFont().deriveFont(Font.PLAIN));
+                 }
+		     }
+		 });
+		 
 	 }
 	 
 }
