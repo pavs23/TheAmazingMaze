@@ -119,18 +119,18 @@ public class SelectCharacterPanel extends JPanel {
         button4 = new JRadioButton("Mario");
         button4.setSize(new Dimension(90, 30));
         button4.setBackground(Color.WHITE);
-        button4.setLocation(new Point(X_BUTTON , 350));
+        button4.setLocation(new Point(X_BUTTON , 345));
         button4.setSelected(true);
         
         button5 = new JRadioButton("Peach");
         button5.setSize(new Dimension(90, 30));
         button5.setBackground(Color.WHITE);
-        button5.setLocation(new Point(X_BUTTON  + 100, 350));
+        button5.setLocation(new Point(X_BUTTON  + 100, 345));
         
         button6 = new JRadioButton("Yoshi");
         button6.setBackground(Color.WHITE);
         button6.setSize(new Dimension(90, 30));
-        button6.setLocation(new Point(X_BUTTON  + 200, 350));
+        button6.setLocation(new Point(X_BUTTON  + 200, 345));
         
         ButtonGroup group = new ButtonGroup();
         group.add(button1);
@@ -146,7 +146,7 @@ public class SelectCharacterPanel extends JPanel {
         playerTwoLabel.setSize(new Dimension(100, 20));
         playerTwoLabel.setIcon(new ImageIcon(Game.PLAYER_2_TEXT_IMAGE.getScaledInstance(playerTwoLabel.getWidth(),
                 playerTwoLabel.getHeight(), Image.SCALE_SMOOTH)));
-        playerTwoLabel.setLocation(new Point(X_LABEL_POSITION, 330));
+        playerTwoLabel.setLocation(new Point(X_LABEL_POSITION, 325));
         
         imageLabel1 = new JLabel();
         imageLabel1.setSize(new Dimension(CHAR_X_DIMENSION, CHAR_Y_DIMENSION));
@@ -155,7 +155,7 @@ public class SelectCharacterPanel extends JPanel {
         
         imageLabel2 = new JLabel();
         imageLabel2.setSize(new Dimension(CHAR_X_DIMENSION, CHAR_Y_DIMENSION));
-        imageLabel2.setLocation(new Point(X_IMAGE_LABEL_POSITION, Y_IMAGE_LABEL_POSITION + 205));
+        imageLabel2.setLocation(new Point(X_IMAGE_LABEL_POSITION, Y_IMAGE_LABEL_POSITION + 200));
         imageLabel2.setIcon(player0);
         
         done = new StyledButton("Start Game!");
