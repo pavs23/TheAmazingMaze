@@ -10,10 +10,10 @@ import javax.swing.*;
  *
  */
 public class FinishingPanel extends JPanel {
+    private static final long serialVersionUID = 1L;
     private JPanel message;
     private MainMenuButton menu;
     private QuitButton quit;
-    private static final long serialVersionUID = 1L;
     
 	/**
 	 * Create a finishing panel.

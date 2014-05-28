@@ -57,13 +57,13 @@ public class Game {
     public static final Image PLAYER_2_FRONT_IMAGE;
     public static final Image PLAYER_2_BACK_IMAGE;
     public static final Image PLAYER_2_LEFT_IMAGE;
+    public static final Image PLAYER_2_RIGHT_IMAGE; 
     public static final Image PLAYER_0_IMAGE;
     public static final Image PLAYER_1_IMAGE;
     public static final Image PLAYER_2_IMAGE;
     public static final Image PLAYER_1_TEXT_IMAGE;
     public static final Image PLAYER_2_TEXT_IMAGE;
-    public static final Image PLAYER_2_RIGHT_IMAGE;	
-	
+    
 	// Constants in the game.
     public static final int SINGLE_PLAYER = 0;
     public static final int MULTI_PLAYER = 1;
@@ -75,7 +75,7 @@ public class Game {
     public static final int ROAD = 1;
     public static final int WALL = 0;
     public static final int SCORE_MULTIPLIER = 10;
-    public static final int MOVING_TIME = 110;
+    public static final int MOVING_TIME = 100;
     
     // The player characters.
     public static final int PLAYER_0 = 0;

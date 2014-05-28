@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 /**
  * A class to create difficulty selection panel.
- * @author pavan & josephine
+ * @author pavan & JosephineJs
  *
  */
 public class DifficultySelection extends JPanel {

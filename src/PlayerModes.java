@@ -14,14 +14,14 @@ import java.util.ArrayList;
  *
  */
 public abstract class PlayerModes {
+    public static final Color MAZE_BACKGROUND_COLOR = new Color(230, 230, 250);
+    
     // The icons.
     private ImageIcon roadIcon;
     private ImageIcon wallIcon;
     private ImageIcon hintIcon;
     private ImageIcon coinIcon;
 
-    private static final int MAZE_PANEL_WIDTH = 550;
-    
     private GameMode maze;
     private int mode;
     private int[][] mazeArray;
@@ -36,7 +36,7 @@ public abstract class PlayerModes {
     private StyledButton mainMenuButton;
     private StyledButton pauseButton;
 
-    public static final Color MAZE_BACKGROUND_COLOR = new Color(230, 230, 250);
+    private static final int MAZE_PANEL_WIDTH = 550;  
     
     /**
      * Constructor of the class.
@@ -516,7 +516,6 @@ public abstract class PlayerModes {
         iconWidth = MAZE_PANEL_WIDTH/xDimension;
         iconHeight = MAZE_PANEL_WIDTH/yDimension;
 
-            
         // Set the image dimension.
         Image scaledWall = Game.WALL_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);
         Image scaledRoad = Game.ROAD_IMAGE.getScaledInstance(iconWidth, iconHeight, Image.SCALE_SMOOTH);

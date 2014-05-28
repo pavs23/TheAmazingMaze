@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  * A class that represents a "Back" button.
- * @author floren
+ * @author pavan
  *
  */
 public class BackButton extends StyledButton{
