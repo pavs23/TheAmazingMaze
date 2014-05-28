@@ -79,7 +79,7 @@ public class GameTimer {
 	
 	/**
 	 * Get the current second of the timer.
-	 * @return
+	 * @return the current second.
 	 */
 	public int getCurrentSecond() {
 		return min*60 + sec;

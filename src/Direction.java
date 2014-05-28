@@ -10,7 +10,6 @@ public class Direction {
     
     /**
      * Constructor of the class.
-     * @param directionName the name of direction.
      * @param dx x component of the direction.
      * @param dy y component of the direction.
      */

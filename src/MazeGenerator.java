@@ -81,7 +81,7 @@ public class MazeGenerator {
 	
 	/**
      * Find the path from a coordinate to the other.
-     * @precondition has to be invoked after the method generateMazeArray().
+     * This method has to be invoked after the method generateMazeArray().
      * @param from the Coordinate from.
      * @param to the Coordinate to.
      * @return an ArrayList of Coordinate of the path, in order, including the to but not from.
