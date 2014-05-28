@@ -25,7 +25,7 @@ public class DifficultySelection extends JPanel {
 	private StyledButton hardButton;
 	private BackButton back;
 	private JLabel panelLabel;
-	private JPanel current;	
+	private DifficultySelection current;	
 	private JLabel titleLabel;
 	
 	private static final int WIDTH_BUTTON = 50;

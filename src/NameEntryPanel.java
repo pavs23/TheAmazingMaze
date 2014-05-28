@@ -25,7 +25,7 @@ public class NameEntryPanel extends JPanel {
     private JTextField playerOneNameField;
     private JTextField playerTwoNameField;
 	private StyledButton done;
-	private JPanel current;
+	private NameEntryPanel current;
 	private JLabel panelLabel;
 	private BackButton backButton;
 	

@@ -23,11 +23,10 @@ import javax.swing.JPanel;
  */
 public class Game {
 	private JFrame mainFrame;
-	private JButton newGameButton;
-	private JButton quitButton;
+	private StyledButton newGameButton;
+	private StyledButton quitButton;
 	private JPanel mainPanel;
-	private JButton leaderboard;
-	private JButton instructions;
+	private StyledButton leaderboard;
 	
 	//image files
 	private ImageIcon heading;
@@ -216,7 +215,6 @@ public class Game {
 		newGameButton = new StyledButton("New Game");
 		quitButton = new QuitButton(mainFrame);
 		leaderboard = new StyledButton("Leaderboard");
-		instructions = new StyledButton("Instructions");
 		
 		// Load images
 	    Image superMarioMazeHeading = null;
@@ -269,9 +267,6 @@ public class Game {
 		leaderboard.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + VERTICAL_GAP));
 		leaderboard.setVisible(true);
 		
-		instructions.setLocation(new Point(X_BUTTON_POSITION, Y_BUTTON_POSITION + (2 * VERTICAL_GAP)));
-		instructions.setVisible(true);
-		
 		//images
 		title.setIcon(heading);
 		title.setLocation(new Point(100, 0));
@@ -298,7 +293,6 @@ public class Game {
 		mainPanel.add(newGameButton);
 		mainPanel.add(leaderboard);
 		mainPanel.add(quitButton);
-		//mainPanel.add(instructions);
 		mainPanel.add(title);
 		mainPanel.add(yoshiLabel);
 		mainPanel.add(peachLabel);
@@ -339,19 +333,6 @@ public class Game {
 				
 			}
 		});
-		
-		/*
-		instructions.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                InstructionPanel instructionScreen = new InstructionPanel(mainFrame, mainPanel);
-                mainFrame.setVisible(true);
-                mainPanel.setVisible(false);
-                mainFrame.remove(mainPanel);
-                mainFrame.add(instructionScreen);
-            }
-		});
-		*/
-		
 	}
 	
 	/**	

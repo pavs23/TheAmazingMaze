@@ -36,7 +36,7 @@ public class SelectCharacterPanel extends JPanel {
     private JLabel panelLabel;
     
     private StyledButton done;
-    private JPanel current;
+    private SelectCharacterPanel current;
     private BackButton backButton;
     
     private final int X_LABEL_POSITION = 240;
