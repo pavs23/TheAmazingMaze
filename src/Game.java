@@ -77,7 +77,7 @@ public class Game {
     public static final int ROAD = 1;
     public static final int WALL = 0;
     public static final int SCORE_MULTIPLIER = 10;
-    public static final int MOVING_TIME = 120;
+    public static final int MOVING_TIME = 110;
     
     // The player characters.
     public static final int PLAYER_0 = 0;

@@ -228,29 +228,34 @@ public class SinglePlayer extends PlayerModes {
      * Show the score of the winning player.
      * @param playerName the name of the winning player.
      */
-    public void gameEndWin(String playerName) {
+    public void gameEndWin(final String playerName) {
         gameFinished = true;
         freeze();
-        timer.pause();    
-        disposeFrame();
-        int currSec = timer.getCurrentSecond();
-        int score = currSec * Game.SCORE_MULTIPLIER;
-        
-        ScoreManager manageScore = new ScoreManager();
-        manageScore.setNewScore(getMode(), difficulty, playerName, score);
-        
-        // Create a frame for winning player.
-        JFrame newFrame = new JFrame();
-        newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
-        newFrame.setResizable(false);
-        newFrame.setLayout(null);
-        JPanel winPanel = new WinPanel(newFrame, playerName, score, getMode(), difficulty);
-        winPanel.setLocation(new Point(0, 0));
-        newFrame.add(winPanel);
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        newFrame.setLocationRelativeTo(null);
-        newFrame.setVisible(true);
-       
+        // Make the game freeze for a moment before ending.
+        Timer newTimer =  new Timer(400, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                disposeFrame();
+                int currSec = timer.getCurrentSecond();
+                int score = currSec * Game.SCORE_MULTIPLIER;
+                
+                ScoreManager manageScore = new ScoreManager();
+                manageScore.setNewScore(getMode(), difficulty, playerName, score);
+                
+                // Create a frame for winning player.
+                JFrame newFrame = new JFrame();
+                newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+                newFrame.setResizable(false);
+                newFrame.setLayout(null);
+                JPanel winPanel = new WinPanel(newFrame, playerName, score, getMode(), difficulty);
+                winPanel.setLocation(new Point(0, 0));
+                newFrame.add(winPanel);
+                newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+                newFrame.setLocationRelativeTo(null);
+                newFrame.setVisible(true);
+            }
+        });
+        newTimer.setRepeats(false);
+        newTimer.start();
     }
     
     /**
@@ -260,18 +265,25 @@ public class SinglePlayer extends PlayerModes {
     public void gameEndLost() {
         gameFinished = true;
         freeze();
-        disposeFrame();
         // Create a frame for losing player.
-        JFrame newFrame = new JFrame();
-        newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
-        newFrame.setResizable(false);
-        newFrame.setLayout(null);
-        JPanel losePanel = new LosePanel(newFrame);
-        losePanel.setLocation(new Point(0, 0));
-        newFrame.add(losePanel);
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        newFrame.setLocationRelativeTo(null);
-        newFrame.setVisible(true);
+        // Make the game freeze for a moment before ending.
+        Timer newTimer =  new Timer(400, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                disposeFrame();
+                JFrame newFrame = new JFrame();
+                newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+                newFrame.setResizable(false);
+                newFrame.setLayout(null);
+                JPanel losePanel = new LosePanel(newFrame);
+                losePanel.setLocation(new Point(0, 0));
+                newFrame.add(losePanel);
+                newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+                newFrame.setLocationRelativeTo(null);
+                newFrame.setVisible(true);
+            }
+        });
+        newTimer.setRepeats(false);
+        newTimer.start();
     }
     
     /**

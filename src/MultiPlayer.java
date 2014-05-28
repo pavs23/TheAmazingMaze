@@ -102,7 +102,7 @@ public class MultiPlayer extends PlayerModes {
         Image player2Img;
         if (player2Code == Game.PLAYER_0) {
             player2Img = Game.PLAYER_0_IMAGE;
-        } else if (player1Code == Game.PLAYER_1) {
+        } else if (player2Code == Game.PLAYER_1) {
             player2Img = Game.PLAYER_1_IMAGE;
         } else {
             player2Img = Game.PLAYER_2_IMAGE;
@@ -365,21 +365,28 @@ public class MultiPlayer extends PlayerModes {
      * Dispose the frame, stop and dispose the timers, and show which player wins on game end.
      * @param playerName the name of the winning player.
      */
-    public void gameEndWin(String playerName) {
+    public void gameEndWin(final String playerName) {
         gameFinished = true;
         freeze();
-        disposeFrame();
-        // Create a frame for winning player.
-        JFrame newFrame = new JFrame();
-        newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
-        newFrame.setResizable(false);
-        newFrame.setLayout(null);
-        JPanel winPanel = new WinPanel(newFrame, playerName);
-        winPanel.setLocation(new Point(0, 0));
-        newFrame.add(winPanel);
-        newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
-        newFrame.setLocationRelativeTo(null);
-        newFrame.setVisible(true);
+     // Make the game freeze for a moment before ending.
+        Timer newTimer =  new Timer(400, new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                disposeFrame();
+                // Create a frame for winning player.
+                JFrame newFrame = new JFrame();
+                newFrame.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
+                newFrame.setResizable(false);
+                newFrame.setLayout(null);
+                JPanel winPanel = new WinPanel(newFrame, playerName);
+                winPanel.setLocation(new Point(0, 0));
+                newFrame.add(winPanel);
+                newFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+                newFrame.setLocationRelativeTo(null);
+                newFrame.setVisible(true);
+            }
+        });
+        newTimer.setRepeats(false);
+        newTimer.start();     
     }
     
     /**
