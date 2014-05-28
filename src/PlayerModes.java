@@ -36,7 +36,8 @@ public abstract class PlayerModes {
     
     private StyledButton mainMenuButton;
     private StyledButton pauseButton;
-    
+
+    public static final Color MAZE_BACKGROUND_COLOR = Color.BLACK;
     
     /**
      * Constructor of the class.
@@ -78,18 +79,18 @@ public abstract class PlayerModes {
         frame.setLayout(new FlowLayout());
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    
-        frame.getContentPane().setBackground(Color.BLACK);
+        frame.getContentPane().setBackground(MAZE_BACKGROUND_COLOR);
         
         // Create the gamePanel.
         gamePanel = new JPanel();
         gamePanel.setLayout(new FlowLayout());
-        gamePanel.setBackground(Color.BLACK);
+        gamePanel.setBackground(MAZE_BACKGROUND_COLOR);
         gamePanel.setVisible(true);
         
         // Create the sidePanel and menu. 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
-        sidePanel.setBackground(Color.BLACK);
+        sidePanel.setBackground(MAZE_BACKGROUND_COLOR);
         sidePanel.setVisible(true);    
         generateSideMenu();
         
@@ -262,7 +263,7 @@ public abstract class PlayerModes {
             }
         }
         
-        mazePanel.setBackground(Color.BLACK);
+        mazePanel.setBackground(MAZE_BACKGROUND_COLOR);
         
         // Paint the coin if it's coin mode.
         if (mode == Game.COIN_MODE) {
@@ -409,7 +410,7 @@ public abstract class PlayerModes {
         JPanel mainMenu = new JPanel();
         mainMenu.setLayout(new FlowLayout());       
         mainMenu.setBorder(new EmptyBorder(0, 0, 50, 0));
-        mainMenu.setBackground(Color.BLACK);
+        mainMenu.setBackground(MAZE_BACKGROUND_COLOR);
  
         mainMenuButton = new StyledButton("Main Menu");
         mainMenu.add(mainMenuButton);
@@ -418,7 +419,7 @@ public abstract class PlayerModes {
         JPanel pause = new JPanel();
         pause.setLayout(new FlowLayout()); 
         pause.setBorder(new EmptyBorder(0, 0, 50, 0));
-        pause.setBackground(Color.BLACK);
+        pause.setBackground(MAZE_BACKGROUND_COLOR);
         
         pauseButton = new StyledButton("Pause");
         pause.add(pauseButton);

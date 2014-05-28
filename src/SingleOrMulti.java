@@ -45,7 +45,7 @@ public class SingleOrMulti extends JPanel{
 		currentScreen = this;
 		
 		//input image
-		File titleFile = new File("numOfPlayer.png");
+		File titleFile = new File("images/numOfPlayer.png");
 		Image titleImage = null;
 		
 		try {

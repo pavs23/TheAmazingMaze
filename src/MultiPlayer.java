@@ -61,29 +61,29 @@ public class MultiPlayer extends PlayerModes {
         JPanel mazeAndInst1 = new JPanel();
         mazeAndInst1.setLayout(new BoxLayout(mazeAndInst1, BoxLayout.Y_AXIS));
         mazeAndInst1.setBorder(new EmptyBorder(0, 0, 0, 30));
-        mazeAndInst1.setBackground(Color.BLACK);
+        mazeAndInst1.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         
         JPanel mazeAndInst2 = new JPanel();
         mazeAndInst2.setLayout(new BoxLayout(mazeAndInst2, BoxLayout.Y_AXIS));
-        mazeAndInst2.setBackground(Color.BLACK);
+        mazeAndInst2.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         
         JPanel instruction1 = new JPanel();
-        instruction1.setBackground(Color.BLACK);
+        instruction1.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         instruction1.setLayout(new FlowLayout());
         
         JPanel instruction2 = new JPanel();
-        instruction2.setBackground(Color.BLACK);
+        instruction2.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         instruction2.setLayout(new FlowLayout());
         
         JPanel playerLabel1 = new JPanel();
         playerLabel1.setBorder(new EmptyBorder(0, 0, 0, 20) );
         playerLabel1.setLayout(new BoxLayout(playerLabel1, BoxLayout.X_AXIS));
-        playerLabel1.setBackground(Color.BLACK);
+        playerLabel1.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         
         JPanel playerLabel2 = new JPanel();
         playerLabel2.setBorder(new EmptyBorder(0, 0, 0, 20) );
         playerLabel2.setLayout(new BoxLayout(playerLabel2, BoxLayout.X_AXIS));
-        playerLabel2.setBackground(Color.BLACK);
+        playerLabel2.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         
         JLabel player1Icon = new JLabel();
         Image player1Img;
@@ -128,7 +128,7 @@ public class MultiPlayer extends PlayerModes {
         JLabel player2Keys = new JLabel();
         
         
-        File aswdFile = new File("ASWD_Key.jpg");
+        File aswdFile = new File("images/ASWD_Key.jpg");
         Image aswdImage = null;
         try {
             aswdImage = ImageIO.read(aswdFile);
@@ -137,7 +137,7 @@ public class MultiPlayer extends PlayerModes {
         ImageIcon aswdIcon = new ImageIcon(scaledAswd);
         player1Keys.setIcon(aswdIcon);
          
-        File arrowFile = new File("Arrow_Key.jpg");
+        File arrowFile = new File("images/Arrow_Key.jpg");
         Image arrowImage = null;
         try {
             arrowImage = ImageIO.read(arrowFile);

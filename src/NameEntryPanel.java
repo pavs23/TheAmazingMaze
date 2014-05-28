@@ -56,8 +56,8 @@ public class NameEntryPanel extends JPanel {
 	    JLabel playerOneLabel;
 	    JLabel playerTwoLabel;
         
-        File enterNameFile = new File("Enter_Players_Name.jpg");
-        File maxCharFile = new File("Max_Char.jpg");
+        File enterNameFile = new File("images/Enter_Players_Name.jpg");
+        File maxCharFile = new File("images/Max_Char.jpg");
         Image enterNameImage = null;
         Image maxCharImage = null;
         try {

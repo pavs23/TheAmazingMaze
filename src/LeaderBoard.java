@@ -77,13 +77,13 @@ public class LeaderBoard extends JPanel{
         Image mediumCoinHeadingImg = null;
         Image hardAdventureHeadingImg = null;
         Image hardCoinHeadingImg = null;
-        File leaderBoardHeadingFile = new File("leaderBoardHeading.png");
-        File easyAdventureHeadingFile = new File("easyAdventureHeading.png");
-        File easyCoinHeadingFile = new File("easyCoinHeading.png");
-        File mediumAdventureHeadingFile = new File("mediumAdventureHeading.png");
-        File mediumCoinHeadingFile = new File("mediumCoinHeading.png");
-        File hardAdventureHeadingFile = new File ("hardAdventureHeading.png");
-        File hardCoinHeadingFile = new File("hardCoinHeading.png");
+        File leaderBoardHeadingFile = new File("images/leaderBoardHeading.png");
+        File easyAdventureHeadingFile = new File("images/easyAdventureHeading.png");
+        File easyCoinHeadingFile = new File("images/easyCoinHeading.png");
+        File mediumAdventureHeadingFile = new File("images/mediumAdventureHeading.png");
+        File mediumCoinHeadingFile = new File("images/mediumCoinHeading.png");
+        File hardAdventureHeadingFile = new File("images/hardAdventureHeading.png");
+        File hardCoinHeadingFile = new File("images/hardCoinHeading.png");
         try {
             leaderBoardHeadingImg = ImageIO.read(leaderBoardHeadingFile);
             easyAdventureHeadingImg = ImageIO.read(easyAdventureHeadingFile);

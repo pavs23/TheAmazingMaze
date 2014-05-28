@@ -36,7 +36,7 @@ public class WinPanel extends FinishingPanel {
         winLabel.setLayout(null);
         winLabel.setBackground(Color.WHITE);
         
-        File winFile = new File("win.jpg");
+        File winFile = new File("images/win.jpg");
         Image winImage = null;
         try {
             winImage = ImageIO.read(winFile);
@@ -168,7 +168,7 @@ public class WinPanel extends FinishingPanel {
         winLabel.setLayout(null);
         winLabel.setBackground(Color.WHITE);
         
-        File winFile = new File("win.jpg");
+        File winFile = new File("images/win.jpg");
         Image winImage = null;
         try {
             winImage = ImageIO.read(winFile);

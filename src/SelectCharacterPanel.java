@@ -82,7 +82,7 @@ public class SelectCharacterPanel extends JPanel {
         panelLabel.setLayout(null);
         panelLabel.setIcon(Game.BACKGROUND);
         
-        File selectCharacterFile = new File("Select_Character.jpg");
+        File selectCharacterFile = new File("images/Select_Character.jpg");
         Image selectCharacterImage = null;
         try {
             selectCharacterImage = ImageIO.read(selectCharacterFile);

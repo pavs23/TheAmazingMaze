@@ -50,16 +50,16 @@ public class SinglePlayer extends PlayerModes {
         
         JPanel mazeAndInst = new JPanel();
         mazeAndInst.setLayout(new BoxLayout(mazeAndInst, BoxLayout.Y_AXIS));
-        mazeAndInst.setBackground(Color.BLACK);
+        mazeAndInst.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         
         JPanel instruction = new JPanel();
-        instruction.setBackground(Color.BLACK);
+        instruction.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         instruction.setLayout(new FlowLayout());
         
         JPanel playerLabel = new JPanel();
         playerLabel.setBorder(new EmptyBorder(0, 0, 0, 20) );
         playerLabel.setLayout(new BoxLayout(playerLabel, BoxLayout.X_AXIS));
-        playerLabel.setBackground(Color.BLACK);
+        playerLabel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         
         JLabel playerIcon = new JLabel();
         Image playerImg;
@@ -82,7 +82,7 @@ public class SinglePlayer extends PlayerModes {
         namePlayer.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel playerKeys = new JLabel();
         
-        File arrowFile = new File("Arrow_Key.jpg");
+        File arrowFile = new File("images/Arrow_Key.jpg");
         Image arrowImage = null;
         try {
             arrowImage = ImageIO.read(arrowFile);
@@ -281,7 +281,7 @@ public class SinglePlayer extends PlayerModes {
         JPanel hintPanel = new JPanel();
         hintPanel.setBorder(new EmptyBorder(0, 0, 50, 0));
         hintPanel.setLayout(new FlowLayout());
-        hintPanel.setBackground(Color.BLACK);
+        hintPanel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         hintButton = new StyledButton ("Get Hint : " + hintRemaining);
         hintButton.setFocusable(false);
         hintPanel.add(hintButton);
@@ -321,10 +321,10 @@ public class SinglePlayer extends PlayerModes {
     private void generateTimer() {
         JPanel timePanel = new JPanel();
         timePanel.setLayout(new FlowLayout());
-        timePanel.setBackground(Color.BLACK);
+        timePanel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         timePanel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         JLabel timeLabel = new JLabel();
-        timeLabel.setBackground(Color.BLACK);
+        timeLabel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         timeLabel.setForeground(Color.WHITE);
         timeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         timeLabel.setVisible(true);

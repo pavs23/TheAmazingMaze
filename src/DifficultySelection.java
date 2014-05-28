@@ -41,7 +41,7 @@ public class DifficultySelection extends JPanel {
 	 * @param prev the previous panel before this panel.
 	 */
 	public DifficultySelection(final JFrame mainFrame, final int mode, final int players, final JPanel prev) {		
-		File titleFile = new File("selectDifficulty.png");
+		File titleFile = new File("images/selectDifficulty.png");
 		
 		Image titleImage = null;
         try {

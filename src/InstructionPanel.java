@@ -46,8 +46,8 @@ public class InstructionPanel extends JPanel {
 	    Image adventureModeInstructionsHeading = null;
 	    Image coinModeInstructionsHeading = null;
 	    File instructionsHeadingFile = new File ("instructionsHeading.png");
-        File adventureModeInstructionsHeadingFile = new File("adventureModeInstructions.png");
-        File coinModeInstructionsHeadingFile = new File("coinModeInstructions.png");
+        File adventureModeInstructionsHeadingFile = new File("images/adventureModeInstructions.png");
+        File coinModeInstructionsHeadingFile = new File("images/coinModeInstructions.png");
         
         try {
             instructionsHeading = ImageIO.read(instructionsHeadingFile);

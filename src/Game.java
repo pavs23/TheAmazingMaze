@@ -110,28 +110,28 @@ public class Game {
      * Load the images from the files.
      */
     static {
-        File wallFile = new File("wall.jpg");
-        File roadFile = new File("road.jpg");
-        File hintFile = new File("hint.jpg");
-        File coinFile = new File("coin.jpg"); 
-        File player0FrontFile = new File("Mario_Front.jpg");
-        File player0BackFile = new File("Mario_Back.jpg");
-        File player0LeftFile = new File("Mario_Left.jpg");
-        File player0RightFile = new File("Mario_Right.jpg"); 
-        File player1FrontFile = new File("Peach_Front.jpg");
-        File player1BackFile = new File("Peach_Back.jpg");
-        File player1LeftFile = new File("Peach_Left.jpg");
-        File player1RightFile = new File("Peach_Right.jpg"); 
-        File player2FrontFile = new File("Yoshi_Front.jpg");
-        File player2BackFile = new File("Yoshi_Back.jpg");
-        File player2LeftFile = new File("Yoshi_Left.jpg");
-        File player2RightFile = new File("Yoshi_Right.jpg"); 
-        File player0File = new File("Mario.jpg");
-        File player1File = new File("Peach.jpg");
-        File player2File = new File("Yoshi.jpg");
-        File backgroundFile = new File("Background.jpg");
-        File player1TextFile = new File("Player_1_Text.jpg");
-        File player2TextFile = new File("Player_2_Text.jpg");
+        File wallFile = new File("images/wall.jpg");
+        File roadFile = new File("images/road.jpg");
+        File hintFile = new File("images/hint.jpg");
+        File coinFile = new File("images/coin.jpg"); 
+        File player0FrontFile = new File("images/Mario_Front.jpg");
+        File player0BackFile = new File("images/Mario_Back.jpg");
+        File player0LeftFile = new File("images/Mario_Left.jpg");
+        File player0RightFile = new File("images/Mario_Right.jpg"); 
+        File player1FrontFile = new File("images/Peach_Front.jpg");
+        File player1BackFile = new File("images/Peach_Back.jpg");
+        File player1LeftFile = new File("images/Peach_Left.jpg");
+        File player1RightFile = new File("images/Peach_Right.jpg"); 
+        File player2FrontFile = new File("images/Yoshi_Front.jpg");
+        File player2BackFile = new File("images/Yoshi_Back.jpg");
+        File player2LeftFile = new File("images/Yoshi_Left.jpg");
+        File player2RightFile = new File("images/Yoshi_Right.jpg"); 
+        File player0File = new File("images/Mario.jpg");
+        File player1File = new File("images/Peach.jpg");
+        File player2File = new File("images/Yoshi.jpg");
+        File backgroundFile = new File("images/Background.jpg");
+        File player1TextFile = new File("images/Player_1_Text.jpg");
+        File player2TextFile = new File("images/Player_2_Text.jpg");
 
         Image wallImg = null;
         Image roadImg = null;
@@ -224,10 +224,10 @@ public class Game {
 	    Image mario2Image = null;
 	    Image peach2Image = null;
 	    
-	    File superMarioMazeHeadingFile = new File("superMarioMaze.jpg");
-        File yoshiTongueFile = new File("yoshiTongue.jpg");
-        File mario2File = new File("mario2.png");
-        File peach2File = new File("peach2.jpg");
+	    File superMarioMazeHeadingFile = new File("images/superMarioMaze.jpg");
+        File yoshiTongueFile = new File("images/yoshiTongue.jpg");
+        File mario2File = new File("images/mario2.png");
+        File peach2File = new File("images/peach2.jpg");
         
         try {
             superMarioMazeHeading = ImageIO.read(superMarioMazeHeadingFile);

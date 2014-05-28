@@ -42,7 +42,7 @@ public class SelectGameMode extends JPanel {
 		this.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
 		this.setLayout(null);
 		
-		File titleFile = new File("modeSelection.png");
+		File titleFile = new File("images/modeSelection.png");
 		
 		Image titleImage = null;
 		try{

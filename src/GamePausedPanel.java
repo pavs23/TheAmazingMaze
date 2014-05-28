@@ -24,7 +24,7 @@ public class GamePausedPanel extends JPanel{
 	 * @param y the y dimension of pause panel.
 	 */
 	public GamePausedPanel(int x, int y) {
-	    File pauseFile = new File("Pause.jpg");
+	    File pauseFile = new File("images/Pause.jpg");
         Image pauseImage = null;
         try {
             pauseImage = ImageIO.read(pauseFile);

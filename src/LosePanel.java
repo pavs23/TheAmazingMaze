@@ -30,8 +30,8 @@ public class LosePanel extends FinishingPanel {
 		loseLabel.setLayout(null);
 		loseLabel.setBackground(Color.WHITE);
 		
-		File loseFile = new File("lose.jpg");
-		File youLoseFile = new File("You_Lose.jpg");
+		File loseFile = new File("images/lose.jpg");
+		File youLoseFile = new File("images/You_Lose.jpg");
 		Image loseImage = null;
 		Image youLoseImage = null;
 		try {
