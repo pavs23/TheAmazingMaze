@@ -10,7 +10,7 @@ public class AdventureMaze extends GameModeImp {
     private Coordinate finish;
     private MazeGenerator maze;  
     
-    private static final int EASY_BOUNDARY = 70;
+    private static final int EASY_BOUNDARY = 80;
     private static final int MEDIUM_BOUNDARY = 110;
     private static final int HARD_BOUNDARY = 150;
     

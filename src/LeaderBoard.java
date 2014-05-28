@@ -34,7 +34,6 @@ public class LeaderBoard extends JPanel{
     private static final int Y_INCREMENT = 140;
     private static final int SCORE_INCREMENT = 100;
     private static final int HEADING_DECREMENT = 5;
-    private static final Dimension LEADER_BOARD_TITLE_SIZE = new Dimension(150, 40);
     private static final Dimension LEADER_BOARD_SIZE = new Dimension(100, 100);
     
     private BackButton back;

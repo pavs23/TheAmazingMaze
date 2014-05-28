@@ -114,7 +114,7 @@ public class MultiPlayer extends PlayerModes {
         JLabel namePlayer1 = new JLabel();
         namePlayer1.setText(player1Name);
         namePlayer1.setHorizontalAlignment(JLabel.CENTER);
-        namePlayer1.setForeground(Color.WHITE);
+        namePlayer1.setForeground(Color.BLACK);
         namePlayer1.setOpaque(false);
         namePlayer1.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel player1Keys = new JLabel();
@@ -122,7 +122,7 @@ public class MultiPlayer extends PlayerModes {
         JLabel namePlayer2 = new JLabel();
         namePlayer2.setText(player2Name);
         namePlayer2.setHorizontalAlignment(JLabel.CENTER);
-        namePlayer2.setForeground(Color.WHITE);
+        namePlayer2.setForeground(Color.BLACK);
         namePlayer2.setOpaque(false);
         namePlayer2.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel player2Keys = new JLabel();

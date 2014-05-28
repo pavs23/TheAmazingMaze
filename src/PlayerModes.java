@@ -37,7 +37,7 @@ public abstract class PlayerModes {
     private StyledButton mainMenuButton;
     private StyledButton pauseButton;
 
-    public static final Color MAZE_BACKGROUND_COLOR = Color.BLACK;
+    public static final Color MAZE_BACKGROUND_COLOR = new Color(230, 230, 250);
     
     /**
      * Constructor of the class.
@@ -85,12 +85,14 @@ public abstract class PlayerModes {
         gamePanel = new JPanel();
         gamePanel.setLayout(new FlowLayout());
         gamePanel.setBackground(MAZE_BACKGROUND_COLOR);
+        gamePanel.setOpaque(true);
         gamePanel.setVisible(true);
         
         // Create the sidePanel and menu. 
         sidePanel = new JPanel();
         sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
         sidePanel.setBackground(MAZE_BACKGROUND_COLOR);
+        sidePanel.setOpaque(true);
         sidePanel.setVisible(true);    
         generateSideMenu();
         

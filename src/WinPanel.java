@@ -183,8 +183,8 @@ public class WinPanel extends FinishingPanel {
         
         JLabel happyIcon = new JLabel();
         happyIcon.setIcon(new ImageIcon(winImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
-        happyIcon.setSize(new Dimension(150, 250));
-        happyIcon.setLocation(new Point(225, 80));
+        happyIcon.setSize(new Dimension(250, 250));
+        happyIcon.setLocation(new Point(200, 80));
               
         winLabel.add(messageIcon);
         winLabel.add(happyIcon);

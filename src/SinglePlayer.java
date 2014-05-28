@@ -77,7 +77,7 @@ public class SinglePlayer extends PlayerModes {
         JLabel namePlayer = new JLabel();
         namePlayer.setText(playerName);
         namePlayer.setHorizontalAlignment(JLabel.CENTER);
-        namePlayer.setForeground(Color.WHITE);
+        namePlayer.setForeground(Color.BLACK);
         namePlayer.setOpaque(false);
         namePlayer.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel playerKeys = new JLabel();
@@ -337,7 +337,7 @@ public class SinglePlayer extends PlayerModes {
         timePanel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         JLabel timeLabel = new JLabel();
         timeLabel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
-        timeLabel.setForeground(Color.WHITE);
+        timeLabel.setForeground(Color.BLACK);
         timeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         timeLabel.setVisible(true);
         timeLabel.setPreferredSize(new Dimension(150, 50));
