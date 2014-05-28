@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -126,12 +125,8 @@ public class NameEntryPanel extends JPanel {
             done.setLocation(new Point(X_POSITION + 15, Y_POSITION + 110));
         }
         
-        // Find the button bounds to detect mouse over.
-        Rectangle buttonBound = done.getBounds();
-        final double buttonWidth = buttonBound.getWidth();
-        final double buttonHeight = buttonBound.getHeight();
-        final double buttonStartX = buttonBound.getX();
-        final double buttonStartY = buttonBound.getY();
+        final double buttonWidth = done.getWidth();
+        final double buttonHeight = done.getHeight();
 
         done.addActionListener(new ActionListener() {
 			
@@ -170,14 +165,13 @@ public class NameEntryPanel extends JPanel {
 		              done.setFont(done.getFont().deriveFont(Font.PLAIN));
 		          } else {
 		              done.setEnabled(true);
-		              // Find mouse location and compare.
+		              // Find mouse location and compare to button's.
 		              Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
-		              Point framePos = mainFrame.getContentPane().getLocationOnScreen();
-		              double framePosX = framePos.getX();
-		              double framePosY = framePos.getY();
-		              double mouseLocX = mouseLoc.getX() - framePosX;
-		              double mouseLocY = mouseLoc.getY() - framePosY;
-		              
+		              double mouseLocX = mouseLoc.getX();
+		              double mouseLocY = mouseLoc.getY();
+		              Point buttonLoc = done.getLocationOnScreen();
+		              double buttonStartX = buttonLoc.getX();
+		              double buttonStartY = buttonLoc.getY();
 		              if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
 		                      && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
 		                  done.setFont(done.getFont().deriveFont(Font.BOLD));
@@ -207,11 +201,11 @@ public class NameEntryPanel extends JPanel {
                     done.setEnabled(true);
                     // Find mouse location and compare.
                     Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
-                    Point framePos = mainFrame.getContentPane().getLocationOnScreen();
-                    double framePosX = framePos.getX();
-                    double framePosY = framePos.getY();
-                    double mouseLocX = mouseLoc.getX() - framePosX;
-                    double mouseLocY = mouseLoc.getY() - framePosY;
+                    double mouseLocX = mouseLoc.getX();
+                    double mouseLocY = mouseLoc.getY();
+                    Point buttonLoc = done.getLocationOnScreen();
+                    double buttonStartX = buttonLoc.getX();
+                    double buttonStartY = buttonLoc.getY();
                     if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
                             && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
                         done.setFont(done.getFont().deriveFont(Font.BOLD));

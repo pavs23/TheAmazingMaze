@@ -181,6 +181,30 @@ public abstract class PlayerModes {
         sidePanel.setEnabled(true);
         mainMenuButton.setEnabled(true);
         pauseButton.setEnabled(true);
+        double buttonWidth = mainMenuButton.getWidth();
+        double buttonHeight = mainMenuButton.getHeight();
+        // Find mouse location and compare to button's.
+        Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+        double mouseLocX = mouseLoc.getX();
+        double mouseLocY = mouseLoc.getY();
+        Point buttonLoc = mainMenuButton.getLocationOnScreen();
+        double buttonStartX = buttonLoc.getX();
+        double buttonStartY = buttonLoc.getY();
+        if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
+                && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
+            mainMenuButton.setFont(mainMenuButton.getFont().deriveFont(Font.BOLD));
+        } 
+        
+        buttonWidth = pauseButton.getWidth();
+        buttonHeight = pauseButton.getHeight();
+        // Compare mouse location pause button's.
+        buttonLoc = pauseButton.getLocationOnScreen();
+        buttonStartX = buttonLoc.getX();
+        buttonStartY = buttonLoc.getY();
+        if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
+                && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
+            pauseButton.setFont(pauseButton.getFont().deriveFont(Font.BOLD));
+        } 
     }
     
     /**

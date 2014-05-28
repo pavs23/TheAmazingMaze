@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.event.*;
 import java.io.File;
@@ -366,6 +367,19 @@ public class SinglePlayer extends PlayerModes {
         if (hintRemaining > 0) {
             hintButton.setEnabled(true);
         }
+        double buttonWidth = hintButton.getWidth();
+        double buttonHeight = hintButton.getHeight();
+        // Find mouse location and compare to hint button's.
+        Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+        double mouseLocX = mouseLoc.getX();
+        double mouseLocY = mouseLoc.getY();
+        Point buttonLoc = hintButton.getLocationOnScreen();
+        double buttonStartX = buttonLoc.getX();
+        double buttonStartY = buttonLoc.getY();
+        if (mouseLocX >= buttonStartX && mouseLocX <= (buttonStartX + buttonWidth)
+                && mouseLocY >= buttonStartY && mouseLocY <= (buttonStartY + buttonHeight)) {
+            hintButton.setFont(hintButton.getFont().deriveFont(Font.BOLD));
+        } 
     }
 
     /**
