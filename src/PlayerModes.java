@@ -15,13 +15,12 @@ import java.util.ArrayList;
  */
 public abstract class PlayerModes {
     // The icons.
-
     private ImageIcon roadIcon;
     private ImageIcon wallIcon;
     private ImageIcon hintIcon;
     private ImageIcon coinIcon;
 
-    private static final int MAZE_PANEL_WIDTH = 600;
+    private static final int MAZE_PANEL_WIDTH = 550;
     
     private GameMode maze;
     private int mode;
@@ -411,7 +410,7 @@ public abstract class PlayerModes {
     private void generateSideMenu() {
         JPanel mainMenu = new JPanel();
         mainMenu.setLayout(new FlowLayout());       
-        mainMenu.setBorder(new EmptyBorder(0, 0, 50, 0));
+        mainMenu.setBorder(new EmptyBorder(40, 0, 20, 0));
         mainMenu.setBackground(MAZE_BACKGROUND_COLOR);
  
         mainMenuButton = new StyledButton("Main Menu");
@@ -420,12 +419,22 @@ public abstract class PlayerModes {
         
         JPanel pause = new JPanel();
         pause.setLayout(new FlowLayout()); 
-        pause.setBorder(new EmptyBorder(0, 0, 50, 0));
+        pause.setBorder(new EmptyBorder(0, 0, 20, 0));
         pause.setBackground(MAZE_BACKGROUND_COLOR);
         
         pauseButton = new StyledButton("Pause");
         pause.add(pauseButton);
         pause.setVisible(true);
+        
+        mainMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                freeze();
+                // Dispose the current frame.
+                frame.dispose();
+                // Create a new menu.
+                (new Game()).run();
+            }
+        });
         
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -442,7 +451,7 @@ public abstract class PlayerModes {
                 resumeButton.setFont(new Font("Arial", Font.PLAIN, 40));
                 resumePanel.add(resumeButton);
                 if (pausePanel == null) {
-                    pausePanel = new GamePausedPanel(frame.getWidth(), frame.getHeight());
+                    pausePanel = new GamePausedPanel(frame.getContentPane().getWidth(), frame.getContentPane().getHeight());
                     pausePanel.setLayout(new BoxLayout(pausePanel, BoxLayout.Y_AXIS));
                     pausePanel.addToPanel(resumePanel);
                     addToFrame(pausePanel);
@@ -463,18 +472,38 @@ public abstract class PlayerModes {
             }
         });
         
-        mainMenuButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                freeze();
-                // Dispose the current frame.
-                frame.dispose();
-                // Create a new menu.
-                (new Game()).run();
-            }
-        });
+        JPanel objective = new JPanel();
+        objective.setLayout(new BoxLayout(objective, BoxLayout.Y_AXIS));       
+        objective.setBackground(new Color(100, 100, 250));
+        objective.setBorder(new EmptyBorder(10, 10, 10, 10));
+        objective.setAlignmentX(Component.CENTER_ALIGNMENT);
         
+        JLabel objTitle = new JLabel("OBJECTIVE");
+        objTitle.setHorizontalAlignment(JLabel.CENTER);
+        objTitle.setForeground(Color.WHITE);
+        objTitle.setFont(new Font("Arial", Font.BOLD, 24));
+        objTitle.setBackground(new Color(100, 100, 250));
+        objTitle.setBorder(new EmptyBorder(0, 0, 10, 0));
+        
+        String text;
+        if (mode == Game.ADVENTURE_MODE) {
+            text = "Get to the end of the maze!";
+        } else {
+            text = "Collect all coins!";
+        }
+        
+        JLabel objInst = new JLabel(text);
+        objInst.setForeground(Color.WHITE);
+        objInst.setFont(new Font("Arial", Font.PLAIN, 18));
+        objInst.setBackground(new Color(100, 100, 250));
+        objInst.setHorizontalAlignment(JLabel.CENTER);
+        objective.add(objTitle);
+        objective.add(objInst);
+        
+        addToSidePanel(objective);
         addToSidePanel(mainMenu);
         addToSidePanel(pause);
+        
     }
    
     /**

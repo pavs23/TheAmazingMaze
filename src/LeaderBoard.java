@@ -29,12 +29,12 @@ public class LeaderBoard extends JPanel{
     
     //constants for GUI positions
     private static final int LEADER_BOARD_X_COORDINATE = 110;
-    private static final int LEADER_BOARD_Y_COORDINATE = 70;
+    private static final int LEADER_BOARD_Y_COORDINATE = 90;
     private static final int X_INCREMENT = 200;
     private static final int Y_INCREMENT = 140;
-    private static final int SCORE_INCREMENT = 100;
-    private static final int HEADING_DECREMENT = 5;
-    private static final Dimension LEADER_BOARD_SIZE = new Dimension(100, 100);
+    private static final int SCORE_INCREMENT = 150;
+    private static final int HEADING_DECREMENT = 15;
+    private static final Dimension LEADER_BOARD_SIZE = new Dimension(150, 100);
     
     private BackButton back;
     
@@ -140,11 +140,13 @@ public class LeaderBoard extends JPanel{
         easyAdventureNames = new JLabel(displayLeaderBoardNames(leaders.get(EASY_ADVENTURE_LOC)));
         easyAdventureNames.setSize(LEADER_BOARD_SIZE);
         easyAdventureNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE));
+        easyAdventureNames.setVerticalAlignment(JLabel.TOP);
         easyAdventureNames.setVisible(true);   
         easyAdventureScores = new JLabel(displayLeaderBoardScores(leaders.get(EASY_ADVENTURE_LOC)));
         easyAdventureScores.setSize(LEADER_BOARD_SIZE);
         easyAdventureScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE));
         easyAdventureScores.setVisible(true);
+        easyAdventureScores.setVerticalAlignment(JLabel.TOP);
       
         //easy coin
         Image scaledCoinEasy = easyCoinHeadingImg.getScaledInstance(97, 7, Image.SCALE_SMOOTH);
@@ -159,11 +161,12 @@ public class LeaderBoard extends JPanel{
         easyCoinNames.setSize(LEADER_BOARD_SIZE);
         easyCoinNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE));
         easyCoinNames.setVisible(true); 
+        easyCoinNames.setVerticalAlignment(JLabel.TOP);
         easyCoinScores = new JLabel(displayLeaderBoardScores(leaders.get(EASY_COIN_LOC)));
         easyCoinScores.setSize(LEADER_BOARD_SIZE);
         easyCoinScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE));
         easyCoinScores.setVisible(true);
-        
+        easyCoinScores.setVerticalAlignment(JLabel.TOP);
         
         //medium adventure
         Image scaledAdventureMedium = mediumAdventureHeadingImg.getScaledInstance(150, 7 , Image.SCALE_SMOOTH);
@@ -177,12 +180,12 @@ public class LeaderBoard extends JPanel{
         mediumAdventureNames.setSize(LEADER_BOARD_SIZE);
         mediumAdventureNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
         mediumAdventureNames.setVisible(true); 
-        
+        mediumAdventureNames.setVerticalAlignment(JLabel.TOP);
         mediumAdventureScores = new JLabel(displayLeaderBoardScores(leaders.get(MEDIUM_ADVENTURE_LOC)));
         mediumAdventureScores.setSize(LEADER_BOARD_SIZE);
         mediumAdventureScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
         mediumAdventureScores.setVisible(true);
-       
+        mediumAdventureScores.setVerticalAlignment(JLabel.TOP);
         
         
         //medium coin
@@ -196,11 +199,12 @@ public class LeaderBoard extends JPanel{
         mediumCoinNames.setSize(LEADER_BOARD_SIZE);
         mediumCoinNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
         mediumCoinNames.setVisible(true);   
+        mediumCoinNames.setVerticalAlignment(JLabel.TOP);
         mediumCoinScores = new JLabel(displayLeaderBoardScores(leaders.get(MEDIUM_COIN_LOC)));
         mediumCoinScores.setSize(LEADER_BOARD_SIZE);
         mediumCoinScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+Y_INCREMENT));
         mediumCoinScores.setVisible(true);
-       
+        mediumCoinScores.setVerticalAlignment(JLabel.TOP);
         
         
         //hard adventure
@@ -214,11 +218,12 @@ public class LeaderBoard extends JPanel{
         hardAdventureNames.setSize(LEADER_BOARD_SIZE);
         hardAdventureNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
         hardAdventureNames.setVisible(true);   
+        hardAdventureNames.setVerticalAlignment(JLabel.TOP);
         hardAdventureScores = new JLabel(displayLeaderBoardScores(leaders.get(HARD_ADVENTURE_LOC)));
         hardAdventureScores.setSize(LEADER_BOARD_SIZE);
         hardAdventureScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
         hardAdventureScores.setVisible(true);
-        
+        hardAdventureScores.setVerticalAlignment(JLabel.TOP);
         
         //hard coin
         Image scaledCoinHard = hardCoinHeadingImg.getScaledInstance(97, 7, Image.SCALE_SMOOTH);
@@ -231,10 +236,12 @@ public class LeaderBoard extends JPanel{
         hardCoinNames.setSize(LEADER_BOARD_SIZE);
         hardCoinNames.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
         hardCoinNames.setVisible(true); 
+        hardCoinNames.setVerticalAlignment(JLabel.TOP);
         hardCoinScores = new JLabel(displayLeaderBoardScores(leaders.get(HARD_COIN_LOC)));
         hardCoinScores.setSize(LEADER_BOARD_SIZE);
         hardCoinScores.setLocation(new Point(LEADER_BOARD_X_COORDINATE+X_INCREMENT+SCORE_INCREMENT, LEADER_BOARD_Y_COORDINATE+(2*Y_INCREMENT)));
         hardCoinScores.setVisible(true);
+        hardCoinScores.setVerticalAlignment(JLabel.TOP);
         
         //generate frame
         panelLabel.add(back);

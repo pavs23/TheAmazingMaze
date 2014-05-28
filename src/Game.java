@@ -91,10 +91,10 @@ public class Game {
     // Difficulties
     public static final int EASY_X = 10;
     public static final int EASY_Y = 10;
-    public static final int MEDIUM_X = 15;
-    public static final int MEDIUM_Y = 15;   
-    public static final int HARD_X = 20;
-    public static final int HARD_Y = 20;
+    public static final int MEDIUM_X = 14;
+    public static final int MEDIUM_Y = 14;   
+    public static final int HARD_X = 18;
+    public static final int HARD_Y = 18;
     
     // Frame size
     public static final int FRAME_SIZE = 600;

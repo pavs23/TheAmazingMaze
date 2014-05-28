@@ -66,8 +66,8 @@ public class WinPanel extends FinishingPanel {
         JLabel leaderBoard = new JLabel();
         leaderBoard.setBackground(Color.BLACK);
         leaderBoard.setOpaque(true);
-        leaderBoard.setSize(new Dimension(250, 180));
-        leaderBoard.setLocation(new Point(320, 160));
+        leaderBoard.setSize(new Dimension(260, 180));
+        leaderBoard.setLocation(new Point(310, 160));
         
         JLabel leaderBoardLabel = new JLabel();
         leaderBoardLabel.setText("Leaderboard");
@@ -76,7 +76,7 @@ public class WinPanel extends FinishingPanel {
         leaderBoardLabel.setOpaque(true);
         leaderBoardLabel.setFont(new Font("Arial", Font.BOLD, 20));
         leaderBoardLabel.setSize(new Dimension(250, 30));
-        leaderBoardLabel.setLocation(new Point(30, 20));
+        leaderBoardLabel.setLocation(new Point(10, 10));
                     
         JLabel leaderBoardNames = new JLabel();
         leaderBoardNames.setBackground(Color.BLACK);
@@ -84,8 +84,8 @@ public class WinPanel extends FinishingPanel {
         leaderBoardNames.setOpaque(true);
         leaderBoardNames.setText(getLeaderBoardNames(mode, difficulty));
         leaderBoardNames.setFont(new Font("Arial", Font.PLAIN, 16));
-        leaderBoardNames.setSize(new Dimension(120, 140));
-        leaderBoardNames.setLocation(new Point(30, 60));
+        leaderBoardNames.setSize(new Dimension(180, 130));
+        leaderBoardNames.setLocation(new Point(10, 60));
         leaderBoardNames.setVerticalAlignment(JLabel.TOP);
         
         JLabel leaderBoardScores = new JLabel();
@@ -94,8 +94,8 @@ public class WinPanel extends FinishingPanel {
         leaderBoardScores.setOpaque(true);
         leaderBoardScores.setText(getLeaderBoardScores(mode, difficulty));
         leaderBoardScores.setFont(new Font("Arial", Font.PLAIN, 16));
-        leaderBoardScores.setSize(new Dimension(100, 140));
-        leaderBoardScores.setLocation(new Point(180, 60));
+        leaderBoardScores.setSize(new Dimension(90, 130));
+        leaderBoardScores.setLocation(new Point(210, 60));
         leaderBoardScores.setVerticalAlignment(JLabel.TOP);
         
         
@@ -163,7 +163,7 @@ public class WinPanel extends FinishingPanel {
     public WinPanel(JFrame frame, String playerName) {
         super(frame);
         JLabel winLabel = new JLabel();
-        winLabel.setSize(new Dimension(600, 430));
+        winLabel.setSize(new Dimension(600, 400));
         winLabel.setLocation(new Point(0, 0));
         winLabel.setLayout(null);
         winLabel.setBackground(Color.WHITE);

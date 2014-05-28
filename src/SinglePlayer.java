@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -82,14 +83,14 @@ public class SinglePlayer extends PlayerModes {
         namePlayer.setFont(new Font("Arial", Font.BOLD, 20));
         JLabel playerKeys = new JLabel();
         
-        File arrowFile = new File("images/Arrow_Key.jpg");
-        Image arrowImage = null;
+        File aswdFile = new File("images/ASWD_Key.jpg");
+        Image aswdImage = null;
         try {
-            arrowImage = ImageIO.read(arrowFile);
+            aswdImage = ImageIO.read(aswdFile);
         } catch (IOException e) {}
-        Image scaledArrow = arrowImage.getScaledInstance(220, 80, Image.SCALE_SMOOTH);    
-        ImageIcon arrowIcon = new ImageIcon(scaledArrow);
-        playerKeys.setIcon(arrowIcon);
+        Image scaledAswd = aswdImage.getScaledInstance(180, 90, Image.SCALE_SMOOTH);    
+        ImageIcon aswdIcon = new ImageIcon(scaledAswd);
+        playerKeys.setIcon(aswdIcon);
          
         playerLabel.add(playerIcon);
         playerLabel.add(namePlayer);
@@ -130,35 +131,34 @@ public class SinglePlayer extends PlayerModes {
      * Use key binding for it.
      */
     public void setEventListenerToMaze() {
-        // Key bindings (so that it works with panel).
-        Action leftKeyPressed = new PressedAction(0, Game.WEST);
-        Action leftKeyReleased = new ReleasedAction(0);
-        Action rightKeyPressed = new PressedAction(1, Game.EAST);
-        Action rightKeyReleased = new ReleasedAction(1);
-        Action upKeyPressed = new PressedAction(2, Game.NORTH);
-        Action upKeyReleased = new ReleasedAction(2);
-        Action downKeyPressed = new PressedAction(3, Game.SOUTH);
-        Action downKeyReleased = new ReleasedAction(3);
+        Action aKeyPressed = new PressedAction (0, Game.WEST); 
+        Action aKeyReleased = new ReleasedAction(0);
+        Action dKeyPressed = new PressedAction (1, Game.EAST); 
+        Action dKeyReleased = new ReleasedAction(1);
+        Action wKeyPressed = new PressedAction (2, Game.NORTH); 
+        Action wKeyReleased = new ReleasedAction(2);
+        Action sKeyPressed = new PressedAction(3, Game.SOUTH); 
+        Action sKeyReleased = new ReleasedAction(3);
         
-        KeyStroke leftKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false);
-        KeyStroke rightKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false);
-        KeyStroke upKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false);
-        KeyStroke downKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false);
+        KeyStroke aKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, false);
+        KeyStroke dKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, false);
+        KeyStroke wKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, false);
+        KeyStroke sKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false);
         
-        KeyStroke leftKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true);
-        KeyStroke rightKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true);
-        KeyStroke upKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true);
-        KeyStroke downKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true);
+        KeyStroke aKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, true);
+        KeyStroke dKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true);
+        KeyStroke wKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true);
+        KeyStroke sKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true);
         
-        setKeyBinding(leftKeyDown, leftKeyPressed, "leftD");
-        setKeyBinding(rightKeyDown, rightKeyPressed, "rightD");
-        setKeyBinding(upKeyDown, upKeyPressed, "upD");
-        setKeyBinding(downKeyDown, downKeyPressed, "downD");
+        setKeyBinding(aKeyDown, aKeyPressed, "aD");
+        setKeyBinding(dKeyDown, dKeyPressed, "dD");
+        setKeyBinding(wKeyDown, wKeyPressed, "wD");
+        setKeyBinding(sKeyDown, sKeyPressed, "sD");
         
-        setKeyBinding(leftKeyUp, leftKeyReleased, "leftU");
-        setKeyBinding(rightKeyUp, rightKeyReleased, "rightU");
-        setKeyBinding(upKeyUp, upKeyReleased, "upU");
-        setKeyBinding(downKeyUp, downKeyReleased, "downU");
+        setKeyBinding(aKeyUp, aKeyReleased, "aU");
+        setKeyBinding(dKeyUp, dKeyReleased, "dU");
+        setKeyBinding(wKeyUp, wKeyReleased, "wU");
+        setKeyBinding(sKeyUp, sKeyReleased, "sU"); 
     }
     
     /**
@@ -232,7 +232,7 @@ public class SinglePlayer extends PlayerModes {
         gameFinished = true;
         freeze();
         // Make the game freeze for a moment before ending.
-        Timer newTimer =  new Timer(400, new ActionListener() {
+        Timer newTimer =  new Timer(250, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 disposeFrame();
                 int currSec = timer.getCurrentSecond();
@@ -334,13 +334,14 @@ public class SinglePlayer extends PlayerModes {
         JPanel timePanel = new JPanel();
         timePanel.setLayout(new FlowLayout());
         timePanel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
-        timePanel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        timePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         JLabel timeLabel = new JLabel();
         timeLabel.setBackground(PlayerModes.MAZE_BACKGROUND_COLOR);
         timeLabel.setForeground(Color.BLACK);
         timeLabel.setFont(new Font("Arial", Font.BOLD, 30));
         timeLabel.setVisible(true);
         timeLabel.setPreferredSize(new Dimension(150, 50));
+        timeLabel.setHorizontalAlignment(JLabel.CENTER);
         timePanel.add(timeLabel);
         addToSidePanel(timePanel);
         timer = new GameTimer(timeLabel, this);        

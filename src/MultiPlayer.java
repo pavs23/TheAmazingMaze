@@ -133,18 +133,18 @@ public class MultiPlayer extends PlayerModes {
         try {
             aswdImage = ImageIO.read(aswdFile);
         } catch (IOException e) {}
-        Image scaledAswd = aswdImage.getScaledInstance(220, 80, Image.SCALE_SMOOTH);    
+        Image scaledAswd = aswdImage.getScaledInstance(180, 90, Image.SCALE_SMOOTH);    
         ImageIcon aswdIcon = new ImageIcon(scaledAswd);
         player1Keys.setIcon(aswdIcon);
          
-        File arrowFile = new File("images/Arrow_Key.jpg");
-        Image arrowImage = null;
+        File jkliFile = new File("images/JKLI_Key.jpg");
+        Image jkliImage = null;
         try {
-            arrowImage = ImageIO.read(arrowFile);
+            jkliImage = ImageIO.read(jkliFile);
         } catch (IOException e) {}
-        Image scaledArrow = arrowImage.getScaledInstance(220, 80, Image.SCALE_SMOOTH);    
-        ImageIcon arrowIcon = new ImageIcon(scaledArrow);
-        player2Keys.setIcon(arrowIcon);
+        Image scaledJkli = jkliImage.getScaledInstance(180, 90, Image.SCALE_SMOOTH);    
+        ImageIcon jkliIcon = new ImageIcon(scaledJkli);
+        player2Keys.setIcon(jkliIcon);
         
         playerLabel1.add(player1Icon);
         playerLabel1.add(namePlayer1);
@@ -196,46 +196,15 @@ public class MultiPlayer extends PlayerModes {
      * Use key binding for it.
      */ 
     public void setEventListenerToMaze() {
-        // Key bindings (so that it works with panel).
-        // 2nd player
-        Action leftKeyPressed = new PressedActionPlayer2 (0, Game.WEST); 
-        Action leftKeyReleased = new ReleasedAction(0);
-        Action rightKeyPressed =  new PressedActionPlayer2 (1, Game.EAST); 
-        Action rightKeyReleased = new ReleasedAction(1);
-        Action upKeyPressed = new PressedActionPlayer2 (2, Game.NORTH);  
-        Action upKeyReleased = new ReleasedAction(2);
-        Action downKeyPressed = new PressedActionPlayer2 (3, Game.SOUTH); 
-        Action downKeyReleased = new ReleasedAction(3);
-        
         // 1st player.
-        Action aKeyPressed = new PressedActionPlayer1 (4, Game.WEST); 
-        Action aKeyReleased = new ReleasedAction(4);
-        Action dKeyPressed = new PressedActionPlayer1 (5, Game.EAST); 
-        Action dKeyReleased = new ReleasedAction(5);
-        Action wKeyPressed = new PressedActionPlayer1 (6, Game.NORTH); 
-        Action wKeyReleased = new ReleasedAction(6);
-        Action sKeyPressed = new PressedActionPlayer1 (7, Game.SOUTH); 
-        Action sKeyReleased = new ReleasedAction(7);
-        
-        KeyStroke leftKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, false);
-        KeyStroke rightKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, false);
-        KeyStroke upKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, false);
-        KeyStroke downKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, false);
-        
-        KeyStroke leftKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0, true);
-        KeyStroke rightKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0, true);
-        KeyStroke upKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true);
-        KeyStroke downKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0, true);
-        
-        setKeyBinding(leftKeyDown, leftKeyPressed, "leftD");
-        setKeyBinding(rightKeyDown, rightKeyPressed, "rightD");
-        setKeyBinding(upKeyDown, upKeyPressed, "upD");
-        setKeyBinding(downKeyDown, downKeyPressed, "downD");
-        
-        setKeyBinding(leftKeyUp, leftKeyReleased, "leftU");
-        setKeyBinding(rightKeyUp, rightKeyReleased, "rightU");
-        setKeyBinding(upKeyUp, upKeyReleased, "upU");
-        setKeyBinding(downKeyUp, downKeyReleased, "downU");
+        Action aKeyPressed = new PressedActionPlayer1 (0, Game.WEST); 
+        Action aKeyReleased = new ReleasedAction(0);
+        Action dKeyPressed = new PressedActionPlayer1 (1, Game.EAST); 
+        Action dKeyReleased = new ReleasedAction(1);
+        Action wKeyPressed = new PressedActionPlayer1 (2, Game.NORTH); 
+        Action wKeyReleased = new ReleasedAction(2);
+        Action sKeyPressed = new PressedActionPlayer1 (3, Game.SOUTH); 
+        Action sKeyReleased = new ReleasedAction(3);
         
         KeyStroke aKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, false);
         KeyStroke dKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, false);
@@ -256,6 +225,36 @@ public class MultiPlayer extends PlayerModes {
         setKeyBinding(dKeyUp, dKeyReleased, "dU");
         setKeyBinding(wKeyUp, wKeyReleased, "wU");
         setKeyBinding(sKeyUp, sKeyReleased, "sU"); 
+        
+        // 2nd player
+        Action jKeyPressed = new PressedActionPlayer2 (4, Game.WEST); 
+        Action jKeyReleased = new ReleasedAction(4);
+        Action lKeyPressed =  new PressedActionPlayer2 (5, Game.EAST); 
+        Action lKeyReleased = new ReleasedAction(5);
+        Action iKeyPressed = new PressedActionPlayer2 (6, Game.NORTH);  
+        Action iKeyReleased = new ReleasedAction(6);
+        Action kKeyPressed = new PressedActionPlayer2 (7, Game.SOUTH); 
+        Action kKeyReleased = new ReleasedAction(7);
+        
+        KeyStroke jKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_J, 0, false);
+        KeyStroke lKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, false);
+        KeyStroke iKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, false);
+        KeyStroke kKeyDown = KeyStroke.getKeyStroke(KeyEvent.VK_K, 0, false);
+        
+        KeyStroke jKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_J, 0, true);
+        KeyStroke lKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, true);
+        KeyStroke iKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_I, 0, true);
+        KeyStroke kKeyUp = KeyStroke.getKeyStroke(KeyEvent.VK_K, 0, true);
+        
+        setKeyBinding(jKeyDown, jKeyPressed, "leftD");
+        setKeyBinding(lKeyDown, lKeyPressed, "rightD");
+        setKeyBinding(iKeyDown, iKeyPressed, "upD");
+        setKeyBinding(kKeyDown, kKeyPressed, "downD");
+        
+        setKeyBinding(jKeyUp, jKeyReleased, "leftU");
+        setKeyBinding(lKeyUp, lKeyReleased, "rightU");
+        setKeyBinding(iKeyUp, iKeyReleased, "upU");
+        setKeyBinding(kKeyUp, kKeyReleased, "downU");
     }
     
     /**
@@ -369,7 +368,7 @@ public class MultiPlayer extends PlayerModes {
         gameFinished = true;
         freeze();
      // Make the game freeze for a moment before ending.
-        Timer newTimer =  new Timer(400, new ActionListener() {
+        Timer newTimer =  new Timer(250, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 disposeFrame();
                 // Create a frame for winning player.

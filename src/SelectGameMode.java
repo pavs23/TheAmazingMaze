@@ -66,16 +66,44 @@ public class SelectGameMode extends JPanel {
 
 		back = new BackButton(prev, mainFrame, this);
 		
-		adventureInstructions = new JLabel("<html><b>Adventure Run:</b> Get to the end of the maze as quickly as possible before the time runs out."  
-		        +" The quicker you get there, the higher your score! </html>");
-		coinInstructions = new JLabel("<html><b>Coin Run:</b> Collect all the coins in the maze before the time runs out." 
-		        + " The quicker you collect your coins, the higher your score!</html>");
+		adventureInstructions = new JLabel();
+		coinInstructions = new JLabel();
 		
-		adventureInstructions.setSize(new Dimension(400, 50));
-		coinInstructions.setSize(new Dimension(400, 50));
+		JLabel advTitle = new JLabel("<html><b>Adventure Run</b></html>");
+		JLabel coinTitle = new JLabel("<html><b>Coin Run</b></html>");
+
+		advTitle.setSize(new Dimension(400, 10));
+		coinTitle.setSize(new Dimension(400, 10));
+		advTitle.setLocation(0, 0);
+		coinTitle.setLocation(0, 0);
+		advTitle.setHorizontalAlignment(JLabel.CENTER);
+		coinTitle.setHorizontalAlignment(JLabel.CENTER);
 		
-		adventureInstructions.setLocation(100, Y_POSITION_BUTTON + 200);
-		coinInstructions.setLocation(100, Y_POSITION_BUTTON + 270);
+		JLabel advInst = new JLabel("<html><div style=\"text-align: center;\">Get to the end of the maze as quickly as possible before the time runs out."
+                +" The quicker you get there, the higher your score! </html>");
+		JLabel coinInst = new JLabel("<html><div style=\"text-align: center;\">Collect all the coins in the maze before the time runs out." 
+                + " The quicker you collect your coins, the higher your score!</html>");
+		advInst.setSize(new Dimension(350, 50));
+		coinInst.setSize(new Dimension(350, 50));
+		advInst.setLocation(25, 12);
+		coinInst.setLocation(25, 12);
+		advInst.setHorizontalAlignment(JLabel.CENTER);
+        coinInst.setHorizontalAlignment(JLabel.CENTER);
+		
+		adventureInstructions.add(advTitle);
+		adventureInstructions.add(advInst);
+		
+		coinInstructions.add(coinTitle);
+        coinInstructions.add(coinInst);
+        
+		adventureInstructions.setSize(new Dimension(400, 70));
+		coinInstructions.setSize(new Dimension(400, 70));
+		
+		adventureInstructions.setLocation(100, Y_POSITION_BUTTON + 190);
+		coinInstructions.setLocation(100, Y_POSITION_BUTTON + 280);
+		
+		adventureInstructions.setHorizontalAlignment(JLabel.CENTER);
+		coinInstructions.setHorizontalAlignment(JLabel.CENTER);
 		
 		panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));

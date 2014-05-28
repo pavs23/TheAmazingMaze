@@ -32,10 +32,10 @@ public class FinishingPanel extends JPanel {
 		message.setBackground(Color.WHITE);
 			
 		menu = new MainMenuButton(frame);
-		menu.setLocation(new Point(225, 450));
+		menu.setLocation(new Point(225, 410));
 		
 		quit = new QuitButton(frame);
-		quit.setLocation(new Point(225, 510));
+		quit.setLocation(new Point(225, 480));
 		
 		this.add(message);
 		this.add(menu);

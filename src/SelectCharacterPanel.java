@@ -43,12 +43,12 @@ public class SelectCharacterPanel extends JPanel {
 	private final int Y_LABEL_POSITION = 120;
 	
 	private final int X_IMAGE_LABEL_POSITION = 255;
-	private final int Y_IMAGE_LABEL_POSITION = 190;
+	private final int Y_IMAGE_LABEL_POSITION = 180;
 	
 	private final int X_BUTTON = 150;
     
     private static final int CHAR_X_DIMENSION = 75;
-    private static final int CHAR_Y_DIMENSION = 100;
+    private static final int CHAR_Y_DIMENSION = 120;
     
     /**
      * Constructor of the panel.
