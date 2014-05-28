@@ -26,6 +26,8 @@ public class SelectGameMode extends JPanel {
 	private SelectGameMode currentScreen;
 	private JLabel panelLabel;
 	private BackButton back;
+	private JLabel adventureInstructions;
+	private JLabel coinInstructions;
 	
 	private static final int WIDTH_BUTTON = 50;
 	private static final int X_POSITION_BUTTON = 225;
@@ -64,6 +66,15 @@ public class SelectGameMode extends JPanel {
 
 		back = new BackButton(prev, mainFrame, this);
 		
+		adventureInstructions = new JLabel(getAdventureInstructionText());
+		coinInstructions = new JLabel(getCoinInstructionText());
+		
+		adventureInstructions.setSize(new Dimension(400, 50));
+		coinInstructions.setSize(new Dimension(400, 50));
+		
+		adventureInstructions.setLocation(100, Y_POSITION_BUTTON + 200);
+		coinInstructions.setLocation(100, Y_POSITION_BUTTON + 270);
+		
 		panelLabel = new JLabel();
         panelLabel.setSize(new Dimension(Game.FRAME_SIZE, Game.FRAME_SIZE));
         panelLabel.setLayout(null);
@@ -73,6 +84,8 @@ public class SelectGameMode extends JPanel {
         panelLabel.add(back);
 		panelLabel.add(adventureMode);
 		panelLabel.add(coinMode);
+		panelLabel.add(adventureInstructions);
+		panelLabel.add(coinInstructions);
 		
 		this.add(panelLabel);
 
@@ -99,5 +112,24 @@ public class SelectGameMode extends JPanel {
 			}
 		});
 		
+	}
+	
+	/**
+	 * Generates the text to be displayed on the instructions screen
+	 * @return a string with all the text in it. The text is formatted 
+	 * using HTML.
+	 */
+	private String getAdventureInstructionText() {
+	
+		String adventureText = "<html><b>Adventure Run:</b> Get to the end of the maze as quickly as possible before the time runs out."  
+		+" The quicker you get there, the higher your score! </html>";
+		return adventureText;
+	}
+	
+	private String getCoinInstructionText() {
+		
+		String coinText = "<html><b>Coin Run:</b> Collect all the coins in the maze before the time runs out." 
+		+ " The quicker you collect your coins, the higher your score!</html>";
+		return coinText;
 	}
 }
