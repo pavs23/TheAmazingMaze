@@ -22,6 +22,7 @@ public class StyledButton extends JButton{
 	public StyledButton(String text) {
 		 this.setBorder(BorderFactory.createMatteBorder(1, 1, 3, 3, Color.black));
 		 this.setOpaque(true);
+		 this.setFocusable(false);
 		 final StyledButton curr = this;
 		 this.setBackground(Color.ORANGE);
 		 this.setForeground(Color.BLACK);

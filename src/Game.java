@@ -206,7 +206,7 @@ public class Game {
     /**
      * Constructor of the game class that creates the game.
      */
-	public Game(){
+	public Game() {
 	    //Making the Objects which go on the screen
 		mainFrame = new JFrame("Game Menu");
 		
