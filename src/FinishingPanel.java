@@ -26,7 +26,7 @@ public class FinishingPanel extends JPanel {
 		this.setVisible(true);
 		
 		message = new JPanel();
-		message.setSize(new Dimension(600, 430));
+		message.setSize(new Dimension(600, 400));
 		message.setLocation(new Point(0, 0));
 		message.setLayout(null);
 		message.setBackground(Color.WHITE);

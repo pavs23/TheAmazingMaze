@@ -31,7 +31,7 @@ public class WinPanel extends FinishingPanel {
 		super(frame);
 		
         winLabel = new JLabel();
-        winLabel.setSize(new Dimension(600, 430));
+        winLabel.setSize(new Dimension(600, 400));
         winLabel.setLocation(new Point(0, 0));
         winLabel.setLayout(null);
         winLabel.setBackground(Color.WHITE);
@@ -52,7 +52,7 @@ public class WinPanel extends FinishingPanel {
         
         JLabel happyIcon = new JLabel();
         happyIcon.setIcon(new ImageIcon(winImage.getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
-        happyIcon.setSize(new Dimension(250, 250));
+        happyIcon.setSize(new Dimension(200, 200));
         happyIcon.setLocation(new Point(60, 140));
         
         JLabel scoreLabel = new JLabel();
