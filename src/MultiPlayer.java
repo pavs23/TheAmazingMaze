@@ -283,13 +283,16 @@ public class MultiPlayer extends PlayerModes {
             if (timers[index] == null) {      
                 timers[index] = new Timer(Game.MOVING_TIME, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                         movePlayer(player1, dir, labels1, maze1);
-                         if (gameFinished) {
+                         if (!gameFinished) {
+                             movePlayer(player1, dir, labels1, maze1);
+                         } else {
                              timers[index].stop();
                          }
                     }
                 });
-                movePlayer(player1, dir, labels1, maze1); 
+                if (!gameFinished) {
+                    movePlayer(player1, dir, labels1, maze1);  
+                }  
                 timers[index].start();
             }
         }
@@ -322,13 +325,16 @@ public class MultiPlayer extends PlayerModes {
             if (timers[index] == null) {      
                 timers[index] = new Timer(Game.MOVING_TIME, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                         movePlayer(player2, dir, labels2, maze2);
-                         if (gameFinished) {
+                         if (!gameFinished) {
+                             movePlayer(player2, dir, labels2, maze2);
+                         } else {
                              timers[index].stop();
                          }
                     }
                 });
-                movePlayer(player2, dir, labels2, maze2); 
+                if (!gameFinished) {
+                    movePlayer(player2, dir, labels2, maze2); 
+                }
                 timers[index].start();
             }
         }
@@ -367,7 +373,7 @@ public class MultiPlayer extends PlayerModes {
     public void gameEndWin(final String playerName) {
         gameFinished = true;
         freeze();
-     // Make the game freeze for a moment before ending.
+        // Make the game freeze for a moment before ending.
         Timer newTimer =  new Timer(250, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 disposeFrame();

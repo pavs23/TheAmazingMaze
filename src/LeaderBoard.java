@@ -37,8 +37,7 @@ public class LeaderBoard extends JPanel{
     private static final Dimension LEADER_BOARD_SIZE = new Dimension(150, 100);
     
     private BackButton back;
-    
-    
+     
     //score displaying JLabels
     private JLabel headingLabel;
     private JLabel easyAdventureTitle;

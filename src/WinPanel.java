@@ -60,7 +60,7 @@ public class WinPanel extends FinishingPanel {
         scoreLabel.setText("Score : " + score);
         scoreLabel.setHorizontalAlignment(JLabel.CENTER);
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        scoreLabel.setSize(new Dimension(150, 30));
+        scoreLabel.setSize(new Dimension(200, 30));
         scoreLabel.setLocation(new Point(225, 80));
         
         JLabel leaderBoard = new JLabel();

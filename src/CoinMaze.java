@@ -19,7 +19,7 @@ public class CoinMaze extends GameModeImp {
 	 * @param sizeX is size of grid horizontally
 	 * @param sizeY is size of grid vertically
 	 */
-	public CoinMaze(int sizeX, int sizeY){
+	public CoinMaze(int sizeX, int sizeY) {
 		coinLocations = new ArrayList<Coordinate>();
 		maze = new MazeGenerator(sizeX,sizeY);
 		setMazeArray(maze.generateMazeArray());
@@ -31,8 +31,8 @@ public class CoinMaze extends GameModeImp {
 	 * @param playerCoordinate the coordinate of current player.
 	 * @return whether the game is finished or not
 	 */
-	public boolean gameFinished(Coordinate playerCoordinate){
-		if (coinLocations.isEmpty()){
+	public boolean gameFinished(Coordinate playerCoordinate) {
+		if (coinLocations.isEmpty()) {
 			return true;
 		} else {
 			return false;
@@ -54,14 +54,14 @@ public class CoinMaze extends GameModeImp {
 	 * @param playerCoordinate is the coordinate of the player
 	 * @return true if a coin has been found
 	 */
-	public boolean isCoinFound(Coordinate playerCoordinate){
+	public boolean isCoinFound(Coordinate playerCoordinate) {
 		int i = 0;
 		int numCoins = coinLocations.size();
 		Coordinate currentCoordinate; //iterator
 		
 		while (i < numCoins){
 			currentCoordinate = coinLocations.get(i);
-			if (currentCoordinate.equals(playerCoordinate)){
+			if (currentCoordinate.equals(playerCoordinate)) {
 				return true;
 			}
 			i++;
@@ -75,7 +75,7 @@ public class CoinMaze extends GameModeImp {
 	 * @param curr is the current position of the player
 	 * @return an array list of the coordinates of the path to a coin closest to the player, excluding the coin position.
 	 */
-	public ArrayList<Coordinate> getHint(Coordinate curr){
+	public ArrayList<Coordinate> getHint(Coordinate curr) {
 	    ArrayList<Coordinate> path = null;
 	    for (Coordinate location : coinLocations) {
 	        ArrayList<Coordinate> currPath = maze.findPath(curr, location);
@@ -93,7 +93,7 @@ public class CoinMaze extends GameModeImp {
 	 * Gets the coordinates of all the coins remaining
 	 * @return an array list of coordinates
 	 */
-	public ArrayList<Coordinate> getCoinCoordinates(){
+	public ArrayList<Coordinate> getCoinCoordinates() {
 		return coinLocations;
 	}
 	
@@ -101,7 +101,7 @@ public class CoinMaze extends GameModeImp {
 	 * gets the number of coins left to be found
 	 * @return number of coins
 	 */
-	public int getNumCoins(){
+	public int getNumCoins() {
 		return coinLocations.size();
 	}
 		
@@ -118,7 +118,7 @@ public class CoinMaze extends GameModeImp {
      * The object will have the deep copy of the coinLocations field.
      * @return the clone of the object.
      */
-    public CoinMaze generateClone(){  
+    public CoinMaze generateClone() {  
          CoinMaze clone = new CoinMaze(5,5);
          clone.setMaze(maze);
          clone.setCoinLocations(coinLocations);
@@ -129,7 +129,7 @@ public class CoinMaze extends GameModeImp {
 	/**
 	 * Generates random coordinates and stores coins in them
 	 */
-	private void coinCoordinateGenerator(){
+	private void coinCoordinateGenerator() {
 		Random randomGenerator = new Random();
 		int x;
 		int y;

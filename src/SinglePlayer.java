@@ -186,13 +186,16 @@ public class SinglePlayer extends PlayerModes {
             if (timers[index] == null) {      
                 timers[index] = new Timer(Game.MOVING_TIME, new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                         movePlayer(player, dir, labels, maze);
-                         if (gameFinished) {
+                         if (!gameFinished) {
+                             movePlayer(player, dir, labels, maze);
+                         } else {
                              timers[index].stop();
                          }
                     }
                 });
-                movePlayer(player, dir, labels, maze); 
+                if (!gameFinished) {
+                    movePlayer(player, dir, labels, maze); 
+                }
                 timers[index].start();
             }
         }

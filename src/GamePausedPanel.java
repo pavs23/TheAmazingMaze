@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * @author floren
  *
  */
-public class GamePausedPanel extends JPanel{	
+public class GamePausedPanel extends JPanel {	
     private static final long serialVersionUID = 1L;
     private JLabel pauseLabel;
     

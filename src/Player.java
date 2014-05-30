@@ -11,8 +11,7 @@ public class Player {
     private ImageIcon frontView;
     private ImageIcon backView;
     private ImageIcon leftView;
-    private ImageIcon rightView;
-    
+    private ImageIcon rightView;   
     
     /**
      * Constructor of the class.
