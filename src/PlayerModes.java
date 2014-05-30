@@ -36,7 +36,7 @@ public abstract class PlayerModes {
     private StyledButton mainMenuButton;
     private StyledButton pauseButton;
 
-    private static final int MAZE_PANEL_WIDTH = 550;
+    private static final int MAZE_PANEL_WIDTH = 540;
     
     /**
      * Constructor of the class.
