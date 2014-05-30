@@ -157,7 +157,8 @@ public class ScoreManager {
 		try{
 		    File file = getFile(modeFlag, difficultyFlag);
 		    if (!file.exists()) {
-		        file.createNewFile();    
+		        file.createNewFile();
+		        file.setReadOnly();
 		    } 
 		    stream = new FileInputStream(file);
 		    return stream;
