@@ -32,7 +32,7 @@ public class NameEntryPanel extends JPanel {
 	
 	private static final int X_POSITION = 215;
 	private static final int Y_POSITION = 130;
-	private static final int MAX_CHAR = 15;
+	private static final int MAX_CHAR = 10;
 	
     /**
 	 * Create a name entry panel.
@@ -121,7 +121,7 @@ public class NameEntryPanel extends JPanel {
             playerOneLabel.setVisible(false);
             playerTwoLabel.setVisible(false);
             playerTwoNameField.setVisible(false);
-            playerTwoNameField.setText("single_player");
+            playerTwoNameField.setText("single");
             done.setLocation(new Point(X_POSITION + 15, Y_POSITION + 110));
         }
         

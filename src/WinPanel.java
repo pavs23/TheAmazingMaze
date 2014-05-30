@@ -84,7 +84,7 @@ public class WinPanel extends FinishingPanel {
         leaderBoardNames.setOpaque(true);
         leaderBoardNames.setText(getLeaderBoardNames(mode, difficulty));
         leaderBoardNames.setFont(new Font("Arial", Font.PLAIN, 16));
-        leaderBoardNames.setSize(new Dimension(180, 130));
+        leaderBoardNames.setSize(new Dimension(170, 130));
         leaderBoardNames.setLocation(new Point(10, 60));
         leaderBoardNames.setVerticalAlignment(JLabel.TOP);
         
@@ -94,8 +94,8 @@ public class WinPanel extends FinishingPanel {
         leaderBoardScores.setOpaque(true);
         leaderBoardScores.setText(getLeaderBoardScores(mode, difficulty));
         leaderBoardScores.setFont(new Font("Arial", Font.PLAIN, 16));
-        leaderBoardScores.setSize(new Dimension(90, 130));
-        leaderBoardScores.setLocation(new Point(210, 60));
+        leaderBoardScores.setSize(new Dimension(100, 130));
+        leaderBoardScores.setLocation(new Point(200, 60));
         leaderBoardScores.setVerticalAlignment(JLabel.TOP);
         
         
