@@ -25,7 +25,7 @@ public class LosePanel extends FinishingPanel {
 		super(frame);
 		
 		loseLabel = new JLabel();
-		loseLabel.setSize(new Dimension(500, 430));
+		loseLabel.setSize(new Dimension(500, 400));
 		loseLabel.setLocation(new Point(0, 0));
 		loseLabel.setLayout(null);
 		loseLabel.setBackground(Color.WHITE);
